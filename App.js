@@ -1,15 +1,16 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import {Provider} from 'react-redux';
+import Store from './src/redux/Index'
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+import { StyleSheet} from 'react-native';
+
+let store = Store();
+
+export default App = () => (
+  <Provider store={store}>
+     <TapBarComponent/>
+  </Provider>
+)
 
 const styles = StyleSheet.create({
   container: {
