@@ -3,12 +3,13 @@ import {Provider} from 'react-redux';
 import Store from './src/redux/Index'
 
 import { StyleSheet} from 'react-native';
+import MiPosicionConsolidada from './src/components/MiPosicionConsolidada';
 
 let store = Store();
 
-export default App = () => (
+const App = () => (
   <Provider store={store}>
-     <TapBarComponent/>
+    <MiPosicionConsolidada/> //Remplazar por componente en producción
   </Provider>
 )
 
@@ -20,3 +21,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+export default App;
