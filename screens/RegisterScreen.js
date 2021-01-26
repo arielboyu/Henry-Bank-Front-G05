@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import { useDispatch } from "react-redux";
 import { StyleSheet,
    Text,
     View,
@@ -12,6 +13,7 @@ import Feather from 'react-native-vector-icons/Feather'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import logo from '../assets/logo.png'
 import * as Animatable from 'react-native-animatable'
+import { createNewUser } from '../src/redux/actions/user'
 
 
 export default function Register() {
@@ -54,6 +56,13 @@ export default function Register() {
       secureTextEntry: !data.secureTextEntry
     })
   }
+
+  const dispatch = useDispatch();
+
+  const onSubmit = (user) => {
+    dispatch(createNewUser(user));
+ 
+  };
 
   return (
     <View style={styles.container}>
@@ -162,7 +171,7 @@ export default function Register() {
           <View>
           </View>
           <View style={styles.button}>
-          <TouchableOpacity
+          <TouchableOpacity onPress={()=>{onSubmit(data)}}
            style={[styles.singIn], {marginTop:-30,backgroundColor: 'green',borderRadius:40,paddingVertical:10,paddingHorizontal:14}}
           >
            <Text style={[styles.textSing],{color:'black'}} >Registrarse</Text>
