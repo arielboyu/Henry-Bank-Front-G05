@@ -1,6 +1,6 @@
 import React from 'react';
 import {Provider} from 'react-redux';
-import Store from './src/redux/Index'
+import store from './src/redux/Index'
 import {
   StyleSheet,
   Text,
@@ -31,10 +31,9 @@ const Stack = createStackNavigator()
 
 
 
-
-
 export default function App() {
   return (
+    <Provider store={store}>
     <NavigationContainer>
     <Stack.Navigator screenOptions={{
       headerStyle:{
@@ -56,6 +55,7 @@ export default function App() {
       />
     </Stack.Navigator>
     </NavigationContainer>
+    </Provider>
 
   )
 }
