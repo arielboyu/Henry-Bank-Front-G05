@@ -1,6 +1,6 @@
 import React from 'react';
 import {Provider} from 'react-redux';
-import Store from './src/redux/Index'
+import Store from './src/redux'
 import {
   StyleSheet,
   Text,
@@ -19,50 +19,45 @@ import MainScreen from './screens/MainScreen'
 import HomeScreen from './screens/HomeScreen'
 import ProfileScreen from './screens/ProfileScreen'
 import Icon from 'react-native-vector-icons/Ionicons'
-// let store = Store();
-//
-// const App = () => (
-//   <Provider store={store}>
-//     // <MainScreen/> //Remplazar por componente en producción
-//   </Provider>
-// )
 
+const store = Store();
 const Stack = createStackNavigator()
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={{
-        headerStyle:{
-          backgroundColor: 'green',
-        },
-        headerTintColor: 'white',
-        headerTitleStyle: {
-          fontWeight: 'bold'
-        }
-        }}>
-        <Stack.Screen 
-          name="Home" 
-          component={HomeScreen}
-          options={{title:'Inicio'}}
-        />
-        <Stack.Screen 
-          name="LoginScreen" 
-          component={LoginScreen}
-          options={{title:'Iniciar Sesión'}}
-        />
-        <Stack.Screen 
-          name="RegisterScreen" 
-          component={RegisterScreen}
-          options={{title:'Registrarse'}}
-        />
-        <Stack.Screen
-          name="MainScreen" 
-          component={MainScreen}
-          options={{title:'Principal'}}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
-
+    <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={{
+          headerStyle:{
+            backgroundColor: 'green',
+          },
+          headerTintColor: 'white',
+          headerTitleStyle: {
+            fontWeight: 'bold'
+          }
+          }}>
+          <Stack.Screen 
+            name="Home" 
+            component={MainScreen}
+            options={{title:'Inicio'}}
+          />
+          <Stack.Screen 
+            name="LoginScreen" 
+            component={LoginScreen}
+            options={{title:'Iniciar Sesión'}}
+          />
+          <Stack.Screen 
+            name="RegisterScreen" 
+            component={RegisterScreen}
+            options={{title:'Registrarse'}}
+          />
+          <Stack.Screen
+            name="MainScreen" 
+            component={MainScreen}
+            options={{title:'Principal'}}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   )
 }

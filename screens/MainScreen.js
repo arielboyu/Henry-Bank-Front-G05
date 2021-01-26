@@ -4,7 +4,6 @@ import { Button, Divider, Headline, Paragraph } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import Transfer from 'react-native-vector-icons/MaterialCommunityIcons';
 
-
 const data = {
   name: "Valentín",
   lastName: "Nicheglod",
@@ -22,7 +21,6 @@ const data = {
 const MainScreen = () =>  {
 
   const {name, income, expenses, dollar, peso, accounts, lastName} = data;
-
 
   return (
     <View style={styles.container}>
