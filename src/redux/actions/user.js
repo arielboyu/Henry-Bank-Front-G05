@@ -15,7 +15,7 @@ export const createNewUser = (newUser) => {
   return async (dispatch) => {
     try {
 
-      const res = await axios.post(`http://localhost:3001/users`, { ...newUser });
+      const res = await axios.post(`http://localhost:3001/user`, { newUser });
 
       dispatch(createUser(res.data));
       alert(`User ${res.data.firstName} created successfully`);
