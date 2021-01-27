@@ -1,6 +1,6 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import Store from './src/redux'
+import store from './src/redux/Index';
 
 //Navigation
 import 'react-native-gesture-handler'
@@ -8,27 +8,26 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 
-//Componentes / Screens
-import LoginScreen from './screens/LoginScreen'
-import RegisterScreen from './screens/RegisterScreen'
-import MainScreen from './screens/MainScreen'
+//Coponentes/Screens
+import LoginScreen from './screens/LoginScreen';
+import RegisterScreen from './screens/RegisterScreen';
+import MainScreen from './screens/MainScreen';
 import ProductsScreen from './screens/ProductsScreen'
 import TransactionsScreen from './screens/TransactionsScreen'
 import StatisticsScreen from './screens/StatisticsScreen'
-import HomeScreen from './screens/HomeScreen'
-import ProfileScreen from './screens/ProfileScreen'
+import HomeScreen from './screens/HomeScreen';
+import ProfileScreen from './screens/ProfileScreen';
+import DischargeScreen from './screens/DischargeScreen';
 import Icon from 'react-native-vector-icons/AntDesign'
 
-const store = Store();
+//const store = Store();
 const Stack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
 
 export default function App() {
-
   const logged = true; //Cambia dependiendo de si el usuario esta logeado
-
-  return (
-    <Provider store={store}>
+	return (
+		<Provider store={store}>
       
       {logged
         //Si esta logueado
@@ -115,6 +114,11 @@ export default function App() {
               options={{title:'Iniciar Sesión'}}
             />
             <Stack.Screen 
+              name="DischargeScreen" 
+              component={DischargeScreen}
+              options={{title:'Alta de Ususario'}}
+            />
+            <Stack.Screen 
               name="RegisterScreen" 
               component={RegisterScreen}
               options={{title:'Registrarse'}}
@@ -122,7 +126,6 @@ export default function App() {
           </Stack.Navigator>
         </NavigationContainer>
       }
-      
     </Provider>
-  )
+	);
 }
