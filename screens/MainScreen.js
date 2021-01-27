@@ -215,7 +215,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#F1F4FF"
   },
   mainCard: {
-    width: 340,
+    width: 310,
     height: "97%",
     padding: 10,
     borderRadius: 20,
@@ -227,11 +227,10 @@ const styles = StyleSheet.create({
     borderRadius: 20
   },
   greeting: {
-    alignItems: "start",
+    alignItems: "flex-start",
     width: "100%",
     marginTop: 10,
     marginBottom: 10,
-    fontFamily: "sans-serif",
     fontSize: 35
   },
   white: {
@@ -240,7 +239,7 @@ const styles = StyleSheet.create({
   generalCont: {
     display: "flex",
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "space-around",
     width: "100%",
     marginTop: 5,
     marginBottom: 5,
@@ -253,14 +252,13 @@ const styles = StyleSheet.create({
   balance: {
     display: "flex",
     flexDirection: "column",
-    alignItems: "start",
+    alignItems: "flex-start",
     marginBottom: 5
   },
   smallParagraph: {
-    fontWeight: "bold"
+    fontWeight: "600"
   },
   bigText: {
-    fontFamily: "calibri",
     fontSize: 40,
     paddingTop: 15,
     marginLeft: 15,
@@ -275,14 +273,14 @@ const styles = StyleSheet.create({
 		marginTop: 25
   },
   buttonDesc: {
-    fontWeight: "bolder"
+    fontWeight: "600"
   },
   cardInfo: {
     marginTop: 35,
     marginLeft: 15
   },
   scroll: {
-    height: 204,
+    height: "40%",
     width: "100%"
   },
   paragraph: {
@@ -292,11 +290,10 @@ const styles = StyleSheet.create({
     fontWeight: "600"
   },
   cardText: {
-    fontFamily: "calibri",
     fontSize: 17,
     color: "#F7F7F9",
     letterSpacing: 1,
-    fontWeight: "lighter"
+    fontWeight: "300"
   },
   general: {
 		marginTop: 15,
