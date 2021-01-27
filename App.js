@@ -46,7 +46,7 @@ export default function App() {
     }
     }} >
       <Stack.Screen name="Home" component={HomeScreen}
-      options={{title:'Inicio'}}
+      options={{title:'Home'}}
       />
       <Stack.Screen name="LoginScreen" component={LoginScreen}
       options={{title:'Iniciar Sesión'}}
