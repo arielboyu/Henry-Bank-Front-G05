@@ -16,7 +16,7 @@ import * as Animatable from 'react-native-animatable'
 import { createNewUser } from '../src/redux/actions/user'
 
 
-export default function Register() {
+export default function Register({navigation}) {
 
   const [data,setData] = useState({
     email:'',
@@ -61,7 +61,7 @@ export default function Register() {
 
   const onSubmit = (user) => {
     dispatch(createNewUser(user));
- 
+
   };
 
   return (
@@ -171,7 +171,7 @@ export default function Register() {
           <View>
           </View>
           <View style={styles.button}>
-          <TouchableOpacity onPress={()=>{onSubmit(data)}}
+          <TouchableOpacity onPress={()=>{onSubmit(data),navigation.navigate('VerifyScrenn')}}
            style={[styles.singIn], {marginTop:-30,backgroundColor: 'green',borderRadius:40,paddingVertical:10,paddingHorizontal:14}}
           >
            <Text style={[styles.textSing],{color:'black'}} >Registrarse</Text>
