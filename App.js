@@ -41,6 +41,11 @@ export default function App() {
             <Tab.Navigator
               initialRouteName="Principal"
               activeColor="#fff"
+              tabBarOptions={{
+                style: {backgroundColor: '#fff'},
+                keyboardHidesTabBar: true
+              }}
+              
             >
               <Tab.Screen
                 name="Principal"
