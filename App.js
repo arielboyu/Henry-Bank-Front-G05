@@ -1,12 +1,6 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import Store from './src/redux'
-import {
-  StyleSheet,
-  Text,
-  View,
-  Button,
-} from 'react-native';
 
 //Navigation
 import 'react-native-gesture-handler'
