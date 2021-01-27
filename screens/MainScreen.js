@@ -200,9 +200,8 @@ const MainScreen = () =>  {
           </Paragraph>
         </View>
       </View>
-
+      
     </View>
-    
   );
 }
 
