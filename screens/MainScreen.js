@@ -139,41 +139,104 @@ const MainScreen = () => {
 };
 
 const styles = StyleSheet.create({
-	container       : {
-		flex            : 1,
-		padding         : 20,
-		backgroundColor : '#F1F4FF'
-	},
-	mainCard        : {
-		width        : 340,
-		height       : '97%',
-		padding      : 10,
-		borderRadius : 20,
-		marginTop    : 10,
-		marginBottom : 10,
-		marginRight  : 10
-	},
-	cards           : {
-		borderRadius : 20
-	},
-	greeting        : {
-		alignItems   : 'flex-start',
-		width        : '100%',
-		marginTop    : 10,
-		marginBottom : 10,
-		fontFamily   : 'sans-serif',
-		fontSize     : 35
-	},
-	white           : {
-		color : 'white'
-	},
-	generalCont     : {
-		display        : 'flex',
-		flexDirection  : 'row',
-		justifyContent : 'space-between',
-		width          : '100%',
-		marginTop      : 5,
-		marginBottom   : 5
+  container: {
+    flex: 1,
+    padding: 20,
+    backgroundColor: "#F1F4FF"
+  },
+  mainCard: {
+    width: 310,
+    height: "97%",
+    padding: 10,
+    borderRadius: 20,
+    marginTop: 10,
+    marginBottom: 10,
+    marginRight: 10
+  },
+  cards: {
+    borderRadius: 20
+  },
+  greeting: {
+    alignItems: "flex-start",
+    width: "100%",
+    marginTop: 10,
+    marginBottom: 10,
+    fontSize: 35
+  },
+  white: {
+    color: "white"
+  },
+  generalCont: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-around",
+    width: "100%",
+    marginTop: 5,
+    marginBottom: 5,
+  },
+  center: {
+    display: "flex",
+    alignItems: "center",
+    flexDirection: "column"
+  },
+  balance: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "flex-start",
+    marginBottom: 5
+  },
+  smallParagraph: {
+    fontWeight: "600"
+  },
+  bigText: {
+    fontSize: 40,
+    paddingTop: 15,
+    marginLeft: 15,
+    color: "#F7F7F9",
+    fontWeight: "400",
+    letterSpacing: 2
+  },
+  iconButtons: {
+    backgroundColor: "#006A34",
+    marginBottom: 12,
+		borderRadius: 20, 
+		marginTop: 25
+  },
+  buttonDesc: {
+    fontWeight: "600"
+  },
+  cardInfo: {
+    marginTop: 35,
+    marginLeft: 15
+  },
+  scroll: {
+    height: "40%",
+    width: "100%"
+  },
+  paragraph: {
+    marginTop: 5,
+    fontSize: 20,
+    color: "#fff",
+    fontWeight: "600"
+  },
+  cardText: {
+    fontSize: 17,
+    color: "#F7F7F9",
+    letterSpacing: 1,
+    fontWeight: "300"
+  },
+  general: {
+		marginTop: 15,
+		marginBottom: 15
+  },
+  cardCont: {
+		display: "flex",
+		flexDirection: "row",
+		marginTop: 5,
+		borderRadius: 10,
+		borderWidth: 1,
+		width: "100%",
+		overflow: "hidden"
 	},
 	center          : {
 		display       : 'flex',
