@@ -114,8 +114,6 @@ const MainScreen = () => {
 			</View>
 			<Divider />
 
-			{/* Buttons */}
-
 			<View style={styles.generalCont}>
 				<View style={styles.center}>
 					<Button style={styles.iconButtons}>
