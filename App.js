@@ -8,7 +8,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 
-//Coponentes/Screens
+//Componentes/Screens
 import LoginScreen from './screens/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import MainScreen from './screens/MainScreen';
@@ -21,17 +21,12 @@ import DischargeScreen from './screens/DischargeScreen';
 import Icon from 'react-native-vector-icons/AntDesign'
 import VerifyScrenn from './screens/VerifyScrenn'
 
-
 // <Stack.Screen
 //   name="VerifyScrenn"
 //   component={VerifyScrenn}
 //   options={{title:'Verificar su e-mail'}}
 // />
 
-
-
-
-//const store = Store();
 const Stack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
 
@@ -46,7 +41,6 @@ export default function App() {
             <Tab.Navigator
               initialRouteName="Principal"
               activeColor="#fff"
-              barStyle={{ width: "100%" }}
             >
               <Tab.Screen
                 name="Principal"
@@ -57,7 +51,7 @@ export default function App() {
                       name="home"
                       color={color}
                       size={23}
-                      style={{MarginBottom: 15}}/>
+                    />
                   ),
                 }}
               />
@@ -67,10 +61,10 @@ export default function App() {
                 options={{
                   tabBarIcon: ({ color }) => (
                     <Icon
-                    name="swap"
-                    color={color}
-                    size={23}
-                    style={{marginBottom: 15}}/>
+                      name="swap"
+                      color={color}
+                      size={23}
+                  />
                   ),
                 }}
               />
@@ -83,7 +77,7 @@ export default function App() {
                       name="linechart"
                       color={color}
                       size={23}
-                      style={{marginBottom: 15}}/>
+                    />
                   ),
                 }}
               />
@@ -96,7 +90,7 @@ export default function App() {
                       name="wallet"
                       color={color}
                       size={23}
-                      style={{marginBottom: 15}}/>
+                    />
                   ),
                 }}
               />

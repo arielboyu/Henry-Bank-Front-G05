@@ -13,12 +13,6 @@ export default function HomeScreen({navigation}) {
       title='Iniciar Sesión'
       onPress={() => navigation.navigate('LoginScreen')}
     ></Button>
-    <View style={{marginTop:30}} >
-        <Button
-      title='Main'
-      onPress={() => navigation.navigate('MainScreen')}
-    ></Button>
-    </View>
     </View>
     </View>
   );

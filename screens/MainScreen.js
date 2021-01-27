@@ -5,12 +5,12 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import Transfer from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const data = {
-	name     : 'Valentín',
+	name  : 'Valentín',
 	lastName : 'Nicheglod',
-	income   : 3320,
+	income: 3320,
 	expenses : 1504,
-	dollar   : '1.300',
-	peso     : '25.000',
+	dollar: '1.300',
+	peso  : '25.000',
 	accounts : {
 		usd  : '6384636',
 		peso : '4520065'
@@ -139,97 +139,97 @@ const MainScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-    backgroundColor: "#F1F4FF"
-  },
-  mainCard: {
-    width: 310,
-    height: "97%",
-    padding: 10,
-    borderRadius: 20,
-    marginTop: 10,
-    marginBottom: 10,
-    marginRight: 10
-  },
-  cards: {
-    borderRadius: 20
-  },
-  greeting: {
-    alignItems: "flex-start",
-    width: "100%",
-    marginTop: 10,
-    marginBottom: 10,
-    fontSize: 35
-  },
-  white: {
-    color: "white"
-  },
-  generalCont: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-around",
-    width: "100%",
-    marginTop: 5,
-    marginBottom: 5,
-  },
-  center: {
-    display: "flex",
-    alignItems: "center",
-    flexDirection: "column"
-  },
-  balance: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "flex-start",
-    marginBottom: 5
-  },
-  smallParagraph: {
-    fontWeight: "600"
-  },
-  bigText: {
-    fontSize: 40,
-    paddingTop: 15,
-    marginLeft: 15,
-    color: "#F7F7F9",
-    fontWeight: "400",
-    letterSpacing: 2
-  },
-  iconButtons: {
-    backgroundColor: "#006A34",
-    marginBottom: 12,
+	container: {
+		flex: 1,
+ 		padding: 20,
+ 		backgroundColor: "#F1F4FF"
+  	},
+ 	mainCard: {
+ 		width: 310,
+ 		height: "97%",
+ 		padding: 10,
+ 		borderRadius: 20,
+ 		marginTop: 10,
+ 		marginBottom: 10,
+ 		marginRight: 10
+  	},
+  	cards: {
+ 		borderRadius: 20
+  	},
+  	greeting: {
+ 		alignItems: "flex-start",
+ 		width: "100%",
+ 		marginTop: 10,
+ 		marginBottom: 10,
+ 		fontSize: 35
+  	},
+  	white: {
+ 		color: "white"
+  	},
+  	generalCont: {
+ 		display: "flex",
+ 		flexDirection: "row",
+ 		justifyContent: "space-around",
+ 		width: "100%",
+ 		marginTop: 5,
+ 		marginBottom: 5,
+  	},
+  	center: {
+		display: "flex",
+		alignItems: "center",
+		flexDirection: "column"
+  	},
+  	balance: {
+		display: "flex",
+		flexDirection: "column",
+		alignItems: "flex-start",
+		marginBottom: 5
+  	},
+  	smallParagraph: {
+ 		fontWeight: "600"
+  	},
+  	bigText: {
+		fontSize: 40,
+		paddingTop: 15,
+		marginLeft: 15,
+		color: "#F7F7F9",
+		fontWeight: "400",
+		letterSpacing: 2
+  	},
+  	iconButtons: {
+		backgroundColor: "#006A34",
+		marginBottom: 12,
 		borderRadius: 20, 
 		marginTop: 25
-  },
-  buttonDesc: {
-    fontWeight: "600"
-  },
-  cardInfo: {
-    marginTop: 35,
-    marginLeft: 15
-  },
-  scroll: {
-    height: "40%",
-    width: "100%"
-  },
-  paragraph: {
-    marginTop: 5,
-    fontSize: 20,
-    color: "#fff",
-    fontWeight: "600"
-  },
-  cardText: {
-    fontSize: 17,
-    color: "#F7F7F9",
-    letterSpacing: 1,
-    fontWeight: "300"
-  },
-  general: {
-		marginTop: 15,
+  	},
+  	buttonDesc: {
+ 		fontWeight: "600"
+  	},
+  	cardInfo: {
+		marginTop: 20,
+		marginLeft: 15
+  	},
+  	scroll: {
+		height: "50%",
+		width: "100%"
+  	},
+  	paragraph: {
+		marginTop: 5,
+		fontSize: 20,
+		color: "#fff",
+		fontWeight: "600"
+  	},
+  	cardText: {
+		fontSize: 17,
+		color: "#F7F7F9",
+		letterSpacing: 1,
+		fontWeight: "300"
+  	},
+  	general: {
+		marginTop: 5,
 		marginBottom: 15
-  },
-  cardCont: {
+  	},
+  	cardCont: {
 		display: "flex",
 		flexDirection: "row",
 		marginTop: 5,
@@ -238,93 +238,91 @@ const styles = StyleSheet.create({
 		width: "100%",
 		overflow: "hidden"
 	},
-	center          : {
-		display       : 'flex',
-		alignItems    : 'center',
-		flexDirection : 'column'
+	center: {
+		display: 'flex',
+		alignItems: 'center',
+		flexDirection: 'column'
 	},
-	balance         : {
-		display       : 'flex',
-		flexDirection : 'column',
-		alignItems    : 'flex-start',
-		marginBottom  : 5
+	balance: {
+		display: 'flex',
+		flexDirection: 'column',
+		alignItems: 'flex-start',
+		marginBottom: 5
 	},
-	smallParagraph  : {
-		fontWeight : 'bold'
+	smallParagraph: {
+		fontWeight: 'bold'
 	},
-	bigText         : {
-		fontFamily    : 'calibri',
-		fontSize      : 40,
-		paddingTop    : 15,
-		marginLeft    : 15,
-		color         : '#F7F7F9',
-		fontWeight    : '400',
-		letterSpacing : 2
+	bigText: {
+		fontSize: 40,
+		paddingTop: 15,
+		marginLeft: 15,
+		color: '#F7F7F9',
+		fontWeight: '400',
+		letterSpacing: 2
 	},
-	iconButtons     : {
-		backgroundColor : '#006A34',
-		marginBottom    : 12,
-		borderRadius    : 20,
-		marginTop       : 25
+	iconButtons: {
+		backgroundColor: '#006A34',
+		marginBottom: 12,
+		borderRadius: 20,
+		marginTop: 25
 	},
-	buttonDesc      : {
-		fontWeight : '700'
+	buttonDesc: {
+		fontWeight: '700'
 	},
-	cardInfo        : {
-		marginTop  : 35,
-		marginLeft : 15
+	cardInfo: {
+		marginTop: 35,
+		marginLeft: 15
 	},
-	scroll          : {
-		height : 204,
-		width  : '100%'
+	scroll: {
+		height: 204,
+		width: '100%'
 	},
-	paragraph       : {
-		marginTop  : 5,
-		fontSize   : 20,
-		color      : '#fff',
-		fontWeight : '600'
+	paragraph: {
+		marginTop: 5,
+		fontSize: 20,
+		color: '#fff',
+		fontWeight: '600'
 	},
-	cardText        : {
-		fontFamily    : 'calibri',
-		fontSize      : 17,
-		color         : '#F7F7F9',
-		letterSpacing : 1,
-		fontWeight    : '300'
+	cardText: {
+		fontSize: 17,
+		color: '#F7F7F9',
+		letterSpacing: 1,
+		fontWeight: '300'
 	},
-	general         : {
-		marginTop    : 15,
-		marginBottom : 15
+	general: {
+		marginTop: 15,
+		marginBottom: 15
 	},
-	cardCont        : {
-		display       : 'flex',
-		flexDirection : 'row',
-		marginTop     : 5,
+	cardCont: {
+		display: 'flex',
+		flexDirection: 'row',
+		marginTop: 5,
 		borderRadius  : 10,
-		borderWidth   : 1,
-		width         : '100%',
-		overflow      : 'hidden'
+		borderWidth: 1,
+		width: '100%',
+		overflow: 'hidden'
 	},
-	generalSection  : {
-		display    : 'flex',
-		alignItems : 'center',
-		width      : '47%'
+	generalSection: {
+		display: 'flex',
+		alignItems: 'center',
+		width: '47%'
 	},
-	generalSection1 : {
-		width            : '35%',
-		display          : 'flex',
-		justifyContent   : 'center',
-		alignItems       : 'center',
-		padding          : 7,
-		borderRightWidth : 1,
-		backgroundColor  : '#006A34'
+	generalSection1: {
+		width: '35%',
+		display: 'flex',
+		justifyContent: 'center',
+		alignItems: 'center',
+		padding: 7,
+		borderRightWidth: 1,
+		backgroundColor: '#006A34'
 	},
-	generalSection2 : {
-		width           : '65%',
-		display         : 'flex',
-		justifyContent  : 'center',
-		paddingLeft     : 10,
-		paddingRight    : 12,
-		backgroundColor : '#57A130'
+	generalSection2: {
+		width: '65%',
+		display: 'flex',
+		justifyContent: 'center',
+		paddingLeft: 10,
+		paddingRight: 12,
+		backgroundColor: '#57A130'
 	}
 });
 
