@@ -43,7 +43,7 @@ export default function App() {
         }}>
         <Stack.Screen 
           name="Home" 
-          component={MainScreen}
+          component={HomeScreen}
           options={{title:'Inicio'}}
         />
         <Stack.Screen 
