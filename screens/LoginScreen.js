@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import { StyleSheet,
    Text,
     View,
@@ -12,9 +12,16 @@ import Feather from 'react-native-vector-icons/Feather'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import logo from '../assets/logo.png'
 import * as Animatable from 'react-native-animatable'
+import { useDispatch } from 'react-redux'
+import { getUsers } from '../src/redux/actions/user'
 
 
 export default function Login({navigation}) {
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getUsers());
+  });
 
   const [data,setData] = useState({
     email:'',
