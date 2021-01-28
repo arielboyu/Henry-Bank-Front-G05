@@ -24,11 +24,8 @@
     "react-native": "https://github.com/expo/react-native/archive/sdk-40.0.1.tar.gz",
     "react-native-animatable": "^1.3.3",
     "react-native-gesture-handler": "~1.8.0",
-<<<<<<< HEAD
     "react-native-linear-gradient": "^2.5.6",
-=======
     "react-native-paper": "^4.7.1",
->>>>>>> 9a3c729b5b8861d88b254d7cf78ad0e4520682a7
     "react-native-reanimated": "~1.13.0",
     "react-native-safe-area-context": "3.1.9",
     "react-native-screens": "~2.15.0",

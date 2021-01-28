@@ -31,30 +31,7 @@ const Stack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
 
 export default function App() {
-<<<<<<< HEAD
-  return (
-    <NavigationContainer>
-    <Stack.Navigator screenOptions={{
-      headerStyle:{
-      backgroundColor:'green',
-    },
-    headerTintColor:'white',
-    headerTitleStyle: {
-      fontWeight: 'bold'
-    }
-    }} >
-      <Stack.Screen name="Home" component={HomeScreen}
-      options={{title:'Home'}}
-      />
-      <Stack.Screen name="LoginScreen" component={LoginScreen}
-      options={{title:'Iniciar Sesión'}}
-      />
-      <Stack.Screen name="RegisterScreen" component={RegisterScreen}
-      options={{title:'Registrarse'}}
-      />
-    </Stack.Navigator>
-    </NavigationContainer>
-=======
+
   const logged = false; //Cambia dependiendo de si el usuario esta logeado
 	return (
 		<Provider store={store}>
@@ -125,7 +102,6 @@ export default function App() {
               />
             </Tab.Navigator>
           </NavigationContainer>
->>>>>>> 9a3c729b5b8861d88b254d7cf78ad0e4520682a7
 
         //Si no esta logueado
         : <NavigationContainer>
