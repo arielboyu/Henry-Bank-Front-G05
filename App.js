@@ -27,7 +27,7 @@ const Tab = createMaterialBottomTabNavigator();
 
 export default function App() {
 
-  const logged = false; //Cambia dependiendo de si el usuario esta logeado
+  const logged = true; //Cambia dependiendo de si el usuario esta logeado
 	return (
 		<Provider store={store}>
 
@@ -46,6 +46,7 @@ export default function App() {
               <Tab.Screen
                 name="Principal"
                 component={MainScreen}
+                
                 options={{
                   tabBarIcon: ({ color }) => (
                     <Icon
@@ -54,11 +55,13 @@ export default function App() {
                       size={23}
                     />
                   ),
+                  tabBarColor: "#5FA743"
                 }}
               />
               <Tab.Screen
                 name="Transacciones"
                 component={TransactionsScreen}
+                
                 options={{
                   tabBarIcon: ({ color }) => (
                     <Icon
@@ -67,11 +70,13 @@ export default function App() {
                       size={23}
                   />
                   ),
+                  tabBarColor: "#006A34"
                 }}
               />
               <Tab.Screen
                 name="Estadísticas"
                 component={StatisticsScreen}
+                
                 options={{
                   tabBarIcon: ({ color }) => (
                     <Icon
@@ -80,11 +85,13 @@ export default function App() {
                       size={23}
                     />
                   ),
+                  tabBarColor: "#007f5f"
                 }}
               />
               <Tab.Screen
                 name="Productos"
                 component={ProductsScreen}
+                
                 options={{
                   tabBarIcon: ({ color }) => (
                     <Icon
@@ -93,6 +100,7 @@ export default function App() {
                       size={23}
                     />
                   ),
+                  tabBarColor: "#279152"
                 }}
               />
               <Tab.Screen
