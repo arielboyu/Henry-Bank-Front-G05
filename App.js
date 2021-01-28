@@ -21,18 +21,13 @@ import DischargeScreen from './screens/DischargeScreen';
 import Icon from 'react-native-vector-icons/AntDesign'
 import VerifyScrenn from './screens/VerifyScrenn'
 
-// <Stack.Screen
-//   name="VerifyScrenn"
-//   component={VerifyScrenn}
-//   options={{title:'Verificar su e-mail'}}
-// />
 
 const Stack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
 
 export default function App() {
 
-  const logged = false; //Cambia dependiendo de si el usuario esta logeado
+  const logged = true; //Cambia dependiendo de si el usuario esta logeado
 	return (
 		<Provider store={store}>
 
@@ -46,7 +41,7 @@ export default function App() {
                 style: {backgroundColor: '#fff'},
                 keyboardHidesTabBar: true
               }}
-              
+
             >
               <Tab.Screen
                 name="Principal"
@@ -94,6 +89,20 @@ export default function App() {
                   tabBarIcon: ({ color }) => (
                     <Icon
                       name="wallet"
+                      color={color}
+                      size={23}
+                    />
+                  ),
+                }}
+              />
+              <Tab.Screen
+                name="Cerrar Sesión"
+                component={MainScreen}
+                onPress={()=>navigation.navigate('Login')}
+                options={{
+                  tabBarIcon: ({ color }) => (
+                    <Icon
+                      name="logout"
                       color={color}
                       size={23}
                     />
