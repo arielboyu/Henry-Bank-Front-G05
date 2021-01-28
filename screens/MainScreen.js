@@ -70,7 +70,7 @@ const MainScreen = () => {
 
 			<View style={styles.general}>
 				<Headline>General...</Headline>
-				<View style={styles.generalCont}>
+				<View style={styles.generalCont1}>
 					{/* Ingresos */}
 
 					<View style={styles.generalSection}>
@@ -80,7 +80,7 @@ const MainScreen = () => {
 							</View>
 							<View style={styles.generalSection2}>
 								<Paragraph style={styles.white}>Ingresos</Paragraph>
-								<Headline style={styles.white}>{`$ ${income}`}</Headline>
+								<Headline style={styles.numbers}>{`$${income}`}</Headline>
 							</View>
 						</View>
 					</View>
@@ -94,7 +94,7 @@ const MainScreen = () => {
 							</View>
 							<View style={styles.generalSection2}>
 								<Paragraph style={styles.white}>Gastos</Paragraph>
-								<Headline style={styles.white}>{`$ ${expenses}`}</Headline>
+								<Headline style={styles.numbers}>{`$${expenses}`}</Headline>
 							</View>
 						</View>
 					</View>
@@ -104,7 +104,7 @@ const MainScreen = () => {
 
 			{/* Period */}
 
-			<View style={styles.generalCont}>
+			<View style={styles.generalCont1}>
 				<Button mode="text">3 D</Button>
 				<Button mode="text">1 S</Button>
 				<Button mode="text">2 S</Button>
@@ -114,7 +114,7 @@ const MainScreen = () => {
 			</View>
 			<Divider />
 
-			<View style={styles.generalCont}>
+			<View style={styles.generalCont2}>
 				<View style={styles.center}>
 					<Button style={styles.iconButtons}>
 						<Icon name="donate" size={30} color="#fff" />
@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
   	},
  	mainCard: {
  		width: 310,
- 		height: "97%",
+ 		height: 190,
  		padding: 10,
  		borderRadius: 20,
  		marginTop: 10,
@@ -157,76 +157,42 @@ const styles = StyleSheet.create({
  		borderRadius: 20
   	},
   	greeting: {
+		display: "flex",
  		alignItems: "flex-start",
  		width: "100%",
- 		marginTop: 10,
  		marginBottom: 10,
  		fontSize: 35
   	},
   	white: {
  		color: "white"
   	},
-  	generalCont: {
+  	generalCont1: {
  		display: "flex",
  		flexDirection: "row",
  		justifyContent: "space-around",
  		width: "100%",
  		marginTop: 5,
  		marginBottom: 5,
-  	},
-  	center: {
-		display: "flex",
+	},
+	generalCont2: {
+		flex: 1,
+		flexDirection: "row",
 		alignItems: "center",
-		flexDirection: "column"
-  	},
-  	balance: {
-		display: "flex",
-		flexDirection: "column",
-		alignItems: "flex-start",
-		marginBottom: 5
-  	},
-  	smallParagraph: {
- 		fontWeight: "600"
-  	},
-  	bigText: {
-		fontSize: 40,
-		paddingTop: 15,
-		marginLeft: 15,
-		color: "#F7F7F9",
-		fontWeight: "400",
-		letterSpacing: 2
-  	},
-  	iconButtons: {
-		backgroundColor: "#006A34",
-		marginBottom: 12,
-		borderRadius: 20, 
-		marginTop: 25
-  	},
-  	buttonDesc: {
- 		fontWeight: "600"
-  	},
+		justifyContent: "space-around",
+		width: "100%",
+		marginTop: 5,
+		marginBottom: 5,
+	 },
   	cardInfo: {
-		marginTop: 20,
+		marginTop: 15,
 		marginLeft: 15
   	},
   	scroll: {
-		height: "50%",
+		height: 200,
 		width: "100%"
   	},
-  	paragraph: {
-		marginTop: 5,
-		fontSize: 20,
-		color: "#fff",
-		fontWeight: "600"
-  	},
-  	cardText: {
-		fontSize: 17,
-		color: "#F7F7F9",
-		letterSpacing: 1,
-		fontWeight: "300"
-  	},
   	general: {
-		marginTop: 5,
+		marginTop: 10,
 		marginBottom: 15
   	},
   	cardCont: {
@@ -250,12 +216,13 @@ const styles = StyleSheet.create({
 		marginBottom: 5
 	},
 	smallParagraph: {
-		fontWeight: 'bold'
+		fontWeight: "400"
 	},
 	bigText: {
 		fontSize: 40,
 		paddingTop: 15,
 		marginLeft: 15,
+		marginBottom: 5,
 		color: '#F7F7F9',
 		fontWeight: '400',
 		letterSpacing: 2
@@ -269,14 +236,6 @@ const styles = StyleSheet.create({
 	buttonDesc: {
 		fontWeight: '700'
 	},
-	cardInfo: {
-		marginTop: 35,
-		marginLeft: 15
-	},
-	scroll: {
-		height: 204,
-		width: '100%'
-	},
 	paragraph: {
 		marginTop: 5,
 		fontSize: 20,
@@ -289,26 +248,13 @@ const styles = StyleSheet.create({
 		letterSpacing: 1,
 		fontWeight: '300'
 	},
-	general: {
-		marginTop: 15,
-		marginBottom: 15
-	},
-	cardCont: {
-		display: 'flex',
-		flexDirection: 'row',
-		marginTop: 5,
-		borderRadius  : 10,
-		borderWidth: 1,
-		width: '100%',
-		overflow: 'hidden'
-	},
 	generalSection: {
 		display: 'flex',
 		alignItems: 'center',
-		width: '47%'
+		width: '48%'
 	},
 	generalSection1: {
-		width: '35%',
+		width: '25%',
 		display: 'flex',
 		justifyContent: 'center',
 		alignItems: 'center',
@@ -317,12 +263,17 @@ const styles = StyleSheet.create({
 		backgroundColor: '#006A34'
 	},
 	generalSection2: {
-		width: '65%',
+		width: '75%',
 		display: 'flex',
 		justifyContent: 'center',
 		paddingLeft: 10,
 		paddingRight: 12,
 		backgroundColor: '#57A130'
+	},
+	numbers: {
+		color: "white",
+		fontWeight: "300",
+		fontSize: 20
 	}
 });
 

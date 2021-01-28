@@ -31,6 +31,7 @@ const Stack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
 
 export default function App() {
+
   const logged = false; //Cambia dependiendo de si el usuario esta logeado
 	return (
 		<Provider store={store}>
@@ -41,6 +42,11 @@ export default function App() {
             <Tab.Navigator
               initialRouteName="Principal"
               activeColor="#fff"
+              tabBarOptions={{
+                style: {backgroundColor: '#fff'},
+                keyboardHidesTabBar: true
+              }}
+              
             >
               <Tab.Screen
                 name="Principal"
