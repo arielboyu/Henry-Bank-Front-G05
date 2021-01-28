@@ -12,13 +12,6 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import logo from '../assets/logo.png'
 
 
-// import VerifyScrenn from './screens/VerifyScrenn'
-// <Stack.Screen
-//   name="VerifyScrenn"
-//   component={VerifyScrenn}
-//   options={{title:'Verificar su e-mail'}}
-// />
-
 
 
 export default function VerifyScrenn({navigation}) {

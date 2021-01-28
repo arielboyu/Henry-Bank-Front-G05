@@ -1,6 +1,7 @@
 import {
   CREATE_USER,
-  GET_ALL_USERS
+  GET_ALL_USERS,
+  DISCHARGE_USER
 } from "../actions/user";
 
 
@@ -21,9 +22,16 @@ const userReducer = (state = initialState, action) => {
         ...state,
         users: action.user
       };
+      case DISCHARGE_USER:
+        return {
+          ...state,
+          user : [ state.user, action.user ]
+        };
       default:
       return state;
   }
-};
+}
+
+
 
 export default userReducer;
