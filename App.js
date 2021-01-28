@@ -27,7 +27,7 @@ const Tab = createMaterialBottomTabNavigator();
 
 export default function App() {
 
-  const logged = true; //Cambia dependiendo de si el usuario esta logeado
+  const logged = false; //Cambia dependiendo de si el usuario esta logeado
 	return (
 		<Provider store={store}>
 

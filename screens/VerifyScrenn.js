@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { StyleSheet,
     Text,
     View,
@@ -9,12 +9,20 @@ import { StyleSheet,
    } from 'react-native'
 import Feather from 'react-native-vector-icons/Feather'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
+import { useDispatch } from 'react-redux'
 import logo from '../assets/logo.png'
+import { getUsers } from '../src/redux/actions/user'
 
 
 
 
 export default function VerifyScrenn({navigation}) {
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getUsers());
+  });
+
   return (
     <View style={styles.container}>
     <View style={styles.header}>

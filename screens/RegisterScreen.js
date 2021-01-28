@@ -1,5 +1,5 @@
-import React, {useState} from 'react'
-import { useDispatch } from "react-redux";
+import React, {useState, useEffect} from 'react'
+import { useDispatch, useSelector } from "react-redux";
 import { StyleSheet,
    Text,
     View,
@@ -13,7 +13,7 @@ import Feather from 'react-native-vector-icons/Feather'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import logo from '../assets/logo.png'
 import * as Animatable from 'react-native-animatable'
-import { createNewUser } from '../src/redux/actions/user'
+import { createNewUser, getUsers } from '../src/redux/actions/user'
 
 
 export default function Register({navigation}) {
@@ -58,6 +58,10 @@ export default function Register({navigation}) {
   }
 
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getUsers());
+  });
+
 
   const onSubmit = (user) => {
     dispatch(createNewUser(user));
