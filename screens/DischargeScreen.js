@@ -3,51 +3,72 @@ import { View, Text, StyleSheet, TextInput, Image, TouchableOpacity } from 'reac
 import * as Animatable from 'react-native-animatable';
 import Feather from 'react-native-vector-icons/Feather';
 import { Picker } from '@react-native-picker/picker';
+import * as ImagePicker from 'expo-image-picker';
+import { useDispatch } from 'react-redux';
 
 import logo from '../assets/logo.png';
+import { dischargeNewUser } from '../src/redux/actions/user';
 
-export default function dischargeScreen(navigation) {
+export default function dischargeScreen({ navigation }) {
 	const [ data, setData ] = useState({
-		typeID                : '',
-		documentNumber        : '',
-		first_name            : '',
-		last_name             : '',
-		date                  : '',
-		check_TextImputChange : false,
+		form : {
+			id              : 1,
+			typeID          : 'DNI',
+			document_number : '',
+			first_name      : '',
+			last_name       : '',
+			prefix_code     : '+54',
+			phone_number    : '',
+			birthday_date   : ''
+		}
+		/* check_TextInputChange : {
+			typeID          : false,
+			document_number : false,
+			first_name      : false,
+			last_name       : false,
+			prefix_code     : false,
+			number          : false,
+			date            : false
+		},
 		secureTextEntry       : true,
 		isValidUser           : true,
-		isValidPassword       : true
+		isValidPassword       : true */
 	});
 
-	const [ typeID, setTypeID ] = useState('DNI');
-	const textInputChange = (val) => {
-		if (val.length != 0) {
-			setData({
-				...data,
-				email                 : val,
-				check_TextImputChange : true
-			});
-		} else {
-			setData({
-				...data,
-				email                 : val,
-				check_TextImputChange : false
-			});
+	const [ selectedImage, setSelectedImage ] = useState(null);
+
+	/* Selección Imagen*/
+	let openImgPictureAsync = async () => {
+		let permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+		if (permissionResult.granted === false) {
+			alert('Permission to access your files is required');
+			return;
 		}
+
+		const pickerResult = await ImagePicker.launchImageLibraryAsync();
+
+		if (pickerResult.cancelled === true) return;
+
+		setSelectedImage({ localUri: pickerResult.uri });
 	};
 
-	const handlePasswordChange = (val) => {
+	const handleChange = (val) => {
 		setData({
 			...data,
-			password : val
+			form : {
+				...data.form,
+				[val.type]: val.value
+			}
 		});
+		console.log('Data', data);
 	};
 
-	const updateSecureTextEntry = () => {
-		setData({
-			...data,
-			secureTextEntry : !data.secureTextEntry
-		});
+	const dispatch = useDispatch();
+
+	const setUpdateUser = (updateUser) => {
+		console.log('Screen', updateUser);
+		dispatch(dischargeNewUser(updateUser));
 	};
 
 	return (
@@ -57,45 +78,63 @@ export default function dischargeScreen(navigation) {
 				<Text style={styles.text_header}>Completa tus Datos!</Text>
 			</View>
 			<View style={styles.footer}>
-				<View style={styles.action_picker}>
+				<View style={styles.action}>
+					<TouchableOpacity style={styles.button_image} onPress={openImgPictureAsync}>
+						<Image
+							source={{
+								uri : selectedImage !== null ? selectedImage.localUri : 'https://picsum.photos/200/200'
+							}}
+							style={styles.image}
+						/>
+					</TouchableOpacity>
+				</View>
+				<View style={styles.action}>
 					<Picker
-						selectedValue={typeID}
+						selectedValue={data.form.typeID}
 						style={styles.picker_input}
-						onValueChange={(itemValue, itemIndex) => setTypeID(itemValue)}>
+						onValueChange={(val) => handleChange({ value: val, type: 'typeID' })}>
 						<Picker.Item label="DNI" value="DNI" />
 						<Picker.Item label="Pasaporte" value="Pasaporte" />
 					</Picker>
 				</View>
-				{/* <Text style={styles.text_footer}>Tipo de Documento</Text> */}
 				<View style={styles.action}>
-					{/* <FontAwesome name="user-o" color="#05375a" size={20} /> */}
 					<TextInput
 						placeholder="ingrese numero de documento"
 						style={styles.text_input}
-						autoCapitalize="none"
-						onChangeText={(val) => textInputChange(val)}
+						keyboardType="decimal-pad"
+						onChangeText={(val) => handleChange({ value: val, type: 'document_number' })}
 					/>
-					{data.check_TextImputChange ? <Feather name="check-circle" color="green" size={20} /> : null}
 				</View>
 				<View style={styles.action}>
-					{/* <FontAwesome name="user-o" color="#05375a" size={20} /> */}
 					<TextInput
 						placeholder="Nombres"
 						style={styles.text_input}
 						autoCapitalize="none"
-						onChangeText={(val) => textInputChange(val)}
+						onChangeText={(val) => handleChange({ value: val, type: 'first_name' })}
 					/>
-					{data.check_TextImputChange ? <Feather name="check-circle" color="green" size={20} /> : null}
 				</View>
 				<View style={styles.action}>
-					{/* <FontAwesome name="user-o" color="#05375a" size={20} /> */}
 					<TextInput
 						placeholder="Apellidos"
 						style={styles.text_input}
 						autoCapitalize="none"
-						onChangeText={(val) => textInputChange(val)}
+						onChangeText={(val) => handleChange({ value: val, type: 'last_name' })}
 					/>
-					{data.check_TextImputChange ? <Feather name="check-circle" color="green" size={20} /> : null}
+				</View>
+				<View style={styles.action}>
+					<Picker
+						selectedValue={data.form.prefix_code}
+						style={styles.picker_prefix}
+						onValueChange={(val) => handleChange({ value: val, type: 'prefix_code' })}>
+						<Picker.Item label="+54" value="+54" />
+						<Picker.Item label="+57" value="+57" />
+					</Picker>
+					<TextInput
+						placeholder="Telefono Celular"
+						style={styles.text_input}
+						keyboardType="decimal-pad"
+						onChangeText={(val) => handleChange({ value: val, type: 'phone_number' })}
+					/>
 				</View>
 				<View style={styles.action}>
 					{/* <FontAwesome name="user-o" color="#05375a" size={20} /> */}
@@ -103,38 +142,14 @@ export default function dischargeScreen(navigation) {
 						placeholder="Fecha de Nacimiento"
 						style={styles.text_input}
 						autoCapitalize="none"
-						onChangeText={(val) => textInputChange(val)}
+						onChangeText={(val) => handleChange({ value: val, type: 'birthday_date' })}
 					/>
-					{data.check_TextImputChange ? <Feather name="check-circle" color="green" size={20} /> : null}
 				</View>
-				{/* <Animatable.View animation="fadeInLeft">
-					<Text style={styles.errorMsg}>Debe colocar un email o telefóno validos</Text>
-				</Animatable.View> */}
-				{/* <Text style={{ color: '#05375a', fontSize: 18, marginTop: 30 }}>Contraseña</Text>
-				<View style={styles.action}>
-					<FontAwesome name="lock" color="#05375a" size={20} paddingLeft={10} />
-					<TextInput
-						placeholder="ingrese contraseña"
-						secureTextEntry={data.secureTextEntry ? true : false}
-						style={styles.text_input}
-						autoCapitalize="none"
-						onChangeText={(val) => handlePasswordChange(val)}
-					/>
-					<TouchableOpacity onPress={updateSecureTextEntry}>
-						{data.secureTextEntry ? (
-							<Feather name="eye-off" color="grey" size={20} />
-						) : (
-							<Feather name="eye" color="grey" size={20} />
-						)}
-					</TouchableOpacity>
-				</View>
-				<View>
-					<TouchableOpacity style={{ marginTop: 10 }}>
-						<Text style={{ fontSize: 12, color: 'blue', alignSelf: 'center' }}>Olvidó su Contraseña?</Text>
-					</TouchableOpacity>
-				</View> */}
 				<View style={styles.button}>
 					<TouchableOpacity
+						onPress={() => {
+							setUpdateUser(data.form), navigation.navigate('LoginScreen');
+						}}
 						style={
 							([ styles.singIn ],
 							{
@@ -148,22 +163,6 @@ export default function dischargeScreen(navigation) {
 						<Text style={([ styles.textSing ], { color: 'black' })}>Finalizar Registro</Text>
 					</TouchableOpacity>
 				</View>
-				{/* <View style={styles.button}>
-					<TouchableOpacity
-						onPress={() => navigation.navigate('RegisterScreen')}
-						style={
-							([ styles.singIn ],
-							{
-								marginTop         : -30,
-								backgroundColor   : 'grey',
-								borderRadius      : 40,
-								paddingVertical   : 10,
-								paddingHorizontal : 14
-							})
-						}>
-						<Text style={([ styles.textSing ], { color: 'black' })}>Registrarse</Text>
-					</TouchableOpacity>
-				</View> */}
 			</View>
 		</View>
 	);
@@ -206,9 +205,6 @@ const styles = StyleSheet.create({
 		borderBottomColor : '#f2f2f2',
 		paddingBottom     : 5
 	},
-	action_picker : {
-		flexDirection : 'row'
-	},
 	text_input    : {
 		flex        : 1,
 		paddingLeft : 15,
@@ -216,14 +212,31 @@ const styles = StyleSheet.create({
 	},
 	picker_input  : {
 		flex        : 1,
-		height      : 50,
+		height      : 20,
 		width       : 100,
 		paddingLeft : 15,
 		color       : 'black'
 	},
+	picker_prefix : {
+		height      : 'auto',
+		width       : 100,
+		paddingLeft : 15,
+		color       : 'black'
+	},
+	image         : {
+		height       : 100,
+		width        : 100,
+		borderRadius : 100,
+		resizeMode   : 'contain'
+	},
 	button        : {
 		alignItems : 'center',
 		marginTop  : 50
+	},
+	button_image  : {
+		flex           : 1,
+		justifyContent : 'center',
+		alignItems     : 'center'
 	},
 	singIn        : {
 		width          : '100%',
