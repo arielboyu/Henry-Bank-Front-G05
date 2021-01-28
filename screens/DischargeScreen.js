@@ -1,18 +1,29 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, TextInput, Image, TouchableOpacity } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import Feather from 'react-native-vector-icons/Feather';
 import { Picker } from '@react-native-picker/picker';
 import * as ImagePicker from 'expo-image-picker';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import logo from '../assets/logo.png';
-import { dischargeNewUser } from '../src/redux/actions/user';
+import { dischargeNewUser, getUsers } from '../src/redux/actions/user';
 
-export default function dischargeScreen({ navigation }) {
+export default function dischargeScreen({ navigation, user }) {
+
+  const userId = useSelector((state) => state.user.user[1].id);
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    console.log("USER >>>", userId)
+    /* setData(...data, form :{ ...data.form, id : user.user[0][1].id}); */
+    dispatch(getUsers());
+  });
+
+
 	const [ data, setData ] = useState({
 		form : {
-			id              : 1,
+			id              : userId,
 			typeID          : 'DNI',
 			document_number : '',
 			first_name      : '',
@@ -64,7 +75,7 @@ export default function dischargeScreen({ navigation }) {
 		console.log('Data', data);
 	};
 
-	const dispatch = useDispatch();
+
 
 	const setUpdateUser = (updateUser) => {
 		console.log('Screen', updateUser);
