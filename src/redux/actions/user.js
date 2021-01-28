@@ -18,6 +18,13 @@ const getAllUsers = (user) => {
   };
 };
 
+const dischargeUser = (user) => {
+	return {
+		type : DISCHARGE_USER,
+		user
+	};
+};
+
 
 
 export const createNewUser = (user) => {
@@ -51,25 +58,6 @@ export const getUsers = () => {
 };
 
 
-const dischargeUser = (user) => {
-	return {
-		type : DISCHARGE_USER,
-		user
-	};
-};
-
-export const createNewUser = (newUser) => {
-	return async (dispatch) => {
-		try {
-			const res = await axios.post(`http://localhost:3001/user`, { newUser });
-
-			dispatch(createUser(res.data));
-			alert(`User ${res.data.firstName} created successfully`);
-		} catch (err) {
-			console.log(err);
-		}
-	};
-};
 
 export const dischargeNewUser = (updateUser) => {
 	return async (dispatch) => {
@@ -79,7 +67,7 @@ export const dischargeNewUser = (updateUser) => {
 				lastName     : updateUser.last_name,
 				mobile       : updateUser.phone_number,
 				street       : 'Bs As',
-				streetNumber : '299 y Calle Colonia',
+				streetNumber : 299,
 				city         : 'Junin',
 				province     : 'Mendoza',
 				country      : 'Argentina',
