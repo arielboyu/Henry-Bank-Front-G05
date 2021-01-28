@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-export const CREATE_USER = "CREATE_USER";
-export const GET_ALL_USERS ="GET_ALL_USERS"
+export const CREATE_USER = 'CREATE_USER';
+export const GET_ALL_USERS = 'GET_ALL_USERS';
 export const DISCHARGE_USER = 'DISCHARGE_USER';
 
 const createUser = (user) => {
@@ -12,10 +12,10 @@ const createUser = (user) => {
 };
 
 const getAllUsers = (user) => {
-  return {
-    type: GET_ALL_USERS,
-    user
-  };
+	return {
+		type : GET_ALL_USERS,
+		user
+	};
 };
 
 const dischargeUser = (user) => {
@@ -25,39 +25,32 @@ const dischargeUser = (user) => {
 	};
 };
 
-
-
 export const createNewUser = (user) => {
-  return async (dispatch) => {
-    try {
-
-      const res = await axios.post(`http://localhost:3001/user`,  user);
-      dispatch(createUser(res.data));
-      if(res.data.email){
-      const email = res.data.email;
-      await axios.post(`http://localhost:3001/email`, { email });
-      }
-      
-    } catch (err) {
-      console.log(err);
-    }
-  };
+	return async (dispatch) => {
+		try {
+			const res = await axios.post(`http://localhost:3001/user`, user);
+			dispatch(createUser(res.data));
+			if (res.data.email) {
+				const email = res.data.email;
+				await axios.post(`http://localhost:3001/email`, { email });
+			}
+		} catch (err) {
+			console.log(err);
+		}
+	};
 };
 
 export const getUsers = () => {
-  return async (dispatch) => {
-    try {
+	return async (dispatch) => {
+		try {
+			const res = await axios.get(`http://localhost:3001/user`);
 
-      const res = await axios.get(`http://localhost:3001/user`);
-
-      dispatch(getAllUsers(res.data));
-    } catch (err) {
-      console.log(err);
-    }
-  };
+			dispatch(getAllUsers(res.data));
+		} catch (err) {
+			console.log(err);
+		}
+	};
 };
-
-
 
 export const dischargeNewUser = (updateUser) => {
 	return async (dispatch) => {
@@ -70,8 +63,8 @@ export const dischargeNewUser = (updateUser) => {
 				streetNumber : 299,
 				city         : 'Junin',
 				province     : 'Mendoza',
-				country      : 'Argentina',
-				birthdate    : '2021-01-27',
+				country      : updateUser.country,
+				birthdate    : updateUser.birthday_date,
 				typeDNI      : updateUser.typeID,
 				DNI          : updateUser.document_number
 			});

@@ -5,21 +5,18 @@ import Feather from 'react-native-vector-icons/Feather';
 import { Picker } from '@react-native-picker/picker';
 import * as ImagePicker from 'expo-image-picker';
 import { useDispatch, useSelector } from 'react-redux';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
 
 import logo from '../assets/logo.png';
 import { dischargeNewUser, getUsers } from '../src/redux/actions/user';
 
 export default function dischargeScreen({ navigation, user }) {
-
-  const userId = useSelector((state) => state.user.user[1].id);
-
-  const dispatch = useDispatch();
-  useEffect(() => {
-    console.log("USER >>>", userId)
-    /* setData(...data, form :{ ...data.form, id : user.user[0][1].id}); */
-    dispatch(getUsers());
-  });
-
+	/* const userId = useSelector((state) => state.user.user[1].id); */
+	const userId = 1;
+	const dispatch = useDispatch();
+	useEffect(() => {
+		dispatch(getUsers());
+	});
 
 	const [ data, setData ] = useState({
 		form : {
@@ -29,6 +26,7 @@ export default function dischargeScreen({ navigation, user }) {
 			first_name      : '',
 			last_name       : '',
 			prefix_code     : '+54',
+			country         : 'Argentina',
 			phone_number    : '',
 			birthday_date   : ''
 		}
@@ -39,13 +37,14 @@ export default function dischargeScreen({ navigation, user }) {
 			last_name       : false,
 			prefix_code     : false,
 			number          : false,
-			date            : false
+			birthday_date            : false
 		},
 		secureTextEntry       : true,
 		isValidUser           : true,
 		isValidPassword       : true */
 	});
 
+	const [ isDatePickerVisible, setDatePickerVisibility ] = useState(false);
 	const [ selectedImage, setSelectedImage ] = useState(null);
 
 	/* Selección Imagen*/
@@ -65,21 +64,74 @@ export default function dischargeScreen({ navigation, user }) {
 	};
 
 	const handleChange = (val) => {
-		setData({
-			...data,
-			form : {
-				...data.form,
-				[val.type]: val.value
-			}
-		});
+		let newCountry;
+		if (val.type === 'prefix_code') {
+			if (val.value === '+54') newCountry = 'Argentina';
+			if (val.value === '+57') newCountry = 'Colombia';
+			setData({
+				...data,
+				form : {
+					...data.form,
+					[val.type]: val.value,
+					['country'] : newCountry
+				}
+			});
+		} else {
+			setData({
+				...data,
+				form : {
+					...data.form,
+					[val.type]: val.value
+				}
+			});
+		}
 		console.log('Data', data);
 	};
 
-
-
 	const setUpdateUser = (updateUser) => {
-		console.log('Screen', updateUser);
-		dispatch(dischargeNewUser(updateUser));
+		let today = new Date();
+		var fechaNace = new Date(data.form.birthday_date);
+		let age = Math.floor((today - fechaNace) / (1000 * 60 * 60 * 24) / 365);
+		if (age >= 16) {
+			console.log('Screen', updateUser);
+			dispatch(dischargeNewUser(updateUser));
+			navigation.navigate('LoginScreen');
+		} else {
+			alert('Please Change your Birthday Date');
+		}
+	};
+
+	const showDatePicker = () => {
+		setDatePickerVisibility(!isDatePickerVisible);
+	};
+
+	const handleConfirm = (date) => {
+		//console.warn('A date has been picked: ', date);
+		let today = new Date();
+		let age = Math.floor((today - date) / (1000 * 60 * 60 * 24) / 365);
+		let dd = date.getDate();
+		let mm = date.getMonth() + 1;
+		const yy = date.getFullYear();
+		if (dd < 10) {
+			dd = '0' + dd;
+		}
+
+		if (mm < 10) {
+			mm = '0' + mm;
+		}
+		const newDate = yy + '-' + mm + '-' + dd;
+		if (age >= 16) {
+			setData({
+				...data,
+				form : {
+					...data.form,
+					['birthday_date'] : newDate
+				}
+			});
+			showDatePicker();
+		} else {
+			alert('Debes ser Mayor de 16 años, Selecciona otra fecha');
+		}
 	};
 
 	return (
@@ -150,16 +202,28 @@ export default function dischargeScreen({ navigation, user }) {
 				<View style={styles.action}>
 					{/* <FontAwesome name="user-o" color="#05375a" size={20} /> */}
 					<TextInput
-						placeholder="Fecha de Nacimiento"
+						placeholder="Fecha de Nacimiento(YYYY-MM-DD)"
 						style={styles.text_input}
 						autoCapitalize="none"
+						//onSubmitEditing={showDatePicker}
+						onFocus={showDatePicker}
+						value={data.form.birthday_date}
 						onChangeText={(val) => handleChange({ value: val, type: 'birthday_date' })}
 					/>
+					<DateTimePickerModal
+						isVisible={isDatePickerVisible}
+						mode="date"
+						onConfirm={handleConfirm}
+						onCancel={showDatePicker}
+					/>
 				</View>
+				<Animatable.View animation="fadeInLeft">
+					<Text style={styles.errorMsg}>Recuerda Debes ser mayor a 16 años</Text>
+				</Animatable.View>
 				<View style={styles.button}>
 					<TouchableOpacity
 						onPress={() => {
-							setUpdateUser(data.form), navigation.navigate('LoginScreen');
+							setUpdateUser(data.form);
 						}}
 						style={
 							([ styles.singIn ],
