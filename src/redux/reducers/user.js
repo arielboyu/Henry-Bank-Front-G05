@@ -1,10 +1,12 @@
 import {
-  CREATE_USER
+  CREATE_USER,
+  GET_ALL_USERS
 } from "../actions/user";
 
 
 const initialState = {
-  user: {}
+  user: {},
+  users: []
 };
 
 const userReducer = (state = initialState, action) => {
@@ -12,7 +14,12 @@ const userReducer = (state = initialState, action) => {
     case CREATE_USER:
       return {
         ...state,
-        user: [...state.user, action.user]
+        user: [state.user, action.user]
+      };
+      case GET_ALL_USERS:
+      return {
+        ...state,
+        users: action.user
       };
       default:
       return state;
