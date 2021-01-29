@@ -13,7 +13,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import logo from '../assets/logo.png'
 import * as Animatable from 'react-native-animatable'
 import { useDispatch } from 'react-redux'
-import { getUsers } from '../src/redux/actions/user'
+import { getUsers, login } from '../src/redux/actions/user'
 
 
 export default function Login({navigation}) {
@@ -61,6 +61,12 @@ export default function Login({navigation}) {
       secureTextEntry: !data.secureTextEntry
     })
   }
+
+  const handleLogin = () => {
+    if (data.isValidUser && data.isValidPassword) {
+      dispatch(login(data))
+    };
+  };
 
   return (
     <View style={styles.container}>
@@ -142,7 +148,12 @@ export default function Login({navigation}) {
           <TouchableOpacity
            style={[styles.singIn], {marginTop:-25,backgroundColor: 'green',borderRadius:40,paddingVertical:10,paddingHorizontal:14}}
           >
-           <Text style={[styles.textSing],{color:'black'}} >Iniciar Sesión</Text>
+          <Text 
+            style={[styles.textSing],{color:'black'}}
+            onPress={handleLogin}
+          >
+              Iniciar Sesión
+            </Text>
           </TouchableOpacity>
           </View>
           <View style={styles.button}>
