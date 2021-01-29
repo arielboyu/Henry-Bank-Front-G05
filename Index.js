@@ -27,13 +27,14 @@ const Tab = createMaterialBottomTabNavigator();
 export default function Index() {
   const user = useSelector(state => state.user)
   const logged = user.user.logged; //Cambia dependiendo de si el usuario esta logeado
+
 	return (
         <>
-            {logged
+            {!logged
             //Si esta logueado
             ? <NavigationContainer>
                 <Tab.Navigator
-                initialRouteName="Principal"
+                initialRouteName="Transacciones"
                 activeColor="#fff"
                 tabBarOptions={{
                     style: {backgroundColor: '#fff'},
