@@ -4,6 +4,8 @@ import {
   DISCHARGE_USER
 } from "../actions/user";
 
+import { LOGIN } from '../constants/index';
+
 
 const initialState = {
   user: {},
@@ -17,20 +19,28 @@ const userReducer = (state = initialState, action) => {
         ...state,
         user: [state.user, action.user]
       };
-      case GET_ALL_USERS:
+    case GET_ALL_USERS:
       return {
         ...state,
         users: action.user
       };
-      case DISCHARGE_USER:
-        return {
-          ...state,
-          user : [ state.user, action.user ]
-        };
-      default:
-      return state;
-  }
-}
+    case DISCHARGE_USER:
+      return {
+        ...state,
+        user: [ state.user, action.user ]
+      };
+    case LOGIN:
+      return {
+        ...state,
+        user: {
+          token: action.user,
+          logged: true
+        }
+      };
+    default:
+    return state;
+  };
+};
 
 
 

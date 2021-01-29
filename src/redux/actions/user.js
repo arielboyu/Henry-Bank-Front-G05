@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+import { LOGIN } from '../constants/index'
+
 export const CREATE_USER = 'CREATE_USER';
 export const GET_ALL_USERS = 'GET_ALL_USERS';
 export const DISCHARGE_USER = 'DISCHARGE_USER';
@@ -24,6 +26,13 @@ const dischargeUser = (user) => {
 		user
 	};
 };
+
+const logUser = (user) => {
+	return {
+		type : LOGIN,
+		user
+	};
+}
 
 export const createNewUser = (user) => {
 	return async (dispatch) => {
@@ -71,6 +80,17 @@ export const dischargeNewUser = (updateUser) => {
 			dispatch(dischargeUser(res.data));
 			console.log('Action', res.data);
 			alert(`User Update successfully`);
+		} catch (err) {
+			console.log(err);
+		}
+	};
+};
+
+export const login = (user) => {
+	return async (dispatch) => {
+		try {
+			const res = await axios.post(`http://localhost:3001/auth/login`, user);
+			dispatch(logUser(res.data))
 		} catch (err) {
 			console.log(err);
 		}
