@@ -30,11 +30,11 @@ export default function Index() {
 
 	return (
         <>
-            {!logged
+            {logged
             //Si esta logueado
             ? <NavigationContainer>
                 <Tab.Navigator
-                initialRouteName="Transacciones"
+                initialRouteName="Principal"
                 activeColor="#fff"
                 tabBarOptions={{
                     style: {backgroundColor: '#fff'},
