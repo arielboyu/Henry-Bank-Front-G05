@@ -21,7 +21,7 @@ export default function Login({navigation}) {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getUsers());
-  });
+  }, []);
 
   const [data,setData] = useState({
     email:'',
