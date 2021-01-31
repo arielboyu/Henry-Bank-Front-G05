@@ -117,20 +117,20 @@ const Index = () => {
 
             //Si no esta logueado
             : <NavigationContainer>
-                <Stack.Navigator 
+                <Stack.Navigator
                 screenOptions={{
                     headerStyle:{
-                        backgroundColor: 'green',
+                        backgroundColor: '#F1F4FF',
                     },
-                    headerTintColor: 'white',
+                    headerTintColor: 'black',
                     headerTitleStyle: {
                         fontWeight: 'bold'
                     }
-                }}>
+                    }}>
                     <Stack.Screen
-                        name="Home"
-                        component={HomeScreen}
-                        options={{title:'Inicio'}}
+                    name="Home"
+                    component={HomeScreen}
+                    options={{title:'Inicio'}}
                     />
                     <Stack.Screen
                         name="LoginScreen"

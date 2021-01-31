@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, TextInput, Image, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Image,ImageBackground, TouchableOpacity } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import Feather from 'react-native-vector-icons/Feather';
 import { Picker } from '@react-native-picker/picker';
 import * as ImagePicker from 'expo-image-picker';
 import { useDispatch, useSelector } from 'react-redux';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
-
 import logo from '../assets/logo.png';
 import { dischargeNewUser, getUsers } from '../src/redux/actions/user';
+import { TextInput, Button, } from 'react-native-paper';
+
 
 export default function dischargeScreen({ navigation, user }) {
 	/* const userId = useSelector((state) => state.user.user[1].id); */
@@ -136,12 +137,15 @@ export default function dischargeScreen({ navigation, user }) {
 
 	return (
 		<View style={styles.container}>
-			<View style={styles.header}>
-				<Image style={{ height: 60, width: 60, alignSelf: 'center' }} source={logo} />
-				<Text style={styles.text_header}>Completa tus Datos!</Text>
+		<ImageBackground
+	   style={{width:20,height:20}}
+	   style={{width:'100%', height: '100%'}}
+		 source={
+		  {uri:
+		  "https://www.observatoriorh.com/wp-content/uploads/2019/09/babbel-apps.jpg"}}>
+			<View style={styles.imagenview}>
 			</View>
-			<View style={styles.footer}>
-				<View style={styles.action}>
+				<View style={styles.imageaction}>
 					<TouchableOpacity style={styles.button_image} onPress={openImgPictureAsync}>
 						<Image
 							source={{
@@ -150,182 +154,291 @@ export default function dischargeScreen({ navigation, user }) {
 							style={styles.image}
 						/>
 					</TouchableOpacity>
-				</View>
-				<View style={styles.action}>
-					<Picker
-						selectedValue={data.form.typeID}
-						style={styles.picker_input}
-						onValueChange={(val) => handleChange({ value: val, type: 'typeID' })}>
-						<Picker.Item label="DNI" value="DNI" />
-						<Picker.Item label="Pasaporte" value="Pasaporte" />
-					</Picker>
-				</View>
-				<View style={styles.action}>
-					<TextInput
-						placeholder="ingrese numero de documento"
-						style={styles.text_input}
-						keyboardType="decimal-pad"
-						onChangeText={(val) => handleChange({ value: val, type: 'document_number' })}
-					/>
-				</View>
-				<View style={styles.action}>
-					<TextInput
-						placeholder="Nombres"
-						style={styles.text_input}
-						autoCapitalize="none"
-						onChangeText={(val) => handleChange({ value: val, type: 'first_name' })}
-					/>
-				</View>
-				<View style={styles.action}>
-					<TextInput
-						placeholder="Apellidos"
-						style={styles.text_input}
-						autoCapitalize="none"
-						onChangeText={(val) => handleChange({ value: val, type: 'last_name' })}
-					/>
-				</View>
-				<View style={styles.action}>
-					<Picker
-						selectedValue={data.form.prefix_code}
-						style={styles.picker_prefix}
-						onValueChange={(val) => handleChange({ value: val, type: 'prefix_code' })}>
-						<Picker.Item label="+54" value="+54" />
-						<Picker.Item label="+57" value="+57" />
-					</Picker>
-					<TextInput
-						placeholder="Telefono Celular"
-						style={styles.text_input}
-						keyboardType="decimal-pad"
-						onChangeText={(val) => handleChange({ value: val, type: 'phone_number' })}
-					/>
-				</View>
-				<View style={styles.action}>
-					{/* <FontAwesome name="user-o" color="#05375a" size={20} /> */}
-					<TextInput
-						placeholder="Fecha de Nacimiento(YYYY-MM-DD)"
-						style={styles.text_input}
-						autoCapitalize="none"
-						//onSubmitEditing={showDatePicker}
-						onFocus={showDatePicker}
-						value={data.form.birthday_date}
-						onChangeText={(val) => handleChange({ value: val, type: 'birthday_date' })}
-					/>
-					<DateTimePickerModal
-						isVisible={isDatePickerVisible}
-						mode="date"
-						onConfirm={handleConfirm}
-						onCancel={showDatePicker}
-					/>
-				</View>
-				<Animatable.View animation="fadeInLeft">
-					<Text style={styles.errorMsg}>Recuerda Debes ser mayor a 16 años</Text>
-				</Animatable.View>
-				<View style={styles.button}>
-					<TouchableOpacity
-						onPress={() => {
-							setUpdateUser(data.form);
-						}}
-						style={
-							([ styles.singIn ],
-							{
-								marginTop         : -25,
-								backgroundColor   : 'green',
-								borderRadius      : 40,
-								paddingVertical   : 10,
-								paddingHorizontal : 14
-							})
-						}>
-						<Text style={([ styles.textSing ], { color: 'black' })}>Finalizar Registro</Text>
-					</TouchableOpacity>
+					</View>
+					<View style={styles.form}>
+					<View>
+				<Picker
+				 style={{
+				 color:'black',
+				 position:'relative',
+				 top:235,
+				 left:10,
+				 width:122,
+				 marginTop:2,
+				 backgroundColor: '#b5f365',
+				 opacity:0.4,
+				 borderRadius:60,
+			 	}}
+					selectedValue={data.form.typeID}
+					onValueChange={(val) => handleChange({ value: val, type: 'typeID' })}>
+					<Picker.Item label="DNI" value="DNI" />
+					<Picker.Item label="Pasaporte" value="Pasaporte" />
+				</Picker>
+			</View>
+			<View >
+			<View style={styles.nro} >
+				<TextInput
+					style={{height:45,
+						backgroundColor:'transparent',
+						color:'white',
+						paddingLeft : 5,
+						marginTop:2,
+						width:200,}}
+					placeholder="ingrese número de dni"
+					placeholderTextColor = "white"
+					keyboardType="decimal-pad"
+					onChangeText={(val) => handleChange({ value: val, type: 'document_number' })}
+				/>
 				</View>
 			</View>
+			<View style={styles.nombres} >
+				<TextInput
+				style={{height:45,
+					color:'black',
+					backgroundColor:'transparent',
+					paddingLeft : 5,
+					marginTop:2,}}
+					placeholder="Nombres"
+					placeholderTextColor = "white"
+					autoCapitalize="none"
+					onChangeText={(val) => handleChange({ value: val, type: 'first_name' })}
+				/>
+			</View>
+			<View style={styles.apellidos} >
+				<TextInput
+					placeholder="Apellidos"
+					placeholderTextColor = "white"
+					style={{height:45,
+						backgroundColor:'transparent',
+						paddingLeft : 5,}}
+					autoCapitalize="none"
+					onChangeText={(val) => handleChange({ value: val, type: 'last_name' })}
+				/>
+			</View>
+			<View  >
+			<View style={styles.picker_tel} >
+				<Picker
+					selectedValue={data.form.prefix_code}
+					style={{
+					color:'black',
+					position:'relative',
+					top:180,
+					left:10,
+					width:70,
+					backgroundColor: '#b5f365',
+					opacity:0.4,
+					borderRadius:60,}}
+					onValueChange={(val) => handleChange({ value: val, type: 'prefix_code' })}>
+					<Picker.Item label="+54" value="+54" />
+					<Picker.Item label="+57" value="+57" />
+				</Picker>
+				</View>
+				<View style={styles.telefono} >
+				<TextInput
+					placeholder="Télefono Celular"
+					placeholderTextColor = "white"
+					style={{height:45,
+						backgroundColor:'transparent',
+						paddingLeft : 5,
+			}}
+					keyboardType="decimal-pad"
+					onChangeText={(val) => handleChange({ value: val, type: 'phone_number' })}
+				/>
+				</View>
+			</View>
+			<View style={styles.fecha}  >
+				{/* <FontAwesome name="user-o" color="#05375a" size={20} /> */}
+				<TextInput
+					placeholder="Fecha de Nacimiento(YYYY-MM-DD)"
+					placeholderTextColor = "white"
+					style={{height:45,
+						backgroundColor:'transparent',
+						paddingLeft : 5,
+						marginTop:2,}}
+					autoCapitalize="none"
+					//onSubmitEditing={showDatePicker}
+					onFocus={showDatePicker}
+					value={data.form.birthday_date}
+					onChangeText={(val) => handleChange({ value: val, type: 'birthday_date' })}
+				/>
+				<View>
+				<DateTimePickerModal
+					isVisible={isDatePickerVisible}
+					mode="date"
+					onConfirm={handleConfirm}
+					onCancel={showDatePicker}
+				/>
+				</View>
+			</View>
+			<Animatable.View animation="fadeInLeft">
+				<Text style={styles.errorMsg}>Recuerda Debes ser mayor a 16 años</Text>
+			</Animatable.View>
+			</View>
+			<View style={styles.guardar} >
+			<Button
+			 mode="outlined"
+			 style={{
+			 backgroundColor:'#57A130',
+			 opacity:0.6,
+			 }}
+			 color='#f8f8ff'
+			 onPress={() => {
+			 setUpdateUser(data.form);
+			 }}
+			 >
+			 GUARDAR</Button>
+			 </View>
+			 <View style={styles.logo}>
+		   <Image
+		     style={styles.imagelogo}
+		     source={logo}
+		   />
+		   <Text style={styles.text_tree} > Tree</Text>
+					<Text style={styles.text_foto} > Agregar  Foto</Text>
+						 </View>
+			</ImageBackground>
 		</View>
 	);
 }
 
 const styles = StyleSheet.create({
-	container     : {
-		flex            : 1,
-		backgroundColor : 'lightgreen'
+	container: {
+		flex:1,
 	},
-	header        : {
-		flex              : 1,
-		justifyContent    : 'flex-end',
-		paddingHorizontal : 20,
-		paddingBottom     : 50,
-		alignItems        : 'center'
+	text_tree: {
+	  color:'black',
+	  borderRadius:10,
+	  marginTop:-12,
+	  fontSize: 20,
+	  paddingBottom:2,
+		paddingLeft:3,
+	  backgroundColor: '#E4DC65',
+	  width:60,
+		position:'relative',
+		left:8
+
 	},
-	footer        : {
-		flex                 : 3,
-		backgroundColor      : '#fff',
-		borderTopLeftRadius  : 30,
-		borderTopRightRadius : 30,
-		paddingHorizontal    : 20,
-		paddingVertical      : 30
+	logo: {
+	  position:'relative',
+	  top:-495,
+	  left:140,
+
 	},
-	text_header   : {
-		color      : 'white',
-		fontWeight : 'bold',
-		fontSize   : 30
+	imagelogo: {
+	  marginLeft:10,
+	  marginBottom:15,
+	  height:55,
+	  width:55,
+	  backgroundColor: 'black',
+	  borderRadius:10
+	},
+	imageaction: {
+		flexDirection:'row',
+		position:'relative',
+		top:100,
+		left:115,
+		backgroundColor:'grey',
+		borderRadius:70,
+		width:120
+	},
+	image:{
+		height:100,
+		width:100,
+		borderRadius:100,
+		resizeMode:'contain'
 	},
 
-	text_footer   : {
-		color    : '#05375a',
-		fontSize : 18
+	button_image: {
+		flex: 1,
+		justifyContent:'center',
+		alignItems:'center'
 	},
-	action        : {
-		flexDirection     : 'row',
-		marginTop         : 10,
-		borderBottomWidth : 1,
-		borderBottomColor : '#f2f2f2',
-		paddingBottom     : 5
+	errorMsg:{
+	fontSize : 12,
+	color:'red',
+	position:'relative',
+	top:140,
+	left:80
+},
+guardar: {
+	position:'relative',
+	top:30,
+	left:-10,
+	marginLeft:10,
+	paddingHorizontal:120,
+},
+picker_tel : {
+		position: 'relative',
+		top:4,
+		width:70
 	},
-	text_input    : {
-		flex        : 1,
-		paddingLeft : 15,
-		color       : 'black'
+	form: {
+			position: 'relative',
+			top:-120,
+		},
+		nro: {
+			position:'relative',
+			top:185,
+			left:150,
+			backgroundColor: '#337751',
+			opacity:0.5,
+			borderRadius:60,
+			width:200,
+		},
+		nombres: {
+			position:'relative',
+			top:185,
+			left:100,
+			backgroundColor: '#337751',
+			opacity:0.5,
+			borderRadius:60,
+			width:200,
+			marginTop:5,
+		},
+		apellidos: {
+			position:'relative',
+			top:185,
+			left:100,
+			backgroundColor: '#337751',
+			opacity:0.5,
+			borderRadius:60,
+			width:200,
+			marginTop:5,
+
+		},
+		telefono: {
+			position:'relative',
+			top:134,
+			left:100,
+			backgroundColor: '#337751',
+			opacity:0.5,
+			borderRadius:60,
+			width:200,
+			marginTop:5,
+		},
+		fecha: {
+			position:'relative',
+			top:134,
+			left:40,
+			backgroundColor: '#337751',
+			opacity:0.5,
+			borderRadius:60,
+			width:290,
+			height:40,
+			marginTop:5,
+	 },
+	 text_foto: {
+		 position:'relative',
+		 top:40,
+		 left:-130,
+		 backgroundColor: '#337751',
+		 opacity:0.7,
+		 borderRadius:60,
+		 width:100,
+		 height:20,
+		 marginTop:5,
+		 color:'white',
+		 fontSize:15
 	},
-	picker_input  : {
-		flex        : 1,
-		height      : 20,
-		width       : 100,
-		paddingLeft : 15,
-		color       : 'black'
-	},
-	picker_prefix : {
-		height      : 'auto',
-		width       : 100,
-		paddingLeft : 15,
-		color       : 'black'
-	},
-	image         : {
-		height       : 100,
-		width        : 100,
-		borderRadius : 100,
-		resizeMode   : 'contain'
-	},
-	button        : {
-		alignItems : 'center',
-		marginTop  : 50
-	},
-	button_image  : {
-		flex           : 1,
-		justifyContent : 'center',
-		alignItems     : 'center'
-	},
-	singIn        : {
-		width          : '100%',
-		height         : 80,
-		justifyContent : 'center',
-		alignItems     : 'center',
-		borderRadius   : 10
-	},
-	textSing      : {
-		fontSize   : 18,
-		fontWeight : 'bold'
-	},
-	errorMsg      : {
-		fontSize : 12,
-		color    : 'red'
-	}
+
 });
