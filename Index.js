@@ -19,103 +19,99 @@ import ProfileScreen from './screens/ProfileScreen';
 import DischargeScreen from './screens/DischargeScreen';
 import Icon from 'react-native-vector-icons/AntDesign'
 import VerifyScrenn from './screens/VerifyScrenn'
-
+import { cos } from 'react-native-reanimated';
 
 const Stack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
 
-export default function Index() {
-  const user = useSelector(state => state.user)
-  const logged = user.user.logged; //Cambia dependiendo de si el usuario esta logeado
-
+const Index = () => {
+  const user = useSelector(state => state.user);
+  const logged = user.user.id;
+  
 	return (
         <>
-            {!logged
+            {logged
             //Si esta logueado
             ? <NavigationContainer>
                 <Tab.Navigator
-                initialRouteName="Transacciones"
+                initialRouteName="Principal"
                 activeColor="#fff"
                 tabBarOptions={{
                     style: {backgroundColor: '#fff'},
                     keyboardHidesTabBar: true
                 }}
-
                 >
-                <Tab.Screen
-                    name="Principal"
-                    component={MainScreen}
-
-                    options={{
-                    tabBarIcon: ({ color }) => (
-                        <Icon
-                        name="home"
-                        color={color}
-                        size={23}
-                        />
-                    ),
-                    tabBarColor: "#5FA743"
-                    }}
-                />
-                <Tab.Screen
-                    name="Transacciones"
-                    component={TransactionsScreen}
-
-                    options={{
-                    tabBarIcon: ({ color }) => (
-                        <Icon
-                        name="swap"
-                        color={color}
-                        size={23}
+                    <Tab.Screen
+                        name="Principal"
+                        component={MainScreen}
+                        
+                        options={{
+                            tabBarIcon: ({ color }) => (
+                                <Icon
+                                    name="home"
+                                    color={color}
+                                    size={23}
+                                />
+                            ),
+                            tabBarColor: "#5FA743"
+                        }}
                     />
-                    ),
-                    tabBarColor: "#006A34"
-                    }}
-                />
-                <Tab.Screen
-                    name="Estadísticas"
-                    component={StatisticsScreen}
-
-                    options={{
-                    tabBarIcon: ({ color }) => (
-                        <Icon
-                        name="linechart"
-                        color={color}
-                        size={23}
-                        />
-                    ),
-                    tabBarColor: "#007f5f"
-                    }}
-                />
-                <Tab.Screen
-                    name="Productos"
-                    component={ProductsScreen}
-
-                    options={{
-                    tabBarIcon: ({ color }) => (
-                        <Icon
-                        name="wallet"
-                        color={color}
-                        size={23}
-                        />
-                    ),
-                    tabBarColor: "#279152"
-                    }}
-                />
-                <Tab.Screen
-                    name="Cerrar Sesión"
-                    component={MainScreen}
-                    onPress={()=>navigation.navigate('Login')}
-                    options={{
-                    tabBarIcon: ({ color }) => (
-                        <Icon
-                        name="logout"
-                        color={color}
-                        size={23}
-                        />
-                    ),
-                    }}
-                />
+                    <Tab.Screen
+                        name="Transacciones"
+                        component={TransactionsScreen}
+                        options={{
+                            tabBarIcon: ({ color }) => (
+                                <Icon
+                                    name="swap"
+                                    color={color}
+                                    size={23}
+                                />
+                            ),
+                            tabBarColor: "#006A34"
+                        }}
+                    />
+                    <Tab.Screen
+                        name="Estadísticas"
+                        component={StatisticsScreen}
+                        options={{
+                            tabBarIcon: ({ color }) => (
+                                <Icon
+                                    name="linechart"
+                                    color={color}
+                                    size={23}
+                                />
+                            ),
+                            tabBarColor: "#007f5f"
+                        }}
+                    />
+                    <Tab.Screen
+                        name="Productos"
+                        component={ProductsScreen}
+                        options={{
+                            tabBarIcon: ({ color }) => (
+                                <Icon
+                                    name="wallet"
+                                    color={color}
+                                    size={23}
+                                />
+                            ),
+                            tabBarColor: "#279152"
+                        }}
+                    />
+                    <Tab.Screen
+                        name="Cerrar Sesión"
+                        component={MainScreen}
+                        onPress={()=>navigation.navigate('Login')}
+                        options={{
+                            tabBarIcon: ({ color }) => (
+                                <Icon
+                                    name="logout"
+                                    color={color}
+                                    size={23}
+                                />
+                            ),
+                        }}
+                    />
                 </Tab.Navigator>
             </NavigationContainer>
 
@@ -161,4 +157,6 @@ export default function Index() {
             }
         </>
     );
-}
+};
+
+export default Index;

@@ -1,11 +1,10 @@
 import {
   CREATE_USER,
   GET_ALL_USERS,
-  DISCHARGE_USER
-} from "../actions/user";
-
-import { LOGIN } from '../constants/index';
-
+  DISCHARGE_USER,
+  LOGIN, 
+  GET_USER_BY_ID
+} from '../constants/index';
 
 const initialState = {
   user: {},
@@ -33,10 +32,16 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         user: {
-          token: action.user,
-          logged: true
+          token: action.user.token,
+          logged: true,
+          id: action.user.id
         }
       };
+      case GET_USER_BY_ID:
+        return {
+          ...state,
+          user: action.user
+        };
     default:
     return state;
   };

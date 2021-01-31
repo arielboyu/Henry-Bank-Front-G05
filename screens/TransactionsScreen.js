@@ -28,7 +28,7 @@ const transactions = [
   },
   {
     name: "Transferencia a Carlos",
-    ammount: 860,
+    ammount: 86,
     movement: "payment",
     icon: "money-bill-wave",
     account: accounts.usd,
@@ -83,8 +83,8 @@ const TransactionsScreen = () => {
 			</View>
       <ScrollView showsVerticalScrollIndicator={false}>
         {
-          transactions.map(transaction => (
-            <View style={styles.generalCont1}>
+          transactions.map((transaction, i) => (
+            <View style={styles.generalCont1} key={i}>
               <View style={styles.cardContainer}>
                 <View style={styles.section1}>
                   <Icon name={transaction.icon} size={30} color="#F7F7F9" />
@@ -92,7 +92,7 @@ const TransactionsScreen = () => {
                 <View style={styles.section2}>
                   <View style={styles.section3}>
                     <Text style={styles.text}>{transaction.name}</Text>
-                    <Text style={styles.information}>{`#${transaction.account} | ${transaction.date} - ${transaction.hour}`}</Text>
+                    <Text style={styles.information}>{`${transaction.date} | ${transaction.hour}`}</Text>
                   </View>
                   <View style={styles.section4}>
                     <Text style={
@@ -100,7 +100,7 @@ const TransactionsScreen = () => {
                       ? styles.blueNumbers 
                       : styles.redNumbers}
                     >
-                      {`${transaction.movement === "collection" ? "+" : "-"}$${transaction.ammount}`}
+                      {`${transaction.movement === "collection" ? "+" : "-"}${transaction.account === accounts.peso ? "$" : "US$"} ${transaction.ammount}`}
                     </Text>
                   </View>
                 </View>
@@ -119,11 +119,12 @@ const styles = StyleSheet.create({
  		padding: 20,
  		backgroundColor: "#F1F4FF"
   },
-  	header: {
+  header: {
 		display: "flex",
  		alignItems: "flex-start",
  		width: "100%",
- 		marginBottom: 10,
+    marginBottom: 10,
+    marginTop: 10,
  		fontSize: 35
   },
   cardContainer: {
@@ -141,11 +142,10 @@ const styles = StyleSheet.create({
  		justifyContent: "space-around",
  		width: "100%",
  		marginTop: 10,
-    marginBottom: 10,
     height: 100
 	},
 	section1: {
-		width: '20%',
+		width: '25%',
 		display: 'flex',
 		justifyContent: 'center',
 		alignItems: 'center',
@@ -154,31 +154,31 @@ const styles = StyleSheet.create({
 		backgroundColor: '#006A34'
 	},
 	section2: {
-		width: '80%',
+		width: '75%',
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-		paddingLeft: 10,
-		paddingRight: 12,
-		backgroundColor: 'rgba(87, 161, 48, 0.8)'
+		padding: 5,
+    backgroundColor: 'rgba(87, 161, 48, 0.8)',
+    marginRight: 5
   },
   section3: {
-    width: '70%'
+    width: '60%'
   },
   section4: {
     display: 'flex',
     alignItems: 'flex-end',
-    width: '30%'
+    width: '40%'
   },
 	blueNumbers: {
 		color: "#192BC2",
 		fontWeight: "100",
-		fontSize: 30
+		fontSize: 25
   },
 	redNumbers: {
 		color: "#FF4242",
 		fontWeight: "100",
-		fontSize: 30
+		fontSize: 25
   },
   text: {
 		color: "white",
