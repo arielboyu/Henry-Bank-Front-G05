@@ -3,18 +3,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { StyleSheet,
    Text,
     View,
-    Button,
     Platform,
-    TextInput,
     TouchableOpacity,
     Image,
+    ImageBackground
    } from 'react-native'
 import Feather from 'react-native-vector-icons/Feather'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import logo from '../assets/logo.png'
 import * as Animatable from 'react-native-animatable'
 import { createNewUser, getUsers } from '../src/redux/actions/user'
-
+import { TextInput, Button, } from 'react-native-paper';
 
 export default function Register({navigation}) {
 
@@ -70,185 +69,181 @@ export default function Register({navigation}) {
 
   return (
     <View style={styles.container}>
-    <View style={styles.header}>
+    <ImageBackground
+    style={{width:20,height:20}}
+    source={
+      {uri:
+      "https://media.metrolatam.com/2018/02/16/appsveinteac3b1era660x650-1200x800.jpg"}}
+     style={{width:'115%', height: '100%'}}>
+    <View >
+    <View style={styles.icon_email}>
+    <FontAwesome
+     name='user-o'
+     color='#edfff8'
+     size={28}
+    />
+    </View>
+    <View style={styles.icon_pw}>
+    <FontAwesome
+       name='lock'
+       color='#edfff8'
+       size={30}
+    />
+    </View>
+    <View style={styles.icon_pw1}>
+    <FontAwesome
+       name='lock'
+       color='#edfff8'
+       size={30}
+    />
+    </View>
+    <View style={styles.input_email}>
+    <TextInput
+    label="email"
+    selectionColor="white"
+    style={{height:45,backgroundColor:'transparent',color:'white'}}
+    />
+    </View>
+    <View style={styles.input_password}>
+    <TextInput
+    label="password"
+    selectionColor="white"
+    style={{height:45,backgroundColor:'transparent'}}
+    />
+    </View>
+    <View style={styles.input_password1}>
+    <TextInput
+    label="password"
+    selectionColor="white"
+    style={{height:45,backgroundColor:'transparent'}}
+    />
+    </View>
+    </View>
+    <View style={{position:'relative',
+    top:160,
+    left:10,
+    width:340,
+    paddingHorizontal:100
+    }}>
+      <Button
+       mode="contained"
+       onPress={()=>{onSubmit(data),navigation.navigate('VerifyScrenn')}}
+       style={{
+        backgroundColor:'#57A130',
+        opacity:0.6,
+     }}>
+     Registrarse</Button>
+    </View>
+    <View style={styles.logo}>
     <Image
-      style={{height:60,width:60,alignSelf:'center'}}
+      style={styles.image}
       source={logo}
     />
-    <Text style={styles.text_header} >Bienvenido!</Text>
+    <Text style={styles.text_tree} > Tree</Text>
     </View>
-    <View style={styles.footer}>
-    <Text style={styles.text_footer} >Email</Text>
-    <View style={styles.action}>
-     <FontAwesome
-       name='user-o'
-       color='#05375a'
-       size={20}
-       />
-    <TextInput
-    placeholder='ingrese e-mail'
-    style={styles.text_input}
-    autoCapitalize='none'
-    onChangeText={(val) => textInputChange(val)}
-    />
-    {data.check_TextImputChange ?
-    <Feather
-    name='check-circle'
-    color='green'
-    size={20}
-    />
-    : null}
-          </View>
-          <Animatable.View animation='fadeInLeft' >
-          <Text style={styles.errorMsg} >Debe colocar un email válido</Text>
-          </Animatable.View>
-          <Text style={{color:'#05375a',fontSize:18,marginTop:30} } >Contraseña</Text>
-          <View style={styles.action}>
-           <FontAwesome
-             name='lock'
-             color='#05375a'
-             size={20}
-             paddingLeft={10}
-             />
-          <TextInput
-          placeholder='ingrese contraseña'
-          secureTextEntry={data.secureTextEntry ? true : false }
-          style={styles.text_input}
-          autoCapitalize='none'
-          onChangeText={(val) => handlePasswordChange(val)}
-          />
-          <TouchableOpacity
-          onPress={updateSecureTextEntry}
-          >
-          {data.secureTextEntry ?
-          <Feather
-          name='eye-off'
-          color='grey'
-          size={20}
-
-          />
-          :
-          <Feather
-          name='eye'
-          color='grey'
-          size={20}
-          />
-         }
-          </TouchableOpacity
-          >
-          </View>
-          <Text style={{color:'#05375a',fontSize:18,marginTop:30} } > Confirme su Contraseña</Text>
-          <View style={styles.action}>
-           <FontAwesome
-             name='lock'
-             color='#05375a'
-             size={20}
-             paddingLeft={10}
-             />
-          <TextInput
-          placeholder='confirmar contraseña'
-          secureTextEntry={data.secureTextEntry ? true : false }
-          style={styles.text_input}
-          autoCapitalize='none'
-          onChangeText={(val) => handlePasswordChange(val)}
-          />
-          <TouchableOpacity
-          onPress={updateSecureTextEntry}
-          >
-          {data.secureTextEntry ?
-          <Feather
-          name='eye-off'
-          color='grey'
-          size={20}
-
-          />
-          :
-          <Feather
-          name='eye'
-          color='grey'
-          size={20}
-          />
-         }
-          </TouchableOpacity
-          >
-          </View>
-          <View>
-          </View>
-          <View style={styles.button}>
-          <TouchableOpacity onPress={()=>{onSubmit(data),navigation.navigate('VerifyScrenn')}}
-           style={[styles.singIn], {marginTop:-30,backgroundColor: 'green',borderRadius:40,paddingVertical:10,paddingHorizontal:14}}
-          >
-           <Text style={[styles.textSing],{color:'black'}} >Registrarse</Text>
-          </TouchableOpacity>
-          </View>
-       </View>
+    </ImageBackground>
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'lightgreen',
+container: {
+  flex: 1,
 
-  },
-  header: {
-    flex:1,
-    justifyContent:'flex-end',
-    paddingHorizontal:20,
-    paddingBottom:50,
-    alignItems:'center',
+},
 
-  },
-  footer: {
-    flex:3,
-    backgroundColor:'#fff',
-    borderTopLeftRadius: 30,
-    borderTopRightRadius: 30,
-    paddingHorizontal:20,
-    paddingVertical:30,
-  },
-  text_header: {
-    color:'white',
-    fontWeight:'bold',
-    fontSize: 30,
+icon_email: {
+  position:'relative',
+  top:190,
+  left:20,
+},
+icon_pw: {
+  position:'relative',
+  top:225,
+  left:22,
+},
+icon_pw1: {
+  position:'relative',
+  top:255,
+  left:22,
+},
+input_email: {
+  position:'relative',
+  top:100,
+  left:60,
+  backgroundColor: '#fa6a94',
+  opacity:0.6,
+  borderRadius:60,
+  width:250,
+  height:40
+},
 
-  },
+input_password: {
+  position:'relative',
+  top:120,
+  left:60,
+  backgroundColor: '#fa6a94',
+  opacity:0.6,
+  borderRadius:100,
+  width:250,
+  height:40
 
-  text_footer: {
-    color:'#05375a',
-    fontSize:18
-  },
-  action:{
-    flexDirection:'row',
-    marginTop:10,
-    borderBottomWidth:1,
-    borderBottomColor:'#f2f2f2',
-    paddingBottom:5,
+},
+input_password1: {
+  position:'relative',
+  top:140,
+  left:60,
+  backgroundColor: '#fa6a94',
+  opacity:0.6,
+  borderRadius:100,
+  width:250,
+  height:40
 
-  },
-  text_input: {
-    flex:1,
-    paddingLeft:15,
-    color:'black'
-  },
-  button: {
-    alignItems:'center',
-    marginTop:50
-  },
-  singIn: {
-    width: '100%',
-    height:80,
-    justifyContent: 'center',
-    alignItems:'center',
-    borderRadius:10
-  },
-  textSing: {
-    fontSize:18,
-    fontWeight: 'bold'
-  },
-  errorMsg: {
-    fontSize:12,
-    color:'red'
-  }
+},
+logo: {
+  flex:1,
+  justifyContent:'flex-end',
+  paddingHorizontal:24,
+  paddingTop:50,
+  position:'relative',
+  top:-400,
+  left:100,
+
+},
+register: {
+  position:'relative',
+  top:-110,
+  left:-5,
+  marginLeft:10,
+  paddingHorizontal:94,
+
+},
+text_bank: {
+  color:'black',
+  borderRadius:10,
+  fontSize: 35,
+  paddingBottom:2,
+  backgroundColor: '#E4DC65',
+  width:100
+
+
+},
+text_tree: {
+  color:'black',
+  borderRadius:10,
+  marginBottom:5,
+  marginTop:-10,
+  fontSize: 35,
+  paddingBottom:2,
+  backgroundColor: '#E4DC65',
+  width:90,
+},
+image: {
+  marginLeft:10,
+  marginBottom:15,
+  height:65,
+  width:65,
+  backgroundColor: '#F1F4FF',
+  borderRadius:10
+},
 });
