@@ -142,7 +142,7 @@ export default function dischargeScreen({ navigation, user }) {
 	   style={{width:'100%', height: '100%'}}
 		 source={
 		  {uri:
-		  "https://www.observatoriorh.com/wp-content/uploads/2019/09/babbel-apps.jpg"}}>
+		  "https://image.freepik.com/foto-gratis/vista-superior-escritorio-oficina-negocios-fondo-aplicacion-formulario-trabajo-lapiz-lapiz-ojo-arboles-fondo-madera-mesa-copia-espacio_1921-21.jpg"}}>
 			<View style={styles.imagenview}>
 			</View>
 				<View style={styles.imageaction}>
@@ -162,17 +162,17 @@ export default function dischargeScreen({ navigation, user }) {
 				 color:'black',
 				 position:'relative',
 				 top:235,
-				 left:10,
+				 left:50,
 				 width:122,
 				 marginTop:2,
-				 backgroundColor: '#b5f365',
+				 backgroundColor: 'transparent',
 				 opacity:0.4,
 				 borderRadius:60,
 			 	}}
 					selectedValue={data.form.typeID}
 					onValueChange={(val) => handleChange({ value: val, type: 'typeID' })}>
 					<Picker.Item label="DNI" value="DNI" />
-					<Picker.Item label="Pasaporte" value="Pasaporte" />
+					<Picker.Item label="Pas" value="Pasaporte" />
 				</Picker>
 			</View>
 			<View >
@@ -184,7 +184,7 @@ export default function dischargeScreen({ navigation, user }) {
 						paddingLeft : 5,
 						marginTop:2,
 						width:200,}}
-					placeholder="ingrese número de dni"
+					placeholder="Ingrese Número De Dni"
 					placeholderTextColor = "white"
 					keyboardType="decimal-pad"
 					onChangeText={(val) => handleChange({ value: val, type: 'document_number' })}
@@ -223,9 +223,9 @@ export default function dischargeScreen({ navigation, user }) {
 					color:'black',
 					position:'relative',
 					top:180,
-					left:10,
+					left:50,
 					width:70,
-					backgroundColor: '#b5f365',
+					backgroundColor: 'transparent',
 					opacity:0.4,
 					borderRadius:60,}}
 					onValueChange={(val) => handleChange({ value: val, type: 'prefix_code' })}>
@@ -254,7 +254,8 @@ export default function dischargeScreen({ navigation, user }) {
 					style={{height:45,
 						backgroundColor:'transparent',
 						paddingLeft : 5,
-						marginTop:2,}}
+						marginTop:2,
+					  fontSize:11}}
 					autoCapitalize="none"
 					//onSubmitEditing={showDatePicker}
 					onFocus={showDatePicker}
@@ -294,7 +295,7 @@ export default function dischargeScreen({ navigation, user }) {
 		     source={logo}
 		   />
 		   <Text style={styles.text_tree} > Tree</Text>
-					<Text style={styles.text_foto} > Agregar  Foto</Text>
+					<Text style={styles.text_foto} > +Agregar Foto </Text>
 						 </View>
 			</ImageBackground>
 		</View>
@@ -337,8 +338,6 @@ const styles = StyleSheet.create({
 		position:'relative',
 		top:100,
 		left:115,
-		backgroundColor:'grey',
-		borderRadius:70,
 		width:120
 	},
 	image:{
@@ -354,11 +353,11 @@ const styles = StyleSheet.create({
 		alignItems:'center'
 	},
 	errorMsg:{
-	fontSize : 12,
+	fontSize : 10,
 	color:'red',
 	position:'relative',
 	top:140,
-	left:80
+	left:120
 },
 guardar: {
 	position:'relative',
@@ -379,8 +378,8 @@ picker_tel : {
 		nro: {
 			position:'relative',
 			top:185,
-			left:150,
-			backgroundColor: '#337751',
+			left:100,
+			backgroundColor: '#808000',
 			opacity:0.5,
 			borderRadius:60,
 			width:200,
@@ -389,7 +388,7 @@ picker_tel : {
 			position:'relative',
 			top:185,
 			left:100,
-			backgroundColor: '#337751',
+			backgroundColor: '#808000',
 			opacity:0.5,
 			borderRadius:60,
 			width:200,
@@ -399,7 +398,7 @@ picker_tel : {
 			position:'relative',
 			top:185,
 			left:100,
-			backgroundColor: '#337751',
+			backgroundColor: '#808000',
 			opacity:0.5,
 			borderRadius:60,
 			width:200,
@@ -410,7 +409,7 @@ picker_tel : {
 			position:'relative',
 			top:134,
 			left:100,
-			backgroundColor: '#337751',
+			backgroundColor: '#808000',
 			opacity:0.5,
 			borderRadius:60,
 			width:200,
@@ -419,11 +418,11 @@ picker_tel : {
 		fecha: {
 			position:'relative',
 			top:134,
-			left:40,
-			backgroundColor: '#337751',
+			left:100,
+			backgroundColor: '#808000',
 			opacity:0.5,
 			borderRadius:60,
-			width:290,
+			width:203,
 			height:40,
 			marginTop:5,
 	 },
@@ -431,14 +430,13 @@ picker_tel : {
 		 position:'relative',
 		 top:40,
 		 left:-130,
-		 backgroundColor: '#337751',
 		 opacity:0.7,
 		 borderRadius:60,
 		 width:100,
 		 height:20,
 		 marginTop:5,
-		 color:'white',
-		 fontSize:15
+		 color:'black',
+		 fontSize:15,
 	},
 
 });
