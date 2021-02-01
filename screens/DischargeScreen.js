@@ -9,7 +9,7 @@ import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import logo from '../assets/logo.png';
 import { dischargeNewUser, getUsers } from '../src/redux/actions/user';
 import { TextInput, Button, } from 'react-native-paper';
-
+import FontAwesome from 'react-native-vector-icons/FontAwesome'
 
 export default function dischargeScreen({ navigation, user }) {
 	/* const userId = useSelector((state) => state.user.user[1].id); */
@@ -184,7 +184,7 @@ export default function dischargeScreen({ navigation, user }) {
 						paddingLeft : 5,
 						marginTop:2,
 						width:200,}}
-					placeholder="Ingrese Número De Dni"
+					placeholder="Número De Dni"
 					placeholderTextColor = "white"
 					keyboardType="decimal-pad"
 					onChangeText={(val) => handleChange({ value: val, type: 'document_number' })}
@@ -295,8 +295,56 @@ export default function dischargeScreen({ navigation, user }) {
 		     source={logo}
 		   />
 		   <Text style={styles.text_tree} > Tree</Text>
-					<Text style={styles.text_foto} > +Agregar Foto </Text>
-						 </View>
+					<FontAwesome
+					 name='camera'
+					 color='black'
+					 size={25}
+					 style={{position:'relative',
+					 top:40,
+					 left:-60}}
+					/>
+					<View
+					style={{position:'relative',
+					top:-50,
+					left:-140,
+					height:2.5,
+					backgroundColor:"#a03472",
+					}}
+					>
+					</View>
+					<View
+					style={{position:'relative',
+					top:-108,
+					left:4,
+					height:48,
+					width:1.5,
+					backgroundColor:"#a03472",
+					}}
+					>
+					<Text>y</Text>
+					</View>
+					<View>
+					<Text
+					style={{width:80,
+					height: 60,
+					position:'relative',
+					top:-165,
+					left:35,
+ 				  fontSize:23
+				  }}
+					>Cargar Datos!</Text>
+					<ImageBackground
+					 style={{width:80,
+					 height: 50,
+					 position:'relative',
+					 top:-216,
+					 left:130
+					 }}
+					 source=
+						{require('../assets/backgroundCard2.jpeg')}>
+						</ImageBackground>
+					</View>
+					</View>
 			</ImageBackground>
 		</View>
 	);
@@ -316,14 +364,13 @@ const styles = StyleSheet.create({
 	  backgroundColor: '#E4DC65',
 	  width:60,
 		position:'relative',
-		left:8
-
+		left:-65,
+		top:-40
 	},
 	logo: {
 	  position:'relative',
 	  top:-495,
 	  left:140,
-
 	},
 	imagelogo: {
 	  marginLeft:10,
@@ -331,7 +378,10 @@ const styles = StyleSheet.create({
 	  height:55,
 	  width:55,
 	  backgroundColor: 'black',
-	  borderRadius:10
+	  borderRadius:10,
+		position:'relative',
+		top:3,
+		left:-140,
 	},
 	imageaction: {
 		flexDirection:'row',
@@ -362,7 +412,7 @@ const styles = StyleSheet.create({
 guardar: {
 	position:'relative',
 	top:30,
-	left:-10,
+	left:5,
 	marginLeft:10,
 	paddingHorizontal:120,
 },
@@ -426,17 +476,6 @@ picker_tel : {
 			height:40,
 			marginTop:5,
 	 },
-	 text_foto: {
-		 position:'relative',
-		 top:40,
-		 left:-130,
-		 opacity:0.7,
-		 borderRadius:60,
-		 width:100,
-		 height:20,
-		 marginTop:5,
-		 color:'black',
-		 fontSize:15,
-	},
+
 
 });
