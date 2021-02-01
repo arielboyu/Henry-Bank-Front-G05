@@ -101,21 +101,21 @@ export default function Register({navigation}) {
     <TextInput
     label="email"
     selectionColor="white"
-    style={{height:45,backgroundColor:'transparent',color:'white'}}
+    style={{height:45,backgroundColor:'transparent',color:'white',paddingLeft:10}}
     />
     </View>
     <View style={styles.input_password}>
     <TextInput
     label="password"
     selectionColor="white"
-    style={{height:45,backgroundColor:'transparent'}}
+    style={{height:45,backgroundColor:'transparent',paddingLeft:15}}
     />
     </View>
     <View style={styles.input_password1}>
     <TextInput
-    label="password"
+    label="confirmar password"
     selectionColor="white"
-    style={{height:45,backgroundColor:'transparent'}}
+    style={{height:45,backgroundColor:'transparent',paddingLeft:15}}
     />
     </View>
     </View>

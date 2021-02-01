@@ -44,7 +44,7 @@ export default function VerifyScrenn({navigation}) {
     label="Ingresar Código"
     style={{height:30}}
     selectionColor="white"
-    style={{height:45,backgroundColor:'transparent'}}
+    style={{height:45,backgroundColor:'transparent',paddingLeft:15}}
     />
     </View>
     </View>
