@@ -122,21 +122,21 @@ container: {
 icon_email: {
   position:'relative',
   top:205,
-  left:20,
+  left:40,
 },
 icon_pw: {
   position:'relative',
   top:250,
-  left:22,
+  left:42,
 },
 input_email: {
   position:'relative',
   top:140,
-  left:60,
-  backgroundColor: '#00ffff',
-  opacity:0.4,
+  left:90,
+  backgroundColor: '#dffff4',
+  opacity:0.7,
   borderRadius:60,
-  width:250,
+  width:200,
   height:50,
   color: 'white'
 },
@@ -144,11 +144,11 @@ input_email: {
 input_password: {
   position:'relative',
   top:160,
-  left:60,
-  backgroundColor: '#00ffff',
-  opacity:0.4,
+  left:90,
+  backgroundColor: '#e0ffff',
+  opacity:0.7,
   borderRadius:100,
-  width:250,
+  width:200,
   height:50
 
 },
