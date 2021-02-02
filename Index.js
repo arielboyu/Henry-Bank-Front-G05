@@ -19,7 +19,10 @@ import ProfileScreen from './screens/ProfileScreen';
 import DischargeScreen from './screens/DischargeScreen';
 import Icon from 'react-native-vector-icons/AntDesign'
 import VerifyScrenn from './screens/VerifyScrenn'
+import ChargeMoney from './screens/ChargeMoney'
+import SendMoney from './screens/SendMoney'
 import { cos } from 'react-native-reanimated';
+
 
 const Stack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
@@ -112,6 +115,82 @@ const Index = () => {
                             ),
                         }}
                     />
+                    ),
+                    tabBarColor: "#006A34"
+                    }}
+                />
+                <Tab.Screen
+                    name="Estadísticas"
+                    component={StatisticsScreen}
+
+                    options={{
+                    tabBarIcon: ({ color }) => (
+                        <Icon
+                        name="linechart"
+                        color={color}
+                        size={23}
+                        />
+                    ),
+                    tabBarColor: "#007f5f"
+                    }}
+                />
+                <Tab.Screen
+                    name="Productos"
+                    component={ProductsScreen}
+
+                    options={{
+                    tabBarIcon: ({ color }) => (
+                        <Icon
+                        name="wallet"
+                        color={color}
+                        size={23}
+                        />
+                    ),
+                    tabBarColor: "#279152"
+                    }}
+                />
+                <Tab.Screen
+                  name="Cargar Dinero"
+                  component={ChargeMoney}
+                  onPress={()=>navigation.navigate('ChargeMoney')}
+                  options={{
+                  tabBarIcon: ({ color }) => (
+                      <Icon
+                      name="dolar"
+                      color={color}
+                      size={23}
+                      />
+                  ),
+                  }}
+              />
+                <Tab.Screen
+                  name="Enviar Dinero"
+                  component={SendMoney}
+                  onPress={()=>navigation.navigate('SendMoney')}
+                  options={{
+                  tabBarIcon: ({ color }) => (
+                      <Icon
+                      name="dolar"
+                      color={color}
+                      size={23}
+                      />
+                  ),
+                  }}
+              />
+                <Tab.Screen
+                    name="Cerrar Sesión"
+                    component={MainScreen}
+                    onPress={()=>navigation.navigate('Login')}
+                    options={{
+                    tabBarIcon: ({ color }) => (
+                        <Icon
+                        name="logout"
+                        color={color}
+                        size={23}
+                        />
+                    ),
+                    }}
+                />
                 </Tab.Navigator>
             </NavigationContainer>
 
