@@ -19,7 +19,8 @@ import ProfileScreen from './screens/ProfileScreen';
 import DischargeScreen from './screens/DischargeScreen';
 import Icon from 'react-native-vector-icons/AntDesign'
 import VerifyScrenn from './screens/VerifyScrenn'
-
+import ChargeMoney from './screens/ChargeMoney'
+import SendMoney from './screens/SendMoney'
 
 const Stack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
@@ -101,6 +102,34 @@ export default function Index() {
                     tabBarColor: "#279152"
                     }}
                 />
+                <Tab.Screen
+                  name="Cargar Dinero"
+                  component={ChargeMoney}
+                  onPress={()=>navigation.navigate('ChargeMoney')}
+                  options={{
+                  tabBarIcon: ({ color }) => (
+                      <Icon
+                      name="dolar"
+                      color={color}
+                      size={23}
+                      />
+                  ),
+                  }}
+              />
+                <Tab.Screen
+                  name="Enviar Dinero"
+                  component={SendMoney}
+                  onPress={()=>navigation.navigate('SendMoney')}
+                  options={{
+                  tabBarIcon: ({ color }) => (
+                      <Icon
+                      name="dolar"
+                      color={color}
+                      size={23}
+                      />
+                  ),
+                  }}
+              />
                 <Tab.Screen
                     name="Cerrar Sesión"
                     component={MainScreen}
