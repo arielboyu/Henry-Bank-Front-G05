@@ -1,14 +1,23 @@
 import axios from 'axios';
 
-import { LOGIN } from '../constants/index'
-
-export const CREATE_USER = 'CREATE_USER';
-export const GET_ALL_USERS = 'GET_ALL_USERS';
-export const DISCHARGE_USER = 'DISCHARGE_USER';
+import { 
+	LOGIN, 
+	GET_USER_BY_ID, 
+	CREATE_USER, 
+	GET_ALL_USERS, 
+	DISCHARGE_USER 
+} from '../constants/index'
 
 const createUser = (user) => {
 	return {
 		type : CREATE_USER,
+		user
+	};
+};
+
+const getUser = (user) => {
+	return {
+		type: GET_USER_BY_ID,
 		user
 	};
 };
@@ -43,6 +52,17 @@ export const createNewUser = (user) => {
 				const email = res.data.email;
 				await axios.post(`http://localhost:3001/email`, { email });
 			}
+		} catch (err) {
+			console.log(err);
+		}
+	};
+};
+
+export const getUserByID = (id) => {
+	return async (dispatch) => {
+		try {
+			const res = await axios.get(`http://localhost:3001/user/${id}`);
+			dispatch(getUser(res.data));
 		} catch (err) {
 			console.log(err);
 		}
