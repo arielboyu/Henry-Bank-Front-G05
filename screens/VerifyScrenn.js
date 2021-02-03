@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { StyleSheet,
     Text,
     View,
@@ -8,19 +8,37 @@ import { StyleSheet,
    } from 'react-native'
 import Feather from 'react-native-vector-icons/Feather'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import logo from '../assets/logo.png'
-import { getUsers } from '../src/redux/actions/user'
+import { getUsers, verifyNewUser } from '../src/redux/actions/user'
 import { TextInput, Button, } from 'react-native-paper'
 
 
 
 export default function VerifyScrenn({navigation}) {
 
+  const userId = useSelector(state => state.user.user.id);
+  
+  const [data,setData] = useState({
+    validationNumber:'',
+  })
+
+  const handleCodeChange = (code) => {
+    setData({
+      ...data,
+      validationNumber: code
+    })
+  }
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getUsers());
-  });
+  },[]);
+
+  const onSubmit = (code, userId) => {
+    dispatch(verifyNewUser(code, userId));
+
+  };
 
 
   return (
@@ -45,6 +63,7 @@ export default function VerifyScrenn({navigation}) {
     style={{height:30}}
     selectionColor="white"
     style={{height:45,backgroundColor:'transparent',paddingLeft:15}}
+    onChangeText={code => handleCodeChange(code)}
     />
     </View>
     </View>
@@ -56,7 +75,7 @@ export default function VerifyScrenn({navigation}) {
     }}>
       <Button
        mode="contained"
-       onPress={()=> {navigation.navigate('DischargeScreen')}}
+       onPress={()=>(onSubmit(data, userId), navigation.navigate('DischargeScreen'))}
        style={{
         backgroundColor:'#57A130',
         opacity:0.6,

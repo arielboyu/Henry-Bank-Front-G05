@@ -101,6 +101,7 @@ export default function Register({navigation}) {
     <TextInput
     label="email"
     selectionColor="white"
+    onChangeText={text => textInputChange(text)}
     style={{height:45,backgroundColor:'transparent',color:'white',paddingLeft:10}}
     />
     </View>
@@ -108,6 +109,7 @@ export default function Register({navigation}) {
     <TextInput
     label="password"
     selectionColor="white"
+    onChangeText={text => handlePasswordChange(text)}
     style={{height:45,backgroundColor:'transparent',paddingLeft:15}}
     />
     </View>
@@ -115,6 +117,7 @@ export default function Register({navigation}) {
     <TextInput
     label="confirmar password"
     selectionColor="white"
+    onChangeText={text => handlePasswordChange(text)}
     style={{height:45,backgroundColor:'transparent',paddingLeft:15}}
     />
     </View>
