@@ -90,6 +90,7 @@ export default function Register({navigation}) {
       <View >
       <TextInput
       label="ingresa e-mail"
+      onChangeText={text => textInputChange(text)}
       selectionColor="black"
       style={{height:48,
         paddingLeft:5,
@@ -97,7 +98,9 @@ export default function Register({navigation}) {
         position: 'relative',
         left:80,
         top:-10
+        
       }}/>
+      
       </View>
       <View style={{position:'relative',
       top:50
@@ -115,6 +118,7 @@ export default function Register({navigation}) {
       <View>
       <TextInput
       label="password"
+      onChangeText={text => handlePasswordChange(text)}
       selectionColor="black"
       style={{height:48,
         paddingLeft:5,
@@ -134,6 +138,7 @@ export default function Register({navigation}) {
       <View >
       <TextInput
       label="confirmar password"
+      onChangeText={text => handlePasswordChange(text)}
       selectionColor="black"
       style={{height:48,
         paddingLeft:5,
