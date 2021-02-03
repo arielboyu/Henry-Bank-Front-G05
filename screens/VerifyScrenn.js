@@ -11,7 +11,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import { useDispatch } from 'react-redux'
 import logo from '../assets/logo.png'
 import { getUsers } from '../src/redux/actions/user'
-import { TextInput, Button, } from 'react-native-paper'
+import { Divider, Headline, Paragraph,TextInput, Button, } from 'react-native-paper';
 
 
 
@@ -25,114 +25,99 @@ export default function VerifyScrenn({navigation}) {
 
   return (
     <View style={styles.container}>
-    <ImageBackground
-    style={{width:20,height:20}}
-    source={
-      {uri:
-      "https://resource.lendingpoint.com/wp-content/uploads/2018/05/money-growing-1.jpg"}}
-     style={{width:'100%', height: '100%'}}>
-    <View style={styles.input}>
-    <View style={styles.icon_code}>
-    <FontAwesome
-     name='lock'
-     color='#edfff8'
-     size={28}
-    />
-    </View>
-    <View style={styles.input_code}>
-    <TextInput
-    label="Ingresar Código"
-    style={{height:30}}
-    selectionColor="white"
-    style={{height:45,backgroundColor:'transparent',paddingLeft:15}}
-    />
-    </View>
-    </View>
-    <View style={{position:'relative',
-    top:220,
-    left:16,
-    width:330,
-    paddingHorizontal:100
-    }}>
-      <Button
-       mode="contained"
-       onPress={()=> {navigation.navigate('DischargeScreen')}}
-       style={{
-        backgroundColor:'#57A130',
-        opacity:0.6,
-     }}>
-     CONFIRMAR</Button>
+    <View style={styles.heading}>
+    <Headline>Ingresar Código</Headline>
     </View>
     <View style={styles.logo}>
-    <Image
-      style={styles.image}
-      source={logo}
-    />
-    <Text style={styles.text_tree} > Tree</Text>
-       </View>
+    <ImageBackground
+    style={{width:140,height:140}}
+    source={require('../assets/LogoVector.png')}
+    >
     </ImageBackground>
     </View>
+      <View style={{position:'relative',
+      top:50
+      }}>
+      <View style={{position:'relative',
+      top:60,
+      }}>
+      <View style={styles.icon_pw}>
+      <FontAwesome
+      name='lock'
+      color='black'
+      size={30}
+      />
+      </View>
+      <View>
+      <TextInput
+      label="ingresar código"
+      selectionColor="black"
+      style={{height:48,
+        paddingLeft:5,
+        width:210,
+        position: 'relative',
+        left:80,
+        top:-80}}
+      />
+      </View>
+      <View style={{
+      position: 'relative',
+      top:-30}} >
+      <Divider/>
+      <Divider/>
+      </View>
+      </View>
+      </View>
+      <View style={styles.boton}>
+      <View>
+      <Button
+     mode="contained"
+     onPress={()=> {navigation.navigate('DischargeScreen')}}
+     style={{
+     backgroundColor: '#006A34',
+     width:150
+   }}>
+   CONFIRMAR</Button>
+  </View>
+  </View>
+  </View>
   )
 }
 
 
+
+
 const styles = StyleSheet.create({
-container: {
-  flex: 1,
-  backgroundColor: '#F1F4FF',
-},
-
-icon_code: {
+  container: {
+    flex:1,
+    backgroundColor: "#F1F4FF"
+  },
+icon_pw: {
   position:'relative',
-  top:235,
-  left:80,
+  top:-45,
+  left:42,
 },
-input_code: {
-  position:'relative',
-  top:200,
-  left:110,
-  backgroundColor: '#ffda40',
-  opacity:0.5,
-  borderRadius:60,
-  width:160,
-  height:40
-},
-logo: {
-  flex:1,
-  justifyContent:'flex-end',
-  paddingHorizontal:24,
-  paddingTop:50,
-  position:'relative',
-  top:-410,
-  left:100,
-
-},
-text_bank: {
-  color:'black',
-  borderRadius:10,
-  fontSize: 35,
-  paddingBottom:2,
-  backgroundColor: '#E4DC65',
-  width:100
-
-
-},
-text_tree: {
-  color:'black',
-  borderRadius:10,
-  marginBottom:5,
-  marginTop:-10,
-  fontSize: 35,
-  paddingBottom:2,
-  backgroundColor: '#E4DC65',
-  width:90,
-},
-image: {
-  marginLeft:10,
-  marginBottom:15,
-  height:65,
-  width:65,
-  backgroundColor: 'black',
-  borderRadius:10
-},
+  logo: {
+     alignItems:'center',
+     marginTop:30,
+  },
+  boton: {
+     alignItems:'center',
+     marginTop:105,
+     marginLeft:10
+  },
+  iconButtons: {
+    marginBottom: 10,
+    borderRadius: 20,
+    marginTop: 25,
+    width:15,
+    marginLeft:-12
+  },
+    heading: {
+   	fontSize: 35,
+    position:'relative',
+    top:20,
+    left:-80,
+    alignItems:'center'
+  },
 });
