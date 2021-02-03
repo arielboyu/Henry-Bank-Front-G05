@@ -1,34 +1,10 @@
 import React from 'react'
-<<<<<<< HEAD
-import {View,Text,Button,StyleSheet, Image} from 'react-native'
-
-
-=======
 import {View,Text,Button,StyleSheet, Image, StatusBar, TouchableOpacity} from 'react-native'
 import  * as Animatable  from 'react-native-animatable'
->>>>>>> 6f735c12f9936e518c9fd36972343311b93e9614
 
 
 export default function HomeScreen({navigation}) {
   return (
-<<<<<<< HEAD
-    <View style={{
-      flex:1,
-      alignItems:'center',
-      justifyContent:'center',
-      backgroundColor:'#76FF03',
-      }}>
-      <Image
-        source= {require("../assets/logo.png")}
-      />
-    {/* <Text>Este es el Home</Text> */}
-    <View style={{marginTop:30}} >
-    <Button
-      title='Iniciar Sesión'
-      onPress={() => navigation.navigate('LoginScreen')}
-    ></Button>
-    </View>
-=======
     <View style={style.container}>
       <StatusBar backgroundColor='green' barStyle="light-content"/>
       <View style={style.header}>
@@ -43,7 +19,7 @@ export default function HomeScreen({navigation}) {
       
       <Animatable.View
         style={[style.footer, {
-          backgroundColor: "#F3FF6F"
+          backgroundColor: "#ffbf34"
       }]}
       animation="fadeInUpBig"
       >
@@ -65,7 +41,6 @@ export default function HomeScreen({navigation}) {
         </TouchableOpacity>
       </View>
       </Animatable.View>
->>>>>>> 6f735c12f9936e518c9fd36972343311b93e9614
     </View>
   );
 }
@@ -74,7 +49,7 @@ export default function HomeScreen({navigation}) {
 const style = StyleSheet.create({
   container: {
     flex: 1, 
-    backgroundColor: '#F1F3F2'
+    backgroundColor: '#ffffff'
   },
   header: {
     flex: 2,
@@ -94,7 +69,7 @@ logo: {
   height: 300
 },
 title: {
-    color: '#015C1A',
+    color: 'black',
     fontSize: 20,
     fontWeight: 'bold'
 },
@@ -109,21 +84,23 @@ text: {
 button: {
     alignItems: 'flex-end',
     marginTop: 30,
-    color:'green'
+    color:'#5db12f'
 },
 signIn: {
     width: 150,
     height: 40,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 50,
+    borderRadius: 10,
     flexDirection: 'row',
-    backgroundColor: '#01890B',
+    backgroundColor: '#097934',
     
 },
 textSign: {
     color: 'black',
     fontWeight: 'bold',
-    color:'#F3FF6F'
+    color:'#ffffff',
+    fontSize:30,
+    
 }
 });
