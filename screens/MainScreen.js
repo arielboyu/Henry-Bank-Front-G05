@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
-import { ImageBackground, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ImageBackground, ScrollView, StyleSheet, Text, View, Picker } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux'
 import { Button, Divider, Headline, Paragraph } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import Transfer from 'react-native-vector-icons/MaterialCommunityIcons';
-
+//import Picker from '@react-native-community/picker'
 import { getUserByID } from '../src/redux/actions/user'
+import { acc } from 'react-native-reanimated';
 
 const data = {
 	name  : 'Valentín',
@@ -41,13 +42,17 @@ const MainScreen = () => {
 	return (
 		<View style={styles.container}>
 			{
-				firstName && <> {/* No se carga la pantalla hasta que los datos del usuario esten en el store */}
+				/* firstName && */ <> {/* No se carga la pantalla hasta que los datos del usuario esten en el store */}
 					<View style={styles.greeting}>
 						<Headline>{`Hola, ${firstName}...`}</Headline>
 						{/* <Button onPress={logout}>Cerrar</Button> */}
 					</View>
 					<View style={styles.balance}>
-						<ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.scroll}>
+						<ScrollView 
+							horizontal={true} 
+							showsHorizontalScrollIndicator={false} 
+							style={styles.scroll}
+						>
 							{/*Card 1*/}
 
 							<View>
@@ -89,7 +94,8 @@ const MainScreen = () => {
 					{/* General */}
 
 					<View style={styles.general}>
-						<Headline>General...</Headline>
+						{/* <Headline>General...</Headline> */}
+						{/* HACER SELECT */}
 						<View style={styles.generalCont1}>
 							{/* Ingresos */}
 
@@ -120,11 +126,47 @@ const MainScreen = () => {
 							</View>
 						</View>
 					</View>
-					<Divider />
+					<View style={styles.center}>
+						<Text>CUENTA</Text>
+					</View>
+					<View style={styles.generalCont1}>
+						
+							<Button mode="text">{`#${accounts.peso} (Pesos)`}</Button>
+							<Button mode="text">{`#${accounts.usd} (Dólares)`}</Button>
+					</View>
 
 					{/* Period */}
-
+					<View style={styles.center}>
+						<Text>PERíODO</Text>
+					</View>
 					<View style={styles.generalCont1}>
+{/* 						<View style={styles.selectorsCont2}>
+							<Text>PERíODO</Text>
+							<Picker
+								//selectedValue={selectedValue}
+								style={{ height: 30, width: 150 }}
+								//onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+							>	
+								<Picker.Item label="1 Día" value="1d" />
+								<Picker.Item label="3 Días" value="3d" />
+								<Picker.Item label="1 Semana" value="1s" />
+								<Picker.Item label="1 Mes" value="1m" />
+								<Picker.Item label="3 Meses" value="3m" />
+								<Picker.Item label="6 Meses" value="6m" />
+								<Picker.Item label="1 Año" value="1a" />
+     	 					</Picker>
+						</View>
+						<View style={styles.selectorsCont2}>
+							<Text>CUENTA</Text>
+							<Picker
+								//selectedValue={selectedValue}
+								style={{ height: 30, width: 150 }}
+								//onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+							>	
+								<Picker.Item label={`#${accounts.peso} (Pesos)`} value="java" />
+								<Picker.Item label={`#${accounts.usd} (Dólares)`} value="js" />
+     	 					</Picker>
+						</View> */}
 						<Button mode="text">3 D</Button>
 						<Button mode="text">1 S</Button>
 						<Button mode="text">2 S</Button>
@@ -132,7 +174,7 @@ const MainScreen = () => {
 						<Button mode="text">3 M</Button>
 						<Button mode="text">6 M</Button>
 					</View>
-					<Divider />
+
 
 					<View style={styles.generalCont2}>
 						<View style={styles.center}>
@@ -164,7 +206,7 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
  		padding: 20,
- 		backgroundColor: "#F1F4FF"
+ 		backgroundColor: "#FFFF"
   	},
  	mainCard: {
  		width: 310,
@@ -191,14 +233,14 @@ const styles = StyleSheet.create({
  		flexDirection: "row",
  		justifyContent: "space-around",
  		width: "100%",
- 		marginTop: 5,
- 		marginBottom: 5,
+ 		marginTop: 2,
+ 		marginBottom: 2,
 	},
 	generalCont2: {
 		flex: 1,
 		flexDirection: "row",
 		alignItems: "center",
-		justifyContent: "space-around",
+		justifyContent: "space-between",
 		width: "100%",
 		marginTop: 5,
 		marginBottom: 5,
@@ -245,7 +287,7 @@ const styles = StyleSheet.create({
 		letterSpacing: 2
 	},
 	iconButtons: {
-		backgroundColor: '#006A34',
+		backgroundColor: '#097934',
 		marginBottom: 12,
 		borderRadius: 20,
 		marginTop: 25
@@ -277,7 +319,7 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		padding: 7,
 		borderRightWidth: 1,
-		backgroundColor: '#006A34'
+		backgroundColor: '#097934'
 	},
 	generalSection2: {
 		width: '75%',
@@ -285,12 +327,25 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		paddingLeft: 10,
 		paddingRight: 12,
-		backgroundColor: '#57A130'
+		backgroundColor: '#5DB12F'
 	},
 	numbers: {
 		color: "white",
 		fontWeight: "300",
 		fontSize: 20
+	}, 
+	selectorsCont: {
+		display: 'flex',
+		flexDirection: 'row',
+		alignItems: 'center',
+		width: '100%'
+	},
+	selectorsCont2: {
+		display: 'flex',
+		alignItems: 'center'
+	},
+	selector: {
+
 	}
 });
 

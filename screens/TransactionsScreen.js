@@ -1,7 +1,8 @@
 import React from 'react';
-import { ImageBackground, ScrollView, StyleSheet, Text, View } from 'react-native';
-import { Button, Divider, Headline, Paragraph } from 'react-native-paper';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Headline } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+
 const accounts = {
   usd  : '6384636',
   peso : '4520065'
@@ -117,7 +118,7 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
  		padding: 20,
- 		backgroundColor: "#F1F4FF"
+ 		backgroundColor: "#FFFF"
   },
   header: {
 		display: "flex",
@@ -130,19 +131,19 @@ const styles = StyleSheet.create({
   cardContainer: {
 		display: "flex",
 		flexDirection: "row",
-		marginTop: 5,
+    marginTop: 2,
+    marginBottom: 2,
 		borderRadius: 10,
-		borderWidth: 1,
-		width: "100%",
-		overflow: "hidden"
+		width: "98%",
+    overflow: "hidden"
 	},
-  	generalCont1: {
+  generalCont1: {
  		display: "flex",
  		flexDirection: "column",
  		justifyContent: "space-around",
  		width: "100%",
  		marginTop: 10,
-    height: 100
+    height: 100,
 	},
 	section1: {
 		width: '25%',
@@ -151,7 +152,7 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		padding: 7,
 		borderRightWidth: 1,
-		backgroundColor: '#006A34'
+		backgroundColor: '#097934'
 	},
 	section2: {
 		width: '75%',
@@ -159,7 +160,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
 		padding: 5,
-    backgroundColor: 'rgba(87, 161, 48, 0.8)',
+    backgroundColor: '#5DB11F',
     marginRight: 5
   },
   section3: {
