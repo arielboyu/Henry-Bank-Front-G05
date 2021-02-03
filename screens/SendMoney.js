@@ -1,10 +1,9 @@
 import React from 'react';
 import { ImageBackground,Image, StyleSheet, Text, View } from 'react-native';
-import { Divider, Headline, Paragraph } from 'react-native-paper';
+import { Divider, Headline, Paragraph,TextInput, Button, } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import logo from '../assets/logo.png'
-import { TextInput, Button, } from 'react-native-paper';
 import Transfer from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export default function SendMoney() {

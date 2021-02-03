@@ -13,10 +13,11 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import logo from '../assets/logo.png'
 import * as Animatable from 'react-native-animatable'
 import { createNewUser, getUsers } from '../src/redux/actions/user'
-import { TextInput, Button, } from 'react-native-paper';
+import { Divider, Headline, Paragraph,TextInput, Button, } from 'react-native-paper';
+
+
 
 export default function Register({navigation}) {
-
   const [data,setData] = useState({
     email:'',
     password:'',
@@ -69,181 +70,145 @@ export default function Register({navigation}) {
 
   return (
     <View style={styles.container}>
-    <ImageBackground
-    style={{width:20,height:20}}
-    source={
-      {uri:
-      "https://media.metrolatam.com/2018/02/16/appsveinteac3b1era660x650-1200x800.jpg"}}
-     style={{width:'115%', height: '100%'}}>
-    <View >
-    <View style={styles.icon_email}>
-    <FontAwesome
-     name='user-o'
-     color='#edfff8'
-     size={28}
-    />
-    </View>
-    <View style={styles.icon_pw}>
-    <FontAwesome
-       name='lock'
-       color='#edfff8'
-       size={30}
-    />
-    </View>
-    <View style={styles.icon_pw1}>
-    <FontAwesome
-       name='lock'
-       color='#edfff8'
-       size={30}
-    />
-    </View>
-    <View style={styles.input_email}>
-    <TextInput
-    label="email"
-    selectionColor="white"
-    style={{height:45,backgroundColor:'transparent',color:'white',paddingLeft:10}}
-    />
-    </View>
-    <View style={styles.input_password}>
-    <TextInput
-    label="password"
-    selectionColor="white"
-    style={{height:45,backgroundColor:'transparent',paddingLeft:15}}
-    />
-    </View>
-    <View style={styles.input_password1}>
-    <TextInput
-    label="confirmar password"
-    selectionColor="white"
-    style={{height:45,backgroundColor:'transparent',paddingLeft:15}}
-    />
-    </View>
-    </View>
-    <View style={{position:'relative',
-    top:160,
-    left:10,
-    width:340,
-    paddingHorizontal:100
-    }}>
-      <Button
-       mode="contained"
-       onPress={()=>{onSubmit(data),navigation.navigate('VerifyScrenn')}}
-       style={{
-        backgroundColor:'#57A130',
-        opacity:0.6,
-     }}>
-     Registrarse</Button>
+    <View style={styles.heading}>
+    <Headline>Registrar Datos</Headline>
     </View>
     <View style={styles.logo}>
-    <Image
-      style={styles.image}
-      source={logo}
-    />
-    <Text style={styles.text_tree} > Tree</Text>
-    </View>
+    <ImageBackground
+    style={{width:140,height:140}}
+    source={require('../assets/LogoVector.png')}
+    >
     </ImageBackground>
     </View>
+    <View style={styles.icon_email}>
+    <FontAwesome
+      name='user-o'
+      color='black'
+      size={28}
+      />
+      </View>
+      <View >
+      <TextInput
+      label="ingresa e-mail"
+      selectionColor="black"
+      style={{height:48,
+        paddingLeft:5,
+        width:210,
+        position: 'relative',
+        left:80,
+        top:-10
+      }}/>
+      </View>
+      <View style={{position:'relative',
+      top:50
+      }}>
+      <View style={{position:'relative',
+      top:60,
+      }}>
+      <View style={styles.icon_pw}>
+      <FontAwesome
+      name='lock'
+      color='black'
+      size={30}
+      />
+      </View>
+      <View>
+      <TextInput
+      label="password"
+      selectionColor="black"
+      style={{height:48,
+        paddingLeft:5,
+        width:210,
+        position: 'relative',
+        left:80,
+        top:-140}}
+      />
+      </View>
+      <View style={styles.icon_pw2}>
+      <FontAwesome
+      name='lock'
+      color='black'
+      size={30}
+      />
+      </View>
+      <View >
+      <TextInput
+      label="confirmar password"
+      selectionColor="black"
+      style={{height:48,
+        paddingLeft:5,
+        width:210,
+        position: 'relative',
+        left:80,
+        top:-155,
+      }}/>
+      </View>
+      <View style={{
+      position: 'relative',
+      top:-120}} >
+      <Divider/>
+      <Divider/>
+      </View>
+      </View>
+      </View>
+      <View style={styles.boton}>
+      <View>
+      <Button
+     mode="contained"
+     onPress={()=>{onSubmit(data),navigation.navigate('VerifyScrenn')}}
+     style={{
+     backgroundColor: '#006A34',
+     width:150
+   }}>
+   CONFIRMAR</Button>
+  </View>
+  </View>
+  </View>
   )
 }
 
 const styles = StyleSheet.create({
-container: {
-  flex: 1,
-
-},
+  container: {
+    flex:1,
+    backgroundColor: "#F1F4FF"
+  },
 
 icon_email: {
   position:'relative',
-  top:190,
-  left:20,
+  top:20,
+  left:40,
 },
 icon_pw: {
   position:'relative',
-  top:225,
-  left:22,
+  top:-105,
+  left:42,
 },
-icon_pw1: {
+icon_pw2: {
   position:'relative',
-  top:255,
-  left:22,
+  top:-115,
+  left:42,
 },
-input_email: {
-  position:'relative',
-  top:100,
-  left:60,
-  backgroundColor: '#fa6a94',
-  opacity:0.6,
-  borderRadius:60,
-  width:250,
-  height:40
-},
-
-input_password: {
-  position:'relative',
-  top:120,
-  left:60,
-  backgroundColor: '#fa6a94',
-  opacity:0.6,
-  borderRadius:100,
-  width:250,
-  height:40
-
-},
-input_password1: {
-  position:'relative',
-  top:140,
-  left:60,
-  backgroundColor: '#fa6a94',
-  opacity:0.6,
-  borderRadius:100,
-  width:250,
-  height:40
-
-},
-logo: {
-  flex:1,
-  justifyContent:'flex-end',
-  paddingHorizontal:24,
-  paddingTop:50,
-  position:'relative',
-  top:-400,
-  left:100,
-
-},
-register: {
-  position:'relative',
-  top:-110,
-  left:-5,
-  marginLeft:10,
-  paddingHorizontal:94,
-
-},
-text_bank: {
-  color:'black',
-  borderRadius:10,
-  fontSize: 35,
-  paddingBottom:2,
-  backgroundColor: '#E4DC65',
-  width:100
-
-
-},
-text_tree: {
-  color:'black',
-  borderRadius:10,
-  marginBottom:5,
-  marginTop:-10,
-  fontSize: 35,
-  paddingBottom:2,
-  backgroundColor: '#E4DC65',
-  width:90,
-},
-image: {
-  marginLeft:10,
-  marginBottom:15,
-  height:65,
-  width:65,
-  backgroundColor: '#F1F4FF',
-  borderRadius:10
-},
+  logo: {
+     alignItems:'center',
+     marginTop:30,
+  },
+  boton: {
+     alignItems:'center',
+     marginTop:5,
+     marginLeft:10
+  },
+  iconButtons: {
+    marginBottom: 10,
+    borderRadius: 20,
+    marginTop: 25,
+    width:15,
+    marginLeft:-12
+  },
+    heading: {
+   	fontSize: 35,
+    position:'relative',
+    top:20,
+    left:-80,
+    alignItems:'center'
+  },
 });
