@@ -5,7 +5,8 @@ import {
 	GET_USER_BY_ID, 
 	CREATE_USER, 
 	GET_ALL_USERS, 
-	DISCHARGE_USER 
+	DISCHARGE_USER,
+	VERIFY_USER
 } from '../constants/index'
 
 const createUser = (user) => {
@@ -39,6 +40,13 @@ const dischargeUser = (user) => {
 const logUser = (user) => {
 	return {
 		type : LOGIN,
+		user
+	};
+}
+
+const verifyUser = (user) => {
+	return {
+		type : VERIFY_USER,
 		user
 	};
 }
@@ -111,6 +119,16 @@ export const login = (user) => {
 		try {
 			const res = await axios.post(`http://localhost:3001/auth/login`, user);
 			dispatch(logUser(res.data))
+		} catch (err) {
+			console.log(err);
+		}
+	};
+};
+export const verifyNewUser = (code, userId) => {
+	return async (dispatch) => {
+		try {
+			const res = await axios.put(`http://localhost:3001/validation/${userId}`, code);
+		//	dispatch(verify(res.data))
 		} catch (err) {
 			console.log(err);
 		}

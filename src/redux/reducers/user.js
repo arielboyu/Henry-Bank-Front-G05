@@ -16,7 +16,7 @@ const userReducer = (state = initialState, action) => {
     case CREATE_USER:
       return {
         ...state,
-        user: [state.user, action.user]
+        user: action.user
       };
     case GET_ALL_USERS:
       return {
