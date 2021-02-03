@@ -19,7 +19,7 @@ import ProfileScreen from './screens/ProfileScreen';
 import DischargeScreen from './screens/DischargeScreen';
 import Icon from 'react-native-vector-icons/AntDesign'
 import VerifyScrenn from './screens/VerifyScrenn'
-import ChargeMoney from './screens/ChargeMoney'
+import ChargeMoneyScreen from './screens/ChargeMoneyScreen'
 import SendMoney from './screens/SendMoney'
 import { cos } from 'react-native-reanimated';
 
@@ -151,8 +151,8 @@ const Index = () => {
                 />
                 <Tab.Screen
                   name="Cargar Dinero"
-                  component={ChargeMoney}
-                  onPress={()=>navigation.navigate('ChargeMoney')}
+                  component={ChargeMoneyScreen}
+                  onPress={()=>navigation.navigate('ChargeMoneyScreen')}
                   options={{
                   tabBarIcon: ({ color }) => (
                       <Icon
