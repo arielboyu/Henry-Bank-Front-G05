@@ -12,8 +12,8 @@ import { TextInput, Button } from 'react-native-paper';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 export default function dischargeScreen({ navigation, user }) {
-	/* const userId = useSelector((state) => state.user.user[1].id); */
-	const userId = 1;
+	const userId = useSelector((state) => state.user.user[1].id);
+	//const userId = 1;
 	let today = new Date();
 	const dispatch = useDispatch();
 	useEffect(() => {
