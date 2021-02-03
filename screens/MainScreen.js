@@ -95,7 +95,6 @@ const MainScreen = () => {
 
 					<View style={styles.general}>
 						{/* <Headline>General...</Headline> */}
-						{/* HACER SELECT */}
 						<View style={styles.generalCont1}>
 							{/* Ingresos */}
 
@@ -140,6 +139,7 @@ const MainScreen = () => {
 						<Text>PERíODO</Text>
 					</View>
 					<View style={styles.generalCont1}>
+
 {/* 						<View style={styles.selectorsCont2}>
 							<Text>PERíODO</Text>
 							<Picker
