@@ -85,6 +85,8 @@ export default function VerifyScrenn({navigation}) {
 }
 
 
+
+
 const styles = StyleSheet.create({
   container: {
     flex:1,
