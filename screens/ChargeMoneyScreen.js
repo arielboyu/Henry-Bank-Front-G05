@@ -126,7 +126,7 @@ export default function ChargeMoneyScreen({ changeScreen, navigation, user }) {
 							{visibleButton ? (
 								<Button
 									mode="contained"
-									onPress={() => navigation.navigate('Inicio')}
+									onPress={() => changeScreen("main")}
 									style={{
 										backgroundColor : '#006A34',
 										width           : 150

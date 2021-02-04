@@ -105,6 +105,7 @@ export default function Login({ navigation }) {
 					<View>
 						<TextInput
 							label="password"
+              type="password"
 							onChangeText={(text) => handlePasswordChange(text)}
 							selectionColor="black"
 							style={{
@@ -185,7 +186,7 @@ const styles = StyleSheet.create({
 	register    : {
 		position   : 'relative',
 		top        : 120,
-		left       : 125,
+		left       : 100,
 		marginLeft : 10,
 		width      : 150
 	},
