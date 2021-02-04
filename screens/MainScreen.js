@@ -297,12 +297,12 @@ const MainScreen = ({changeScreen}) => {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
- 		padding: 20,
+ 		padding: 0,
  		backgroundColor: "#FFFF"
   	},
  	mainCard: {
- 		width: 310,
- 		height: 190,
+ 		width: 250,
+ 		height: 150,
  		padding: 10,
  		borderRadius: 20,
  		marginTop: 10,
@@ -334,7 +334,7 @@ const styles = StyleSheet.create({
 		marginLeft: 15
   	},
   	scroll: {
-		height: 200,
+		height: 100,
 		width: "100%"
   	},
   	general: {

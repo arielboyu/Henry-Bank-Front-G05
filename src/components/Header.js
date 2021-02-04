@@ -4,6 +4,7 @@ import { Avatar, Button, Menu, Headline, Paragraph, Portal, Dialog, Divider, Mod
 import { useDispatch, useSelector } from 'react-redux'
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { getUserByID } from '../redux/actions/user'
+import Contacts from './../../screens/Contacts'
 
 const Header = ({title}) => {
     const dispatch = useDispatch();

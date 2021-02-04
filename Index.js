@@ -22,6 +22,7 @@ import VerifyScrenn from './screens/VerifyScrenn'
 import { cos } from 'react-native-reanimated';
 
 
+
 const Stack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
 
@@ -102,6 +103,7 @@ const Index = () => {
                     }}
 
                 />
+               
 {/*                 <Tab.Screen
                     name="Cerrar Sesión"
                     component={Main}
@@ -133,7 +135,7 @@ const Index = () => {
                     }}>
                     <Stack.Screen
                     name="Home"
-                    component={HomeScreen}
+                    component={Main}
                     options={{title:'Inicio'}}
                     />
                     <Stack.Screen
