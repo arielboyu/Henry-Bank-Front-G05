@@ -55,7 +55,7 @@ export default function VerifyScrenn({navigation}) {
       top:50
       }}>
       <View style={{position:'relative',
-      top:60,
+      top:80,
       }}>
       <View style={styles.icon_pw}>
       <FontAwesome
@@ -73,7 +73,7 @@ export default function VerifyScrenn({navigation}) {
         paddingLeft:5,
         width:210,
         position: 'relative',
-        left:80,
+        left:110,
         top:-80}}
       />
       </View>
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
 icon_pw: {
   position:'relative',
   top:-45,
-  left:42,
+  left:62,
 },
   logo: {
      alignItems:'center',
@@ -120,7 +120,7 @@ icon_pw: {
   },
   boton: {
      alignItems:'center',
-     marginTop:105,
+     marginTop:135,
      marginLeft:10
   },
   iconButtons: {
@@ -134,7 +134,7 @@ icon_pw: {
    	fontSize: 35,
     position:'relative',
     top:20,
-    left:-80,
+    left:-100,
     alignItems:'center'
   },
 });

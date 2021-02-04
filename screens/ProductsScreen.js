@@ -1,14 +1,13 @@
 import React from 'react';
 import { View, ImageBackground, StyleSheet, Text } from 'react-native';
 import { Headline } from 'react-native-paper';
+import Header from '../src/components/Header';
 
 const ProductsScreen = () => {
 
 	return (
 		<View style={styles.container}>
-			<View style={styles.header}>
-				<Headline>Mis productos...</Headline>
-			</View>
+			<Header title="Mis productos..."/>
       <View style={{height: '100%'}}>
         <View style={[styles.btnCard, styles.darkGreen]}>
           <Text style={styles.cardText}>
@@ -16,7 +15,7 @@ const ProductsScreen = () => {
           </Text>
           <ImageBackground
             style={styles.images}
-            // source={require('../assets/myCards.png')}
+            source={require('../assets/MyCards.png')}
           />
         </View>
         <View style={[styles.btnCard, styles.lightGreen]}>
@@ -25,7 +24,7 @@ const ProductsScreen = () => {
           </Text>
           <ImageBackground
             style={styles.images}
-            // source={require('../assets/MyAccounts.png')}
+            source={require('../assets/MyAccounts.png')}
           />
         </View>
       </View>

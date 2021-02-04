@@ -1,12 +1,11 @@
-import React, { useEffect } from 'react';
-import { ImageBackground, ScrollView, StyleSheet, Text, View, Picker } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { ImageBackground, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux'
-import { Button, Divider, Headline, Paragraph } from 'react-native-paper';
+import { Avatar, Button, RadioButton, Headline, Paragraph, Portal, Dialog, Divider, Modal } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import Transfer from 'react-native-vector-icons/MaterialCommunityIcons';
-//import Picker from '@react-native-community/picker'
 import { getUserByID } from '../src/redux/actions/user'
-import { acc } from 'react-native-reanimated';
+import Header from '../src/components/Header';
 
 const data = {
 	name  : 'Valentín',
@@ -22,9 +21,13 @@ const data = {
 };
 
 //Mi posición consolidada
-const MainScreen = () => {
+const MainScreen = ({changeScreen}) => {
 	const dispatch = useDispatch();
 	const user = useSelector(state => state.user);
+  const [periodShows, setPeriodShows] = useState(false)
+	const [periodChecked, setPeriodChecked] = useState("")
+	const [accountShows, setAccountShows] = useState(false)
+	const [accountChecked, setAccountChecked] = useState("")
 
  	useEffect(() => {
      console.log("USER USEFECT >>", user)
@@ -34,12 +37,6 @@ const MainScreen = () => {
 	const { income, expenses, dollar, peso, accounts } = data;
 	const { firstName, lastName } = user.loggedUser;
 
-/* 	const logout = () => {
-		localStorage.setItem("logged", "false");
-		localStorage.removeItem("id");
-		location.reload();
-	}; */
-
 	return (
 		<View style={styles.container}>
 			{
@@ -48,9 +45,12 @@ const MainScreen = () => {
 						<Headline>{`Hola, ${firstName}...`}</Headline>
 						{/* <Button onPress={logout}>Cerrar</Button> */}
 					</View>
+
 					<View style={styles.balance}>
+						<Header title={`Hola, ${firstName}...`}/>
 						<ScrollView 
 							horizontal={true} 
+							pagingEnabled={true}
 							showsHorizontalScrollIndicator={false} 
 							style={styles.scroll}
 						>
@@ -95,7 +95,7 @@ const MainScreen = () => {
 					{/* General */}
 
 					<View style={styles.general}>
-						{/* <Headline>General...</Headline> */}
+						<Headline>General...</Headline>
 						<View style={styles.generalCont1}>
 							{/* Ingresos */}
 
@@ -126,72 +126,169 @@ const MainScreen = () => {
 							</View>
 						</View>
 					</View>
-					<View style={styles.center}>
-						<Text>CUENTA</Text>
-					</View>
+					<Divider/>
 					<View style={styles.generalCont1}>
-						
-							<Button mode="text">{`#${accounts.peso} (Pesos)`}</Button>
-							<Button mode="text">{`#${accounts.usd} (Dólares)`}</Button>
-					</View>
+						<Button 
+							mode="text"
+							onPress={() => setPeriodShows(true)}
+						>
+							PERíODO
+						</Button>
+						<Portal>
+							<Dialog visible={periodShows} onDismiss={() => setPeriodShows(false)}>
+								<Dialog.Title>Selecciona el período</Dialog.Title>
+								<Dialog.Content>
+									<View style={styles.row}>
+										<RadioButton
+											value="1d"
+											status={ periodChecked === '1d' ? 'checked' : 'unChecked' }
+											onPress={() => setPeriodChecked('1d')}
+										/>
+										<Text style={{fontSize: 18, marginLeft: 5}}>
+											Hoy
+										</Text>
+									</View>
+									<View style={styles.row}>
+										<RadioButton
+											value="3d"
+											status={ periodChecked === '3d' ? 'checked' : 'unChecked' }
+											onPress={() => setPeriodChecked('3d')}
+										/>
+										<Text style={{fontSize: 18, marginLeft: 5}}>
+											Tres días
+										</Text>
+									</View>
+									<View style={styles.row}>
+										<RadioButton
+											value="1s"
+											status={ periodChecked === '1s' ? 'checked' : 'unChecked' }
+											onPress={() => setPeriodChecked('1s')}
+										/>
+										<Text style={{fontSize: 18, marginLeft: 5}}>
+											Una semana</Text>
+									</View>
+									<View style={styles.row}>
+										<RadioButton
+											value="2s"
+											status={ periodChecked === '2s' ? 'checked' : 'unChecked' }
+											onPress={() => setPeriodChecked('2s')}
+										/>
+										<Text style={{fontSize: 18, marginLeft: 5}}>
+											Dos semanas
+										</Text>
+									</View>
+									<View style={styles.row}>
+										<RadioButton
+											value="1m"
+											status={ periodChecked === '1m' ? 'checked' : 'unChecked' }
+											onPress={() => setPeriodChecked('1m')}
+										/>
+										<Text style={{fontSize: 18, marginLeft: 5}}>
+											Un mes
+										</Text>
+									</View>
+									<View style={styles.row}>
+										<RadioButton
+											value="3m"
+											status={ periodChecked === '3m' ? 'checked' : 'unChecked' }
+											onPress={() => setPeriodChecked('3m')}
+										/>
+										<Text style={{fontSize: 18, marginLeft: 5}}>
+											Tres meses
+										</Text>
+									</View>
+									<View style={styles.row}>
+										<RadioButton
+											value="6m"
+											status={ periodChecked === '6m' ? 'checked' : 'unChecked' }
+											onPress={() => setPeriodChecked('6m')}
+										/>
+										<Text style={{fontSize: 18, marginLeft: 5}}>
+											Seis meses
+										</Text>
+									</View>
+									<View style={styles.row}>
+										<RadioButton
+											value="1a"
+											status={ periodChecked === '1a' ? 'checked' : 'unChecked' }
+											onPress={() => setPeriodChecked('1a')}
+										/>
+										<Text style={{fontSize: 18, marginLeft: 5}}>
+											Un año
+										</Text>
+									</View>
+								</Dialog.Content>
+								<Dialog.Actions>
+									<Button onPress={() => setPeriodShows(false)}>Seleccionar</Button>
+								</Dialog.Actions>
+							</Dialog>
+						</Portal>
 
-					{/* Period */}
-					<View style={styles.center}>
-						<Text>PERíODO</Text>
+						<Button 
+							mode="text"
+							onPress={() => setAccountShows(true)}
+						>
+							CUENTA
+						</Button>
+						<Portal>
+							<Dialog visible={accountShows} onDismiss={() => setAccountShows(false)}>
+								<Dialog.Title>Selecciona la cuenta</Dialog.Title>
+								<Dialog.Content>
+									<View style={styles.row}>
+										<RadioButton
+											value={accounts.peso}
+											status={ accountChecked === accounts.peso ? 'checked' : 'unChecked' }
+											onPress={() => setAccountChecked(accounts.peso)}
+										/>
+										<Text style={{fontSize: 18, marginLeft: 5}}>
+											{`Cuenta #${accounts.peso} (Pesos)`}
+										</Text>
+									</View>
+									<View style={styles.row}>
+										<RadioButton
+											value={accounts.usd}
+											status={ accountChecked === accounts.usd ? 'checked' : 'unChecked' }
+											onPress={() => setAccountChecked(accounts.usd)}
+										/>
+										<Text style={{fontSize: 18, marginLeft: 5}}>
+											{`Cuenta #${accounts.usd} (Dolares)`}
+										</Text>
+									</View>
+								</Dialog.Content>
+								<Dialog.Actions>
+									<Button onPress={() => setAccountShows(false)}>Seleccionar</Button>
+								</Dialog.Actions>
+							</Dialog>
+						</Portal>
 					</View>
-					<View style={styles.generalCont1}>
+					<Divider/>
 
-{/* 						<View style={styles.selectorsCont2}>
-							<Text>PERíODO</Text>
-							<Picker
-								//selectedValue={selectedValue}
-								style={{ height: 30, width: 150 }}
-								//onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
-							>	
-								<Picker.Item label="1 Día" value="1d" />
-								<Picker.Item label="3 Días" value="3d" />
-								<Picker.Item label="1 Semana" value="1s" />
-								<Picker.Item label="1 Mes" value="1m" />
-								<Picker.Item label="3 Meses" value="3m" />
-								<Picker.Item label="6 Meses" value="6m" />
-								<Picker.Item label="1 Año" value="1a" />
-     	 					</Picker>
-						</View>
-						<View style={styles.selectorsCont2}>
-							<Text>CUENTA</Text>
-							<Picker
-								//selectedValue={selectedValue}
-								style={{ height: 30, width: 150 }}
-								//onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
-							>	
-								<Picker.Item label={`#${accounts.peso} (Pesos)`} value="java" />
-								<Picker.Item label={`#${accounts.usd} (Dólares)`} value="js" />
-     	 					</Picker>
-						</View> */}
-						<Button mode="text">3 D</Button>
-						<Button mode="text">1 S</Button>
-						<Button mode="text">2 S</Button>
-						<Button mode="text">1 M</Button>
-						<Button mode="text">3 M</Button>
-						<Button mode="text">6 M</Button>
-					</View>
-
+					{/* Buttons */}
 
 					<View style={styles.generalCont2}>
 						<View style={styles.center}>
-							<Button style={styles.iconButtons}>
+							<Button 
+								style={styles.iconButtons}
+								onPress={() => changeScreen('charge')}
+							>
 								<Icon name="donate" size={30} color="#fff" />
 							</Button>
 							<Paragraph style={styles.buttonDesc}>Cargar</Paragraph>
 						</View>
 						<View style={styles.center}>
-							<Button style={styles.iconButtons}>
+							<Button 
+								style={styles.iconButtons}
+								onPress={() => changeScreen('main')}
+							>
 								<Icon name="exchange-alt" size={30} color="#fff" />
 							</Button>
 							<Paragraph style={styles.buttonDesc}>Cambiar</Paragraph>
 						</View>
 						<View style={styles.center}>
-							<Button style={styles.iconButtons}>
+							<Button 
+								style={styles.iconButtons}
+								onPress={() => changeScreen('send')}
+							>
 								<Transfer name="send" size={30} color="#fff" />
 							</Button>
 							<Paragraph style={styles.buttonDesc}>Enviar</Paragraph>
@@ -217,14 +314,6 @@ const styles = StyleSheet.create({
  		marginTop: 10,
  		marginBottom: 10,
  		marginRight: 10
-  	},
-  	greeting: {
-		display: "flex",
- 		alignItems: "flex-start",
- 		width: "100%",
-		marginBottom: 10,
-		marginTop: 10,
- 		fontSize: 35
   	},
   	white: {
  		color: "white"
@@ -345,8 +434,16 @@ const styles = StyleSheet.create({
 		display: 'flex',
 		alignItems: 'center'
 	},
-	selector: {
-
+	row: {
+		display: 'flex',
+		flexDirection: 'row',
+		alignItems: 'center'
+	},
+	sideBar: {
+		backgroundColor: '#FFFF',
+		width: '60%',
+		height: '100%',
+		padding: 10
 	}
 });
 
