@@ -34,7 +34,8 @@ const userReducer = (state = initialState, action) => {
         user: {
           token: action.user.token,
           logged: true,
-          id: action.user.id
+          id: action.user.user.id
+          
         }
       };
       case GET_USER_BY_ID:

@@ -28,8 +28,8 @@ const Stack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
 
 const Index = () => {
-    const user = useSelector(state => state);
-  const logged = true;
+    const user = useSelector(state => state.user);
+  const logged = user.user.id;
   
 	return (
         <>
