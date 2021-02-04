@@ -24,13 +24,12 @@ const data = {
 const MainScreen = ({changeScreen}) => {
 	const dispatch = useDispatch();
 	const user = useSelector(state => state.user);
-  const [periodShows, setPeriodShows] = useState(false)
+  	const [periodShows, setPeriodShows] = useState(false)
 	const [periodChecked, setPeriodChecked] = useState("")
 	const [accountShows, setAccountShows] = useState(false)
 	const [accountChecked, setAccountChecked] = useState("")
 
  	useEffect(() => {
-     console.log("USER USEFECT >>", user)
 		dispatch(getUserByID(user.user.id.id));
 	}, []) 
 
@@ -40,12 +39,7 @@ const MainScreen = ({changeScreen}) => {
 	return (
 		<View style={styles.container}>
 			{
-			<>
-					<View style={styles.greeting}>
-						<Headline>{`Hola, ${firstName}...`}</Headline>
-						{/* <Button onPress={logout}>Cerrar</Button> */}
-					</View>
-
+				<>
 					<View style={styles.balance}>
 						<Header title={`Hola, ${firstName}...`}/>
 						<ScrollView 
