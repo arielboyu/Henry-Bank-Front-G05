@@ -11,7 +11,7 @@ const Header = ({title}) => {
     const user = useSelector(state => state.user);
     
     const [visible, setVisible] = useState(false)
-
+  
     useEffect(() => {
 		dispatch(getUserByID(user.user.id));
 	}, [])
@@ -20,6 +20,9 @@ const Header = ({title}) => {
 
     return(
         <>
+           
+
+
             <View style={styles.greeting}>
                 <Icon.Button 
                     name="bars" 
@@ -29,9 +32,9 @@ const Header = ({title}) => {
                     onPress={() => setVisible(true)}
                 />
                 <Headline>{title}</Headline>
-                <View style={{flex: 1, alignItems: 'flex-end'}}>
+                {/* <View style={{flex: 1, alignItems: 'flex-end'}}>
                     <Image source={require('../../assets/logo.png')} style={{backgroundColor: 'transparent'}}/>
-                </View>
+                </View> */}
                 
             </View>
             <Portal>
@@ -50,7 +53,7 @@ const Header = ({title}) => {
                     
                     <View style={[styles.menu]}>
                         <Menu.Item icon="account" onPress={() => {}} title="Mis datos" style={{width: '100%'}}/>
-                        <Menu.Item icon="contacts" onPress={() => {}} title="Mis contactos" style={{width: '100%'}}/>
+                        <Menu.Item icon="contacts" onPress={() => {setScreen("contact")}} title="Mis contactos" style={{width: '100%'}}/>
                         <Menu.Item icon="cog" onPress={() => {}} title="Configuración" style={{width: '100%'}}/>
                         <Menu.Item icon="help" onPress={() => {}} title="Ayuda" style={{width: '100%'}}/>
                     </View>
