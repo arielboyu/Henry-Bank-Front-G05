@@ -15,12 +15,6 @@ import * as Animatable from 'react-native-animatable'
 import { createNewUser, getUsers } from '../src/redux/actions/user'
 import { Divider, Headline, Paragraph,TextInput, Button, } from 'react-native-paper';
 
-export default function Login({ navigation }) {
-	const dispatch = useDispatch();
-	useEffect(() => {
-  dispatch(getUsers());
-	});
-
 export default function Login({navigation}) {
   const [data,setData] = useState({
     email:'',

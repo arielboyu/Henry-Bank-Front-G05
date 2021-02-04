@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { getUserByID } from '../redux/actions/user'
 
-const Header = ({title}) => {
+const Header = ({changeScreen, title}) => {
     const dispatch = useDispatch();
     const user = useSelector(state => state.user);
     
@@ -46,7 +46,7 @@ const Header = ({title}) => {
                     
                     <View style={[styles.menu]}>
                         <Menu.Item icon="account" onPress={() => {}} title="Mis datos" style={{width: '100%'}}/>
-                        <Menu.Item icon="contacts" onPress={() => {}} title="Mis contactos" style={{width: '100%'}}/>
+                        <Menu.Item icon="contacts" onPress={() => {changeScreen('contact')}} title="Mis contactos" style={{width: '100%'}}/>
                         <Menu.Item icon="cog" onPress={() => {}} title="Configuración" style={{width: '100%'}}/>
                         <Menu.Item icon="help" onPress={() => {}} title="Ayuda" style={{width: '100%'}}/>
                     </View>

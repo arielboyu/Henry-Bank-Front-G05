@@ -30,9 +30,8 @@ const MainScreen = ({changeScreen}) => {
 	const [accountChecked, setAccountChecked] = useState("")
 
  	useEffect(() => {
-     console.log("USER USEFECT >>", user)
 		dispatch(getUserByID(user.user.id.id));
-	}, []) 
+	}, [])
 
 	const { income, expenses, dollar, peso, accounts } = data;
 	const { firstName, lastName } = user.loggedUser;
@@ -41,13 +40,11 @@ const MainScreen = ({changeScreen}) => {
 		<View style={styles.container}>
 			{
 			<>
-					<View style={styles.greeting}>
-						<Headline>{`Hola, ${firstName}...`}</Headline>
-						{/* <Button onPress={logout}>Cerrar</Button> */}
-					</View>
-
+					<Header //En header esta el boton
+						title={`Hola, ${firstName}...`}
+						changeScreen={changeScreen}
+					/>
 					<View style={styles.balance}>
-						<Header title={`Hola, ${firstName}...`}/>
 						<ScrollView 
 							horizontal={true} 
 							pagingEnabled={true}
