@@ -26,12 +26,13 @@ const MainScreen = () => {
 	const dispatch = useDispatch();
 	const user = useSelector(state => state.user);
 
-	useEffect(() => {
-		dispatch(getUserByID(user.user.id));
-	}, [])
+ 	useEffect(() => {
+     console.log("USER USEFECT >>", user)
+		dispatch(getUserByID(user.user.id.id));
+	}, []) 
 
 	const { income, expenses, dollar, peso, accounts } = data;
-	const { firstName, lastName } = user.user;
+	const { firstName, lastName } = user.loggedUser;
 
 /* 	const logout = () => {
 		localStorage.setItem("logged", "false");
@@ -42,7 +43,7 @@ const MainScreen = () => {
 	return (
 		<View style={styles.container}>
 			{
-				/* firstName && */ <> {/* No se carga la pantalla hasta que los datos del usuario esten en el store */}
+			<>
 					<View style={styles.greeting}>
 						<Headline>{`Hola, ${firstName}...`}</Headline>
 						{/* <Button onPress={logout}>Cerrar</Button> */}

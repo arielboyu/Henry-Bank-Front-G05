@@ -8,7 +8,8 @@ import {
 
 const initialState = {
   user: {},
-  users: []
+  users: [],
+  loggedUser:{}
 };
 
 const userReducer = (state = initialState, action) => {
@@ -34,14 +35,14 @@ const userReducer = (state = initialState, action) => {
         user: {
           token: action.user.token,
           logged: true,
-          id: action.user.user.id
+          id: action.user.user
           
         }
       };
       case GET_USER_BY_ID:
         return {
           ...state,
-          user: action.user
+          loggedUser: action.user
         };
     default:
     return state;
