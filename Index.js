@@ -27,7 +27,7 @@ const Tab = createMaterialBottomTabNavigator();
 
 const Index = () => {
     const user = useSelector(state => state.user);
-  const logged = user.user.id;
+  const logged = user.user.logged;
   
 	return (
         <>
