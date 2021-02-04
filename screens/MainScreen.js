@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { ImageBackground, ScrollView, StyleSheet, Text, View, Picker } from 'react-native';
+import { ImageBackground, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux'
-import { Button, Divider, Headline, Paragraph } from 'react-native-paper';
+import { Button, RadioButton, Headline, Paragraph, Portal, Dialog, Divider } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import Transfer from 'react-native-vector-icons/MaterialCommunityIcons';
 //import Picker from '@react-native-community/picker'
@@ -28,7 +28,10 @@ const MainScreen = ({changeScreen}) => {
 	const dispatch = useDispatch();
 	const user = useSelector(state => state.user);
 
-	//const [screen, changeScreen] = useState("main")
+	const [periodShows, setPeriodShows] = useState(false)
+	const [periodChecked, setPeriodChecked] = useState("")
+	const [accountShows, setAccountShows] = useState(false)
+	const [accountChecked, setAccountChecked] = useState("")
 
 	useEffect(() => {
 		dispatch(getUserByID(user.user.id));
@@ -53,6 +56,7 @@ const MainScreen = ({changeScreen}) => {
 					<View style={styles.balance}>
 						<ScrollView 
 							horizontal={true} 
+							pagingEnabled={true}
 							showsHorizontalScrollIndicator={false} 
 							style={styles.scroll}
 						>
@@ -142,42 +146,142 @@ const MainScreen = ({changeScreen}) => {
 						<Text>PERIODO</Text>
 					</View>
 					<View style={styles.generalCont1}>
+						<Button 
+							mode="text"
+							onPress={() => setPeriodShows(true)}
+						>
+							PERíODO
+						</Button>
+						<Portal>
+							<Dialog visible={periodShows} onDismiss={() => setPeriodShows(false)}>
+								<Dialog.Title>Selecciona el período</Dialog.Title>
+								<Dialog.Content>
+									<View style={styles.row}>
+										<RadioButton
+											value="1d"
+											status={ periodChecked === '1d' ? 'checked' : 'unChecked' }
+											onPress={() => setPeriodChecked('1d')}
+										/>
+										<Text style={{fontSize: 18, marginLeft: 5}}>
+											Hoy
+										</Text>
+									</View>
+									<View style={styles.row}>
+										<RadioButton
+											value="3d"
+											status={ periodChecked === '3d' ? 'checked' : 'unChecked' }
+											onPress={() => setPeriodChecked('3d')}
+										/>
+										<Text style={{fontSize: 18, marginLeft: 5}}>
+											Tres días
+										</Text>
+									</View>
+									<View style={styles.row}>
+										<RadioButton
+											value="1s"
+											status={ periodChecked === '1s' ? 'checked' : 'unChecked' }
+											onPress={() => setPeriodChecked('1s')}
+										/>
+										<Text style={{fontSize: 18, marginLeft: 5}}>
+											Una semana</Text>
+									</View>
+									<View style={styles.row}>
+										<RadioButton
+											value="2s"
+											status={ periodChecked === '2s' ? 'checked' : 'unChecked' }
+											onPress={() => setPeriodChecked('2s')}
+										/>
+										<Text style={{fontSize: 18, marginLeft: 5}}>
+											Dos semanas
+										</Text>
+									</View>
+									<View style={styles.row}>
+										<RadioButton
+											value="1m"
+											status={ periodChecked === '1m' ? 'checked' : 'unChecked' }
+											onPress={() => setPeriodChecked('1m')}
+										/>
+										<Text style={{fontSize: 18, marginLeft: 5}}>
+											Un mes
+										</Text>
+									</View>
+									<View style={styles.row}>
+										<RadioButton
+											value="3m"
+											status={ periodChecked === '3m' ? 'checked' : 'unChecked' }
+											onPress={() => setPeriodChecked('3m')}
+										/>
+										<Text style={{fontSize: 18, marginLeft: 5}}>
+											Tres meses
+										</Text>
+									</View>
+									<View style={styles.row}>
+										<RadioButton
+											value="6m"
+											status={ periodChecked === '6m' ? 'checked' : 'unChecked' }
+											onPress={() => setPeriodChecked('6m')}
+										/>
+										<Text style={{fontSize: 18, marginLeft: 5}}>
+											Seis meses
+										</Text>
+									</View>
+									<View style={styles.row}>
+										<RadioButton
+											value="1a"
+											status={ periodChecked === '1a' ? 'checked' : 'unChecked' }
+											onPress={() => setPeriodChecked('1a')}
+										/>
+										<Text style={{fontSize: 18, marginLeft: 5}}>
+											Un año
+										</Text>
+									</View>
+								</Dialog.Content>
+								<Dialog.Actions>
+									<Button onPress={() => setPeriodShows(false)}>Seleccionar</Button>
+								</Dialog.Actions>
+							</Dialog>
+						</Portal>
 
-{/* 						<View style={styles.selectorsCont2}>
-							<Text>PERíODO</Text>
-							<Picker
-								//selectedValue={selectedValue}
-								style={{ height: 30, width: 150 }}
-								//onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
-							>	
-								<Picker.Item label="1 Día" value="1d" />
-								<Picker.Item label="3 Días" value="3d" />
-								<Picker.Item label="1 Semana" value="1s" />
-								<Picker.Item label="1 Mes" value="1m" />
-								<Picker.Item label="3 Meses" value="3m" />
-								<Picker.Item label="6 Meses" value="6m" />
-								<Picker.Item label="1 Año" value="1a" />
-     	 					</Picker>
-						</View>
-						<View style={styles.selectorsCont2}>
-							<Text>CUENTA</Text>
-							<Picker
-								//selectedValue={selectedValue}
-								style={{ height: 30, width: 150 }}
-								//onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
-							>	
-								<Picker.Item label={`#${accounts.peso} (Pesos)`} value="java" />
-								<Picker.Item label={`#${accounts.usd} (Dólares)`} value="js" />
-     	 					</Picker>
-						</View> */}
-						<Button mode="text">3 D</Button>
-						<Button mode="text">1 S</Button>
-						<Button mode="text">2 S</Button>
-						<Button mode="text">1 M</Button>
-						<Button mode="text">3 M</Button>
-						<Button mode="text">6 M</Button>
+						<Button 
+							mode="text"
+							onPress={() => setAccountShows(true)}
+						>
+							CUENTA
+						</Button>
+						<Portal>
+							<Dialog visible={accountShows} onDismiss={() => setAccountShows(false)}>
+								<Dialog.Title>Selecciona la cuenta</Dialog.Title>
+								<Dialog.Content>
+									<View style={styles.row}>
+										<RadioButton
+											value={accounts.peso}
+											status={ periodChecked === accounts.peso ? 'checked' : 'unChecked' }
+											onPress={() => setPeriodChecked(accounts.peso)}
+										/>
+										<Text style={{fontSize: 18, marginLeft: 5}}>
+											{`Cuenta #${accounts.peso} (Pesos)`}
+										</Text>
+									</View>
+									<View style={styles.row}>
+										<RadioButton
+											value={accounts.usd}
+											status={ periodChecked === accounts.usd ? 'checked' : 'unChecked' }
+											onPress={() => setPeriodChecked(accounts.usd)}
+										/>
+										<Text style={{fontSize: 18, marginLeft: 5}}>
+											{`Cuenta #${accounts.usd} (Dolares)`}
+										</Text>
+									</View>
+								</Dialog.Content>
+								<Dialog.Actions>
+									<Button onPress={() => setAccountShows(false)}>Seleccionar</Button>
+								</Dialog.Actions>
+							</Dialog>
+						</Portal>
 					</View>
+					<Divider/>
 
+					{/* Buttons */}
 
 					<View style={styles.generalCont2}>
 						<View style={styles.center}>
@@ -356,8 +460,10 @@ const styles = StyleSheet.create({
 		display: 'flex',
 		alignItems: 'center'
 	},
-	selector: {
-
+	row: {
+		display: 'flex',
+		flexDirection: 'row',
+		alignItems: 'center'
 	}
 });
 
