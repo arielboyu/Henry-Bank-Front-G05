@@ -28,7 +28,6 @@ const Header = ({title}) => {
                     onPress={() => setVisible(true)}
                 />
                 <Headline>{title}</Headline>
-                
             </View>
             <Portal>
                 <Modal 
