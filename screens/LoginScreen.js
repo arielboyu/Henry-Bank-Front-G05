@@ -1,178 +1,204 @@
-import React, {useEffect, useState} from 'react'
-import { StyleSheet,
-    Text,
-    View,
-    Platform,
-    TouchableOpacity,
-    Image,
-    ImageBackground
-   } from 'react-native'
-import logo from '../assets/logo.png'
-import { useDispatch } from 'react-redux'
-import { getUsers, login } from '../src/redux/actions/user'
-import Feather from 'react-native-vector-icons/Feather'
-import FontAwesome from 'react-native-vector-icons/FontAwesome'
-import { Divider, Headline, Paragraph,TextInput, Button, } from 'react-native-paper';
-import Transfer from 'react-native-vector-icons/MaterialCommunityIcons';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, Text, View, Button, Platform, TextInput, TouchableOpacity, Image } from 'react-native';
+import Feather from 'react-native-vector-icons/Feather';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import logo from '../assets/logo.png';
+import * as Animatable from 'react-native-animatable';
+import { useDispatch } from 'react-redux';
+import { getUsers, login } from '../src/redux/actions/user';
 
+export default function Login({ navigation }) {
+	const dispatch = useDispatch();
+	useEffect(() => {
+		// dispatch(getUsers());
+	}, []);
 
-export default function Login({navigation}) {
+	const [ data, setData ] = useState({
+		email                 : '',
+		password              : '',
+		check_TextImputChange : false,
+		secureTextEntry       : true,
+		isValidUser           : true,
+		isValidPassword       : true
+	});
 
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getUsers());
-  }, []);
+	const textInputChange = (val) => {
+		if (val.length != 0) {
+			setData({
+				...data,
+				email                 : val,
+				check_TextImputChange : true
+			});
+		} else {
+			setData({
+				...data,
+				email                 : val,
+				check_TextImputChange : false
+			});
+		}
+	};
 
+	const handlePasswordChange = (val) => {
+		setData({
+			...data,
+			password : val
+		});
+	};
 
-  const handleLogin = () => {
-    if (data.isValidUser && data.isValidPassword) {
-      dispatch(login(data))
-    };
-  };
+	const updateSecureTextEntry = () => {
+		setData({
+			...data,
+			secureTextEntry : !data.secureTextEntry
+		});
+	};
 
-  return (
-    <View style={styles.container}>
-    <View style={styles.heading}>
-    <Headline>Iniciar Sesión</Headline>
-    </View>
-    <View style={styles.logo}>
-    <ImageBackground
-    style={{width:140,height:140}}
-    source={require('../assets/LogoVector.png')}
-    >
-    </ImageBackground>
-    </View>
-    <View style={styles.icon_email}>
-    <FontAwesome
-      name='user-o'
-      color='black'
-      size={28}
-      />
-      </View>
-      <View >
-      <TextInput
-      label="ingresa nombre o e-mail"
-      selectionColor="black"
-      style={{height:40,
-        paddingLeft:5,
-        width:210,
-        position: 'relative',
-        left:80,
-        top:-10
-      }}/>
-      </View>
-      <View style={{marginTop:12}}>
-      <Text style={{fontSize:12,
-      position:'relative',
-      top:65,color:'blue',
-      alignSelf:'center',
-      borderRadius:100,}}
-      >Olvidó su Contraseña?</Text>
-      </View>
-      <View style={{position:'relative',
-      top:50
-      }}>
-      <View style={{position:'relative',
-      top:60,
-      }}>
-      <View style={styles.icon_pw}>
-      <FontAwesome
-      name='lock'
-      color='black'
-      size={30}
-      />
-      </View>
-      <View style={styles.input_password}>
-      <TextInput
-      label="password"
-      selectionColor="black"
-      style={{height:40,
-        paddingLeft:5,
-        width:210,
-        position: 'relative',
-        left:80,
-        top:-140}}
-      />
-      </View>
-      <View style={{
-      position: 'relative',
-      top:-80}} >
-      <Divider/>
-      <Divider/>
-      </View>
-      </View>
-      </View>
-			<View style={styles.boton}>
-			<View>
-      <Button
-     mode="contained"
-     onPress={handleLogin}
-     style={{
-     backgroundColor: '#006A34',
-     width:150
-   }}>
-   Ingresar</Button>
+	const handleLogin = () => {
+		if (data.isValidUser && data.isValidPassword) {
+			dispatch(login(data));
+		}
+	};
+
+	return (
+		<View style={styles.container}>
+			<View style={styles.header}>
+				<Image style={{ height: 60, width: 60, alignSelf: 'center' }} source={logo} />
+				<Text style={styles.text_header}>Bienvenido!</Text>
 			</View>
-      <View style={styles.register} >
-<Button
- mode="outlined"
- style={{
- backgroundColor:'#006A34',
- }}
- color='#f8f8ff'
- onPress={()=>{navigation.navigate('RegisterScreen')}}
- >
- Crear Cuenta</Button>
-  </View>
-  </View>
-  </View>
-  )
+			<View style={styles.footer}>
+				<Text style={styles.text_footer}>Email/Telefóno</Text>
+				<View style={styles.action}>
+					<FontAwesome name="user-o" color="#05375a" size={20} />
+					<TextInput
+						placeholder="ingrese e-mail o telefóno"
+						style={styles.text_input}
+						autoCapitalize="none"
+						onChangeText={(val) => textInputChange(val)}
+					/>
+					{data.check_TextImputChange ? <Feather name="check-circle" color="green" size={20} /> : null}
+				</View>
+				<Animatable.View animation="fadeInLeft">
+					<Text style={styles.errorMsg}>Debe colocar un email o telefóno validos</Text>
+				</Animatable.View>
+				<Text style={{ color: '#05375a', fontSize: 18, marginTop: 30 }}>Contraseña</Text>
+				<View style={styles.action}>
+					<FontAwesome name="lock" color="#05375a" size={20} paddingLeft={10} />
+					<TextInput
+						placeholder="ingrese contraseña"
+						secureTextEntry={data.secureTextEntry ? true : false}
+						style={styles.text_input}
+						autoCapitalize="none"
+						onChangeText={(val) => handlePasswordChange(val)}
+					/>
+					<TouchableOpacity onPress={updateSecureTextEntry}>
+						{data.secureTextEntry ? (
+							<Feather name="eye-off" color="grey" size={20} />
+						) : (
+							<Feather name="eye" color="grey" size={20} />
+						)}
+					</TouchableOpacity>
+				</View>
+				<View>
+					<TouchableOpacity style={{ marginTop: 10 }}>
+						<Text style={{ fontSize: 12, color: 'blue', alignSelf: 'center' }}>Olvidó su Contraseña?</Text>
+					</TouchableOpacity>
+				</View>
+				<View style={styles.button}>
+					<TouchableOpacity
+						style={
+							([ styles.singIn ],
+							{
+								marginTop         : -25,
+								backgroundColor   : 'green',
+								borderRadius      : 40,
+								paddingVertical   : 10,
+								paddingHorizontal : 14
+							})
+						}>
+						<Text style={([ styles.textSing ], { color: 'black' })} onPress={handleLogin}>
+							Iniciar Sesión
+						</Text>
+					</TouchableOpacity>
+				</View>
+				<View style={styles.button}>
+					<TouchableOpacity
+						onPress={() => navigation.navigate('RegisterScreen')}
+						style={
+							([ styles.singIn ],
+							{
+								marginTop         : -30,
+								backgroundColor   : 'grey',
+								borderRadius      : 40,
+								paddingVertical   : 10,
+								paddingHorizontal : 14
+							})
+						}>
+						<Text style={([ styles.textSing ], { color: 'black' })}>Registrarse</Text>
+					</TouchableOpacity>
+				</View>
+			</View>
+		</View>
+	);
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex:1,
-    backgroundColor: "#F1F4FF"
-  },
-  register: {
-  position:'relative',
-  top:16,
-  left:-5,
-  marginLeft:10,
-  width:150
-},
+	container   : {
+		flex            : 1,
+		backgroundColor : 'lightgreen'
+	},
+	header      : {
+		flex              : 1,
+		justifyContent    : 'flex-end',
+		paddingHorizontal : 20,
+		paddingBottom     : 50,
+		alignItems        : 'center'
+	},
+	footer      : {
+		flex                 : 3,
+		backgroundColor      : '#fff',
+		borderTopLeftRadius  : 30,
+		borderTopRightRadius : 30,
+		paddingHorizontal    : 20,
+		paddingVertical      : 30
+	},
+	text_header : {
+		color      : 'white',
+		fontWeight : 'bold',
+		fontSize   : 30
+	},
 
-icon_email: {
-  position:'relative',
-  top:20,
-  left:40,
-},
-icon_pw: {
-  position:'relative',
-  top:-105,
-  left:42,
-},
-  logo: {
-     alignItems:'center',
-     marginTop:30,
-  },
-  boton: {
-     alignItems:'center',
-     marginTop:45,
-     marginLeft:10
-  },
-  iconButtons: {
-    marginBottom: 10,
-    borderRadius: 20,
-    marginTop: 25,
-    width:15,
-    marginLeft:-12
-  },
-    heading: {
-   	fontSize: 35,
-    position:'relative',
-    top:20,
-    left:-90,
-    alignItems:'center'
-  },
+	text_footer : {
+		color    : '#05375a',
+		fontSize : 18
+	},
+	action      : {
+		flexDirection     : 'row',
+		marginTop         : 10,
+		borderBottomWidth : 1,
+		borderBottomColor : '#f2f2f2',
+		paddingBottom     : 5
+	},
+	text_input  : {
+		flex        : 1,
+		paddingLeft : 15,
+		color       : 'black'
+	},
+	button      : {
+		alignItems : 'center',
+		marginTop  : 50
+	},
+	singIn      : {
+		width          : '100%',
+		height         : 80,
+		justifyContent : 'center',
+		alignItems     : 'center',
+		borderRadius   : 10
+	},
+	textSing    : {
+		fontSize   : 18,
+		fontWeight : 'bold'
+	},
+	errorMsg    : {
+		fontSize : 12,
+		color    : 'red'
+	}
 });
