@@ -14,13 +14,12 @@ import Main from './src/components/Main';
 import ProductsScreen from './screens/ProductsScreen'
 import TransactionsScreen from './screens/TransactionsScreen'
 import StatisticsScreen from './screens/StatisticsScreen'
+import Contacts from './screens/Contacts'
 import HomeScreen from './screens/HomeScreen'
 import ProfileScreen from './screens/ProfileScreen';
 import DischargeScreen from './screens/DischargeScreen';
 import Icon from 'react-native-vector-icons/AntDesign'
 import VerifyScrenn from './screens/VerifyScrenn'
-import ChargeMoneyScreen from './screens/ChargeMoneyScreen'
-import SendMoney from './screens/SendMoney'
 import { cos } from 'react-native-reanimated';
 
 
@@ -105,33 +104,21 @@ const Index = () => {
 
                 />
                 <Tab.Screen
-                  name="Cargar Dinero"
-                  component={ChargeMoneyScreen}
-                  onPress={()=>navigation.navigate('ChargeMoneyScreen')}
-                  options={{
-                  tabBarIcon: ({ color }) => (
-                      <Icon
-                      name="dolar"
-                      color={color}
-                      size={23}
-                      />
-                  ),
-                  }}
-              />
-                <Tab.Screen
-                  name="Enviar Dinero"
-                  component={SendMoney}
-                  onPress={()=>navigation.navigate('SendMoney')}
-                  options={{
-                  tabBarIcon: ({ color }) => (
-                      <Icon
-                      name="dolar"
-                      color={color}
-                      size={23}
-                      />
-                  ),
-                  }}
-              />
+                    name="Contactos"
+                    component={Contacts}
+
+                    options={{
+                    tabBarIcon: ({ color }) => (
+                        <Icon
+                        name="contacts"
+                        color={color}
+                        size={23}
+                        />
+                    ),
+                    tabBarColor: "#5db12f"
+                    }}
+
+                />
 {/*                 <Tab.Screen
                     name="Cerrar Sesión"
                     component={Main}
