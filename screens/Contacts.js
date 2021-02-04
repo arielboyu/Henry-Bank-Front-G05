@@ -5,7 +5,7 @@ import {
   ActivityIndicator, StatusBar, Text,
   Dimensions
 } from 'react-native';
-
+import { Picker } from '@react-native-picker/picker';
 
 import * as Contacts from 'expo-contacts';
 
@@ -79,16 +79,18 @@ export default function PhoneBook() {
 
   return (
     <View style={{flex:1}}>
+           <StatusBar backgroundColor='green' barStyle="light-content"/>
       <TextInput
              placeholder="Buscar contactos"
-             placeholderTextColor="#dddddd"
+             placeholderTextColor="#097934"
              style={{
-                  backgroundColor:'#2f363c',
+                  backgroundColor:'#ffbf34',
                    height: 70,
                    fontSize: 36,
                    padding: 10,
                    borderBottomWidth: 1.5,
-                   borderBottomColor: '#7d90a0'
+                   borderBottomColor: '#5db12f',
+                   color:'#097934'
              }}
              onChangeText={(value) => searchContacts(value)}
         />
@@ -101,7 +103,7 @@ export default function PhoneBook() {
                       justifyContent: 'center'
               }}
             >
-            <ActivityIndicator size="large" color="#bad555" />
+            <ActivityIndicator size="large" color="#097934" />
            </View>
           ) : null}
           <FlatList

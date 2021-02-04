@@ -14,7 +14,7 @@ import MainScreen from './screens/MainScreen';
 import ProductsScreen from './screens/ProductsScreen'
 import TransactionsScreen from './screens/TransactionsScreen'
 import StatisticsScreen from './screens/StatisticsScreen'
-import HomeScreen from './screens/HomeScreen'
+import HomeScreen from './screens/Contacts'
 import ProfileScreen from './screens/ProfileScreen';
 import DischargeScreen from './screens/DischargeScreen';
 import Icon from 'react-native-vector-icons/AntDesign'
@@ -28,8 +28,8 @@ const Stack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
 
 const Index = () => {
-    const user = useSelector(state => state);
-  const logged = user.user.id;
+  const user = useSelector(state => state.user);
+  const logged = user.user.logged;
   
 	return (
         <>
@@ -112,9 +112,7 @@ const Index = () => {
                                     color={color}
                                     size={23}
                                 />
-                            ),
-                        }}
-                    />
+                           
                     ),
                     tabBarColor: "#006A34"
                     }}
