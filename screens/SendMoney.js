@@ -6,10 +6,17 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import logo from '../assets/logo.png'
 import Transfer from 'react-native-vector-icons/MaterialCommunityIcons';
 
-export default function SendMoney() {
+export default function SendMoney({changeScreen}) {
 	return (
     <View style={styles.container}>
     <View style={styles.heading}>
+    <Icon.Button 
+						name="arrow-left" 
+						size={25}
+						color="black"
+						backgroundColor="#FFFF"
+						onPress={() => changeScreen('main')}
+					/>
     <Headline>Enviar Dinero</Headline>
     </View>
     <View style={styles.logo}>
@@ -92,10 +99,11 @@ export default function SendMoney() {
 }
 
 const styles = StyleSheet.create({
-container: {
-  flex:1,
-  backgroundColor: "#F1F4FF"
-},
+	container: {
+		flex: 1,
+ 		padding: 20,
+ 		backgroundColor: "#FFFF"
+  	},
 logo: {
    alignItems:'center',
    marginTop:30,
@@ -114,11 +122,11 @@ iconButtons: {
   marginLeft:-12
 },
   heading: {
- 	fontSize: 35,
-  position:'relative',
-  top:20,
-  left:-100,
-  alignItems:'center'
-},
-
+    marginBottom: 10,
+    marginTop: 10,
+ 		fontSize: 35,
+		alignItems : 'center',
+		display: 'flex',
+		flexDirection: 'row'
+}
 });

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ImageBackground, ScrollView, StyleSheet, Text, View, Picker } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux'
 import { Button, Divider, Headline, Paragraph } from 'react-native-paper';
@@ -6,7 +6,9 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import Transfer from 'react-native-vector-icons/MaterialCommunityIcons';
 //import Picker from '@react-native-community/picker'
 import { getUserByID } from '../src/redux/actions/user'
-import { acc } from 'react-native-reanimated';
+
+import SendMoney from './SendMoney';
+import ChargeMoney from './ChargeMoneyScreen';
 
 const data = {
 	name  : 'Valentín',
@@ -22,9 +24,11 @@ const data = {
 };
 
 //Mi posición consolidada
-const MainScreen = () => {
+const MainScreen = ({changeScreen}) => {
 	const dispatch = useDispatch();
 	const user = useSelector(state => state.user);
+
+	//const [screen, changeScreen] = useState("main")
 
 	useEffect(() => {
 		dispatch(getUserByID(user.user.id));
@@ -41,8 +45,7 @@ const MainScreen = () => {
 
 	return (
 		<View style={styles.container}>
-			{
-				 <> 
+ 			{/* firstName &&*/ <>
 					<View style={styles.greeting}>
 						<Headline>{`Hola, ${firstName}...`}</Headline>
 						{/* <Button onPress={logout}>Cerrar</Button> */}
@@ -178,19 +181,28 @@ const MainScreen = () => {
 
 					<View style={styles.generalCont2}>
 						<View style={styles.center}>
-							<Button style={styles.iconButtons}>
+							<Button 
+								style={styles.iconButtons}
+								onPress={() => changeScreen('charge')}
+							>
 								<Icon name="donate" size={30} color="#fff" />
 							</Button>
 							<Paragraph style={styles.buttonDesc}>Cargar</Paragraph>
 						</View>
 						<View style={styles.center}>
-							<Button style={styles.iconButtons}>
+							<Button 
+								style={styles.iconButtons}
+								onPress={() => changeScreen('main')}
+							>
 								<Icon name="exchange-alt" size={30} color="#fff" />
 							</Button>
 							<Paragraph style={styles.buttonDesc}>Cambiar</Paragraph>
 						</View>
 						<View style={styles.center}>
-							<Button style={styles.iconButtons}>
+							<Button 
+								style={styles.iconButtons}
+								onPress={() => changeScreen('send')}
+							>
 								<Transfer name="send" size={30} color="#fff" />
 							</Button>
 							<Paragraph style={styles.buttonDesc}>Enviar</Paragraph>
