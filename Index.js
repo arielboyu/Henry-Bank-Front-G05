@@ -29,7 +29,7 @@ const Tab = createMaterialBottomTabNavigator();
 
 const Index = () => {
     const user = useSelector(state => state);
-  const logged = user.user.id;
+  const logged = true;
   
 	return (
         <>
@@ -113,13 +113,10 @@ const Index = () => {
                                     size={23}
                                 />
                             ),
+                            tabBarColor: "#006A34"
                         }}
                     />
-                    ),
-                    tabBarColor: "#006A34"
-                    }}
-                />
-                <Tab.Screen
+                {/* <Tab.Screen
                     name="Estadísticas"
                     component={StatisticsScreen}
 
@@ -133,8 +130,8 @@ const Index = () => {
                     ),
                     tabBarColor: "#007f5f"
                     }}
-                />
-                <Tab.Screen
+                /> */}
+                {/* <Tab.Screen
                     name="Productos"
                     component={ProductsScreen}
 
@@ -148,7 +145,7 @@ const Index = () => {
                     ),
                     tabBarColor: "#279152"
                     }}
-                />
+                /> */}
                 <Tab.Screen
                   name="Cargar Dinero"
                   component={ChargeMoneyScreen}
@@ -177,7 +174,7 @@ const Index = () => {
                   ),
                   }}
               />
-                <Tab.Screen
+               {/*  <Tab.Screen
                     name="Cerrar Sesión"
                     component={MainScreen}
                     onPress={()=>navigation.navigate('Login')}
@@ -190,7 +187,7 @@ const Index = () => {
                         />
                     ),
                     }}
-                />
+                /> */}
                 </Tab.Navigator>
             </NavigationContainer>
 
