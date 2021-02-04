@@ -15,7 +15,7 @@ const Header = ({title}) => {
 		dispatch(getUserByID(user.user.id));
 	}, [])
 
-	const { firstName, lastName } = user.user;
+	const { email, firstName, lastName } = user.user;
 
     return(
         <>
@@ -28,9 +28,6 @@ const Header = ({title}) => {
                     onPress={() => setVisible(true)}
                 />
                 <Headline>{title}</Headline>
-                <View style={{flex: 1, alignItems: 'flex-end'}}>
-                    <Image source={require('../../assets/logo.png')} style={{backgroundColor: 'transparent'}}/>
-                </View>
                 
             </View>
             <Portal>
@@ -43,8 +40,8 @@ const Header = ({title}) => {
                 >
                     <View style={[styles.center, styles.section]}>
                         <Avatar.Image size={100} source={require('../../assets/logo.png')} />
-                        <Title>{firstName ? `${firstName} ${lastName}` : "Valentin Nicheglod"}</Title>
-                        <Caption>nicheglod69@gmail.com</Caption>
+                        <Title>{`${firstName} ${lastName}`}</Title>
+                        <Caption>{`${email}`}</Caption>
                     </View>
                     
                     <View style={[styles.menu]}>
