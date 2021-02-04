@@ -49,17 +49,17 @@ export default function ChargeMoneyScreen({ changeScreen, navigation, user }) {
 
 	return (
 		<View style={styles.container}>
+			<View style={styles.heading}>
+				<Icon.Button 
+					name="arrow-left" 
+					size={25}
+					color="black"
+					backgroundColor="#FFFF"
+					onPress={() => changeScreen('main')}
+				/>
+				<Headline>Cargar Dinero</Headline>
+			</View>
 			<ScrollView>
-				<View style={styles.heading}>
-					<Icon.Button 
-						name="arrow-left" 
-						size={25}
-						color="black"
-						backgroundColor="#FFFF"
-						onPress={() => changeScreen('main')}
-					/>
-					<Headline>Cargar Dinero</Headline>
-				</View>
 				<View style={styles.logo}>
 					<ImageBackground style={{ width: 160, height: 160 }} source={require('../assets/LogoVector.png')} />
 				</View>
