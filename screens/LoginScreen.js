@@ -85,6 +85,7 @@ export default function Login({navigation}) {
       <View style={styles.input_password}>
       <TextInput
       label="password"
+      type="password"
       selectionColor="black"
       style={{height:40,
         paddingLeft:5,
