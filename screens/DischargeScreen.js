@@ -12,7 +12,7 @@ import { TextInput, Button } from 'react-native-paper';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 export default function dischargeScreen({ navigation, user }) {
-	const userId = useSelector((state) => state.user.user[1].id);
+	const userId = useSelector((state) => state.user.user.id);
 	//const userId = 1;
 	let today = new Date();
 	const dispatch = useDispatch();
@@ -315,7 +315,7 @@ export default function dischargeScreen({ navigation, user }) {
 					style={{
 						position : 'relative',
 						top      : 40,
-						left     : -60
+						left     : -50
 					}}
 				/>
 				<View
@@ -341,12 +341,12 @@ export default function dischargeScreen({ navigation, user }) {
 				<View>
 					<Text
 						style={{
-							width    : 140,
+							width    : 150,
 							height   : 60,
 							position : 'relative',
-							top      : -148,
-							left     : -35,
-							fontSize : 23
+							top      : -150,
+							left     : -5,
+							fontSize : 24
 						}}>
 						Cargar Datos!
 					</Text>
@@ -356,7 +356,7 @@ export default function dischargeScreen({ navigation, user }) {
 							height   : 50,
 							position : 'relative',
 							top      : -216,
-							left     : 130
+							left     : 180
 						}}
 						source={require('../assets/backgroundCard2.jpeg')}
 					/>
@@ -393,7 +393,7 @@ const styles = StyleSheet.create({
 		marginLeft   : 10,
 		marginBottom : 15,
 		height       : 55,
-		width        : 55,
+		width        : 60,
 		borderRadius : 10,
 		position     : 'relative',
 		top          : 3,
@@ -403,7 +403,7 @@ const styles = StyleSheet.create({
 		flexDirection : 'row',
 		position      : 'relative',
 		top           : 100,
-		left          : 115,
+		left          : 145,
 		width         : 120
 	},
 	image        : {
@@ -427,8 +427,8 @@ const styles = StyleSheet.create({
 	},
 	guardar      : {
 		position          : 'relative',
-		top               : 30,
-		left              : 5,
+		top               : 50,
+		left              : -15,
 		marginLeft        : 10,
 		paddingHorizontal : 120
 	},

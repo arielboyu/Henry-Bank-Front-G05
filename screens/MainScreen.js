@@ -132,7 +132,19 @@ const MainScreen = ({changeScreen}) => {
 							</View>
 						</View>
 					</View>
-					<Divider/>
+					<View style={styles.center}>
+						<Text>CUENTA</Text>
+					</View>
+					<View style={styles.generalCont1}>
+						
+							<Button mode="text">{`#${accounts.peso} (Pesos)`}</Button>
+							<Button mode="text">{`#${accounts.usd} (Dólares)`}</Button>
+					</View>
+
+					{/* Period */}
+					<View style={styles.center}>
+						<Text>PERIODO</Text>
+					</View>
 					<View style={styles.generalCont1}>
 						<Button 
 							mode="text"

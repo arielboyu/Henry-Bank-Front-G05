@@ -25,7 +25,7 @@ const ProductsScreen = () => {
           </Text>
           <ImageBackground
             style={styles.images}
-            source={require('../assets/MyAccounts.png')}
+            // source={require('../assets/MyAccounts.png')}
           />
         </View>
       </View>
