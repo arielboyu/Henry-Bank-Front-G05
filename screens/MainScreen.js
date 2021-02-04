@@ -42,7 +42,7 @@ const MainScreen = () => {
 	return (
 		<View style={styles.container}>
 			{
-				/* firstName && */ <> {/* No se carga la pantalla hasta que los datos del usuario esten en el store */}
+				 <> 
 					<View style={styles.greeting}>
 						<Headline>{`Hola, ${firstName}...`}</Headline>
 						{/* <Button onPress={logout}>Cerrar</Button> */}
@@ -136,7 +136,7 @@ const MainScreen = () => {
 
 					{/* Period */}
 					<View style={styles.center}>
-						<Text>PERíODO</Text>
+						<Text>PERIODO</Text>
 					</View>
 					<View style={styles.generalCont1}>
 
