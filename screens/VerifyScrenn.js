@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { StyleSheet,
     Text,
     View,
@@ -8,20 +8,36 @@ import { StyleSheet,
    } from 'react-native'
 import Feather from 'react-native-vector-icons/Feather'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import logo from '../assets/logo.png'
-import { getUsers } from '../src/redux/actions/user'
+import { getUsers, verifyNewUser} from '../src/redux/actions/user'
 import { Divider, Headline, Paragraph,TextInput, Button, } from 'react-native-paper';
 
 
 
 export default function VerifyScrenn({navigation}) {
 
+  const userId = useSelector(state => state.user.user.id);
+
+  const [data,setData] = useState({
+    validationNumber:'',
+  })
+
+  const handleCodeChange = (code) => {
+    setData({
+      ...data,
+      validationNumber: code
+    })
+  }
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getUsers());
-  });
+  },[]);
 
+  const onSubmit = (code, userId) => {
+    dispatch(verifyNewUser(code, userId));
+
+  };
 
   return (
     <View style={styles.container}>
@@ -39,7 +55,7 @@ export default function VerifyScrenn({navigation}) {
       top:50
       }}>
       <View style={{position:'relative',
-      top:60,
+      top:80,
       }}>
       <View style={styles.icon_pw}>
       <FontAwesome
@@ -51,12 +67,13 @@ export default function VerifyScrenn({navigation}) {
       <View>
       <TextInput
       label="ingresar código"
+      onChangeText={code => handleCodeChange(code)}
       selectionColor="black"
       style={{height:48,
         paddingLeft:5,
         width:210,
         position: 'relative',
-        left:80,
+        left:110,
         top:-80}}
       />
       </View>
@@ -72,7 +89,7 @@ export default function VerifyScrenn({navigation}) {
       <View>
       <Button
      mode="contained"
-     onPress={()=> {navigation.navigate('DischargeScreen')}}
+     onPress={()=>(onSubmit(data, userId), navigation.navigate('DischargeScreen'))}
      style={{
      backgroundColor: '#006A34',
      width:150
@@ -95,7 +112,7 @@ const styles = StyleSheet.create({
 icon_pw: {
   position:'relative',
   top:-45,
-  left:42,
+  left:62,
 },
   logo: {
      alignItems:'center',
@@ -103,7 +120,7 @@ icon_pw: {
   },
   boton: {
      alignItems:'center',
-     marginTop:105,
+     marginTop:135,
      marginLeft:10
   },
   iconButtons: {
@@ -117,7 +134,7 @@ icon_pw: {
    	fontSize: 35,
     position:'relative',
     top:20,
-    left:-80,
+    left:-100,
     alignItems:'center'
   },
 });

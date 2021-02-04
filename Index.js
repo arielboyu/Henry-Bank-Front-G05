@@ -26,7 +26,7 @@ const Stack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
 
 const Index = () => {
-  const user = useSelector(state => state.user);
+    const user = useSelector(state => state.user);
   const logged = user.user.id;
   
 	return (
@@ -85,6 +85,7 @@ const Index = () => {
                             tabBarColor: "#007f5f"
                         }}
                     />
+
                 <Tab.Screen
                     name="Productos"
                     component={ProductsScreen}
@@ -99,6 +100,7 @@ const Index = () => {
                     ),
                     tabBarColor: "#279152"
                     }}
+
                 />
 {/*                 <Tab.Screen
                     name="Cerrar Sesión"

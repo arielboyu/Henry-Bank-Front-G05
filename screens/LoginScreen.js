@@ -1,34 +1,77 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState, useEffect} from 'react'
+import { useDispatch, useSelector } from "react-redux";
 import { StyleSheet,
-    Text,
+   Text,
     View,
     Platform,
     TouchableOpacity,
     Image,
     ImageBackground
    } from 'react-native'
-import logo from '../assets/logo.png'
-import { useDispatch } from 'react-redux'
-import { getUsers, login } from '../src/redux/actions/user'
 import Feather from 'react-native-vector-icons/Feather'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
+import logo from '../assets/logo.png'
+import * as Animatable from 'react-native-animatable'
+import { createNewUser, getUsers } from '../src/redux/actions/user'
 import { Divider, Headline, Paragraph,TextInput, Button, } from 'react-native-paper';
-import Transfer from 'react-native-vector-icons/MaterialCommunityIcons';
+
 
 
 export default function Login({navigation}) {
+  const [data,setData] = useState({
+    email:'',
+    password:'',
+    check_TextImputChange:false,
+    secureTextEntry:true,
+    isValidUser: true,
+    isValidPassword: true,
+  })
+
+  const textInputChange = (val) => {
+      if(val.length != 0){
+        setData({
+          ...data,
+          email:val,
+          check_TextImputChange:true
+        })
+      } else {
+        setData({
+          ...data,
+          email:val,
+          check_TextImputChange:false
+        })
+      }
+  }
+
+  const handlePasswordChange = (val) => {
+    setData({
+      ...data,
+      password:val
+    })
+  }
+
+  const updateSecureTextEntry = () => {
+    setData({
+      ...data,
+      secureTextEntry: !data.secureTextEntry
+    })
+  }
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getUsers());
-  }, []);
+  });
 
 
-  const handleLogin = () => {
-    if (data.isValidUser && data.isValidPassword) {
-      dispatch(login(data))
-    };
+  const onSubmit = (user) => {
+    dispatch(createNewUser(user));
+
   };
+	const handleLogin = () => {
+	if (data.isValidUser && data.isValidPassword) {
+		dispatch(login(data))
+	};
+};
 
   return (
     <View style={styles.container}>
@@ -51,23 +94,17 @@ export default function Login({navigation}) {
       </View>
       <View >
       <TextInput
-      label="ingresa nombre o e-mail"
+      label="ingresa e-mail"
+      onChangeText={text => textInputChange(text)}
       selectionColor="black"
-      style={{height:40,
+      style={{height:48,
         paddingLeft:5,
         width:210,
         position: 'relative',
-        left:80,
-        top:-10
+        left:100,
+        top:30
+
       }}/>
-      </View>
-      <View style={{marginTop:12}}>
-      <Text style={{fontSize:12,
-      position:'relative',
-      top:65,color:'blue',
-      alignSelf:'center',
-      borderRadius:100,}}
-      >Olvidó su Contraseña?</Text>
       </View>
       <View style={{position:'relative',
       top:50
@@ -82,38 +119,42 @@ export default function Login({navigation}) {
       size={30}
       />
       </View>
-      <View style={styles.input_password}>
+      <View>
       <TextInput
       label="password"
+      onChangeText={text => handlePasswordChange(text)}
       selectionColor="black"
-      style={{height:40,
+      style={{height:48,
         paddingLeft:5,
         width:210,
         position: 'relative',
-        left:80,
-        top:-140}}
+        left:100,
+        top:-90}}
       />
       </View>
       <View style={{
       position: 'relative',
-      top:-80}} >
+      top:-50}} >
       <Divider/>
       <Divider/>
       </View>
       </View>
       </View>
-			<View style={styles.boton}>
-			<View>
+      <View style={styles.boton}>
+      <View>
       <Button
      mode="contained"
      onPress={handleLogin}
      style={{
      backgroundColor: '#006A34',
-     width:150
+     width:150,
+		 position:'relative',
+		 top:100
    }}>
-   Ingresar</Button>
-			</View>
-      <View style={styles.register} >
+   INICIAR SESIóN</Button>
+  </View>
+  </View>
+	<View style={styles.register} >
 <Button
  mode="outlined"
  style={{
@@ -123,8 +164,7 @@ export default function Login({navigation}) {
  onPress={()=>{navigation.navigate('RegisterScreen')}}
  >
  Crear Cuenta</Button>
-  </View>
-  </View>
+ </View>
   </View>
   )
 }
@@ -134,23 +174,23 @@ const styles = StyleSheet.create({
     flex:1,
     backgroundColor: "#F1F4FF"
   },
-  register: {
-  position:'relative',
-  top:16,
-  left:-5,
-  marginLeft:10,
-  width:150
-},
 
 icon_email: {
   position:'relative',
-  top:20,
-  left:40,
+  top:65,
+  left:60,
 },
 icon_pw: {
   position:'relative',
-  top:-105,
-  left:42,
+  top:-55,
+  left:62,
+},
+register: {
+position:'relative',
+top:120,
+left:125,
+marginLeft:10,
+width:150
 },
   logo: {
      alignItems:'center',
@@ -158,7 +198,7 @@ icon_pw: {
   },
   boton: {
      alignItems:'center',
-     marginTop:45,
+     marginTop:5,
      marginLeft:10
   },
   iconButtons: {
@@ -172,7 +212,7 @@ icon_pw: {
    	fontSize: 35,
     position:'relative',
     top:20,
-    left:-90,
+    left:-100,
     alignItems:'center'
   },
 });

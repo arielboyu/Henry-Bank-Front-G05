@@ -139,7 +139,7 @@ const MainScreen = ({changeScreen}) => {
 
 					{/* Period */}
 					<View style={styles.center}>
-						<Text>PERíODO</Text>
+						<Text>PERIODO</Text>
 					</View>
 					<View style={styles.generalCont1}>
 
