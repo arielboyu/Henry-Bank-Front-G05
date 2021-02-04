@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { ImageBackground, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux'
-import { Button, RadioButton, Headline, Paragraph, Portal, Dialog, Divider } from 'react-native-paper';
+import { Avatar, Button, RadioButton, Headline, Paragraph, Portal, Dialog, Divider, Modal } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import Transfer from 'react-native-vector-icons/MaterialCommunityIcons';
-//import Picker from '@react-native-community/picker'
 import { getUserByID } from '../src/redux/actions/user'
-
-import SendMoney from './SendMoney';
-import ChargeMoney from './ChargeMoneyScreen';
+import Header from '../src/components/Header';
 
 const data = {
 	name  : 'Valentín',
@@ -40,20 +37,11 @@ const MainScreen = ({changeScreen}) => {
 	const { income, expenses, dollar, peso, accounts } = data;
 	const { firstName, lastName } = user.user;
 
-/* 	const logout = () => {
-		localStorage.setItem("logged", "false");
-		localStorage.removeItem("id");
-		location.reload();
-	}; */
-
 	return (
 		<View style={styles.container}>
- 			{/* firstName &&*/ <>
-					<View style={styles.greeting}>
-						<Headline>{`Hola, ${firstName}...`}</Headline>
-						{/* <Button onPress={logout}>Cerrar</Button> */}
-					</View>
+ 			{/* firstName &&*/ <>					
 					<View style={styles.balance}>
+						<Header title={`Hola, ${firstName}...`}/>
 						<ScrollView 
 							horizontal={true} 
 							pagingEnabled={true}
@@ -101,7 +89,7 @@ const MainScreen = ({changeScreen}) => {
 					{/* General */}
 
 					<View style={styles.general}>
-						{/* <Headline>General...</Headline> */}
+						<Headline>General...</Headline>
 						<View style={styles.generalCont1}>
 							{/* Ingresos */}
 
@@ -132,19 +120,7 @@ const MainScreen = ({changeScreen}) => {
 							</View>
 						</View>
 					</View>
-					<View style={styles.center}>
-						<Text>CUENTA</Text>
-					</View>
-					<View style={styles.generalCont1}>
-						
-							<Button mode="text">{`#${accounts.peso} (Pesos)`}</Button>
-							<Button mode="text">{`#${accounts.usd} (Dólares)`}</Button>
-					</View>
-
-					{/* Period */}
-					<View style={styles.center}>
-						<Text>PERIODO</Text>
-					</View>
+					<Divider/>
 					<View style={styles.generalCont1}>
 						<Button 
 							mode="text"
@@ -255,8 +231,8 @@ const MainScreen = ({changeScreen}) => {
 									<View style={styles.row}>
 										<RadioButton
 											value={accounts.peso}
-											status={ periodChecked === accounts.peso ? 'checked' : 'unChecked' }
-											onPress={() => setPeriodChecked(accounts.peso)}
+											status={ accountChecked === accounts.peso ? 'checked' : 'unChecked' }
+											onPress={() => setAccountChecked(accounts.peso)}
 										/>
 										<Text style={{fontSize: 18, marginLeft: 5}}>
 											{`Cuenta #${accounts.peso} (Pesos)`}
@@ -265,8 +241,8 @@ const MainScreen = ({changeScreen}) => {
 									<View style={styles.row}>
 										<RadioButton
 											value={accounts.usd}
-											status={ periodChecked === accounts.usd ? 'checked' : 'unChecked' }
-											onPress={() => setPeriodChecked(accounts.usd)}
+											status={ accountChecked === accounts.usd ? 'checked' : 'unChecked' }
+											onPress={() => setAccountChecked(accounts.usd)}
 										/>
 										<Text style={{fontSize: 18, marginLeft: 5}}>
 											{`Cuenta #${accounts.usd} (Dolares)`}
@@ -332,14 +308,6 @@ const styles = StyleSheet.create({
  		marginTop: 10,
  		marginBottom: 10,
  		marginRight: 10
-  	},
-  	greeting: {
-		display: "flex",
- 		alignItems: "flex-start",
- 		width: "100%",
-		marginBottom: 10,
-		marginTop: 10,
- 		fontSize: 35
   	},
   	white: {
  		color: "white"
@@ -464,6 +432,12 @@ const styles = StyleSheet.create({
 		display: 'flex',
 		flexDirection: 'row',
 		alignItems: 'center'
+	},
+	sideBar: {
+		backgroundColor: '#FFFF',
+		width: '60%',
+		height: '100%',
+		padding: 10
 	}
 });
 

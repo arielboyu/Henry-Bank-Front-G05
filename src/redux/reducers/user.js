@@ -3,6 +3,7 @@ import {
   GET_ALL_USERS,
   DISCHARGE_USER,
   LOGIN, 
+  LOGOUT,
   GET_USER_BY_ID
 } from '../constants/index';
 
@@ -38,6 +39,13 @@ const userReducer = (state = initialState, action) => {
           
         }
       };
+      case LOGOUT:
+        return {
+          ...state,
+          user: {
+            logged: false,
+          }
+        };
       case GET_USER_BY_ID:
         return {
           ...state,

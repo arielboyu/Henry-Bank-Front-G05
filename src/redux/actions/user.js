@@ -6,7 +6,8 @@ import {
 	CREATE_USER, 
 	GET_ALL_USERS, 
 	DISCHARGE_USER,
-	VERIFY_USER
+	VERIFY_USER,
+	LOGOUT
 } from '../constants/index'
 
 const createUser = (user) => {
@@ -38,13 +39,18 @@ const dischargeUser = (user) => {
 };
 
 const logUser = (user) => {
-  console.log("USER >>>", user)
 	return {
 		type : LOGIN,
 		user
 	};
 }
 
+const logoutUser = (user) => {
+	return {
+		type : LOGOUT,
+		user
+	};
+}
 
 export const createNewUser = (user) => {
 	return async (dispatch) => {
@@ -113,13 +119,23 @@ export const login = (user) => {
 	return async (dispatch) => {
 		try {
 			const res = await axios.post(`http://localhost:3001/auth/login`, user);
-      dispatch(logUser(res.data))
-
+      		dispatch(logUser(res.data))
 		} catch (err) {
 			console.log(err);
 		}
 	};
 };
+
+export const logout = () => {
+	return async (dispatch) => {
+		try {
+      		dispatch(logoutUser(res.data))
+		} catch (err) {
+			console.log(err);
+		}
+	};
+};
+
 export const verifyNewUser = (code, userId) => {
 	return async (dispatch) => {
 		try {

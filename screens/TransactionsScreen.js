@@ -2,6 +2,7 @@ import React from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Headline } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import Header from '../src/components/Header';
 
 const accounts = {
   usd  : '6384636',
@@ -79,9 +80,7 @@ const TransactionsScreen = () => {
 
 	return (
 		<View style={styles.container}>
-			<View style={styles.header}>
-				<Headline>Mis transacciones...</Headline>
-			</View>
+			<Header title="Mis transacciones..."/>
       <ScrollView showsVerticalScrollIndicator={false}>
         {
           transactions.map((transaction, i) => (
