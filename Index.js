@@ -10,7 +10,7 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 //Componentes/Screens
 import LoginScreen from './screens/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen';
-import MainScreen from './screens/MainScreen';
+import Main from './src/components/Main';
 import ProductsScreen from './screens/ProductsScreen'
 import TransactionsScreen from './screens/TransactionsScreen'
 import StatisticsScreen from './screens/StatisticsScreen'
@@ -19,8 +19,6 @@ import ProfileScreen from './screens/ProfileScreen';
 import DischargeScreen from './screens/DischargeScreen';
 import Icon from 'react-native-vector-icons/AntDesign'
 import VerifyScrenn from './screens/VerifyScrenn'
-import ChargeMoneyScreen from './screens/ChargeMoneyScreen'
-import SendMoney from './screens/SendMoney'
 import { cos } from 'react-native-reanimated';
 
 
@@ -37,7 +35,7 @@ const Index = () => {
             //Si esta logueado
             ? <NavigationContainer>
                 <Tab.Navigator
-                initialRouteName="Principal"
+                initialRouteName="Inicio"
                 activeColor="#fff"
                 tabBarOptions={{
                     style: {backgroundColor: '#fff'},
@@ -45,8 +43,8 @@ const Index = () => {
                 }}
                 >
                     <Tab.Screen
-                        name="Principal"
-                        component={MainScreen}
+                        name="Inicio"
+                        component={Main}
                         
                         options={{
                             tabBarIcon: ({ color }) => (
@@ -87,53 +85,6 @@ const Index = () => {
                             tabBarColor: "#007f5f"
                         }}
                     />
-                    <Tab.Screen
-                        name="Productos"
-                        component={ProductsScreen}
-                        options={{
-                            tabBarIcon: ({ color }) => (
-                                <Icon
-                                    name="wallet"
-                                    color={color}
-                                    size={23}
-                                />
-                            ),
-                            tabBarColor: "#279152"
-                        }}
-                    />
-                    <Tab.Screen
-                        name="Cerrar Sesión"
-                        component={MainScreen}
-                        onPress={()=>navigation.navigate('Login')}
-                        options={{
-                            tabBarIcon: ({ color }) => (
-                                <Icon
-                                    name="logout"
-                                    color={color}
-                                    size={23}
-                                />
-                            ),
-                        }}
-                    />
-                    ),
-                    tabBarColor: "#006A34"
-                    }}
-                />
-                <Tab.Screen
-                    name="Estadísticas"
-                    component={StatisticsScreen}
-
-                    options={{
-                    tabBarIcon: ({ color }) => (
-                        <Icon
-                        name="linechart"
-                        color={color}
-                        size={23}
-                        />
-                    ),
-                    tabBarColor: "#007f5f"
-                    }}
-                />
                 <Tab.Screen
                     name="Productos"
                     component={ProductsScreen}
@@ -149,37 +100,9 @@ const Index = () => {
                     tabBarColor: "#279152"
                     }}
                 />
-                <Tab.Screen
-                  name="Cargar Dinero"
-                  component={ChargeMoneyScreen}
-                  onPress={()=>navigation.navigate('ChargeMoneyScreen')}
-                  options={{
-                  tabBarIcon: ({ color }) => (
-                      <Icon
-                      name="dolar"
-                      color={color}
-                      size={23}
-                      />
-                  ),
-                  }}
-              />
-                <Tab.Screen
-                  name="Enviar Dinero"
-                  component={SendMoney}
-                  onPress={()=>navigation.navigate('SendMoney')}
-                  options={{
-                  tabBarIcon: ({ color }) => (
-                      <Icon
-                      name="dolar"
-                      color={color}
-                      size={23}
-                      />
-                  ),
-                  }}
-              />
-                <Tab.Screen
+{/*                 <Tab.Screen
                     name="Cerrar Sesión"
-                    component={MainScreen}
+                    component={Main}
                     onPress={()=>navigation.navigate('Login')}
                     options={{
                     tabBarIcon: ({ color }) => (
@@ -190,7 +113,7 @@ const Index = () => {
                         />
                     ),
                     }}
-                />
+                /> */}
                 </Tab.Navigator>
             </NavigationContainer>
 

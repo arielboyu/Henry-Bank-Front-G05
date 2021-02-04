@@ -16,7 +16,7 @@ const ProductsScreen = () => {
           </Text>
           <ImageBackground
             style={styles.images}
-            source={require('../assets/myCards.png')}
+            source={require('../assets/MyCards.png')}
           />
         </View>
         <View style={[styles.btnCard, styles.lightGreen]}>
