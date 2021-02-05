@@ -141,7 +141,7 @@ const Index = () => {
                 <Stack.Navigator
                 screenOptions={{
                     headerStyle:{
-                        backgroundColor: '#F1F4FF',
+                        backgroundColor: '#FFFF',
                     },
                     headerTintColor: 'black',
                     headerTitleStyle: {
@@ -171,7 +171,7 @@ const Index = () => {
                     <Stack.Screen
                         name="VerifyScrenn"
                         component={VerifyScrenn}
-                        options={{title:'Verificar su e-mail'}}
+                        options={{title:'Verificacion'}}
                     />
                 </Stack.Navigator>
             </NavigationContainer>
