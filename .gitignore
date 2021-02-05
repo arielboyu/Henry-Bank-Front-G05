@@ -12,4 +12,6 @@ web-build/
 # macOS
 .DS_Store
 
+# variable
 
+src/redux/actions/ip.js
