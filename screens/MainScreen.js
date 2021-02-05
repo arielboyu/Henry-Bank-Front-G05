@@ -45,7 +45,8 @@ const MainScreen = ({changeScreen}) => {
 						<ScrollView 
 							horizontal={true} 
 							pagingEnabled={true}
-							showsHorizontalScrollIndicator={false} 
+							showsHorizontalScrollIndicator={false}
+							decelerationRate='fast'
 							style={styles.scroll}
 						>
 							{/*Card 1*/}

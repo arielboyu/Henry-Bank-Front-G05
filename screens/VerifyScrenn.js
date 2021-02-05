@@ -41,9 +41,6 @@ export default function VerifyScrenn({navigation}) {
 
   return (
     <View style={styles.container}>
-    <View style={styles.heading}>
-    <Headline>Ingresar Código</Headline>
-    </View>
     <View style={styles.logo}>
     <ImageBackground
     style={{width:140,height:140}}
@@ -66,7 +63,7 @@ export default function VerifyScrenn({navigation}) {
       </View>
       <View>
       <TextInput
-      label="ingresar código"
+      label="Código de verificación"
       onChangeText={code => handleCodeChange(code)}
       selectionColor="black"
       style={{height:48,
@@ -107,7 +104,7 @@ export default function VerifyScrenn({navigation}) {
 const styles = StyleSheet.create({
   container: {
     flex:1,
-    backgroundColor: "#F1F4FF"
+    backgroundColor: "#FFFF"
   },
 icon_pw: {
   position:'relative',
