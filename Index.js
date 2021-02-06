@@ -21,7 +21,7 @@ import DischargeScreen from './screens/DischargeScreen';
 import Icon from 'react-native-vector-icons/AntDesign'
 import VerifyScrenn from './screens/VerifyScrenn'
 import { cos } from 'react-native-reanimated';
-
+import CvuScreen from './screens/CvuScreen'
 
 const Stack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
@@ -29,7 +29,7 @@ const Tab = createMaterialBottomTabNavigator();
 const Index = () => {
     const user = useSelector(state => state.user);
     const logged = user.user.logged;
-  
+
 	return (
         <>
             {logged
@@ -46,7 +46,7 @@ const Index = () => {
                     <Tab.Screen
                         name="Inicio"
                         component={Main}
-                        
+
                         options={{
                             tabBarIcon: ({ color }) => (
                                 <Icon
@@ -119,20 +119,21 @@ const Index = () => {
                     }}
 
                 />
-{/*                 <Tab.Screen
-                    name="Cerrar Sesión"
-                    component={Main}
-                    onPress={()=>navigation.navigate('Login')}
+                <Tab.Screen
+                    name="Cvu"
+                    component={CvuScreen}
                     options={{
                     tabBarIcon: ({ color }) => (
                         <Icon
-                        name="logout"
+                        name="asd"
                         color={color}
                         size={23}
                         />
                     ),
+                    tabBarColor: "#5db12f"
                     }}
-                /> */}
+
+                />
                 </Tab.Navigator>
             </NavigationContainer>
 
