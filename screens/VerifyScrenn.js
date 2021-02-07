@@ -54,79 +54,68 @@ export default function VerifyScrenn({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.heading}>
-        <Headline>Ingresar Código</Headline>
+    <View style={styles.logo}>
+    <ImageBackground
+    style={{width:140,height:140}}
+    source={require('../assets/LogoVector.png')}
+    >
+    </ImageBackground>
+    </View>
+      <View style={{position:'relative',
+      top:50
+      }}>
+      <View style={{position:'relative',
+      top:80,
+      }}>
+      <View style={styles.icon_pw}>
+      <FontAwesome
+      name='lock'
+      color='black'
+      size={30}
+      />
       </View>
-      <View style={styles.logo}>
-        <ImageBackground
-          style={{ width: 140, height: 140 }}
-          source={require('../assets/LogoVector.png')}
-        >
-        </ImageBackground>
+      <View>
+      <TextInput
+      label="Código de verificación"
+      onChangeText={code => handleCodeChange(code)}
+      selectionColor="black"
+      style={{height:48,
+        paddingLeft:5,
+        width:210,
+        position: 'relative',
+        left:110,
+        top:-80}}
+      />
       </View>
       <View style={{
-        position: 'relative',
-        top: 50
-      }}>
-        <View style={{
-          position: 'relative',
-          top: 80,
-        }}>
-          <View style={styles.icon_pw}>
-            <FontAwesome
-              name='lock'
-              color='black'
-              size={30}
-            />
-          </View>
-          <View>
-            <TextInput
-              label="ingresar código"
-              onChangeText={code => handleCodeChange(code)}
-              selectionColor="black"
-              style={{
-                height: 48,
-                paddingLeft: 5,
-                width: 210,
-                position: 'relative',
-                left: 110,
-                top: -80
-              }}
-            />
-          </View>
-          <View style={{
-            position: 'relative',
-            top: -30
-          }} >
-            <Divider />
-            <Divider />
-          </View>
-        </View>
+      position: 'relative',
+      top:-30}} >
+      <Divider/>
+      <Divider/>
+      </View>
+      </View>
       </View>
       <View style={styles.boton}>
-        <View>
-          <Button
-            mode="contained"
-           onPress={() => onSubmit(data, userId)}
-            style={{
-              backgroundColor: '#006A34',
-              width: 150
-
-            }}>
-            CONFIRMAR</Button>
-        </View>
-      </View>
-    </View>
+      <View>
+      <Button
+     mode="contained"
+     onPress={()=>(onSubmit(data, userId), navigation.navigate('DischargeScreen'))}
+     style={{
+     backgroundColor: '#006A34',
+     width:150
+   }}>
+   CONFIRMAR</Button>
+  </View>
+  </View>
+  </View>
   )
 }
 
 
-
-
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: "#F1F4FF"
+    flex:1,
+    backgroundColor: "#FFFF"
   },
   icon_pw: {
     position: 'relative',

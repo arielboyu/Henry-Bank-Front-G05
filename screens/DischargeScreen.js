@@ -369,7 +369,7 @@ export default function dischargeScreen({ navigation, user }) {
 const styles = StyleSheet.create({
 	container    : {
 		flex            : 1,
-		backgroundColor : '#F1F4FF'
+		backgroundColor : '#FFFF'
 	},
 	text_tree    : {
 		color           : 'black',

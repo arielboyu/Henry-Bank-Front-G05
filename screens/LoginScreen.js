@@ -65,9 +65,6 @@ export default function Login({ navigation }) {
 
 	return (
 		<View style={styles.container}>
-			<View style={styles.heading}>
-				<Headline>Iniciar Sesión</Headline>
-			</View>
 			<View style={styles.logo}>
 				<ImageBackground style={{ width: 140, height: 140 }} source={require('../assets/LogoVector.png')} />
 			</View>
@@ -76,9 +73,10 @@ export default function Login({ navigation }) {
 			</View>
 			<View>
 				<TextInput
-					label="ingresa e-mail"
+					label="Correo electrónico"
 					onChangeText={(text) => textInputChange(text)}
 					selectionColor="black"
+					type= 'outlined'
 					style={{
 						height      : 48,
 						paddingLeft : 5,
@@ -104,8 +102,9 @@ export default function Login({ navigation }) {
 					</View>
 					<View>
 						<TextInput
-							label="password"
-              type="password"
+							label="Contraseña"
+							secureTextEntry={true}
+							type= 'outlined'
 							onChangeText={(text) => handlePasswordChange(text)}
 							selectionColor="black"
 							style={{
@@ -135,33 +134,34 @@ export default function Login({ navigation }) {
 					</View>
 				</View>
 			</View>
-			<View style={styles.boton}>
-				<View>
+			<View style={styles.botones}>
+				<View style={styles.boton}>
+						<Button
+							mode="contained"
+							onPress={handleLogin}
+							style={{
+								backgroundColor : '#006A34',
+								width           : '100%',
+								position        : 'relative',
+								top             : 100
+							}}>
+							INICIAR SESIóN
+						</Button>
+				</View>
+				<View style={styles.boton}>
 					<Button
-						mode="contained"
-						onPress={handleLogin}
+						mode="outlined"
 						style={{
-							backgroundColor : '#006A34',
-							width           : 150,
-							position        : 'relative',
-							top             : 100
+							width: '100%',
+							backgroundColor : '#006A34'
+						}}
+						color="#f8f8ff"
+						onPress={() => {
+							navigation.navigate('RegisterScreen');
 						}}>
-						INICIAR SESIóN
+						Crear Cuenta
 					</Button>
 				</View>
-			</View>
-			<View style={styles.register}>
-				<Button
-					mode="outlined"
-					style={{
-						backgroundColor : '#006A34'
-					}}
-					color="#f8f8ff"
-					onPress={() => {
-						navigation.navigate('RegisterScreen');
-					}}>
-					Crear Cuenta
-				</Button>
 			</View>
 		</View>
 	);
@@ -169,8 +169,8 @@ export default function Login({ navigation }) {
 
 const styles = StyleSheet.create({
 	container   : {
-		flex            : 1,
-		backgroundColor : '#F1F4FF'
+		backgroundColor : '#FFF',
+		height: '100%'
 	},
 
 	icon_email  : {
@@ -183,12 +183,11 @@ const styles = StyleSheet.create({
 		top      : -55,
 		left     : 62
 	},
-	register    : {
-		position   : 'relative',
-		top        : 120,
-		left       : 100,
-		marginLeft : 10,
-		width      : 150
+	botones    : {
+		display: 'flex',
+		alignItems: 'center',
+		width: '100%',
+		marginTop: 60
 	},
 	logo        : {
 		alignItems : 'center',
