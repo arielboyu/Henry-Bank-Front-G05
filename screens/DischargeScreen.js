@@ -18,7 +18,7 @@ export default function dischargeScreen({ navigation, user }) {
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(getUsers());
-	});
+	},[]);
 
 	const [ data, setData ] = useState({
 		form : {

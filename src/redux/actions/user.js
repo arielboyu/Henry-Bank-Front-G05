@@ -133,13 +133,3 @@ export const logout = () => {
 		}
 	};
 };
-
-export const verifyNewUser = (code, userId) => {
-	return async (dispatch) => {
-		try {
-      const res = await axios.put(`http://192.168.0.10:3001/validation/${userId}`, code);
-		} catch (err) {
-			console.log(err);
-		}
-	};
-};
