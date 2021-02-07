@@ -60,7 +60,7 @@ export default function Register({navigation}) {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getUsers());
-  });
+  }, []);
 
 
   const onSubmit = (user) => {
