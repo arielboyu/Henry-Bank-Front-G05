@@ -7,7 +7,7 @@ import * as ImagePicker from 'expo-image-picker';
 import { useDispatch, useSelector } from 'react-redux';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import logo from '../assets/LogoVector.png';
-import { dischargeNewUser, getUsers } from '../src/redux/actions/user';
+import { createAccount, dischargeNewUser, getUsers } from '../src/redux/actions/user';
 import { TextInput, Button } from 'react-native-paper';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
@@ -107,6 +107,7 @@ export default function dischargeScreen({ navigation, user }) {
 		if (age >= 16) {
 			console.log('Screen', updateUser);
 			dispatch(dischargeNewUser(updateUser));
+      dispatch(createAccount(updateUser));
 			navigation.navigate('LoginScreen');
 		} else {
 			alert('Debes ser Mayor de 16 años, Selecciona otra fecha');
