@@ -99,7 +99,7 @@ export default function VerifyScrenn({ navigation }) {
       <View>
       <Button
      mode="contained"
-     onPress={()=>(onSubmit(data, userId), navigation.navigate('DischargeScreen'))}
+     onPress={()=>(onSubmit(data, userId))}
      style={{
      backgroundColor: '#006A34',
      width:150
