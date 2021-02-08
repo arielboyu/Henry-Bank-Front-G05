@@ -43,11 +43,11 @@ export default function VerifyScrenn({ navigation }) {
     const res = await axios.put(`http://${IP}:3001/validation/${userId}`, code);
     console.log("RES:DATA  ", res.data)
         return navigation.navigate('DischargeScreen')
-       
+
     } catch (err) {
+
     
      if (err) alert('Código de verificación incorrecto');
-   
     }
   };
 
