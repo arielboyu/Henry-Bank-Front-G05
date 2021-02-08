@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, ImageBackground, StyleSheet, Text } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Headline } from 'react-native-paper';
 import Header from '../src/components/Header';
 
@@ -8,8 +9,8 @@ const ProductsScreen = () => {
 	return (
 		<View style={styles.container}>
 			<Header title="Mis productos..."/>
-      <View style={{height: '100%'}}>
-        <View style={[styles.btnCard, styles.darkGreen]}>
+      <View style={styles.container2}>
+        <TouchableOpacity style={[styles.btnCard, styles.darkGreen]}>
           <Text style={styles.cardText}>
             Mis tarjetas
           </Text>
@@ -17,8 +18,8 @@ const ProductsScreen = () => {
             style={styles.images}
             source={require('../assets/MyCards.png')}
           />
-        </View>
-        <View style={[styles.btnCard, styles.lightGreen]}>
+        </TouchableOpacity>
+        <TouchableOpacity style={[styles.btnCard, styles.lightGreen]}>
           <Text style={styles.cardText}>
             Mis cuentas
           </Text>
@@ -26,7 +27,7 @@ const ProductsScreen = () => {
             style={styles.images}
             source={require('../assets/MyAccounts.png')}
           />
-        </View>
+        </TouchableOpacity>
       </View>
 		</View>
 	);
@@ -38,6 +39,10 @@ const styles = StyleSheet.create({
  		padding: 20,
  		backgroundColor: "#FFFF"
   },
+  container2: {
+    height: '90%',
+    justifyContent: 'space-evenly'
+  },
   header: {
 		display: "flex",
  		alignItems: "flex-start",
@@ -48,7 +53,7 @@ const styles = StyleSheet.create({
   },
   btnCard: {
     width: '100%',
-    height: '42%',
+    height: '100%',
     padding: 20,
     borderRadius: 20,
     marginTop: 10,

@@ -15,6 +15,7 @@ import logo from '../assets/logo.png'
 import { getUsers, verifyNewUser } from '../src/redux/actions/user'
 import { Divider, Headline, Paragraph, TextInput, Button, } from 'react-native-paper';
 import axios from 'axios'
+import IP from '../src/redux/actions/ip';
 
 
 
@@ -39,14 +40,14 @@ export default function VerifyScrenn({ navigation }) {
 
   const onSubmit = async (code, userId) => {
     try {
-      const res = await axios.put(`http://192.168.1.31:3001/validation/${userId}`, code);
-     console.log("RES:DATA  ", res.data)
+    const res = await axios.put(`http://${IP}:3001/validation/${userId}`, code);
+    console.log("RES:DATA  ", res.data)
         return navigation.navigate('DischargeScreen')
 
     } catch (err) {
 
-     if (err) alert('Código de verificaión incorrecto');
-
+    
+     if (err) alert('Código de verificación incorrecto');
     }
   };
 
