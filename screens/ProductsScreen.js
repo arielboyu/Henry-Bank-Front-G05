@@ -65,6 +65,10 @@ const styles = StyleSheet.create({
  		padding: 20,
  		backgroundColor: "#FFFF"
   },
+  container2: {
+    height: '90%',
+    justifyContent: 'space-evenly'
+  },
   header: {
 		display: "flex",
  		alignItems: "flex-start",
@@ -75,7 +79,7 @@ const styles = StyleSheet.create({
   },
   btnCard: {
     width: '100%',
-    height: '42%',
+    height: '100%',
     padding: 20,
     borderRadius: 20,
     marginTop: 10,
