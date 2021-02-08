@@ -5,7 +5,7 @@ import { Button, RadioButton, Headline, Paragraph, Portal, Dialog, Divider } fro
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import Transfer from 'react-native-vector-icons/MaterialCommunityIcons';
 import { getUserByID } from '../src/redux/actions/user'
-import { getOneAccount } from '../src/redux/actions/account'
+import { getAllAccounts } from '../src/redux/actions/account'
 import Header from '../src/components/Header';
 
 const dataAccount = [
@@ -13,13 +13,13 @@ const dataAccount = [
 		balance: 1500,
 		tipo: 'Pesos',
 		cvu: '222222000022222',
-		img: 'backgroundCard2.jpeg'
+		img: '2'
 	}, 
 	{
 		balance: 45,
 		tipo: 'Dolares',
 		cvu: '333333111133333',
-		img: 'backgroundCard1.jpeg'
+		img: '1'
 	}
 ]
 
@@ -47,11 +47,12 @@ const MainScreen = ({changeScreen}) => {
 	const [periodChecked, setPeriodChecked] = useState("");
 
 	const user = useSelector(state => state.user);
-	const account = useSelector(state => state.account);
+	const account = useSelector(state => state.account.userAccounts);
 
  	useEffect(() => {
-		user.user.id && dispatch(getUserByID(user.user.id.id));
-		user.user.id && dispatch(getOneAccount(user.loggedUser.id, user.loggedUser.email));
+		dispatch(getUserByID(user.user.id.id));
+		dispatch(getAllAccounts(user.user.id.email));
+		console.log(user.loggedUser.email)
 	}, []);
 
 	const { firstName, lastName } = user.loggedUser;
@@ -59,16 +60,22 @@ const MainScreen = ({changeScreen}) => {
 	const card = ({item, index}) => (
 		<View>
 			<ImageBackground
-				source={require(`../assets/${item.img}`)}
+				source={require(`../assets/backgroundCard2.jpeg`)}
 				style={styles.mainCard}
 				imageStyle={{ borderRadius: 15 }}>
 				<View>
 					<Paragraph>Balance actual</Paragraph>
-					<Text style={styles.bigText}>{`${item.tipo === 'Dolares' ? 'US$' : '$'}${item.balance}`}</Text>
+					<Text style={styles.bigText}>
+						{`${item.tipo === 'dolares' ? 'US$' : '$'}${item.balance}`}
+					</Text>
 				</View>
 				<View style={styles.cardInfo}>
-					<Paragraph style={styles.cardText}>{`${firstName} ${lastName}`}</Paragraph>
-					<Paragraph style={styles.cardText}>{`******************${item.cvu.slice(item.cvu.length - 4, item.cvu.length)} | ${item.tipo}`}</Paragraph>
+					<Paragraph style={styles.cardText}>
+						{`${firstName} ${lastName}`}
+					</Paragraph>
+					<Paragraph style={styles.cardText}>
+						{`******************${item.tipo === 'dolares' ? item.cvuUS.slice(item.cvuUS.length - 4, item.cvuUS.length) : item.cvu.slice(item.cvu.length - 4, item.cvu.length)} | ${item.tipo.charAt(0).toUpperCase() + item.tipo.slice(1)}`}
+					</Paragraph>
 				</View>
 			</ImageBackground>
 		</View>
@@ -92,7 +99,7 @@ const MainScreen = ({changeScreen}) => {
 						<FlatList
 							keyExtractor={keyExtractor}
 							onScroll={setAccount}
-							data={dataAccount}
+							data={account}
 							pagingEnabled={true}
 							decelerationRate='fast'
 							horizontal={true}

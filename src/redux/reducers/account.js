@@ -1,5 +1,6 @@
 import {
-  GET_ACCOUNT_BY_ID
+  GET_ACCOUNT_BY_ID,
+  GET_ALL_ACCOUNTS
 } from '../constants/index';
   
   const initialState = {
@@ -13,6 +14,11 @@ import {
             ...state,
             userAccounts: action.account
           };
+        case GET_ALL_ACCOUNTS:
+          return {
+            ...state,
+            userAccounts: action.account
+          };  
       default:
       return state;
     };
