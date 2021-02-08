@@ -50,13 +50,13 @@ export default function ChargeMoneyScreen({ changeScreen, navigation, user }) {
 	return (
 		<View style={styles.container}>
 			<View style={styles.heading}>
-				{/* <Icon.Button
+				<Icon.Button
 					name="arrow-left"
 					size={25}
 					color="black"
 					backgroundColor="#FFFF"
-					onPress={() => changeScreen('Inicio')}
-				/> */}
+					onPress={() => changeScreen('main')}
+				/>
 				<Headline>Cargar Dinero</Headline>
 			</View>
 			<ScrollView>
