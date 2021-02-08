@@ -39,14 +39,14 @@ export default function VerifyScrenn({ navigation }) {
 
   const onSubmit = async (code, userId) => {
     try {
-      const res = await axios.put(`http://192.168.0.10:3001/validation/${userId}`, code);
+      const res = await axios.put(`http://192.168.1.31:3001/validation/${userId}`, code);
      console.log("RES:DATA  ", res.data)
         return navigation.navigate('DischargeScreen')
-       
+
     } catch (err) {
-    
+
      if (err) alert('Código de verificaión incorrecto');
-   
+
     }
   };
 
