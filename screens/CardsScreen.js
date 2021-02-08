@@ -15,7 +15,7 @@ export default function CardsScreen({changeScreen}) {
 		size={25}
 		color="black"
 		backgroundColor="#FFFF"
-		// onPress={() => changeScreen('main')}
+		onPress={() => changeScreen('prod')}
 		/>
     <Headline>Mis Tarjetas</Headline>
     </View>

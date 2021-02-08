@@ -29,6 +29,13 @@ export default function CvuScreen({changeScreen}) {
 			{
 				<>
         <View style={styles.heading}>
+        <Icon.Button
+        name="arrow-left"
+        size={25}
+        color="black"
+        backgroundColor="#FFFF"
+        onPress={() => changeScreen('prod')}
+        />
         <Headline>CVU</Headline>
         </View>
         <View style={styles.logo}>
