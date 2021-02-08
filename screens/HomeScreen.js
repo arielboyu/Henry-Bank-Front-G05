@@ -8,15 +8,15 @@ export default function HomeScreen({navigation}) {
     <View style={style.container}>
       <StatusBar backgroundColor='green' barStyle="light-content"/>
       <View style={style.header}>
-        <Animatable.Image 
+        <Animatable.Image
           animation="bounceIn"
           duration={2000}
           source = {require('../assets/logo.png')}
           style = {style.logo}
           resizeMode="stretch"
         />
-      </View> 
-      
+      </View>
+
       <Animatable.View
         style={[style.footer, {
           backgroundColor: "#ffbf34"
@@ -29,15 +29,22 @@ export default function HomeScreen({navigation}) {
       >Bienvenido a...
       </Text>
       <Text style={style.text}>TreeBank</Text>
-      
-      
+
+
       <View style={style.button} >
-        <TouchableOpacity 
+        <TouchableOpacity
           onPress={() => navigation.navigate('LoginScreen')}
           // color={'#08d4c4', '#01ab9d'}
           style={style.signIn}
           >
-          <Text style={style.textSign}>Iniciar</Text> 
+          <Text style={style.textSign}>Iniciar</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('RegisterScreen')}
+          // color={'#08d4c4', '#01ab9d'}
+          style={style.signIn2}
+          >
+          <Text style={style.textSign}>Registrar</Text>
         </TouchableOpacity>
       </View>
       </Animatable.View>
@@ -48,7 +55,7 @@ export default function HomeScreen({navigation}) {
 
 const style = StyleSheet.create({
   container: {
-    flex: 1, 
+    flex: 1,
     backgroundColor: '#ffffff'
   },
   header: {
@@ -79,12 +86,13 @@ text: {
     fontSize: 60,
     fontWeight: 'bold',
     textAlign: 'center'
-    
+
 },
 button: {
-    alignItems: 'flex-end',
-    marginTop: 30,
-    color:'#5db12f'
+   flexDirection: 'row',
+    marginTop: 10,
+    color:'#5db12f',
+
 },
 signIn: {
     width: 150,
@@ -94,13 +102,23 @@ signIn: {
     borderRadius: 10,
     flexDirection: 'row',
     backgroundColor: '#097934',
-    
+
+},
+signIn2: {
+    width: 150,
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
+    marginLeft:10,
+    backgroundColor: '#097934',
+
 },
 textSign: {
     color: 'black',
     fontWeight: 'bold',
     color:'#ffffff',
     fontSize:30,
-    
+
 }
 });

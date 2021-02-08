@@ -81,9 +81,8 @@ export default function Login({ navigation }) {
 						height      : 48,
 						paddingLeft : 5,
 						width       : 210,
-						position    : 'relative',
-						left        : 100,
-						top         : 30
+						marginTop:30,
+						marginLeft:100
 					}}
 				/>
 			</View>
@@ -94,8 +93,7 @@ export default function Login({ navigation }) {
 				}}>
 				<View
 					style={{
-						position : 'relative',
-						top      : 60
+						marginTop:40
 					}}>
 					<View style={styles.icon_pw}>
 						<FontAwesome name="lock" color="black" size={30} />
@@ -125,9 +123,7 @@ export default function Login({ navigation }) {
 						</TouchableOpacity> */}
 					</View>
 					<View
-						style={{
-							position : 'relative',
-							top      : -50
+						style={{marginTop:-60
 						}}>
 						<Divider />
 						<Divider />
@@ -142,25 +138,9 @@ export default function Login({ navigation }) {
 							style={{
 								backgroundColor : '#006A34',
 								width           : '100%',
-								position        : 'relative',
-								top             : 100
 							}}>
 							INICIAR SESIóN
 						</Button>
-				</View>
-				<View style={styles.boton}>
-					<Button
-						mode="outlined"
-						style={{
-							width: '100%',
-							backgroundColor : '#006A34'
-						}}
-						color="#f8f8ff"
-						onPress={() => {
-							navigation.navigate('RegisterScreen');
-						}}>
-						Crear Cuenta
-					</Button>
 				</View>
 			</View>
 		</View>
@@ -174,12 +154,10 @@ const styles = StyleSheet.create({
 	},
 
 	icon_email  : {
-		position : 'relative',
 		top      : 65,
 		left     : 60
 	},
 	icon_pw     : {
-		position : 'relative',
 		top      : -55,
 		left     : 62
 	},
@@ -187,7 +165,7 @@ const styles = StyleSheet.create({
 		display: 'flex',
 		alignItems: 'center',
 		width: '100%',
-		marginTop: 60
+		marginTop: 170
 	},
 	logo        : {
 		alignItems : 'center',
@@ -195,7 +173,7 @@ const styles = StyleSheet.create({
 	},
 	boton       : {
 		alignItems : 'center',
-		marginTop  : 5,
+		marginTop  : -100,
 		marginLeft : 10
 	},
 	iconButtons : {
@@ -207,9 +185,6 @@ const styles = StyleSheet.create({
 	},
 	heading     : {
 		fontSize   : 35,
-		position   : 'relative',
-		top        : 20,
-		left       : -100,
 		alignItems : 'center'
 	}
 });
