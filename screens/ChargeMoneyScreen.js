@@ -25,7 +25,7 @@ export default function ChargeMoneyScreen({ changeScreen, navigation, user }) {
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(getUsers());
-	});
+	}, []);
 
 	const [ visible, setVisible ] = useState(false);
 	const [ visibleButton, setVisibleButton ] = useState(false);

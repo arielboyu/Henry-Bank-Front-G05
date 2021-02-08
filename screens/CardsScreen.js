@@ -1,30 +1,12 @@
-import React,{useEffect} from 'react';
-import { ImageBackground,Image, StyleSheet, Text, View, Linking } from 'react-native';
+import React from 'react';
+import { ImageBackground,Image, StyleSheet, Text, View } from 'react-native';
 import { Divider, Headline, Paragraph,TextInput, Button, } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import logo from '../assets/logo.png'
 import Transfer from 'react-native-vector-icons/MaterialCommunityIcons';
-import { useDispatch, useSelector } from 'react-redux'
 
-
-
-export default function CvuScreen({changeScreen}) {
-	const dispatch = useDispatch();
-	const user = useSelector(state => state.user)
-	const { firstName, lastName } = user.loggedUser
-
-	useEffect(() => {
-		// dispatch(getUserByID(user.user.id.id));
-	}, [])
-
-
-const handldeWhatsAppPress = async() => {
-  await Linking.openURL('https://wa.me/?text=Este es mi CVU:000000543290784315763-Mensaje Enviado desde TreeBankAPP')
-}
-
-
-
+export default function CardsScreen({changeScreen}) {
 	return (
     <View style={styles.container}>
     <View style={styles.heading}>
@@ -35,7 +17,7 @@ const handldeWhatsAppPress = async() => {
 		backgroundColor="#FFFF"
 		// onPress={() => changeScreen('main')}
 		/>
-    <Headline>CVU</Headline>
+    <Headline>Mis Tarjetas</Headline>
     </View>
     <View style={styles.logo}>
     <ImageBackground
@@ -46,62 +28,64 @@ const handldeWhatsAppPress = async() => {
     </View>
 		<View>
 		<ImageBackground
-		source={require('../assets/backgroundCard1.jpeg')}
+		source={require('../assets/backgroundCard2.jpeg')}
 		style={styles.mainCard}
 		imageStyle={{ borderRadius: 15 }}>
 		</ImageBackground>
 		</View>
 			<View style={{alignItems:'center',
       width:320,
-      marginTop:-186,
-			marginLeft:-100,
+      marginTop:-166,
+			marginLeft:-80,
       height:36,
       }}>
-			<Headline style={{color:'white',fontSize:24}}>CVU:</Headline>
 		  </View>
 			<View style={{alignItems:'center',
       width:250,
-      marginTop:30,
+      marginTop:10,
       height:36,
-			marginLeft:30,
-			backgroundColor: '#006A34',
-			opacity:0.8
+			marginLeft:10,
       }}>
-			<Headline style={{color:'white',fontSize:20}}>000000543290784315763</Headline>
+			<Headline style={{color:'white',fontSize:20}}>4322 3663 5456 2234</Headline>
 		  </View>
       <View style={{alignItems:'center',
       width:220,
-			marginTop:26,
-      height:36,
-			marginLeft:-20,
+			marginTop:16,
+      height:26,
       }}>
-      <Headline style={{color:'white'}}>{` ${firstName}`}</Headline>
+      <Headline style={{color:'white'}}>Valentín</Headline>
       </View>
-      <View style={{marginTop:40,
+      <View style={{marginTop:26,
       }}>
       <View>
-      <View style={{marginTop:40,}} >
+      <View style={{marginTop:46,}} >
       <Divider/>
       <Divider/>
       </View>
       </View>
       </View>
-      <View style={styles.botonAsociar}>
+      <View style={styles.botonRecargar}>
       <View>
       <Button style={styles.iconButtons}>
-      <Transfer name="cash-plus" size={30} color="#fff" />
+      <Icon name="donate" size={30} color="#fff" />
       </Button>
-      <Paragraph style={{fontWeight: '700',marginLeft:18}}>Asociar</Paragraph>
+      <Paragraph style={{fontWeight: '700',marginLeft:14}}>Recargar</Paragraph>
       </View>
       </View>
-			<View style={styles.botonCompartir}>
+			<View style={styles.botonMandar}>
 			<View>
-			<Button
-			 onPress={handldeWhatsAppPress}
-			 style={styles.iconButtons}>
-			<Transfer name="share-outline" size={30} color="#fff" />
+			<Button style={styles.iconButtons}>
+			<Transfer name="arrow-right-bold-hexagon-outline" size={30} color="#fff" />
 			</Button>
-			<Paragraph style={{fontWeight: '700',marginLeft:12}}>Compartir</Paragraph>
+			<Paragraph style={{fontWeight: '700',marginLeft:18}}>Mandar</Paragraph>
+			</View>
+			</View>
+      <View style={styles.botonestadísticas}>
+			<View>
+			<Button style={styles.iconButtons}>
+			<Transfer name="chart-line" size={30} color="#fff" />
+			</Button>
+			<Paragraph style={{fontWeight: '700',marginLeft:4}}>Estadísticas</Paragraph>
 			</View>
 			</View>
   </View>
@@ -123,19 +107,24 @@ mainCard: {
 	height: 190,
 	padding: 10,
 	borderRadius: 20,
-	marginTop: 10,
+	marginTop: 20,
 	marginBottom: 10,
-	marginLeft: 4
+	marginLeft: 5
 	},
-botonAsociar: {
+botonRecargar: {
    alignItems:'center',
    marginTop:45,
-   marginLeft:-200
+   marginLeft:-260
 },
-botonCompartir: {
+botonMandar: {
    alignItems:'center',
-   marginTop:-105,
-   marginLeft:160
+   marginTop:-110,
+   marginLeft:-20
+},
+botonestadísticas: {
+   alignItems:'center',
+   marginTop:-110,
+   marginLeft:230
 },
 iconButtons: {
   backgroundColor: '#006A34',
