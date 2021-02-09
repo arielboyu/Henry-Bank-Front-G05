@@ -6,11 +6,12 @@ import ChangeMoney from '../../screens/ChangeMoneyScreen';
 import MainScreen from '../../screens/MainScreen';
 
 const Main = () => {
-    const [screen, setScreen] = useState("change")
+    const [screen, setScreen] = useState("main")
 
     const changeScreen = (data) => {
         setScreen(data)
     }
+
     return(
         <>
             {
