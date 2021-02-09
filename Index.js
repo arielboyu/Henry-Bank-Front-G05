@@ -14,12 +14,16 @@ import Main from './src/components/Main';
 import ProductsScreen from './screens/ProductsScreen'
 import TransactionsScreen from './screens/TransactionsScreen'
 import StatisticsScreen from './screens/StatisticsScreen'
+import Contacts from './screens/Contacts'
 import HomeScreen from './screens/HomeScreen'
 import ProfileScreen from './screens/ProfileScreen';
 import DischargeScreen from './screens/DischargeScreen';
 import Icon from 'react-native-vector-icons/AntDesign'
 import VerifyScrenn from './screens/VerifyScrenn'
 import { cos } from 'react-native-reanimated';
+import CvuScreen from './screens/CvuScreen'
+import CardsScreen from './screens/CardsScreen'
+
 
 
 
@@ -28,8 +32,8 @@ const Tab = createMaterialBottomTabNavigator();
 
 const Index = () => {
     const user = useSelector(state => state.user);
-  const logged = user.user.id;
-  
+    const logged = user.user.logged;
+
 	return (
         <>
             {logged
@@ -46,7 +50,7 @@ const Index = () => {
                     <Tab.Screen
                         name="Inicio"
                         component={Main}
-                        
+
                         options={{
                             tabBarIcon: ({ color }) => (
                                 <Icon
@@ -103,21 +107,22 @@ const Index = () => {
                     }}
 
                 />
-               
-{/*                 <Tab.Screen
-                    name="Cerrar Sesión"
-                    component={Main}
-                    onPress={()=>navigation.navigate('Login')}
+                <Tab.Screen
+                    name="Contactos"
+                    component={Contacts}
+
                     options={{
                     tabBarIcon: ({ color }) => (
                         <Icon
-                        name="logout"
+                        name="contacts"
                         color={color}
                         size={23}
                         />
                     ),
+                    tabBarColor: "#5db12f"
                     }}
-                /> */}
+
+                />
                 </Tab.Navigator>
             </NavigationContainer>
 
@@ -126,7 +131,7 @@ const Index = () => {
                 <Stack.Navigator
                 screenOptions={{
                     headerStyle:{
-                        backgroundColor: '#F1F4FF',
+                        backgroundColor: '#FFFF',
                     },
                     headerTintColor: 'black',
                     headerTitleStyle: {
@@ -156,7 +161,7 @@ const Index = () => {
                     <Stack.Screen
                         name="VerifyScrenn"
                         component={VerifyScrenn}
-                        options={{title:'Verificar su e-mail'}}
+                        options={{title:'Verificacion'}}
                     />
                 </Stack.Navigator>
             </NavigationContainer>

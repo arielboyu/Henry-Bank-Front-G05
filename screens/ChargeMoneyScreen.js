@@ -25,7 +25,7 @@ export default function ChargeMoneyScreen({ changeScreen, navigation, user }) {
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(getUsers());
-	});
+	}, []);
 
 	const [ visible, setVisible ] = useState(false);
 	const [ visibleButton, setVisibleButton ] = useState(false);
@@ -50,8 +50,8 @@ export default function ChargeMoneyScreen({ changeScreen, navigation, user }) {
 	return (
 		<View style={styles.container}>
 			<View style={styles.heading}>
-				<Icon.Button 
-					name="arrow-left" 
+				<Icon.Button
+					name="arrow-left"
 					size={25}
 					color="black"
 					backgroundColor="#FFFF"
@@ -126,7 +126,7 @@ export default function ChargeMoneyScreen({ changeScreen, navigation, user }) {
 							{visibleButton ? (
 								<Button
 									mode="contained"
-									onPress={() => navigation.navigate('Principal')}
+									onPress={() => changeScreen("main")}
 									style={{
 										backgroundColor : '#006A34',
 										width           : 150
@@ -146,11 +146,11 @@ export default function ChargeMoneyScreen({ changeScreen, navigation, user }) {
 }
 
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
- 		padding: 20,
- 		backgroundColor: "#FFFF"
-  	},
+	container    : {
+		flex            : 1,
+		padding         : 20,
+		backgroundColor : '#FFFF'
+	},
 	logo         : {
 		alignItems : 'center',
 		marginTop  : 30
@@ -168,12 +168,12 @@ const styles = StyleSheet.create({
 		marginLeft      : 25
 	},
 	heading      : {
-		marginBottom: 10,
-		marginTop: 10,
- 		fontSize: 35,
-		alignItems : 'center',
-		display: 'flex',
-		flexDirection: 'row'
+		marginBottom  : 10,
+		marginTop     : 10,
+		fontSize      : 35,
+		alignItems    : 'center',
+		display       : 'flex',
+		flexDirection : 'row'
 	},
 	centeredView : {
 		flex           : 1,
@@ -195,5 +195,5 @@ const styles = StyleSheet.create({
 		shadowOpacity : 0.25,
 		shadowRadius  : 3.84, */
 		elevation    : 5
-	},
+	}
 });

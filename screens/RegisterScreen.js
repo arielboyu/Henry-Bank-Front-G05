@@ -60,7 +60,7 @@ export default function Register({navigation}) {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getUsers());
-  });
+  }, []);
 
 
   const onSubmit = (user) => {
@@ -70,9 +70,6 @@ export default function Register({navigation}) {
 
   return (
     <View style={styles.container}>
-    <View style={styles.heading}>
-    <Headline>Registrar Datos</Headline>
-    </View>
     <View style={styles.logo}>
     <ImageBackground
     style={{width:140,height:140}}
@@ -89,7 +86,7 @@ export default function Register({navigation}) {
       </View>
       <View >
       <TextInput
-      label="ingresa e-mail"
+      label="Correo electrónico"
       onChangeText={text => textInputChange(text)}
       selectionColor="black"
       style={{height:48,
@@ -115,7 +112,8 @@ export default function Register({navigation}) {
       </View>
       <View>
       <TextInput
-      label="password"
+      label="Contraseña"
+      secureTextEntry={true}
       onChangeText={text => handlePasswordChange(text)}
       selectionColor="black"
       style={{height:48,
@@ -135,7 +133,8 @@ export default function Register({navigation}) {
       </View>
       <View >
       <TextInput
-      label="confirmar password"
+      label="Confirmar contraseña"
+      secureTextEntry={true}
       onChangeText={text => handlePasswordChange(text)}
       selectionColor="black"
       style={{height:48,
@@ -173,7 +172,7 @@ export default function Register({navigation}) {
 const styles = StyleSheet.create({
   container: {
     flex:1,
-    backgroundColor: "#F1F4FF"
+    backgroundColor: "#FFFF"
   },
 
 icon_email: {
