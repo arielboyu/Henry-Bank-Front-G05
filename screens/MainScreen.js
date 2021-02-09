@@ -264,7 +264,7 @@ const MainScreen = ({changeScreen}) => {
 						<View style={styles.center}>
 							<Button 
 								style={styles.iconButtons}
-								onPress={() => changeScreen('main')}
+								onPress={() => changeScreen('change')}
 							>
 								<Icon name="exchange-alt" size={30} color="#fff" />
 							</Button>
