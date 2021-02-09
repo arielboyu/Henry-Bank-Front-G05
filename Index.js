@@ -122,36 +122,6 @@ const Index = () => {
                     }}
 
                 />
-                <Tab.Screen
-                    name="Cvu"
-                    component={CvuScreen}
-                    options={{
-                    tabBarIcon: ({ color }) => (
-                        <Icon
-                        name="asd"
-                        color={color}
-                        size={23}
-                        />
-                    ),
-                    tabBarColor: "#5db12f"
-                    }}
-
-                />
-                <Tab.Screen
-                    name="Cards"
-                    component={CardsScreen}
-                    options={{
-                    tabBarIcon: ({ color }) => (
-                        <Icon
-                        name="asd"
-                        color={color}
-                        size={23}
-                        />
-                    ),
-                    tabBarColor: "#5db12f"
-                    }}
-
-                />
                 </Tab.Navigator>
             </NavigationContainer>
 

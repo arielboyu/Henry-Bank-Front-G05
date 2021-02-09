@@ -1,16 +1,38 @@
-import React from 'react';
-import { View, ImageBackground, StyleSheet, Text } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import React,{useState} from 'react';
+import { View, ImageBackground, StyleSheet, Text,TouchableOpacity } from 'react-native';
 import { Headline } from 'react-native-paper';
 import Header from '../src/components/Header';
+import CvuScreen from './CvuScreen'
+import CardsScreen from './CardsScreen'
+
+
 
 const ProductsScreen = () => {
-
+	const [screen,setScreen] = useState('prod')
+	const changeScreen = (data) => {
+			setScreen(data)
+	}
 	return (
+		 <>
+
+		 {
+				 screen === "card" && <CardsScreen
+						 changeScreen={changeScreen}
+				 />
+		 }
+		 {
+				 screen === "cvu" && <CvuScreen
+						 changeScreen={changeScreen}
+				 />
+		 }
+		{
+			screen === 'prod' &&
 		<View style={styles.container}>
 			<Header title="Mis productos..."/>
-      <View style={styles.container2}>
-        <TouchableOpacity style={[styles.btnCard, styles.darkGreen]}>
+      <View style={{height: '100%'}}>
+        <TouchableOpacity
+				onPress={() => changeScreen('card')}
+				style={[styles.btnCard, styles.darkGreen]}>
           <Text style={styles.cardText}>
             Mis tarjetas
           </Text>
@@ -18,8 +40,10 @@ const ProductsScreen = () => {
             style={styles.images}
             source={require('../assets/MyCards.png')}
           />
-        </TouchableOpacity>
-        <TouchableOpacity style={[styles.btnCard, styles.lightGreen]}>
+        	</TouchableOpacity>
+        <TouchableOpacity
+			   onPress={() => changeScreen('cvu')}
+				 style={[styles.btnCard, styles.lightGreen]}>
           <Text style={styles.cardText}>
             Mis cuentas
           </Text>
@@ -30,6 +54,8 @@ const ProductsScreen = () => {
         </TouchableOpacity>
       </View>
 		</View>
+  	}
+	</>
 	);
 };
 
@@ -53,7 +79,7 @@ const styles = StyleSheet.create({
   },
   btnCard: {
     width: '100%',
-    height: '100%',
+    height: '42%',
     padding: 20,
     borderRadius: 20,
     marginTop: 10,
@@ -74,10 +100,10 @@ const styles = StyleSheet.create({
      color: '#ffbf34'
   },
   images: {
-    width: 201,
+    width: 196,
     height: 136,
     position: 'relative',
-    bottom: -40,
+    bottom: -6,
     right: -95
   },
   lightGreen: {
