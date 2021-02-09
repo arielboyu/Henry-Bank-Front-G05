@@ -55,7 +55,9 @@ export default function ChangeMoney ({changeScreen}) {
                     color="#fff" 
                 />
             </Button>
-            <Paragraph style={{fontWeight: '700'}}>Cambiar</Paragraph>
+            <Paragraph style={{fontWeight: '700'}}>
+                Cambiar
+            </Paragraph>
         </View>
     </View>
 	)
