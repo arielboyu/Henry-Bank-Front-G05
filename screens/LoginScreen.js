@@ -7,12 +7,13 @@ import logo from '../assets/logo.png';
 import * as Animatable from 'react-native-animatable';
 import { createNewUser, getUsers, login } from '../src/redux/actions/user';
 import { Divider, Headline, Paragraph, TextInput, Button } from 'react-native-paper';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Login({ navigation }) {
 	const dispatch = useDispatch();
-	useEffect(() => {
+  	useEffect(() => {
 		dispatch(getUsers());
-	},[]);
+	},[]); 
 
 	const [ data, setData ] = useState({
 		email                 : '',
@@ -60,8 +61,38 @@ export default function Login({ navigation }) {
 	const handleLogin = () => {
 		if (data.isValidUser && data.isValidPassword) {
 			dispatch(login(data));
-		}
+/*       async () => {
+        try {
+          const jsonData = JSON.stringify(data)
+          await AsyncStorage.setItem('USER', jsonData);
+        } catch(e){
+          console.log(e);
+        }
+      }
+      async () => {
+        try {
+          console.log("ENTREEE")
+          const jsonData = await AsyncStorage.getItem('USER')
+          console.log("JSON DATA ", jsonData)
+          return jsonData != null ? JSON.parse(jsonData) : null;
+         
+        } catch(e) {
+          // error reading value
+        }
+      }
+		} */
 	};
+
+/*   const storeUser = async () => {
+    try {
+      const jsonData = JSON.stringify(data)
+      await AsyncStorage.setItem('USER', jsonData);
+    } catch(e){
+      console.log(e);
+    }
+  } */
+
+
 
 	return (
 		<View style={styles.container}>

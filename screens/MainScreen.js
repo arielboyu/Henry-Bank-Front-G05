@@ -4,8 +4,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Avatar, Button, RadioButton, Headline, Paragraph, Portal, Dialog, Divider, Modal } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import Transfer from 'react-native-vector-icons/MaterialCommunityIcons';
-import { getUserByID } from '../src/redux/actions/user'
+import { getStorageUser, getUserByID } from '../src/redux/actions/user'
 import Header from '../src/components/Header';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const data = {
 	name  : 'Valentín',
@@ -29,9 +30,30 @@ const MainScreen = ({changeScreen}) => {
 	const [accountShows, setAccountShows] = useState(false)
 	const [accountChecked, setAccountChecked] = useState("")
 
- 	useEffect(() => {
+  	useEffect(() => {
 		dispatch(getUserByID(user.user.id.id));
-	}, []) 
+  
+	}, [])  
+
+/*   useEffect(() => {
+	
+    dispatch(getStorageUser()); 
+	}, [])  */
+
+ /*  componentDidMount =  async () => {
+    await getUser();
+   } */
+
+/*   const getUser = async () => {
+    try {
+      const jsonData = await AsyncStorage.getItem('USER')
+      console.log("JSON DATA ", jsonData)
+      return jsonData != null ? JSON.parse(jsonData) : null;
+     
+    } catch(e) {
+      // error reading value
+    }
+  } */
 
 	const { income, expenses, dollar, peso, accounts } = data;
 	const { firstName, lastName } = user.loggedUser;

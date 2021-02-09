@@ -40,7 +40,7 @@ export default function VerifyScrenn({ navigation }) {
   const onSubmit = async (code, userId) => {
     try {
       const res = await axios.put(`http://192.168.0.10:3001/validation/${userId}`, code);
-     console.log("RES:DATA  ", res.data)
+  
         return navigation.navigate('DischargeScreen')
        
     } catch (err) {

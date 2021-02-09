@@ -23,6 +23,7 @@ import VerifyScrenn from './screens/VerifyScrenn'
 import { cos } from 'react-native-reanimated';
 import CvuScreen from './screens/CvuScreen'
 import CardsScreen from './screens/CardsScreen'
+import FingerPrint from './screens/FingerPrintScreen';
 
 
 
