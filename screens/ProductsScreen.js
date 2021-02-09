@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
   },
   btnCard: {
     width: '100%',
-    height: '100%',
+    height: '42%',
     padding: 20,
     borderRadius: 20,
     marginTop: 10,
@@ -100,10 +100,10 @@ const styles = StyleSheet.create({
      color: '#ffbf34'
   },
   images: {
-    width: 201,
+    width: 196,
     height: 136,
     position: 'relative',
-    bottom: -40,
+    bottom: -6,
     right: -95
   },
   lightGreen: {
