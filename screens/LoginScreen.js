@@ -7,12 +7,28 @@ import logo from '../assets/logo.png';
 import * as Animatable from 'react-native-animatable';
 import { createNewUser, getUsers, login } from '../src/redux/actions/user';
 import { Divider, Headline, Paragraph, TextInput, Button } from 'react-native-paper';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Login({ navigation }) {
 	const dispatch = useDispatch();
-	useEffect(() => {
+  	useEffect(() => {
 		dispatch(getUsers());
-	},[]);
+    getUser()
+	},[]); 
+
+  let storageUser= "";
+   // Trae el usuario guardado en asyncStorage, en forma de objeto.
+   const getUser = async () => {  
+    try {
+      const jsonData = await AsyncStorage.getItem('USER')
+      console.log("JSON DATA ", jsonData)
+      storageUser = jsonData;
+      return jsonData != null ? JSON.parse(jsonData) : null;
+     
+    } catch(e) {
+      // error reading value
+    }
+  } 
 
 	const [ data, setData ] = useState({
 		email                 : '',
@@ -60,8 +76,21 @@ export default function Login({ navigation }) {
 	const handleLogin = () => {
 		if (data.isValidUser && data.isValidPassword) {
 			dispatch(login(data));
-		}
+      storeUser(data)
+		} 
 	};
+
+  //Guarda el user que se loguea en asyncStorage.
+   const storeUser = async (data) => {
+        try {
+      const jsonData = JSON.stringify(data)
+      await AsyncStorage.setItem('USER', jsonData);
+    } catch(e){
+      console.log(e);
+    }
+  } 
+
+
 
 	return (
 		<View style={styles.container}>
@@ -142,7 +171,19 @@ export default function Login({ navigation }) {
 							INICIAR SESIóN
 						</Button>
 				</View>
+        		<View style={styles.boton}>
+						<Button
+							mode="contained"
+							onPress={handleLogin}
+							style={{
+								backgroundColor : '#006A34',
+								width           : '100%',
+							}}>
+							INICIAR SESIóN
+						</Button>
+				</View>
 			</View>
+
 		</View>
 	);
 }

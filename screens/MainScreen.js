@@ -7,6 +7,7 @@ import Transfer from 'react-native-vector-icons/MaterialCommunityIcons';
 import { getUserByID } from '../src/redux/actions/user'
 import { getAllAccounts } from '../src/redux/actions/account'
 import Header from '../src/components/Header';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const dataAccount = [
 	{
@@ -49,11 +50,25 @@ const MainScreen = ({changeScreen}) => {
 	const user = useSelector(state => state.user);
 	const account = useSelector(state => state.account.userAccounts);
 
- 	useEffect(() => {
+  	useEffect(() => {
 		dispatch(getUserByID(user.user.id.id));
 		dispatch(getAllAccounts(user.user.id.email));
-		console.log(user.loggedUser.email)
-	}, []);
+		//console.log(user.loggedUser.email)
+    getUser()
+	}, []); 
+
+   // Trae el usuario guardado en asyncStorage, en forma de objeto.
+   const getUser = async () => {  
+    try {
+      const jsonData = await AsyncStorage.getItem('USER')
+      console.log("JSON DATA ", jsonData)
+      return jsonData != null ? JSON.parse(jsonData) : null;
+     
+    } catch(e) {
+      // error reading value
+    }
+  } 
+
 
 	const { firstName, lastName } = user.loggedUser;
 

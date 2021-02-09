@@ -1,9 +1,30 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {View,Text,Button,StyleSheet, Image, StatusBar, TouchableOpacity} from 'react-native'
 import  * as Animatable  from 'react-native-animatable'
 
 
+
+
 export default function HomeScreen({navigation}) {
+
+  useEffect(() => {
+    getUser()
+  }); 
+
+
+   // Trae el usuario guardado en asyncStorage, en forma de objeto.
+   const getUser = async () => {  
+    try {
+      const jsonData = await AsyncStorage.getItem('USER')
+      console.log("JSON DATA ", jsonData)
+      return jsonData != null ? JSON.parse(jsonData) : null;
+     
+    } catch(e) {
+      // error reading value
+    }
+  } 
+
+
   return (
     <View style={style.container}>
       <StatusBar backgroundColor='green' barStyle="light-content"/>
