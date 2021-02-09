@@ -9,21 +9,6 @@ import { getAllAccounts } from '../src/redux/actions/account'
 import Header from '../src/components/Header';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const dataAccount = [
-	{
-		balance: 1500,
-		tipo: 'Pesos',
-		cvu: '222222000022222',
-		img: '2'
-	}, 
-	{
-		balance: 45,
-		tipo: 'Dolares',
-		cvu: '333333111133333',
-		img: '1'
-	}
-]
-
 const dataMovements = {
 	pesos: {
 		tipo: 'Pesos',
@@ -48,13 +33,12 @@ const MainScreen = ({changeScreen}) => {
 	const [periodChecked, setPeriodChecked] = useState("");
 
 	const user = useSelector(state => state.user);
-	const account = useSelector(state => state.account.userAccounts);
+	const account = useSelector(state => state.account.userAccounts)
 
-  	useEffect(() => {
+  useEffect(() => {
 		dispatch(getUserByID(user.user.id.id));
 		dispatch(getAllAccounts(user.user.id.email));
-		//console.log(user.loggedUser.email)
-    getUser()
+    getUser();
 	}, []); 
 
    // Trae el usuario guardado en asyncStorage, en forma de objeto.
@@ -68,7 +52,6 @@ const MainScreen = ({changeScreen}) => {
       // error reading value
     }
   } 
-
 
 	const { firstName, lastName } = user.loggedUser;
 
@@ -98,9 +81,8 @@ const MainScreen = ({changeScreen}) => {
 
 	const setAccount = (e) => {
 		let offset = e.nativeEvent.contentOffset.x;
-		let index = parseInt(offset / 304); //Flatlist width
-		index === 0 ? setSelectedCard('Pesos') : setSelectedCard('Dolares')
-		//Si index es cero la card que se esta mostrando es la de pesos
+		let index = parseInt(offset / offset);
+		index === 1 ? setSelectedCard('Dolares') : setSelectedCard('Pesos')
 	}
 
 	const keyExtractor = (item, index) => index.toString();
@@ -342,7 +324,7 @@ const styles = StyleSheet.create({
   	},
   	scroll: {
 		height: 200,
-		width: "100%"
+		width: '100%'
   	},
   	general: {
 		marginTop: 10,
