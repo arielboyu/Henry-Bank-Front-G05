@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 
 import SendMoney from '../../screens/SendMoney';
 import ChargeMoney from '../../screens/ChargeMoneyScreen';
+import ChangeMoney from '../../screens/ChangeMoneyScreen';
 import MainScreen from '../../screens/MainScreen';
 
 const Main = () => {
-    const [screen, setScreen] = useState("main")
+    const [screen, setScreen] = useState("change")
 
     const changeScreen = (data) => {
         setScreen(data)
@@ -24,6 +25,11 @@ const Main = () => {
             }
             {
                 screen === "send" && <SendMoney
+                    changeScreen={changeScreen}
+                />
+            }
+            {
+                screen === "change" && <ChangeMoney
                     changeScreen={changeScreen}
                 />
             }

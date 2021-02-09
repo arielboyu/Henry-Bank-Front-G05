@@ -32,7 +32,7 @@ const Tab = createMaterialBottomTabNavigator();
 
 const Index = () => {
     const user = useSelector(state => state.user);
-    const logged = user.user.logged;
+    const logged = true//user.user.logged;
 
 	return (
         <>
@@ -115,36 +115,6 @@ const Index = () => {
                     tabBarIcon: ({ color }) => (
                         <Icon
                         name="contacts"
-                        color={color}
-                        size={23}
-                        />
-                    ),
-                    tabBarColor: "#5db12f"
-                    }}
-
-                />
-                <Tab.Screen
-                    name="Cvu"
-                    component={CvuScreen}
-                    options={{
-                    tabBarIcon: ({ color }) => (
-                        <Icon
-                        name="asd"
-                        color={color}
-                        size={23}
-                        />
-                    ),
-                    tabBarColor: "#5db12f"
-                    }}
-
-                />
-                <Tab.Screen
-                    name="Cards"
-                    component={CardsScreen}
-                    options={{
-                    tabBarIcon: ({ color }) => (
-                        <Icon
-                        name="asd"
                         color={color}
                         size={23}
                         />

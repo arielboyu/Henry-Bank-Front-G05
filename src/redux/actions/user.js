@@ -91,11 +91,13 @@ export const getUsers = () => {
 };
 
 export const dischargeNewUser = (updateUser) => {
+  const firstName = updateUser.first_name.charAt(0).toUpperCase() + updateUser.first_name.slice(1);
+  const lastName =updateUser.last_name.charAt(0).toUpperCase() + updateUser.last_name.slice(1);
   return async (dispatch) => {
     try {
       const res = await axios.put(`http://${IP}:3001/user/alta/${updateUser.id}`, {
-        firstName: updateUser.first_name,
-        lastName: updateUser.last_name,
+        firstName: firstName,
+        lastName: lastName,
         mobile: updateUser.phone_number,
         street: 'Bs As',
         streetNumber: 299,
@@ -108,7 +110,7 @@ export const dischargeNewUser = (updateUser) => {
       });
       dispatch(dischargeUser(res.data));
       console.log('Action', res.data);
-      alert(`User Update successfully`);
+      alert(`Usuario registrado correctamente`);
     } catch (err) {
       console.log(err);
     }

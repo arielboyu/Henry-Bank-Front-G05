@@ -1,39 +1,60 @@
 import React, { useEffect, useState } from 'react';
-import { ImageBackground, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { FlatList, ImageBackground, StyleSheet, Text, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux'
-import { Avatar, Button, RadioButton, Headline, Paragraph, Portal, Dialog, Divider, Modal } from 'react-native-paper';
+import { Button, RadioButton, Headline, Paragraph, Portal, Dialog, Divider } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import Transfer from 'react-native-vector-icons/MaterialCommunityIcons';
 import { getStorageUser, getUserByID } from '../src/redux/actions/user'
+import { getAllAccounts } from '../src/redux/actions/account'
 import Header from '../src/components/Header';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const data = {
-	name  : 'Valentín',
-	lastName : 'Nicheglod',
-	income: 3320,
-	expenses : 1504,
-	dollar: '1.300',
-	peso  : '25.000',
-	accounts : {
-		usd  : '6384636',
-		peso : '4520065'
+const dataAccount = [
+	{
+		balance: 1500,
+		tipo: 'Pesos',
+		cvu: '222222000022222',
+		img: '2'
+	}, 
+	{
+		balance: 45,
+		tipo: 'Dolares',
+		cvu: '333333111133333',
+		img: '1'
 	}
-};
+]
 
+const dataMovements = {
+	pesos: {
+		tipo: 'Pesos',
+		ingresos: 1300,
+		gastos: 250
+	},
+	dolares: {
+		tipo: 'Dolares',
+		ingresos: 20,
+		gastos: 0
+	},
+}
 //Mi posición consolidada
 const MainScreen = ({changeScreen}) => {
 	const dispatch = useDispatch();
+
+	//Card seleccionada (pesos o dolares)
+	const [selectedCard, setSelectedCard] = useState('Pesos');
+
+	//Se utiliza en el selector de periodo
+  	const [periodShows, setPeriodShows] = useState(false);
+	const [periodChecked, setPeriodChecked] = useState("");
+
 	const user = useSelector(state => state.user);
-  	const [periodShows, setPeriodShows] = useState(false)
-	const [periodChecked, setPeriodChecked] = useState("")
-	const [accountShows, setAccountShows] = useState(false)
-	const [accountChecked, setAccountChecked] = useState("")
+	const account = useSelector(state => state.account.userAccounts);
 
   	useEffect(() => {
 		dispatch(getUserByID(user.user.id.id));
-  
-	}, [])  
+		dispatch(getAllAccounts(user.user.id.email));
+		console.log(user.loggedUser.email)
+	}, []); 
 
 /*   useEffect(() => {
 	
@@ -55,8 +76,41 @@ const MainScreen = ({changeScreen}) => {
     }
   } */
 
-	const { income, expenses, dollar, peso, accounts } = data;
+
 	const { firstName, lastName } = user.loggedUser;
+
+	const card = ({item, index}) => (
+		<View>
+			<ImageBackground
+				source={require(`../assets/backgroundCard2.jpeg`)}
+				style={styles.mainCard}
+				imageStyle={{ borderRadius: 15 }}>
+				<View>
+					<Paragraph>Balance actual</Paragraph>
+					<Text style={styles.bigText}>
+						{`${item.tipo === 'dolares' ? 'US$' : '$'}${item.balance}`}
+					</Text>
+				</View>
+				<View style={styles.cardInfo}>
+					<Paragraph style={styles.cardText}>
+						{`${firstName} ${lastName}`}
+					</Paragraph>
+					<Paragraph style={styles.cardText}>
+						{`******************${item.tipo === 'dolares' ? item.cvuUS.slice(item.cvuUS.length - 4, item.cvuUS.length) : item.cvu.slice(item.cvu.length - 4, item.cvu.length)} | ${item.tipo.charAt(0).toUpperCase() + item.tipo.slice(1)}`}
+					</Paragraph>
+				</View>
+			</ImageBackground>
+		</View>
+	);
+
+	const setAccount = (e) => {
+		let offset = e.nativeEvent.contentOffset.x;
+		let index = parseInt(offset / 304); //Flatlist width
+		index === 0 ? setSelectedCard('Pesos') : setSelectedCard('Dolares')
+		//Si index es cero la card que se esta mostrando es la de pesos
+	}
+
+	const keyExtractor = (item, index) => index.toString();
 
 	return (
 		<View style={styles.container}>
@@ -64,57 +118,29 @@ const MainScreen = ({changeScreen}) => {
 				<>
 					<View style={styles.balance}>
 						<Header title={`Hola, ${firstName}...`}/>
-						<ScrollView 
-							horizontal={true} 
+						<FlatList
+							keyExtractor={keyExtractor}
+							onScroll={setAccount}
+							data={account}
 							pagingEnabled={true}
-							showsHorizontalScrollIndicator={false}
 							decelerationRate='fast'
+							horizontal={true}
+							extraData={user.loggedUser}
+							renderItem={card}
+							showsHorizontalScrollIndicator={false}
 							style={styles.scroll}
-						>
-							{/*Card 1*/}
-
-							<View>
-								<ImageBackground
-									source={require('../assets/backgroundCard2.jpeg')}
-									style={styles.mainCard}
-									imageStyle={{ borderRadius: 15 }}>
-									<View>
-										<Paragraph>Balance actual</Paragraph>
-										<Text style={styles.bigText}>{`$ ${peso}`}</Text>
-									</View>
-									<View style={styles.cardInfo}>
-										<Paragraph style={styles.cardText}>{`${firstName} ${lastName}`}</Paragraph>
-										<Paragraph style={styles.cardText}>{`Nº #${accounts.peso} | Pesos`}</Paragraph>
-									</View>
-								</ImageBackground>
-							</View>
-
-							{/*Card 2 */}
-
-							<View>
-								<ImageBackground
-									source={require('../assets/backgroundCard1.jpeg')}
-									style={styles.mainCard}
-									imageStyle={{ borderRadius: 15 }}>
-									<View>
-										<Paragraph>Balance actual</Paragraph>
-										<Text style={styles.bigText}>{`US$ ${dollar}`}</Text>
-									</View>
-									<View style={styles.cardInfo}>
-										<Paragraph style={styles.cardText}>{`${firstName} ${lastName}`}</Paragraph>
-										<Paragraph style={styles.cardText}>{`Nº #${accounts.usd} | Dólares`}</Paragraph>
-									</View>
-								</ImageBackground>
-							</View>
-						</ScrollView>
+						/>
 					</View>
 
 					{/* General */}
 
 					<View style={styles.general}>
-						<Headline>General...</Headline>
+						<View style={[styles.generalCont1, {justifyContent: 'space-between', alignItems: 'center'}]}>
+							<Headline>General...</Headline>
+							<Text style={{marginRight: 10}}>{selectedCard}</Text>
+						</View>
+				
 						<View style={styles.generalCont1}>
-							{/* Ingresos */}
 
 							<View style={styles.generalSection}>
 								<View style={styles.cardCont}>
@@ -123,12 +149,10 @@ const MainScreen = ({changeScreen}) => {
 									</View>
 									<View style={styles.generalSection2}>
 										<Paragraph style={styles.white}>Ingresos</Paragraph>
-										<Headline style={styles.numbers}>{`$${income}`}</Headline>
+										<Headline style={styles.numbers}>{`${selectedCard === 'Pesos' ? '$' + dataMovements.pesos.ingresos : 'US$ ' + dataMovements.dolares.ingresos}`}</Headline>
 									</View>
 								</View>
 							</View>
-
-							{/* Gastos */}
 
 							<View style={styles.generalSection}>
 								<View style={styles.cardCont}>
@@ -137,19 +161,22 @@ const MainScreen = ({changeScreen}) => {
 									</View>
 									<View style={styles.generalSection2}>
 										<Paragraph style={styles.white}>Gastos</Paragraph>
-										<Headline style={styles.numbers}>{`$${expenses}`}</Headline>
+										<Headline style={styles.numbers}>{`${selectedCard === 'Pesos' ? '$' + dataMovements.pesos.gastos : 'US$ ' + dataMovements.dolares.gastos}`}</Headline>
 									</View>
 								</View>
 							</View>
+
 						</View>
 					</View>
+
 					<Divider/>
-					<View style={styles.generalCont1}>
+
+					<View style={[styles.generalCont1, {justifyContent: 'center'}]}>
 						<Button 
 							mode="text"
 							onPress={() => setPeriodShows(true)}
 						>
-							PERíODO
+							SELECCIONAR PERíODO
 						</Button>
 						<Portal>
 							<Dialog visible={periodShows} onDismiss={() => setPeriodShows(false)}>
@@ -240,44 +267,8 @@ const MainScreen = ({changeScreen}) => {
 								</Dialog.Actions>
 							</Dialog>
 						</Portal>
-
-						<Button 
-							mode="text"
-							onPress={() => setAccountShows(true)}
-						>
-							CUENTA
-						</Button>
-						<Portal>
-							<Dialog visible={accountShows} onDismiss={() => setAccountShows(false)}>
-								<Dialog.Title>Selecciona la cuenta</Dialog.Title>
-								<Dialog.Content>
-									<View style={styles.row}>
-										<RadioButton
-											value={accounts.peso}
-											status={ accountChecked === accounts.peso ? 'checked' : 'unChecked' }
-											onPress={() => setAccountChecked(accounts.peso)}
-										/>
-										<Text style={{fontSize: 18, marginLeft: 5}}>
-											{`Cuenta #${accounts.peso} (Pesos)`}
-										</Text>
-									</View>
-									<View style={styles.row}>
-										<RadioButton
-											value={accounts.usd}
-											status={ accountChecked === accounts.usd ? 'checked' : 'unChecked' }
-											onPress={() => setAccountChecked(accounts.usd)}
-										/>
-										<Text style={{fontSize: 18, marginLeft: 5}}>
-											{`Cuenta #${accounts.usd} (Dolares)`}
-										</Text>
-									</View>
-								</Dialog.Content>
-								<Dialog.Actions>
-									<Button onPress={() => setAccountShows(false)}>Seleccionar</Button>
-								</Dialog.Actions>
-							</Dialog>
-						</Portal>
 					</View>
+
 					<Divider/>
 
 					{/* Buttons */}
@@ -295,7 +286,7 @@ const MainScreen = ({changeScreen}) => {
 						<View style={styles.center}>
 							<Button 
 								style={styles.iconButtons}
-								onPress={() => changeScreen('main')}
+								onPress={() => changeScreen('change')}
 							>
 								<Icon name="exchange-alt" size={30} color="#fff" />
 							</Button>
@@ -338,7 +329,7 @@ const styles = StyleSheet.create({
   	generalCont1: {
  		display: "flex",
  		flexDirection: "row",
- 		justifyContent: "space-around",
+ 		justifyContent: "space-between",
  		width: "100%",
  		marginTop: 2,
  		marginBottom: 2,
@@ -417,7 +408,7 @@ const styles = StyleSheet.create({
 	generalSection: {
 		display: 'flex',
 		alignItems: 'center',
-		width: '48%'
+		width: '48%',
 	},
 	generalSection1: {
 		width: '25%',
