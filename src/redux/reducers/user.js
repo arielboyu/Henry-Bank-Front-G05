@@ -3,12 +3,14 @@ import {
   GET_ALL_USERS,
   DISCHARGE_USER,
   LOGIN, 
+  LOGOUT,
   GET_USER_BY_ID
 } from '../constants/index';
 
 const initialState = {
   user: {},
-  users: []
+  users: [],
+  loggedUser:{}
 };
 
 const userReducer = (state = initialState, action) => {
@@ -34,13 +36,21 @@ const userReducer = (state = initialState, action) => {
         user: {
           token: action.user.token,
           logged: true,
-          id: action.user.id
+          id: action.user.user
+          
         }
       };
+      case LOGOUT:
+        return {
+          ...state,
+          user: {
+            logged: false,
+          }
+        };
       case GET_USER_BY_ID:
         return {
           ...state,
-          user: action.user
+          loggedUser: action.user
         };
     default:
     return state;

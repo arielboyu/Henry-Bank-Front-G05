@@ -7,7 +7,7 @@ import * as ImagePicker from 'expo-image-picker';
 import { useDispatch, useSelector } from 'react-redux';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import logo from '../assets/LogoVector.png';
-import { dischargeNewUser, getUsers } from '../src/redux/actions/user';
+import { createAccount, dischargeNewUser, getUsers } from '../src/redux/actions/user';
 import { TextInput, Button } from 'react-native-paper';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
@@ -18,7 +18,7 @@ export default function dischargeScreen({ navigation, user }) {
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(getUsers());
-	});
+	},[]);
 
 	const [ data, setData ] = useState({
 		form : {
@@ -107,6 +107,7 @@ export default function dischargeScreen({ navigation, user }) {
 		if (age >= 16) {
 			console.log('Screen', updateUser);
 			dispatch(dischargeNewUser(updateUser));
+      dispatch(createAccount(updateUser));
 			navigation.navigate('LoginScreen');
 		} else {
 			alert('Debes ser Mayor de 16 años, Selecciona otra fecha');
@@ -315,7 +316,7 @@ export default function dischargeScreen({ navigation, user }) {
 					style={{
 						position : 'relative',
 						top      : 40,
-						left     : -60
+						left     : -50
 					}}
 				/>
 				<View
@@ -341,12 +342,12 @@ export default function dischargeScreen({ navigation, user }) {
 				<View>
 					<Text
 						style={{
-							width    : 140,
+							width    : 150,
 							height   : 60,
 							position : 'relative',
-							top      : -148,
-							left     : -35,
-							fontSize : 23
+							top      : -150,
+							left     : -5,
+							fontSize : 24
 						}}>
 						Cargar Datos!
 					</Text>
@@ -356,7 +357,7 @@ export default function dischargeScreen({ navigation, user }) {
 							height   : 50,
 							position : 'relative',
 							top      : -216,
-							left     : 130
+							left     : 180
 						}}
 						source={require('../assets/backgroundCard2.jpeg')}
 					/>
@@ -369,7 +370,7 @@ export default function dischargeScreen({ navigation, user }) {
 const styles = StyleSheet.create({
 	container    : {
 		flex            : 1,
-		backgroundColor : '#F1F4FF'
+		backgroundColor : '#FFFF'
 	},
 	text_tree    : {
 		color           : 'black',
@@ -393,7 +394,7 @@ const styles = StyleSheet.create({
 		marginLeft   : 10,
 		marginBottom : 15,
 		height       : 55,
-		width        : 55,
+		width        : 60,
 		borderRadius : 10,
 		position     : 'relative',
 		top          : 3,
@@ -403,7 +404,7 @@ const styles = StyleSheet.create({
 		flexDirection : 'row',
 		position      : 'relative',
 		top           : 100,
-		left          : 115,
+		left          : 145,
 		width         : 120
 	},
 	image        : {
@@ -427,8 +428,8 @@ const styles = StyleSheet.create({
 	},
 	guardar      : {
 		position          : 'relative',
-		top               : 30,
-		left              : 5,
+		top               : 50,
+		left              : -15,
 		marginLeft        : 10,
 		paddingHorizontal : 120
 	},

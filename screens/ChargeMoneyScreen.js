@@ -18,14 +18,14 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import logo from '../assets/logo.png';
 import { getUsers } from '../src/redux/actions/user';
 
-export default function ChargeMoneyScreen({ navigation, user }) {
+export default function ChargeMoneyScreen({ changeScreen, navigation, user }) {
 	//const userAccount = useSelector((state) => state.user.user[1].mobile);
 	const userAccount = '88333 44526';
 
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(getUsers());
-	});
+	}, []);
 
 	const [ visible, setVisible ] = useState(false);
 	const [ visibleButton, setVisibleButton ] = useState(false);
@@ -49,10 +49,17 @@ export default function ChargeMoneyScreen({ navigation, user }) {
 
 	return (
 		<View style={styles.container}>
+			<View style={styles.heading}>
+				<Icon.Button
+					name="arrow-left"
+					size={25}
+					color="black"
+					backgroundColor="#FFFF"
+					onPress={() => changeScreen('main')}
+				/>
+				<Headline>Cargar Dinero</Headline>
+			</View>
 			<ScrollView>
-				<View style={styles.heading}>
-					<Headline>Cargar Dinero</Headline>
-				</View>
 				<View style={styles.logo}>
 					<ImageBackground style={{ width: 160, height: 160 }} source={require('../assets/LogoVector.png')} />
 				</View>
@@ -85,7 +92,7 @@ export default function ChargeMoneyScreen({ navigation, user }) {
 						source={require('../assets/rapi.png')}
 					/>
 					<Text style={{ width: 150, position: 'relative', left: 90, top: -20 }}>
-						Para cargar presenta este Código al cajero{' '}
+						Para cargar presenta este código al cajero{' '}
 					</Text>
 				</View>
 				<View style={{ position: 'relative', top: 50 }}>
@@ -119,7 +126,7 @@ export default function ChargeMoneyScreen({ navigation, user }) {
 							{visibleButton ? (
 								<Button
 									mode="contained"
-									onPress={() => navigation.navigate('Principal')}
+									onPress={() => changeScreen("main")}
 									style={{
 										backgroundColor : '#006A34',
 										width           : 150
@@ -141,7 +148,8 @@ export default function ChargeMoneyScreen({ navigation, user }) {
 const styles = StyleSheet.create({
 	container    : {
 		flex            : 1,
-		backgroundColor : '#F1F4FF'
+		padding         : 20,
+		backgroundColor : '#FFFF'
 	},
 	logo         : {
 		alignItems : 'center',
@@ -160,11 +168,12 @@ const styles = StyleSheet.create({
 		marginLeft      : 25
 	},
 	heading      : {
-		fontSize   : 35,
-		position   : 'relative',
-		top        : 20,
-		left       : -100,
-		alignItems : 'center'
+		marginBottom  : 10,
+		marginTop     : 10,
+		fontSize      : 35,
+		alignItems    : 'center',
+		display       : 'flex',
+		flexDirection : 'row'
 	},
 	centeredView : {
 		flex           : 1,
