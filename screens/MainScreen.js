@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Button, RadioButton, Headline, Paragraph, Portal, Dialog, Divider } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import Transfer from 'react-native-vector-icons/MaterialCommunityIcons';
-import { getStorageUser, getUserByID } from '../src/redux/actions/user'
+import { getUserByID } from '../src/redux/actions/user'
 import { getAllAccounts } from '../src/redux/actions/account'
 import Header from '../src/components/Header';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -53,19 +53,12 @@ const MainScreen = ({changeScreen}) => {
   	useEffect(() => {
 		dispatch(getUserByID(user.user.id.id));
 		dispatch(getAllAccounts(user.user.id.email));
-		console.log(user.loggedUser.email)
+		//console.log(user.loggedUser.email)
+    getUser()
 	}, []); 
 
-/*   useEffect(() => {
-	
-    dispatch(getStorageUser()); 
-	}, [])  */
-
- /*  componentDidMount =  async () => {
-    await getUser();
-   } */
-
-/*   const getUser = async () => {
+   // Trae el usuario guardado en asyncStorage, en forma de objeto.
+   const getUser = async () => {  
     try {
       const jsonData = await AsyncStorage.getItem('USER')
       console.log("JSON DATA ", jsonData)
@@ -74,7 +67,7 @@ const MainScreen = ({changeScreen}) => {
     } catch(e) {
       // error reading value
     }
-  } */
+  } 
 
 
 	const { firstName, lastName } = user.loggedUser;

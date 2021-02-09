@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Text,
   View,
@@ -12,69 +12,96 @@ import Constants from 'expo-constants';
 import DropdownAlert from 'react-native-dropdownalert';
 import * as LocalAuthentication from 'expo-local-authentication'
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useDispatch } from 'react-redux';
+import { login } from '../src/redux/actions/user';
 
-export default class App extends Component {
-  state = {
-    compatible: false,
-  };
- 
-  componentDidMount =  async () => {
-   await this.checkDeviceForHardware(); 
-   await this.getUser();
+export default function fingerPrint({ navigation }) {
+
+  const [ state, setState ] = useState({
+		compatible : false,
+    loggedUser: {}
+	});
+
+  const dispatch = useDispatch();
+  useEffect( () => {
+    checkDeviceForHardware();
+    getUser()
+  }, []);
+
+
+
+  //Busca el user guardado en AsyncStorage para hacer el login.
+  const getUser = async () => {
+    try {
+      const jsonData = await AsyncStorage.getItem('USER')
+      console.log("JSON DATA ", jsonData)
+     setState({compatible: true, loggedUser: JSON.parse(jsonData) })
+
+     /*  return jsonData != null ? JSON.parse(jsonData) : null; */
+
+    } catch (e) {
+      // error reading value
+    }
   }
 
-  checkDeviceForHardware = async () => {
-    let compatible = await LocalAuthentication.hasHardwareAsync();
-    this.setState({ compatible });
-    if (!compatible) {
-      this.showIncompatibleAlert();
-    }
-  }; 
+  var loggedUser = state.loggedUser;
 
-  showIncompatibleAlert = () => {
-    this.dropdown.alertWithType(
+  //Checkea si el telefono es compatible 
+  const checkDeviceForHardware = async () => {
+    let compatible = await LocalAuthentication.hasHardwareAsync();
+     setState({ compatible });
+    if (!compatible) {
+      showIncompatibleAlert();
+    }
+  };
+
+  //Error si no es compatible.
+  const showIncompatibleAlert = () => {
+    dropdown.alertWithType(
       'error',
       'Dispositivo no compatible',
       'Su dispositivo no es compatible con escaneo de huella dactilar.'
     );
   };
 
-  checkForBiometrics = async () => {
+  //Busca que haya huellas guardadas.
+  const checkForBiometrics = async () => {
     let biometricRecords = await LocalAuthentication.isEnrolledAsync();
     if (!biometricRecords) {
-      this.dropdown.alertWithType(
+      dropdown.alertWithType(
         'Atención',
         'No tiene huellas guardadas',
         'Asegurese que su dispositivo tenga huellas guardadas'
       );
     } else {
-      this.handleLoginPress();
+      handleLoginPress();
     }
   };
-  
-  handleLoginPress = () => {
+
+  const handleLoginPress = () => {
     if (Platform.OS === 'android') {
-      this.showAndroidAlert();
+      showAndroidAlert();
     } else {
-      this.scanBiometrics();
+      scanBiometrics();
     }
   };
 
-  showAndroidAlert = () => {
-    Alert.alert('Fingerprint Scan', 'Coloque su huella sobre el sensor.');
-    this.scanBiometrics();
+  const showAndroidAlert = () => {
+  /*   Alert.alert('Fingerprint Scan', 'Coloque su huella sobre el sensor.'); */
+    scanBiometrics();
   };
 
-  scanBiometrics = async () => {
-    let result = await LocalAuthentication.authenticateAsync('Biometric Scan.');
+  const scanBiometrics = async () => {
+    let result = await LocalAuthentication.authenticateAsync();
     if (result.success) {
-      this.dropdown.alertWithType(
+      dropdown.alertWithType(
         'success',
         'You are you!',
         'Bio-Authentication succeeded.'
       );
+      handleLogin();
     } else {
-      this.dropdown.alertWithType(
+      dropdown.alertWithType(
         'error',
         'Uh oh!',
         'Bio-Authentication failed or canceled.'
@@ -82,43 +109,40 @@ export default class App extends Component {
     }
   };
 
-   getUser = async () => {
-    try {
-      const jsonData = await AsyncStorage.getItem('USER')
-      console.log("JSON DATA ", jsonData)
-      return jsonData != null ? JSON.parse(jsonData) : null;
-     
-    } catch(e) {
-      // error reading value
-    }
-  }
+  const handleLogin = () => {
+/*     console.log("loggedUSER >>", loggedUser)
+    if (loggedUser.isValidUser && loggedUser.isValidPassword) { */
+      dispatch(login(loggedUser));
+   /*  } */
+  };
 
-  render() {
-    return (
-      <View style={styles.container}>
-        <Image
-          style={styles.logo}
-          source={require('../assets/logo.png')}
-        />
-        <TouchableOpacity
-          onPress={
-            this.state.compatible
-              ? this.checkForBiometrics
-              : this.showIncompatibleAlert
-          }
-          style={styles.button}>
-          <Text style={styles.buttonText}>
-            Bio Login
+
+
+  return (
+    <View style={styles.container}>
+      <Image
+        style={styles.logo}
+        source={require('../assets/logo.png')}
+      />
+      <TouchableOpacity
+        onPress={
+          state.compatible
+            ? checkForBiometrics
+            : showIncompatibleAlert
+        }
+        style={styles.button}>
+        <Text style={styles.buttonText}>
+          Bio Login
           </Text>
-        </TouchableOpacity>
-        <DropdownAlert
-          ref={ref => (this.dropdown = ref)}
-          closeInterval={5000}
-        />
-      </View>
-    );
-  }
+      </TouchableOpacity>
+      <DropdownAlert
+        ref={ref => (dropdown = ref)}
+        closeInterval={5000}
+      />
+    </View>
+  );
 }
+
 
 const styles = StyleSheet.create({
   container: {
