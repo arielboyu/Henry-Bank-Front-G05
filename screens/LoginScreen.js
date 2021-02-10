@@ -117,7 +117,7 @@ export default function Login({ navigation }) {
 		 placeholder="Correo Electrónico"
 		 autoCapitalize="none"
 		 onChangeText={(val) => textInputChange(val)}
-		 onEndEditing={(e)=>handleValidUser(e.nativeEvent.text)}
+		 //onEndEditing={(e)=>handleValidUser(e.nativeEvent.text)}
 		 style={{
 		 height:48,
 		 paddingLeft:5,

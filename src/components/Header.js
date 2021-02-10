@@ -12,7 +12,7 @@ const Header = ({title}) => {
     const [visible, setVisible] = useState(false)
 
     useEffect(() => {
-		dispatch(getUserByID(user.user.id));
+		dispatch(getUserByID(user.user.id.id));
 	}, [])
 
 	const { email, firstName, lastName } = user.user;
