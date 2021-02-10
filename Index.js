@@ -123,22 +123,6 @@ const Index = () => {
                     }}
 
                 />
-                <Tab.Screen
-                    name="Contactos"
-                    component={Contacts}
-
-                    options={{
-                    tabBarIcon: ({ color }) => (
-                        <Icon
-                        name="contacts"
-                        color={color}
-                        size={23}
-                        />
-                    ),
-                    tabBarColor: "#5db12f"
-                    }}
-
-                />
                 </Tab.Navigator>
             </NavigationContainer>
 

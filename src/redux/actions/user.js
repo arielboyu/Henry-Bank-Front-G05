@@ -2,6 +2,7 @@ import axios from 'axios';
 
 import {
   LOGIN,
+  LOGOUT,
   GET_USER_BY_ID,
   CREATE_USER,
   GET_ALL_USERS,
@@ -45,10 +46,9 @@ const logUser = (user) => {
   };
 }
 
-const logoutUser = (user) => {
+const logoutUser = () => {
   return {
-    type: LOGOUT,
-    user
+    type: LOGOUT
   };
 }
 
@@ -141,7 +141,7 @@ export const createAccount = (updateUser) => {
   export const logout = () => {
     return async (dispatch) => {
       try {
-        dispatch(logoutUser(res.data))
+        dispatch(logoutUser())
       } catch (err) {
         console.log(err);
       }

@@ -58,7 +58,7 @@ const MainScreen = ({changeScreen}) => {
 	const card = ({item, index}) => (
 		<View>
 			<ImageBackground
-				source={require(`../assets/backgroundCard2.jpeg`)}
+				source={require(`../assets/backgroundCard1.jpeg`)}
 				style={styles.mainCard}
 				imageStyle={{ borderRadius: 15 }}>
 				<View>
@@ -92,7 +92,11 @@ const MainScreen = ({changeScreen}) => {
 			{
 				<>
 					<View style={styles.balance}>
-						<Header title={`Hola, ${firstName}...`}/>
+						<Header 
+							title={`Hola, ${firstName}...`}
+							changeScreen={changeScreen}
+							menu={true}
+						/>
 						<FlatList
 							keyExtractor={keyExtractor}
 							onScroll={setAccount}

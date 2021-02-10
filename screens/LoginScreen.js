@@ -117,7 +117,7 @@ export default function Login({ navigation }) {
 		 placeholder="Correo Electrónico"
 		 autoCapitalize="none"
 		 onChangeText={(val) => textInputChange(val)}
-		 //onEndEditing={(e)=>handleValidUser(e.nativeEvent.text)}
+		 // onEndEditing={(e)=>handleValidUser(e.nativeEvent.text)}
 		 style={{
 		 height:48,
 		 paddingLeft:5,
@@ -229,12 +229,12 @@ logo: {
 	action: {
 			flexDirection:'row',
 			marginTop:20,
-			marginLeft:90,
+			marginLeft:60,
 			paddingBottom:5
 	},
 	errorMsg: {
 			color: '#FF0000',
 			fontSize: 14,
-			marginLeft:120
+			marginLeft:100
 	},
 });
