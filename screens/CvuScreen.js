@@ -17,11 +17,11 @@ export default function CvuScreen({changeScreen}) {
   	const cvuUS = user.loggedUser.accounts[1].cvuUS
 
   const handldeWhatsAppPress = async() => {
-    await Linking.openURL(`https://wa.me/?text=Este es mi CVU:${cvu} / Cuenta en pesos,-Mensaje Enviado desde TreeBankAPP`)
+    await Linking.openURL(`https://wa.me/?text=Este es mi CVU:${cvu} / Cuenta en pesos, -Mensaje Enviado desde TreeBankAPP`)
   }
 
   const handldeWhatsAppPressUS = async() => {
-    await Linking.openURL(`https://wa.me/?text=Este es mi CVU:${cvuUS} / Cuenta en Dolares,-Mensaje Enviado desde TreeBankAPP`)
+    await Linking.openURL(`https://wa.me/?text=Este es mi CVU:${cvuUS} / Cuenta en Dolares, -Mensaje Enviado desde TreeBankAPP`)
   }
 
 	return (
@@ -55,7 +55,7 @@ export default function CvuScreen({changeScreen}) {
 						>
 							<View>
 								<ImageBackground
-									source={require('../assets/backgroundCard2.jpeg')}
+									source={require('../assets/backgroundCard1.jpeg')}
 									style={styles.mainCard}
 									imageStyle={{ borderRadius: 15 }}>
 									<View>
@@ -102,7 +102,7 @@ export default function CvuScreen({changeScreen}) {
 				 	   		</View>
 			      		<View>
 								<ImageBackground
-									source={require('../assets/backgroundCard1.jpeg')}
+									source={require('../assets/backgroundCard2.jpeg')}
 									style={styles.mainCard}
 									imageStyle={{ borderRadius: 15 }}
                   >

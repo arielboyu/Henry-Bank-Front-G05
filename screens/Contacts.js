@@ -8,10 +8,12 @@ import {
 
 
 import * as Contacts from 'expo-contacts';
+import { Headline } from 'react-native-paper';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 
 
 
-export default function PhoneBook() {
+export default function PhoneBook({changeScreen}) {
 
   const [info, setInfo] = useState({
        isLoading: true,
@@ -78,50 +80,62 @@ export default function PhoneBook() {
   }
 
   return (
-    <View style={{flex:1}}>
-      <TextInput
-             placeholder="Buscar contactos"
-             placeholderTextColor="#dddddd"
-             style={{
-                  backgroundColor:'#2f363c',
-                   height: 70,
-                   fontSize: 36,
-                   padding: 10,
-                   borderBottomWidth: 1.5,
-                   borderBottomColor: '#7d90a0'
-             }}
-             onChangeText={(value) => searchContacts(value)}
+    <View style={styles.container2}>
+      <View style={styles.heading}>
+        <Icon.Button
+          name="arrow-left" 
+          size={25}
+          color="black"
+          backgroundColor="#FFFF"
+          onPress={() => changeScreen('main')}
         />
-        <View style={{flex: 1, backgroundColor: '#fff'}}>
-          {info.isLoading ? (
-            <View
+        <Headline>Contactos</Headline>
+      </View>
+      <View style={{flex:1}}>
+        <TextInput
+              placeholder="Buscar contactos"
+              placeholderTextColor="#dddddd"
               style={{
-                      ...StyleSheet.absoluteFill,
-                      alignItems: 'center',
-                      justifyContent: 'center'
+                    backgroundColor:'#2f363c',
+                    height: 70,
+                    fontSize: 36,
+                    padding: 10,
+                    borderBottomWidth: 1.5,
+                    borderBottomColor: '#7d90a0'
               }}
-            >
-            <ActivityIndicator size="large" color="#bad555" />
-           </View>
-          ) : null}
-          <FlatList
-            data={info.contacts}
-            renderItem={renderItem}
-            keyExtractor={(item, index) => index.toString()}
-            ListEmptyComponent={() => (
+              onChangeText={(value) => searchContacts(value)}
+          />
+          <View style={{flex: 1, backgroundColor: '#fff'}}>
+            {info.isLoading ? (
               <View
                 style={{
-                flex: 1,
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginTop: 50
+                        ...StyleSheet.absoluteFill,
+                        alignItems: 'center',
+                        justifyContent: 'center'
                 }}
               >
-              <Text style={{ color: "#bad555" }}>No hay contactos</Text>
-              </View>
-            )}
-          />
-        </View>
+              <ActivityIndicator size="large" color="#bad555" />
+            </View>
+            ) : null}
+            <FlatList
+              data={info.contacts}
+              renderItem={renderItem}
+              keyExtractor={(item, index) => index.toString()}
+              ListEmptyComponent={() => (
+                <View
+                  style={{
+                  flex: 1,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  marginTop: 50
+                  }}
+                >
+                <Text style={{ color: "#bad555" }}>No hay contactos</Text>
+                </View>
+              )}
+            />
+          </View>
+      </View>
     </View>
   );
 
@@ -134,5 +148,18 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center'
   },
+  container2: {
+		flex: 1,
+ 		padding: 20,
+ 		backgroundColor: "#FFFF"
+  	},
+    heading: {
+      marginBottom: 10,
+      marginTop: 10,
+      fontSize: 35,
+      alignItems : 'center',
+      display: 'flex',
+      flexDirection: 'row'
+  }
 });
 
