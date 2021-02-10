@@ -37,6 +37,7 @@
     "react-native-linear-gradient": "^2.5.6",
     "react-native-modal-datetime-picker": "^9.1.0",
     "react-native-paper": "^4.7.1",
+    "react-native-pure-chart": "0.0.24",
     "react-native-reanimated": "~1.13.0",
     "react-native-safe-area-context": "3.1.9",
     "react-native-screens": "~2.15.0",

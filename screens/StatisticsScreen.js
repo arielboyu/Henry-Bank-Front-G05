@@ -4,9 +4,8 @@ import { Button } from 'react-native-paper';
 import PureChart from 'react-native-pure-chart';
 import Svg from 'react-native-svg';
 import { useDispatch, useSelector } from 'react-redux';
-import { VictoryPie, VictoryAnimation, VictoryLabel, VictoryLegend } from 'victory';
-
-import { getAllMovements } from '../src/redux/actions/account';
+import { VictoryPie, VictoryAnimation, VictoryLabel, VictoryLegend } from 'victory'; // Para ver desde el mobil
+                                                                                    // >> victory-native
 
 const WIDTH = 400;
 const HEIGHT = 250;
@@ -15,17 +14,13 @@ const HEIGHTRING = 400;
 
 const StatisticsScreen = () => {
 	const dispatch = useDispatch();
-	/* const user = useSelector((state) => state.user); */
-	const account = useSelector((state) => state.account);
-
-	useEffect(() => {
-		/* dispatch(getAllMovements(user.user.id.id)); */
-		dispatch(getAllMovements(1));
-	}, []);
-
+	const user = useSelector((state) => state.user); 
 	const [ data, setData ] = useState([ { x: 1, y: 5 }, { x: 2, y: 2 }, { x: 3, y: 3 } ]);
 
-	const changeData = () => {
+  const movements = user.loggedUser.movements;
+  const account = user.loggedUser.accounts;
+  
+	 const changeData = () => {
 		const randomNum = Math.floor(Math.random() * 100) + 1;
 
 		const y2 = Math.round(randomNum / 3);
@@ -34,7 +29,7 @@ const StatisticsScreen = () => {
 
 		setData([ { x: 1, y: randomNum }, { x: 2, y: y2 }, { x: 3, y: y3 }, { x: 4, y: y3 + 4 } ]);
 	};
-
+ 
 	return (
 		<View style={{ flex: 1, alignItems: 'center' }}>
 			<View
