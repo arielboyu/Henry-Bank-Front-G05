@@ -32,7 +32,7 @@ export default function HomeScreen({navigation}) {
         <Animatable.Image
           animation="bounceIn"
           duration={2000}
-          source = {require('../assets/logo.png')}
+          source = {require('../assets/logo-wo-title.png')}
           style = {style.logo}
           resizeMode="stretch"
         />
@@ -58,14 +58,14 @@ export default function HomeScreen({navigation}) {
           // color={'#08d4c4', '#01ab9d'}
           style={style.signIn}
           >
-          <Text style={style.textSign}>Iniciar</Text>
+          <Text style={style.textSign}>Iniciar sesion</Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => navigation.navigate('RegisterScreen')}
           // color={'#08d4c4', '#01ab9d'}
           style={style.signIn2}
           >
-          <Text style={style.textSign}>Registrar</Text>
+          <Text style={style.textSign}>Registrarse</Text>
         </TouchableOpacity>
       </View>
       </Animatable.View>
@@ -93,8 +93,8 @@ footer: {
     paddingHorizontal: 30
 },
 logo: {
-  width: 300,
-  height: 300
+  width: 250,
+  height: 250
 },
 title: {
     color: 'black',
@@ -111,8 +111,10 @@ text: {
 },
 button: {
    flexDirection: 'row',
-    marginTop: 10,
+    marginTop: 20,
     color:'#5db12f',
+    display: 'flex',
+    justifyContent: 'center'
 
 },
 signIn: {
@@ -137,9 +139,9 @@ signIn2: {
 },
 textSign: {
     color: 'black',
-    fontWeight: 'bold',
+    //fontWeight: 'bold',
     color:'#ffffff',
-    fontSize:30,
+    fontSize:20,
 
 }
 });

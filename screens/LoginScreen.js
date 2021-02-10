@@ -160,17 +160,7 @@ export default function Login({ navigation }) {
 				</View>
 			</View>
 			<View style={styles.botones}>
-				<View style={styles.boton}>
-						<Button
-							mode="contained"
-							onPress={handleLogin}
-							style={{
-								backgroundColor : '#006A34',
-								width           : '100%',
-							}}>
-							INICIAR SESIóN
-						</Button>
-				</View>
+
         		<View style={styles.boton}>
 						<Button
 							mode="contained"
