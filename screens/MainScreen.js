@@ -38,11 +38,11 @@ const MainScreen = ({changeScreen}) => {
   useEffect(() => {
 		dispatch(getUserByID(user.user.id.id));
 		dispatch(getAllAccounts(user.user.id.email));
-    	getUser();
+    getStoredUser();
 	}, []); 
 
    // Trae el usuario guardado en asyncStorage, en forma de objeto.
-   const getUser = async () => {  
+   const getStoredUser = async () => {  
     try {
       const jsonData = await AsyncStorage.getItem('USER')
       console.log("JSON DATA ", jsonData)
