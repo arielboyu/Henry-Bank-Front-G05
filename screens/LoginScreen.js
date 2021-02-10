@@ -40,7 +40,7 @@ export default function Login({ navigation }) {
 	});
 
 	function handlePasswordChange(val) {
-	  if (/^[a-zA-Z0-9]{4,20}$/i.test(val)){
+	  if (/^[a-zA-Z0-9]{8,20}$/i.test(val)){
 			setData({
 					...data,
 					password: val,
@@ -137,7 +137,7 @@ export default function Login({ navigation }) {
 		 </View>
 		 { data.isValidUser ? null :
 		 <Animatable.View animation="fadeInLeft" duration={500}>
-		 <Text style={styles.errorMsg}>Ingresa un e-mail valido</Text>
+		 <Text style={styles.errorMsg}>Ingresar e-mail</Text>
 		 </Animatable.View>
 		 }
 		 <View style={styles.action}>
@@ -177,11 +177,6 @@ export default function Login({ navigation }) {
 		 }
 		 </TouchableOpacity>
 		 </View>
-		 { data.isValidPassword ? null :
-		 <Animatable.View animation="fadeInLeft" duration={500}>
-		 <Text style={styles.errorMsg}>valores alfanumericos 8 caracteres min</Text>
-		 </Animatable.View>
-		 }
 		 <View
 		 style={{marginTop:60
 		 }}>
