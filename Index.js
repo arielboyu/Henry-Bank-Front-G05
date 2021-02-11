@@ -141,7 +141,7 @@ const Index = () => {
                     }}>
                     <Stack.Screen
                     name="Home"
-                    component={Main}
+                    component={HomeScreen}
                     options={{title:'Inicio'}}
                     />
                     <Stack.Screen

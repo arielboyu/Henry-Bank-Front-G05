@@ -5,7 +5,7 @@ import {
   ActivityIndicator, StatusBar, Text,
   Dimensions,Alert
 } from 'react-native';
-
+import {useSelector} from 'react-redux';
 
 import * as Contacts from 'expo-contacts';
 import { Headline } from 'react-native-paper';
@@ -14,12 +14,23 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 
 
 export default function PhoneBook({changeScreen}) {
-
+  
+  const contactos = useSelector(state => state.user.loggedUser.contacts)
   const [info, setInfo] = useState({
        isLoading: true,
        contacts: [],
   })
   
+  // const comparar = (contactos, contacts) => {
+  //   // acceder a los telefonos  de la db- contactos[i].mobile
+  //   // acceder a los telefonos de los contactos- contacts.phoneNumbers[0].number
+    
+  //   if ()
+  
+    
+  //   return finalarray;
+  // }
+
   useEffect(() => {
       loadContacts();
       setInfo({
@@ -34,7 +45,7 @@ export default function PhoneBook({changeScreen}) {
 
     const createButtonAlert = (item) =>
     Alert.alert(
-      "Enviar dinero a este contacto?",
+      "Editar este contacto?",
       `${item.firstName + ' '}${item.lastName}`,
       [
         {
@@ -48,7 +59,7 @@ export default function PhoneBook({changeScreen}) {
     );
 
 
-  renderItem = ({item})=>(
+   let renderItem = ({item})=>(
     <View style={{minHeight:70,padding:5}}>
       <TouchableOpacity onPress={()=>createButtonAlert(item)}>
       <Text style={{color: 'black', fontWeight:'bold', fontSize:26}}>
@@ -70,9 +81,9 @@ export default function PhoneBook({changeScreen}) {
     
           if (data.length > 0) {
                const contact = data[0];
-               //console.log("contacts",contact);
+               console.log("contacts-",contact);
           }
-          //console.log("data",data);
+          console.log("data-",data);
           setInfo({
                 ...info,
                 contacts: data,
