@@ -13,12 +13,12 @@ export default function Login({ navigation }) {
 	const dispatch = useDispatch();
   	useEffect(() => {
 		dispatch(getUsers());
-    getUser()
+    getStoredUser()
 	},[]);
 
   let storageUser= "";
    // Trae el usuario guardado en asyncStorage, en forma de objeto.
-   const getUser = async () => {
+   const getStoredUser = async () => {
     try {
       const jsonData = await AsyncStorage.getItem('USER')
       console.log("JSON DATA ", jsonData)

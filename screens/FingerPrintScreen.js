@@ -24,8 +24,10 @@ export default function fingerPrint({ navigation }) {
 
   const dispatch = useDispatch();
   useEffect( () => {
-    checkDeviceForHardware();
-    getUser()
+    let mounted = true;
+   if(mounted) checkDeviceForHardware();
+   // getUser()
+   mounted = false;
   }, []);
 
 
@@ -50,6 +52,7 @@ export default function fingerPrint({ navigation }) {
   const checkDeviceForHardware = async () => {
     let compatible = await LocalAuthentication.hasHardwareAsync();
      setState({ compatible });
+     getUser();
     if (!compatible) {
       showIncompatibleAlert();
     }

@@ -10,7 +10,8 @@ const TransactionsScreen = () => {
 
   const dispatch = useDispatch()
   const user = useSelector(state => state.user)
-  const account = useSelector(state => state.account)
+  const account = useSelector(state => state.user.loggedUser.accounts)
+  const movements = useSelector(state => state.user.loggedUser.movements )
 
   useEffect(() => {
     dispatch(getAllMovements(user.user.id.id))
@@ -41,31 +42,31 @@ const TransactionsScreen = () => {
           <Divider/>
           <View style={styles.row}>
             <Text style={styles.title}>Origen: </Text>
-            <Text>{account.movements[selected] && account.movements[selected].name}</Text>
+            <Text>{movements[selected] && movements[selected].name}</Text>
           </View>
           <View style={styles.row}>
             <Text style={styles.title}>Monto: </Text>
-            <Text>${account.movements[selected] && account.movements[selected].amount}</Text>
+            <Text>${movements[selected] && movements[selected].amount}</Text>
           </View>
           <View style={styles.row}>
             <Text style={styles.title}>Número de transacción: </Text>
-            <Text>{account.movements[selected] && account.movements[selected].id}</Text>
+            <Text>{movements[selected] && movements[selected].id}</Text>
           </View>
           <View style={styles.row}>
             <Text style={styles.title}>Tipo: </Text>
-            <Text>{`${account.movements[selected] && account.movements[selected].movementType} en ${account.movements[selected] && account.movements[selected].currency}`}</Text>
+            <Text>{`${movements[selected] && movements[selected].movementType} en ${movements[selected] && movements[selected].currency}`}</Text>
           </View>
           <View style={styles.row}>
             <Text style={styles.title}>Descripción: </Text>
-            <Text>{account.movements[selected] && account.movements[selected].description}</Text>
+            <Text>{movements[selected] && movements[selected].description}</Text>
           </View>
         </Modal>
       </Portal>
-      {account.movements
+      {movements
         ? <ScrollView showsVerticalScrollIndicator={false}>
             {/* Detalles de la transaccion */}
             {
-              account.movements.map((transaction, i) => (
+              movements.map((transaction, i) => (
                 <View 
                   style={styles.generalCont1} 
                   key={i}  
