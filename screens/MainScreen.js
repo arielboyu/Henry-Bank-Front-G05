@@ -24,6 +24,11 @@ const dataMovements = {
 //Mi posición consolidada
 const MainScreen = ({changeScreen}) => {
 	const dispatch = useDispatch();
+  useEffect(() => {
+		dispatch(getUserByID(user.user.id.id));
+		dispatch(getAllAccounts(user.user.id.email));
+    getStoredUser();
+	}, []); 
 
 	//Card seleccionada (pesos o dolares)
 	const [selectedCard, setSelectedCard] = useState('Pesos');
@@ -35,11 +40,7 @@ const MainScreen = ({changeScreen}) => {
 	const user = useSelector(state => state.user);
 	const account = useSelector(state => state.account.userAccounts)
 
-  useEffect(() => {
-		dispatch(getUserByID(user.user.id.id));
-		dispatch(getAllAccounts(user.user.id.email));
-    getStoredUser();
-	}, []); 
+ 
 
    // Trae el usuario guardado en asyncStorage, en forma de objeto.
    const getStoredUser = async () => {  

@@ -16,16 +16,36 @@ import { useDispatch, useSelector } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import logo from '../assets/logo.png';
-import { getUsers } from '../src/redux/actions/user';
+import { getUserByID, getUsers } from '../src/redux/actions/user';
+import axios from 'axios';
+import IP from '../src/redux/actions/ip';
 
-export default function ChargeMoneyScreen({ changeScreen, navigation, user }) {
+export default function ChargeMoneyScreen({ changeScreen, navigation}) {
 	//const userAccount = useSelector((state) => state.user.user[1].mobile);
 	const userAccount = '88333 44526';
 
 	const dispatch = useDispatch();
+  const user = useSelector(state => state.user)
 	useEffect(() => {
 		dispatch(getUsers());
+    dispatch(getUserByID(user.user.id.id));
 	}, []);
+
+  const id = useSelector(state => state.user.loggedUser.id)
+
+
+  const chargeMoney = () => {
+    return async () => {
+      try {
+        console.log("EWEWEWWWEWWEW")
+        const res = await axios.post(`http://${IP}:3001/movement/carga/1`);
+        const res1 = await axios.put(`http://${IP}:3001/account/recarga/2`)
+        console.log(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+  };
 
 	const [ visible, setVisible ] = useState(false);
 	const [ visibleButton, setVisibleButton ] = useState(false);
@@ -101,7 +121,7 @@ export default function ChargeMoneyScreen({ changeScreen, navigation, user }) {
 				</View>
 				<View style={styles.boton}>
 					<View>
-						<Button style={styles.iconButtons} onPress={transfer}>
+						<Button style={styles.iconButtons} onPress={(transfer, chargeMoney())}>
 							<Icon name="donate" size={30} color="#fff" />
 						</Button>
 						<Paragraph style={{ fontWeight: '700' }}>Confirmar Recarga</Paragraph>
