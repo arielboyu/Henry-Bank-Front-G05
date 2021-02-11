@@ -17,7 +17,7 @@ const Header = (props) => {
 		dispatch(getUserByID(user.user.id.id));
 	}, [])
 
-	const { email, firstName, lastName } = user.loggedUser;
+	const { email, firstName, lastName, photoURL } = user.loggedUser;
 
     return(
         <>
@@ -46,7 +46,7 @@ const Header = (props) => {
                 >
                     <View>
                         <View style={[styles.center, styles.section]}>
-                            <Avatar.Image size={100} source={require('../../assets/logo.png')} />
+                            {photoURL ? <Avatar.Image size={100} source={uri(photoURL)} /> : <Avatar.Text size={100} label={[firstName && firstName.slice(0, 1), lastName && lastName.slice(0, 1)]}/>}
                             <Title>{`${firstName} ${lastName}`}</Title>
                             <Caption>{`${email}`}</Caption>
                         </View>

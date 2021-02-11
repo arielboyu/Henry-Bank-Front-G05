@@ -70,9 +70,9 @@ export default function PhoneBook({changeScreen}) {
     
           if (data.length > 0) {
                const contact = data[0];
-               console.log("contacts",contact);
+               //console.log("contacts",contact);
           }
-          console.log("data",data);
+          //console.log("data",data);
           setInfo({
                 ...info,
                 contacts: data,

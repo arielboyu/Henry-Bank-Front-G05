@@ -17,7 +17,7 @@ export default function CardsScreen({changeScreen}) {
 		backgroundColor="#FFFF"
 		onPress={() => changeScreen('prod')}
 		/>
-    <Headline>Mis Tarjetas</Headline>
+    <Headline>Mis tarjetas</Headline>
     </View>
     <View style={styles.logo}>
     <ImageBackground
