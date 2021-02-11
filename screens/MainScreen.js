@@ -50,8 +50,8 @@ const MainScreen = ({changeScreen}) => {
 	const account = useSelector(state => state.account.userAccounts);
 
  	useEffect(() => {
-		dispatch(getUserByID(user.user.id.id));
-		dispatch(getAllAccounts(user.user.id.email));
+		// dispatch(getUserByID(user.user.id.id));
+		// dispatch(getAllAccounts(user.user.id.email));
 		console.log(user.loggedUser.email)
 	}, []);
 
@@ -264,7 +264,7 @@ const MainScreen = ({changeScreen}) => {
 						<View style={styles.center}>
 							<Button 
 								style={styles.iconButtons}
-								onPress={() => changeScreen('main')}
+								onPress={() => changeScreen('change')}
 							>
 								<Icon name="exchange-alt" size={30} color="#fff" />
 							</Button>

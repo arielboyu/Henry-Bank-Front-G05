@@ -28,7 +28,9 @@ export default function SendMoney({changeScreen}) {
     </View>
       <View >
       <TextInput
-      label="ingresa nombre o e-mail"
+      label="Nombre o e-mail"
+     
+      mode="outlined"
       selectionColor="black"
       style={{height:40,
         paddingLeft:5,
@@ -68,7 +70,8 @@ export default function SendMoney({changeScreen}) {
       }}>
       <View style={styles.input_password}>
       <TextInput
-      label="enviar mensaje"
+      label="Enviar mensaje"
+      mode="outlined"
       selectionColor="black"
       style={{height:40,
         paddingLeft:5,
