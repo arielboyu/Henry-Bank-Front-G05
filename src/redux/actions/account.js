@@ -61,3 +61,16 @@ export const getAllMovements = (id) => {
 		}
 	};
 };
+
+export const changeMoney = (data) => { //type: venta o compra
+	const { amount, email, type } = data
+	return async () => {
+		try {
+			const res = await axios.get(`https://www.dolarsi.com/api/api.php?type=valoresprincipales`);
+			const cotizacion = res.data[0].casa[type].replace(',', '.') //Valor del cambio actual para venta o compra
+			axios.put(`http://${IP}:3001/account/cambio/${cotizacion}/${type}/${amount}/${email}`);
+		} catch (err) {
+			console.log(err);
+		}
+	};
+};

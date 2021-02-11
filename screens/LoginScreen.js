@@ -194,6 +194,20 @@ export default function Login({ navigation }) {
 		 </Button>
 		 </View>
 		 </View>
+		 { storageUser ? true :
+			 <Button
+			 mode="contained"
+			 onPress={()=>{}}
+			 style={{
+				 borderRadius:5,
+				 marginTop: 25,
+				 marginLeft:130,
+				 width: 150,
+			 backgroundColor : '#006A34',
+			 }}>
+			 Usar Huella
+			 </Button>
+		 }
 	 </View>
 	</View>
 	);
