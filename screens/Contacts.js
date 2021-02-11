@@ -9,6 +9,9 @@ import { Picker } from '@react-native-picker/picker';
 
 import * as Contacts from 'expo-contacts';
 
+//crear get para comparar usuarios cargados en el db
+//crear put para editar usuario de db
+
 
 
 export default function PhoneBook() {
