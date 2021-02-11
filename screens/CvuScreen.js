@@ -36,7 +36,7 @@ export default function CvuScreen({changeScreen}) {
         backgroundColor="#FFFF"
         onPress={() => changeScreen('prod')}
         />
-        <Headline>CVU</Headline>
+        <Headline>Mis cuentas</Headline>
         </View>
         <View style={styles.logo}>
         <ImageBackground
