@@ -4,15 +4,16 @@ import {
 } from '../constants/index';
   
   const initialState = {
-    userAccounts: {}
+    userAccounts: {},
+    movements: []
   };
   
   const accountReducer = (state = initialState, action) => {
-    switch (action.type) {
+    switch (action.type) { 
         case GET_ACCOUNT_BY_ID:
           return {
             ...state,
-            userAccounts: action.account
+            movements: action.movement
           };
         case GET_ALL_ACCOUNTS:
           return {

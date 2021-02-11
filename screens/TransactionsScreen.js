@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Headline } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import { useDispatch, useSelector } from 'react-redux';
 import Header from '../src/components/Header';
+import { getAllAccounts } from '../src/redux/actions/account';
 
 const accounts = {
   usd  : '6384636',
@@ -77,6 +79,13 @@ const transactions = [
 ];
 
 const TransactionsScreen = () => {
+
+  const dispatch = useDispatch()
+  const user = useSelector(state => state.user)
+
+  useEffect(() => {
+    dispatch(getAllAccounts(user.user.id.id))
+  }, [])
 
 	return (
 		<View style={styles.container}>

@@ -3,7 +3,7 @@ import {
   StyleSheet, View, TouchableOpacity,
   TextInput, SafeAreaView, FlatList,
   ActivityIndicator, StatusBar, Text,
-  Dimensions
+  Dimensions,Alert
 } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 
@@ -30,12 +30,29 @@ export default function PhoneBook() {
       }
     }, []);
 
+    const createButtonAlert = (item) =>
+    Alert.alert(
+      "Enviar dinero a este contacto?",
+      `${item.firstName + ' '}${item.lastName}`,
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel"
+        },
+        { text: "OK", onPress: () => console.log("OK Pressed") }
+      ],
+      { cancelable: false }
+    );
+
 
   renderItem = ({item})=>(
     <View style={{minHeight:70,padding:5}}>
+      <TouchableOpacity onPress={()=>createButtonAlert(item)}>
       <Text style={{color: 'black', fontWeight:'bold', fontSize:26}}>
         {item.firstName + ' '}{item.lastName}
       </Text>
+      </TouchableOpacity>
       <Text style={{color: 'black', fontWeight:'bold'}}>
         {item.phoneNumbers[0].number}
       </Text>
@@ -108,6 +125,8 @@ export default function PhoneBook() {
           ) : null}
           <FlatList
             data={info.contacts}
+            
+            onPress={() => {alert}}
             renderItem={renderItem}
             keyExtractor={(item, index) => index.toString()}
             ListEmptyComponent={() => (

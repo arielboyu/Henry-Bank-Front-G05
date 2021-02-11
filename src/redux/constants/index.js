@@ -7,3 +7,4 @@ export const DISCHARGE_USER = 'DISCHARGE_USER';
 export const LOGOUT = 'LOGOUT';
 export const GET_ACCOUNT_BY_ID = 'GET_ACCOUNT_BY_ID';
 export const GET_ALL_ACCOUNTS = 'GET_ALL_ACCOUNTS';
+export const GET_ALL_MOVEMENTS = 'GET_ALL_MOVEMENTS';
