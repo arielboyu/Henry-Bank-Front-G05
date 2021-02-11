@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { ImageBackground,Image, StyleSheet, Text, View,CheckBox } from 'react-native';
+import { ImageBackground,Image, StyleSheet, Text, View,CheckBox, ScrollView } from 'react-native';
 import { Divider, Headline, Paragraph,TextInput, Button, } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
@@ -13,6 +13,7 @@ export default function SendMoney({changeScreen}) {
 
 	return (
     <View style={styles.container}>
+	
     <View style={styles.heading}>
     <Icon.Button
 						name="arrow-left"
@@ -23,60 +24,65 @@ export default function SendMoney({changeScreen}) {
 					/>
     <Headline>Enviar Dinero</Headline>
     </View>
+	<ScrollView>
     <View style={styles.logo}>
     <ImageBackground
-    style={{width:60,height:60}}
+    style={{width:160,height:160}}
     source={require('../assets/LogoVector.png')}
     >
     </ImageBackground>
     </View>
 		<View style={styles.action}>
 		 <TextInput
-		 placeholder="Nombre o E-mail"
+		 label="Nombre o e-mail"
 		 autoCapitalize="none"
+		 mode="outlined"
 		 style={{
-		 height:48,
+		 height:40,
 		 paddingLeft:5,
-		 width:180,
+		 width:222,
 		 }}
 		 />
-		 </View>
-		 <View style={styles.action}>
  		 <TextInput
- 		 placeholder="Detalle de envio"
+ 		 label="Detalle de envio"
+		 mode="outlined"
+		 placeholder="Opcional"
  		 autoCapitalize="none"
  		 style={{
- 		 height:48,
+ 		 height:40,
  		 paddingLeft:5,
- 		 width:180,
+ 		 width:222,
+		marginTop: 10
  		 }}
  		 />
  		 </View>
 		 <View style={{
-		 marginTop:15,
-		 marginLeft:80
+		 width: '100%',
+		 flex: 1,
+		 flexDirection: 'row',
+		 justifyContent: 'space-evenly',
+		 marginTop: 10
 		 }} >
 		 <Picker
 			 style={{
 				 color:'black',
-				 width: 100,
+				 width: '35%',
 			 }}
 			 // selectedValue={data.form.typeID}
 			 // onValueChange={(val) => handleChange({ value: val, type: 'typeMoney' })}
 			 >
 			 <Picker.Item label="Pesos" value="Pesos" />
-			 <Picker.Item label="Dolar" value="Dolar" />
-			 </Picker>
-			 </View>
-		 <View style={styles.monto}>
-		 <TextInput
-		 placeholder="$ monto"
+			 <Picker.Item label="Dolares" value="Dolar" />
+		</Picker>
+		<TextInput
+		 label="Monto"
 		 autoCapitalize="none"
+		 mode="outlined"
 		 keyboardType="decimal-pad"
 		 style={{
 		 height:40,
 		 paddingLeft:5,
-		 width:80,
+		 width:'35%',
 		 fontSize:12
 		 }}
 		 />
@@ -87,20 +93,18 @@ export default function SendMoney({changeScreen}) {
 				 onValueChange={setSelection}
 				 style={styles.checkbox}
 			 />
+			 <Text>Acepto usar la sección amigos sin fin comercial  {isSelected ? "👍" : "👎"}</Text>
 		 </View>
-		 <Text>Acepto usar la sección amigo  con fines personales  {isSelected ? "👍" : "👎"}</Text>
-		 <View
-		 style={{marginTop:60
-		 }}>
-		 <View style={styles.botones}>
-		 <View style={styles.boton}>
-		 <Button style={styles.iconButtons}>
-	 	<Transfer name="send" size={30} color="#fff" />
-	 	</Button>
-	 	<Paragraph style={{fontWeight: '700',marginLeft:-36}}>Enviar</Paragraph>
-		 </View>
-		 </View>
-	 </View>
+		 
+		<View>
+			<View style={styles.boton}>
+				<Button style={styles.iconButtons}>
+					<Transfer name="send" size={30} color="#fff" />
+				</Button>
+				<Paragraph style={{fontWeight: '700'}}>Enviar</Paragraph>
+			</View>
+		</View>
+	 </ScrollView>
   </View>
 	)
 }
@@ -112,10 +116,9 @@ const styles = StyleSheet.create({
  		backgroundColor: "#FFFF"
   	},
 		action: {
-				flexDirection:'row',
-				marginTop:20,
-				marginLeft:90,
-				paddingBottom:5
+			flex: 1,
+			alignItems: 'center',
+			marginTop: 20
 		},
 		monto: {
 				flexDirection:'row',
@@ -128,6 +131,7 @@ logo: {
    marginTop:30,
 },
 boton: {
+	display: 'flex',
    alignItems:'center',
    marginTop:15,
    marginLeft:20
@@ -136,9 +140,7 @@ iconButtons: {
   backgroundColor: '#006A34',
   marginBottom: 10,
   borderRadius: 20,
-  marginTop: -65,
   width:15,
-  marginLeft:-32
 },
   heading: {
     marginBottom: 10,
@@ -148,5 +150,16 @@ iconButtons: {
 		display: 'flex',
 		flexDirection: 'row'
 },
+checkboxContainer: {
+	display: 'flex',
+	flexDirection: 'row',
+	alignItems: 'center',
+	marginTop: 20,
+	marginBottom: 20
+},
+boton: {
+	display: 'flex',
+	alignItems: 'center'
+}
 
 });
