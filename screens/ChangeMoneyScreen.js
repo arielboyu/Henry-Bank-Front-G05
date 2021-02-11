@@ -22,8 +22,8 @@ export default function ChangeMoney ({changeScreen}) {
                     backgroundColor="#FFFF"
                     onPress={() => changeScreen('main')}
                 />
-            <Headline>Cambiar Dinero</Headline>
-        </View>
+                <Headline>Cambiar Dinero</Headline>
+            </View>
         <View style={styles.logo}>
             <ImageBackground
                 style={{width:160,height:160}}
@@ -55,7 +55,9 @@ export default function ChangeMoney ({changeScreen}) {
                     color="#fff" 
                 />
             </Button>
-            <Paragraph style={{fontWeight: '700'}}>Cambiar</Paragraph>
+            <Paragraph style={{fontWeight: '700'}}>
+                Cambiar
+            </Paragraph>
         </View>
     </View>
 	)

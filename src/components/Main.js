@@ -4,16 +4,22 @@ import SendMoney from '../../screens/SendMoney';
 import ChargeMoney from '../../screens/ChargeMoneyScreen';
 import ChangeMoney from '../../screens/ChangeMoneyScreen';
 import MainScreen from '../../screens/MainScreen';
-import Contacts from '../../screens/Contacts'
+import ContactsScreen from '../../screens/Contacts';
 
 const Main = () => {
-    const [screen, setScreen] = useState("change")
+    const [screen, setScreen] = useState("main")
 
     const changeScreen = (data) => {
         setScreen(data)
     }
+
     return(
         <>
+            {
+                screen === "contacts" && <ContactsScreen
+                    changeScreen={changeScreen}
+                />
+            }
             {
                 screen === "main" && <MainScreen
                     changeScreen={changeScreen}

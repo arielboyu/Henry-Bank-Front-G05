@@ -1,4 +1,5 @@
 import {
+  GET_ALL_MOVEMENTS,
   GET_ACCOUNT_BY_ID,
   GET_ALL_ACCOUNTS
 } from '../constants/index';
@@ -19,9 +20,14 @@ import {
           return {
             ...state,
             userAccounts: action.account
-          };  
-      default:
-      return state;
+          };
+        case GET_ALL_MOVEMENTS:
+          return {
+            ...state,
+            movements: action.movement
+          };
+        default:
+          return state;
     };
   };
   

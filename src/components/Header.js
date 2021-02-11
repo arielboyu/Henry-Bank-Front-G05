@@ -1,22 +1,23 @@
 import React, {useEffect, useState} from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
-import { Avatar, Button, Menu, Headline, Paragraph, Portal, Dialog, Divider, Modal, Title, Caption } from 'react-native-paper';
+import { StyleSheet, View, Image } from 'react-native';
+import { Avatar, Menu, Headline, Portal, Modal, Title, Caption } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux'
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import { getUserByID } from '../redux/actions/user'
-import Contacts from './../../screens/Contacts'
+import { getUserByID, logout } from '../redux/actions/user'
 
-const Header = ({title}) => {
+const Header = (props) => {
     const dispatch = useDispatch();
     const user = useSelector(state => state.user);
+
+    const { changeScreen, menu, title } = props;
     
     const [visible, setVisible] = useState(false)
   
     useEffect(() => {
-		dispatch(getUserByID(user.user.id));
+		dispatch(getUserByID(user.user.id.id));
 	}, [])
 
-	const { email, firstName, lastName } = user.user;
+	const { email, firstName, lastName } = user.loggedUser;
 
     return(
         <>
@@ -24,13 +25,15 @@ const Header = ({title}) => {
 
 
             <View style={styles.greeting}>
-                <Icon.Button 
-                    name="bars" 
-                    size={25}
-                    color="black"
-                    backgroundColor="#FFFF"
-                    onPress={() => setVisible(true)}
-                />
+                {
+                    menu && <Icon.Button 
+                        name="bars" 
+                        size={25}
+                        color="black"
+                        backgroundColor="#FFFF"
+                        onPress={() => setVisible(true)}
+                    />
+                }
                 <Headline>{title}</Headline>
             </View>
             <Portal>
@@ -41,20 +44,23 @@ const Header = ({title}) => {
                     contentContainerStyle={styles.content}
                     style={styles.sideBar}
                 >
-                    <View style={[styles.center, styles.section]}>
-                        <Avatar.Image size={100} source={require('../../assets/logo.png')} />
-                        <Title>{`${firstName} ${lastName}`}</Title>
-                        <Caption>{`${email}`}</Caption>
+                    <View>
+                        <View style={[styles.center, styles.section]}>
+                            <Avatar.Image size={100} source={require('../../assets/logo.png')} />
+                            <Title>{`${firstName} ${lastName}`}</Title>
+                            <Caption>{`${email}`}</Caption>
+                        </View>
+                        
+                        <View style={[styles.menu]}>
+                            <Menu.Item icon="account" onPress={() => {}} title="Mis datos" style={{width: '100%'}}/>
+                            <Menu.Item icon="contacts" onPress={() => {changeScreen('contacts')}} title="Mis contactos" style={{width: '100%'}}/>
+                            <Menu.Item icon="cog" onPress={() => {}} title="Configuración" style={{width: '100%'}}/>
+                            <Menu.Item icon="help" onPress={() => {}} title="Ayuda" style={{width: '100%'}}/>
+                        </View>
                     </View>
-                    
-                    <View style={[styles.menu]}>
-                        <Menu.Item icon="account" onPress={() => {}} title="Mis datos" style={{width: '100%'}}/>
-                        <Menu.Item icon="contacts" onPress={() => {setScreen("contact")}} title="Mis contactos" style={{width: '100%'}}/>
-                        <Menu.Item icon="cog" onPress={() => {}} title="Configuración" style={{width: '100%'}}/>
-                        <Menu.Item icon="help" onPress={() => {}} title="Ayuda" style={{width: '100%'}}/>
-                    </View>
-                    <View style={[styles.logout, styles.menu, styles.center]}>
-                        <Menu.Item icon="logout" onPress={() => {}} title="Cerrar sesión" style={{width: '100%'}}/>
+
+                    <View style={[styles.logout, styles.menu]}>
+                        <Menu.Item icon="logout" onPress={() => {dispatch(logout())}} title="Cerrar sesión" style={{width: '100%'}}/>
                         <Caption>© TreeBank | {new Date().getFullYear()}</Caption>
                     </View>
                 </Modal>
@@ -69,7 +75,7 @@ const styles = StyleSheet.create({
 		width: '60%',
 		height: '100%',
         display: 'flex',
-        justifyContent: 'flex-start',
+        justifyContent: 'flex-start'
     },
     greeting: {
 		display: "flex",
@@ -84,23 +90,27 @@ const styles = StyleSheet.create({
         elevation: 0,
         display: 'flex',
         alignItems: 'center',
+        justifyContent: 'space-between',
         width: '100%',
-        position: 'absolute'
+        height: '100%',
       },
       center: {
         display: 'flex',
         alignItems: 'center',
       },
       section: {
-        margin: 20
+        margin: 20,
       },
       menu: {
         margin: 0,
-        width: '100%'
+        width: '100%',
       },
       logout: {
-          position: 'relative',
-          bottom: -200
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+        marginBottom: 30
       }
 });
 

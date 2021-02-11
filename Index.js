@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 //Navigation
@@ -23,6 +23,7 @@ import VerifyScrenn from './screens/VerifyScrenn'
 import { cos } from 'react-native-reanimated';
 import CvuScreen from './screens/CvuScreen'
 import CardsScreen from './screens/CardsScreen'
+import FingerPrint from './screens/FingerPrintScreen';
 
 
 
@@ -32,7 +33,23 @@ const Tab = createMaterialBottomTabNavigator();
 
 const Index = () => {
     const user = useSelector(state => state.user);
-    const logged = true//user.user.logged;
+    const logged = user.user.logged;
+
+    useEffect(() => {
+      getStoredUser()
+    }, []); 
+  
+     // Trae el usuario guardado en asyncStorage, en forma de objeto.
+     const getStoredUser = async () => {  
+      try {
+        const jsonData = await AsyncStorage.getItem('USER')
+        console.log("JSON DATA ", jsonData)
+        return jsonData != null ? JSON.parse(jsonData) : null;
+       
+      } catch(e) {
+        // error reading value
+      }
+    } 
 
 	return (
         <>
@@ -104,22 +121,6 @@ const Index = () => {
                         />
                     ),
                     tabBarColor: "#279152"
-                    }}
-
-                />
-                <Tab.Screen
-                    name="Contactos"
-                    component={Contacts}
-
-                    options={{
-                    tabBarIcon: ({ color }) => (
-                        <Icon
-                        name="contacts"
-                        color={color}
-                        size={23}
-                        />
-                    ),
-                    tabBarColor: "#5db12f"
                     }}
 
                 />

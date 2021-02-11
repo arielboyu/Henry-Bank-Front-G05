@@ -7,21 +7,7 @@ import Transfer from 'react-native-vector-icons/MaterialCommunityIcons';
 import { getUserByID } from '../src/redux/actions/user'
 import { getAllAccounts } from '../src/redux/actions/account'
 import Header from '../src/components/Header';
-
-const dataAccount = [
-	{
-		balance: 1500,
-		tipo: 'Pesos',
-		cvu: '222222000022222',
-		img: '2'
-	}, 
-	{
-		balance: 45,
-		tipo: 'Dolares',
-		cvu: '333333111133333',
-		img: '1'
-	}
-]
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const dataMovements = {
 	pesos: {
@@ -47,20 +33,32 @@ const MainScreen = ({changeScreen}) => {
 	const [periodChecked, setPeriodChecked] = useState("");
 
 	const user = useSelector(state => state.user);
-	const account = useSelector(state => state.account.userAccounts);
+	const account = useSelector(state => state.account.userAccounts)
 
- 	useEffect(() => {
-		// dispatch(getUserByID(user.user.id.id));
-		// dispatch(getAllAccounts(user.user.id.email));
-		console.log(user.loggedUser.email)
-	}, []);
+  useEffect(() => {
+		dispatch(getUserByID(user.user.id.id));
+		dispatch(getAllAccounts(user.user.id.email));
+    getStoredUser();
+	}, []); 
+
+   // Trae el usuario guardado en asyncStorage, en forma de objeto.
+   const getStoredUser = async () => {  
+    try {
+      const jsonData = await AsyncStorage.getItem('USER')
+      console.log("JSON DATA ", jsonData)
+      return jsonData != null ? JSON.parse(jsonData) : null;
+     
+    } catch(e) {
+      // error reading value
+    }
+  } 
 
 	const { firstName, lastName } = user.loggedUser;
 
 	const card = ({item, index}) => (
 		<View>
 			<ImageBackground
-				source={require(`../assets/backgroundCard2.jpeg`)}
+				source={require(`../assets/backgroundCard1.jpeg`)}
 				style={styles.mainCard}
 				imageStyle={{ borderRadius: 15 }}>
 				<View>
@@ -83,9 +81,8 @@ const MainScreen = ({changeScreen}) => {
 
 	const setAccount = (e) => {
 		let offset = e.nativeEvent.contentOffset.x;
-		let index = parseInt(offset / 304); //Flatlist width
-		index === 0 ? setSelectedCard('Pesos') : setSelectedCard('Dolares')
-		//Si index es cero la card que se esta mostrando es la de pesos
+		let index = parseInt(offset / offset);
+		index === 1 ? setSelectedCard('Dolares') : setSelectedCard('Pesos')
 	}
 
 	const keyExtractor = (item, index) => index.toString();
@@ -95,7 +92,11 @@ const MainScreen = ({changeScreen}) => {
 			{
 				<>
 					<View style={styles.balance}>
-						<Header title={`Hola, ${firstName}...`}/>
+						<Header 
+							title={`Hola, ${firstName}...`}
+							changeScreen={changeScreen}
+							menu={true}
+						/>
 						<FlatList
 							keyExtractor={keyExtractor}
 							onScroll={setAccount}
@@ -326,8 +327,8 @@ const styles = StyleSheet.create({
 		marginLeft: 15
   	},
   	scroll: {
-		height: 100,
-		width: "100%"
+		height: 200,
+		width: '100%'
   	},
   	general: {
 		marginTop: 10,
