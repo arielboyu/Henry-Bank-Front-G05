@@ -14,4 +14,4 @@ web-build/
 
 # variable
 
-src/redux/actions/ip.js
+/src/redux/actions/ip.js

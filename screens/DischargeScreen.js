@@ -87,7 +87,7 @@ export default function dischargeScreen({ navigation, user }) {
 				}
 			});
 		}
-		console.log('Data', data);
+		//console.log('Data', data);
 	};
 
 	const onChangeDate = (e) => {
@@ -105,12 +105,12 @@ export default function dischargeScreen({ navigation, user }) {
 		var fechaNace = new Date(data.form.birthday_date);
 		let age = Math.floor((today - fechaNace) / (1000 * 60 * 60 * 24) / 365);
 		if (age >= 16) {
-			console.log('Screen', updateUser);
+			//console.log('Screen', updateUser);
 			dispatch(dischargeNewUser(updateUser));
       dispatch(createAccount(updateUser));
 			navigation.navigate('LoginScreen');
 		} else {
-			alert('Debes ser Mayor de 16 años, Selecciona otra fecha');
+			alert('Debes ser Mayor de 16 años para poder registrate');
 		}
 	};
 
