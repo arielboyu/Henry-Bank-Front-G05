@@ -31,15 +31,15 @@ export default function ChargeMoneyScreen({ changeScreen, navigation}) {
     dispatch(getUserByID(user.user.id.id));
 	}, []);
 
-  const id = useSelector(state => state.user.loggedUser.id)
+  //const id = useSelector(state => state.user.loggedUser.id)
 
 
   const chargeMoney = () => {
     return async () => {
       try {
-        console.log("EWEWEWWWEWWEW")
         const res = await axios.post(`http://${IP}:3001/movement/carga/1`);
         const res1 = await axios.put(`http://${IP}:3001/account/recarga/2`)
+        
         console.log(res.data);
       } catch (err) {
         console.log(err);
@@ -54,10 +54,12 @@ export default function ChargeMoneyScreen({ changeScreen, navigation}) {
 	const [ account, setAccount ] = useState(userAccount);
 
 	const transfer = () => {
+    
 		setVisible(true);
 		setVisibleButton(false);
 		setMovement('Procesando Recarga....');
 		setTimeout(() => {
+      
 			setMovement('Recarga Exitosa');
 			setAnimation(false);
 			setVisibleButton(true);
@@ -66,6 +68,11 @@ export default function ChargeMoneyScreen({ changeScreen, navigation}) {
 			setVisible('false');
 		}, 4000) */
 	};
+
+  const handleSubmit = () => {
+    chargeMoney();
+    transfer();
+  }
 
 	return (
 		<View style={styles.container}>
@@ -121,7 +128,7 @@ export default function ChargeMoneyScreen({ changeScreen, navigation}) {
 				</View>
 				<View style={styles.boton}>
 					<View>
-						<Button style={styles.iconButtons} onPress={(transfer, chargeMoney())}>
+						<Button style={styles.iconButtons} onPress={handleSubmit}>
 							<Icon name="donate" size={30} color="#fff" />
 						</Button>
 						<Paragraph style={{ fontWeight: '700' }}>Confirmar Recarga</Paragraph>
@@ -146,7 +153,7 @@ export default function ChargeMoneyScreen({ changeScreen, navigation}) {
 							{visibleButton ? (
 								<Button
 									mode="contained"
-									onPress={() => changeScreen("main")}
+									onPress={() => changeScreen("main") }
 									style={{
 										backgroundColor : '#006A34',
 										width           : 150

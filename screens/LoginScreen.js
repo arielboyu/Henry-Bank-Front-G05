@@ -197,7 +197,7 @@ export default function Login({ navigation }) {
 		 { storageUser ? true :
 			 <Button
 			 mode="contained"
-			 onPress={()=>{}}
+			 onPress={()=>{navigation.navigate("FingerPrint")}}
 			 style={{
 				 borderRadius:5,
 				 marginTop: 25,
