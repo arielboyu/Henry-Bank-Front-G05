@@ -16,7 +16,7 @@ export default function HomeScreen({navigation}) {
    const getStoredUser = async () => {  
     try {
       const jsonData = await AsyncStorage.getItem('USER')
-      console.log("JSON DATA ", jsonData)
+      //console.log("JSON DATA ", jsonData)
       return jsonData != null ? JSON.parse(jsonData) : null;
      
     } catch(e) {

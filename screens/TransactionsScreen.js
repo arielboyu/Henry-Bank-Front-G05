@@ -20,14 +20,6 @@ const TransactionsScreen = () => {
   const [visible, setVisible] = useState(false)
   const [selected, setSelected] = useState(1)
 
-  console.log(account)
-
-  const details = (i) => {
-    console.log(i)
-  }
-
-  const i = selected;
-
 	return (
 		<View style={styles.container}>
 			<Header title="Mis transacciones..."/>

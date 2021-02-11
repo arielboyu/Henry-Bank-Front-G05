@@ -43,7 +43,7 @@ const Header = (props) => {
                 >
                     <View>
                         <View style={[styles.center, styles.section]}>
-                            {photoURL ? <Avatar.Image size={100} source={require(photoURL)} /> : <Avatar.Text size={100} label={[firstName && firstName.slice(0, 1), lastName && lastName.slice(0, 1)]}/>}
+                            {photoURL ? <Avatar.Image size={100} source={uri(photoURL)} /> : <Avatar.Text size={100} label={[firstName && firstName.slice(0, 1), lastName && lastName.slice(0, 1)]}/>}
                             <Title>{`${firstName} ${lastName}`}</Title>
                             <Caption>{`${email}`}</Caption>
                         </View>

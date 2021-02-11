@@ -21,7 +21,7 @@ import axios from 'axios';
 import IP from '../src/redux/actions/ip';
 
 export default function ChargeMoneyScreen({ changeScreen, navigation}) {
-	//const userAccount = useSelector((state) => state.user.user[1].mobile);
+	
 	const userAccount = '88333 44526';
 
 	const dispatch = useDispatch();
@@ -31,7 +31,7 @@ export default function ChargeMoneyScreen({ changeScreen, navigation}) {
     dispatch(getUserByID(user.user.id.id));
 	}, []);
 
-  //const id = useSelector(state => state.user.loggedUser.id)
+
 
 
   const chargeMoney = () => {
@@ -39,7 +39,8 @@ export default function ChargeMoneyScreen({ changeScreen, navigation}) {
       try {
         const res = await axios.post(`http://${IP}:3001/movement/carga/1`);
         const res1 = await axios.put(`http://${IP}:3001/account/recarga/2`)
-        
+        transfer();
+
         console.log(res.data);
       } catch (err) {
         console.log(err);
@@ -69,10 +70,6 @@ export default function ChargeMoneyScreen({ changeScreen, navigation}) {
 		}, 4000) */
 	};
 
-  const handleSubmit = () => {
-    chargeMoney();
-    transfer();
-  }
 
 	return (
 		<View style={styles.container}>
@@ -128,7 +125,7 @@ export default function ChargeMoneyScreen({ changeScreen, navigation}) {
 				</View>
 				<View style={styles.boton}>
 					<View>
-						<Button style={styles.iconButtons} onPress={handleSubmit}>
+						<Button style={styles.iconButtons} onPress={ chargeMoney()}>
 							<Icon name="donate" size={30} color="#fff" />
 						</Button>
 						<Paragraph style={{ fontWeight: '700' }}>Confirmar Recarga</Paragraph>

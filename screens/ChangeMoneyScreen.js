@@ -124,8 +124,7 @@ export default function ChangeMoney ({changeScreen}) {
                 mode="outlined"
                 value={amount}
                 onChange={handleChange}
-                selectionColor="black"
-                style={{height: 40}}
+                style={{height: 40, width: 222}}
             />
             <ButtonGroup
                 onPress={updateSelected}
@@ -166,7 +165,7 @@ const styles = StyleSheet.create({
     },
     mainCont: {
         width: '100%',
-        display: 'flex',
+        flex: 1,
         alignItems: 'center',
         marginTop: 20,
         marginBottom: 20

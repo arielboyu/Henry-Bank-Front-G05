@@ -4,23 +4,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Button, RadioButton, Headline, Paragraph, Portal, Dialog, Divider } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import Transfer from 'react-native-vector-icons/MaterialCommunityIcons';
+import moment from 'moment';
 import { getUserByID } from '../src/redux/actions/user'
 import { getAllAccounts } from '../src/redux/actions/account'
 import Header from '../src/components/Header';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const dataMovements = {
-	pesos: {
-		tipo: 'Pesos',
-		ingresos: 1300,
-		gastos: 250
-	},
-	dolares: {
-		tipo: 'Dolares',
-		ingresos: 20,
-		gastos: 0
-	},
-}
 //Mi posición consolidada
 const MainScreen = ({changeScreen}) => {
 	const dispatch = useDispatch();
@@ -35,31 +24,112 @@ const MainScreen = ({changeScreen}) => {
 
 	//Se utiliza en el selector de periodo
   	const [periodShows, setPeriodShows] = useState(false);
-	const [periodChecked, setPeriodChecked] = useState("");
+	const [periodChecked, setPeriodChecked] = useState("1M");
+	const [periodAmount, setPeriodAmount] = useState({
+		dollar: {
+			in: '',
+			out: ''
+		},
+		peso: {
+			in: '',
+			out: ''
+		}
+	});
 
 	const user = useSelector(state => state.user);
 	const account = useSelector(state => state.account.userAccounts)
 
- 
+  useEffect(() => {
+		dispatch(getUserByID(user.user.id.id));
+		dispatch(getAllAccounts(user.user.id.email));
+    	getStoredUser();
+		handlePeriod('1M')
+	}, []); 
 
    // Trae el usuario guardado en asyncStorage, en forma de objeto.
-   const getStoredUser = async () => {  
-    try {
-      const jsonData = await AsyncStorage.getItem('USER')
-      console.log("JSON DATA ", jsonData)
-      return jsonData != null ? JSON.parse(jsonData) : null;
-     
-    } catch(e) {
-      // error reading value
-    }
-  } 
+   	const getStoredUser = async () => {  
+		try {
+			const jsonData = await AsyncStorage.getItem('USER')
+			return jsonData != null ? JSON.parse(jsonData) : null;
+		
+		} catch(e) {
+			// error reading value
+		}
+  	} 
 
-	const { firstName, lastName } = user.loggedUser;
+	const { firstName, lastName, movements } = user.loggedUser;
+
+	const setAccount = (e) => {
+		let offset = e.nativeEvent.contentOffset.x;
+		let index = parseInt(offset / offset);
+		index === 1 ? setSelectedCard('Dolares') : setSelectedCard('Pesos')
+	}
+
+	const keyExtractor = (item, index) => index.toString();
+
+	const handlePeriod = (period) => {
+		const format = 'DD-MM-YYYY';
+		const time = periodChecked[0] ? periodChecked[0] : period[0]; //Numero
+		const unit = periodChecked[1] ? periodChecked[1] : period[1]; //Periodos de tiempo (dia, mes, semana)
+
+		const parsedMovements = [];
+
+		movements && movements.map(movement => {
+			let data = {
+				type: movement.type,
+				amount: parseInt(movement.amount),
+				currency: movement.currency,
+				date: moment(movement.createdAt.slice(0, 10), 'YYYY-MM-DD').format(format)
+			}
+			parsedMovements.push(data)
+		})
+
+		const startDate = moment().subtract(time, unit).format(format)
+
+		const resultData = parsedMovements.filter(movement => {
+			return new Date(movement.date) >= new Date(startDate)
+		});
+
+		const pesosIn = resultData.filter(movement => {
+			return movement.currency === 'pesos' && movement.type === 'recibo'
+		}).reduce((acc, value) => {
+				return acc + value.amount
+		}, 0)
+
+		const pesosOut = resultData.filter(movement => {
+			return movement.currency === 'pesos' && movement.type === 'envio'
+		}).reduce((acc, value) => {
+				return acc + value.amount
+		}, 0)
+
+		const DollarsIn = resultData.filter(movement => {
+			return movement.currency === 'dolares' && movement.type === 'recibo'
+		}).reduce((acc, value) => {
+				return acc + value.amount
+		}, 0)
+
+		const DollarsOut = resultData.filter(movement => {
+			return movement.currency === 'dolares' && movement.type === 'recibo'
+		}).reduce((acc, value) => {
+				return acc + value.amount
+		}, 0)
+
+		setPeriodAmount({
+			dollar: {
+				in: DollarsIn,
+				out: DollarsOut
+			},
+			peso: {
+				in: pesosIn,
+				out: pesosOut
+			}
+		})
+	}
 
 	const card = ({item, index}) => (
 		<View>
 			<ImageBackground
-				source={require(`../assets/backgroundCard1.jpeg`)}
+				source={index === 0 ? require(`../assets/backgroundCard1.jpeg`) : require(`../assets/backgroundCard2.jpeg`)}
 				style={styles.mainCard}
 				imageStyle={{ borderRadius: 15 }}>
 				<View>
@@ -80,17 +150,9 @@ const MainScreen = ({changeScreen}) => {
 		</View>
 	);
 
-	const setAccount = (e) => {
-		let offset = e.nativeEvent.contentOffset.x;
-		let index = parseInt(offset / offset);
-		index === 1 ? setSelectedCard('Dolares') : setSelectedCard('Pesos')
-	}
-
-	const keyExtractor = (item, index) => index.toString();
-
 	return (
 		<View style={styles.container}>
-			{
+			{firstName &&
 				<>
 					<View style={styles.balance}>
 						<Header 
@@ -129,7 +191,7 @@ const MainScreen = ({changeScreen}) => {
 									</View>
 									<View style={styles.generalSection2}>
 										<Paragraph style={styles.white}>Ingresos</Paragraph>
-										<Headline style={styles.numbers}>{`${selectedCard === 'Pesos' ? '$' + dataMovements.pesos.ingresos : 'US$ ' + dataMovements.dolares.ingresos}`}</Headline>
+										<Headline style={styles.numbers}>{`${selectedCard === 'Pesos' ? '$' + periodAmount.peso.in : 'US$ ' + periodAmount.dollar.in}`}</Headline>
 									</View>
 								</View>
 							</View>
@@ -141,7 +203,7 @@ const MainScreen = ({changeScreen}) => {
 									</View>
 									<View style={styles.generalSection2}>
 										<Paragraph style={styles.white}>Gastos</Paragraph>
-										<Headline style={styles.numbers}>{`${selectedCard === 'Pesos' ? '$' + dataMovements.pesos.gastos : 'US$ ' + dataMovements.dolares.gastos}`}</Headline>
+										<Headline style={styles.numbers}>{`${selectedCard === 'Pesos' ? '$' + periodAmount.peso.out : 'US$ ' + periodAmount.dollar.out}`}</Headline>
 									</View>
 								</View>
 							</View>
@@ -184,18 +246,18 @@ const MainScreen = ({changeScreen}) => {
 									</View>
 									<View style={styles.row}>
 										<RadioButton
-											value="1s"
-											status={ periodChecked === '1s' ? 'checked' : 'unChecked' }
-											onPress={() => setPeriodChecked('1s')}
+											value="1w"
+											status={ periodChecked === '1w' ? 'checked' : 'unChecked' }
+											onPress={() => setPeriodChecked('1w')}
 										/>
 										<Text style={{fontSize: 18, marginLeft: 5}}>
 											Una semana</Text>
 									</View>
 									<View style={styles.row}>
 										<RadioButton
-											value="2s"
-											status={ periodChecked === '2s' ? 'checked' : 'unChecked' }
-											onPress={() => setPeriodChecked('2s')}
+											value="2w"
+											status={ periodChecked === '2w' ? 'checked' : 'unChecked' }
+											onPress={() => setPeriodChecked('2w')}
 										/>
 										<Text style={{fontSize: 18, marginLeft: 5}}>
 											Dos semanas
@@ -203,9 +265,9 @@ const MainScreen = ({changeScreen}) => {
 									</View>
 									<View style={styles.row}>
 										<RadioButton
-											value="1m"
-											status={ periodChecked === '1m' ? 'checked' : 'unChecked' }
-											onPress={() => setPeriodChecked('1m')}
+											value="1M"
+											status={ periodChecked === '1M' ? 'checked' : 'unChecked' }
+											onPress={() => setPeriodChecked('1M')}
 										/>
 										<Text style={{fontSize: 18, marginLeft: 5}}>
 											Un mes
@@ -213,9 +275,9 @@ const MainScreen = ({changeScreen}) => {
 									</View>
 									<View style={styles.row}>
 										<RadioButton
-											value="3m"
-											status={ periodChecked === '3m' ? 'checked' : 'unChecked' }
-											onPress={() => setPeriodChecked('3m')}
+											value="3M"
+											status={ periodChecked === '3M' ? 'checked' : 'unChecked' }
+											onPress={() => setPeriodChecked('3M')}
 										/>
 										<Text style={{fontSize: 18, marginLeft: 5}}>
 											Tres meses
@@ -223,9 +285,9 @@ const MainScreen = ({changeScreen}) => {
 									</View>
 									<View style={styles.row}>
 										<RadioButton
-											value="6m"
-											status={ periodChecked === '6m' ? 'checked' : 'unChecked' }
-											onPress={() => setPeriodChecked('6m')}
+											value="6M"
+											status={ periodChecked === '6M' ? 'checked' : 'unChecked' }
+											onPress={() => setPeriodChecked('6M')}
 										/>
 										<Text style={{fontSize: 18, marginLeft: 5}}>
 											Seis meses
@@ -233,9 +295,9 @@ const MainScreen = ({changeScreen}) => {
 									</View>
 									<View style={styles.row}>
 										<RadioButton
-											value="1a"
-											status={ periodChecked === '1a' ? 'checked' : 'unChecked' }
-											onPress={() => setPeriodChecked('1a')}
+											value="1y"
+											status={ periodChecked === '1y' ? 'checked' : 'unChecked' }
+											onPress={() => setPeriodChecked('1y')}
 										/>
 										<Text style={{fontSize: 18, marginLeft: 5}}>
 											Un año
@@ -243,7 +305,13 @@ const MainScreen = ({changeScreen}) => {
 									</View>
 								</Dialog.Content>
 								<Dialog.Actions>
-									<Button onPress={() => setPeriodShows(false)}>Seleccionar</Button>
+									<Button onPress={(e) => {
+										handlePeriod()
+										setPeriodShows(false)
+										console.log(e.target)
+									}}>
+										Seleccionar
+									</Button>
 								</Dialog.Actions>
 							</Dialog>
 						</Portal>

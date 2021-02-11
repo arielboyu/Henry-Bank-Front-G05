@@ -21,7 +21,6 @@ export default function Login({ navigation }) {
    const getStoredUser = async () => {
     try {
       const jsonData = await AsyncStorage.getItem('USER')
-      console.log("JSON DATA ", jsonData)
       storageUser = jsonData;
       return jsonData != null ? JSON.parse(jsonData) : null;
 

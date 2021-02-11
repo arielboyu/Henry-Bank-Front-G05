@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { ImageBackground, Image, StyleSheet, Text, View, CheckBox } from 'react-native';
-import { Divider, Headline, Paragraph, TextInput, Button, } from 'react-native-paper';
+import React, {useState} from 'react';
+import { ImageBackground,Image, StyleSheet, Text, View,CheckBox, ScrollView } from 'react-native';
+import { Divider, Headline, Paragraph,TextInput, Button, } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import logo from '../assets/logo.png'
@@ -39,11 +39,13 @@ export default function SendMoney({ changeScreen, navigation }) {
   }
   //console.log('Data', data);
 
-  const handleSendMoney = () => {
+  const handleSendMoney =  async () => {
    
   console.log("DATA 2 >>>", data.form)
-      return  axios.post(`http://${IP}:3001/movement/transferencia/${userId}`, data.form )
-      .then( changeScreen('main'));
+      return  await axios.post(`http://${IP}:3001/movement/transferencia/${userId}`, data.form )
+      .then(  await axios.put(`http://${IP}:3001/account/${userId}`, data.form ))    
+      .then( changeScreen('main'))
+      
            
     };
 	
@@ -85,10 +87,11 @@ export default function SendMoney({ changeScreen, navigation }) {
         {/* <TextInput
 		 placeholder="Nombre o E-mail"
 		 autoCapitalize="none"
+		 mode="outlined"
 		 style={{
-		 height:48,
+		 height:40,
 		 paddingLeft:5,
-		 width:180,
+		 width:222,
 		 }}
 		 /> */}
       </View>
