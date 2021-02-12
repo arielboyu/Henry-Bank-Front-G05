@@ -53,10 +53,7 @@ const StatisticsScreen = () => {
 	return (
 		<View style={styles.container}>
 			<Header title="Mis Estadisticas..." />
-			<ImageBackground
-				source={require(`../assets/backgroundCard1.jpeg`)}
-				style={[ styles.btnCard, styles.lightGreen ]}
-				imageStyle={{ borderRadius: 15 }}>
+			
 				<View style={styles.chart}>
 					<Svg>
 						<VictoryPie
@@ -69,7 +66,7 @@ const StatisticsScreen = () => {
 							innerRadius={WIDTHRING / 2 - 30}
 							startAngle={130}
 							endAngle={-130}
-							colorScale={[ 'tomato', 'orange', 'navy', 'cyan' ]}
+							colorScale={[ '#FFEA00', 'orange', 'green', 'red' ]}
 							style={{ labels: { fill: 'white', fontSize: 0 } }}
 						/>
 						<VictoryAnimation duration={1000} data={{ left: account[0].balance }}>
@@ -102,16 +99,16 @@ const StatisticsScreen = () => {
 							y={WIDTHRING / 2 + 50}
 							gutter={20}
 							style={{ border: { stroke: 'black' }, labels: { fontSize: 10 } }}
-							colorScale={[ 'tomato', 'orange', 'navy', 'cyan' ]}
+							colorScale={[ '#FFEA00', 'orange', 'green', 'red' ]}
 							data={[ { name: 'Compra' }, { name: 'Transf' }, { name: 'Carga' }, { name: 'Pago' } ]}
 						/>
 					</Svg>
 				</View>
-			</ImageBackground>
+			
 			<View style={styles.generalCont1}>
 				<TouchableOpacity style={styles.cardContainer}>
 					<View style={styles.section1}>
-						<Icon name={'shopping-cart'} size={30} color="tomato" />
+						<Icon name={'shopping-cart'} size={30} color="white" />
 					</View>
 					<View style={styles.section2}>
 						<View style={styles.section3}>
@@ -127,7 +124,7 @@ const StatisticsScreen = () => {
 			<View style={styles.generalCont1}>
 				<TouchableOpacity style={styles.cardContainer}>
 					<View style={styles.section1}>
-						<Icon name={'exchange-alt'} size={30} color="orange" />
+						<Icon name={'exchange-alt'} size={30} color="white" />
 					</View>
 					<View style={styles.section2}>
 						<View style={styles.section3}>
@@ -143,7 +140,7 @@ const StatisticsScreen = () => {
 			<View style={styles.generalCont1}>
 				<TouchableOpacity style={styles.cardContainer}>
 					<View style={styles.section1}>
-						<Icon name={'donate'} size={30} color="navy" />
+						<Icon name={'donate'} size={30} color="white" />
 					</View>
 					<View style={styles.section2}>
 						<View style={styles.section3}>
@@ -159,7 +156,7 @@ const StatisticsScreen = () => {
 			<View style={styles.generalCont1}>
 				<TouchableOpacity style={styles.cardContainer}>
 					<View style={styles.section1}>
-						<Icon name={'dollar-sign'} size={30} color="cyan" />
+						<Icon name={'dollar-sign'} size={30} color="white" />
 					</View>
 					<View style={styles.section2}>
 						<View style={styles.section3}>
@@ -218,7 +215,9 @@ const styles = StyleSheet.create({
 		height     : HEIGHT,
 		width      : WIDTH,
 		alignItems : 'center',
-		marginTop  : 10
+		marginTop  : 10,
+		marginLeft: "13%"
+
 	},
 	cardContainer : {
 		display       : 'flex',
@@ -227,7 +226,17 @@ const styles = StyleSheet.create({
 		marginBottom  : 2,
 		borderRadius  : 10,
 		width         : '98%',
-		overflow      : 'hidden'
+		overflow      : 'hidden',
+		shadowColor: "#000",
+		shadowOffset: {
+						width: 5,
+						height: 6,
+					},
+		shadowOpacity: 0.37,
+		shadowRadius: 7.49,
+
+		elevation: 2,
+		
 	},
 	generalCont1  : {
 		display        : 'flex',
@@ -235,7 +244,7 @@ const styles = StyleSheet.create({
 		justifyContent : 'space-around',
 		width          : '100%',
 		marginTop      : 5,
-		height         : 60
+		height         : 80
 	},
 	section1      : {
 		width            : '25%',
@@ -244,7 +253,8 @@ const styles = StyleSheet.create({
 		alignItems       : 'center',
 		padding          : 7,
 		borderRightWidth : 1,
-		backgroundColor  : '#097934'
+		backgroundColor  : '#097934',
+		height:"100%"
 	},
 	section2      : {
 		width           : '75%',
@@ -252,8 +262,10 @@ const styles = StyleSheet.create({
 		flexDirection   : 'row',
 		alignItems      : 'center',
 		padding         : 5,
-		backgroundColor : '#5DB11F',
-		marginRight     : 5
+		backgroundColor : 'rgba(93, 177, 31,0.1)',
+		marginRight     : 5,
+		
+		
 	},
 	section3      : {
 		width : '60%'
@@ -264,7 +276,7 @@ const styles = StyleSheet.create({
 		width      : '40%'
 	},
 	text          : {
-		color      : 'white',
+		color      : 'black',
 		fontWeight : '400',
 		fontSize   : 18
 	},

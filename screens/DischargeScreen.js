@@ -319,7 +319,7 @@ export default function dischargeScreen({ navigation, user }) {
 						left     : -50
 					}}
 				/>
-				<View
+				{/* <View
 					style={{
 						position        : 'relative',
 						top             : -50,
@@ -327,8 +327,8 @@ export default function dischargeScreen({ navigation, user }) {
 						height          : 1.5,
 						backgroundColor : 'black'
 					}}
-				/>
-				<View
+				/> */}
+				{/* <View
 					style={{
 						position        : 'relative',
 						top             : -108,
@@ -338,20 +338,20 @@ export default function dischargeScreen({ navigation, user }) {
 						backgroundColor : '#006A34'
 					}}>
 					<Text>y</Text>
-				</View>
+				</View> */}
 				<View>
 					<Text
 						style={{
-							width    : 150,
+							width    : "100%",
 							height   : 60,
 							position : 'relative',
-							top      : -150,
-							left     : -5,
+							top      : -110,
+							left     : 5,
 							fontSize : 24
 						}}>
 						Cargar Datos!
 					</Text>
-					<ImageBackground
+					{/* <ImageBackground
 						style={{
 							width    : 80,
 							height   : 50,
@@ -360,7 +360,7 @@ export default function dischargeScreen({ navigation, user }) {
 							left     : 180
 						}}
 						source={require('../assets/backgroundCard2.jpeg')}
-					/>
+					/> */}
 				</View>
 			</View>
 		</View>
