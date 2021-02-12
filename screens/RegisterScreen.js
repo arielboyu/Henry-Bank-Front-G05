@@ -126,6 +126,7 @@ export default function Register({navigation}) {
         position: 'relative',
         left:80,
         top:-140}}
+        secureTextEntry={true}
       />
       </View>
       <View style={styles.icon_pw2}>
@@ -145,8 +146,9 @@ export default function Register({navigation}) {
         width:210,
         position: 'relative',
         left:80,
-        top:-155,
-      }}/>
+        top:-155}}
+      secureTextEntry={true}
+      />
       </View>
       <View style={{
       position: 'relative',
