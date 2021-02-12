@@ -23,7 +23,7 @@ const MainScreen = ({changeScreen}) => {
 	const [selectedCard, setSelectedCard] = useState('Pesos');
 
 	//Se utiliza en el selector de periodo
-	const [chargin, setCharging] = useState(true);
+	const [charging, setCharging] = useState(false);
   	const [periodShows, setPeriodShows] = useState(false);
 	const [periodChecked, setPeriodChecked] = useState("1M");
 	const [periodAmount, setPeriodAmount] = useState({
@@ -65,77 +65,78 @@ const MainScreen = ({changeScreen}) => {
 		index === 1 ? setSelectedCard('Dolares') : setSelectedCard('Pesos')
 	}
 
+	setTimeout(() => {
+		if (periodAmount.peso.in === "" || periodAmount.peso.in === "") {
+			console.log("Me ejecuto")
+			handlePeriod()
+		} else {
+			setCharging(false)
+		}
+	}, 3000)
+
 	const keyExtractor = (item, index) => index.toString();
 
 			const format = 'DD/MM/YYYY';
-			const time = periodChecked[0] || data[0]; //Numero
-			const unit = periodChecked[1] || data[1]; //Periodos de tiempo (dia, mes, semana)
+			const time = periodChecked[0] || 1; //Numero
+			const unit = periodChecked[1] || 'M'; //Periodos de tiempo (dia, mes, semana)
 
-			const parsedMovements = [];
+	const handlePeriod = () => {
+		const parsedMovements = [];
 
-			movements && movements.map(movement => {
-				let data = {
-					type: movement.type,
-					amount: parseInt(movement.amount),
-					currency: movement.currency,
-					date: moment(movement.createdAt.slice(0, 10), 'YYYY-MM-DD').format(format)
-				}
-				parsedMovements.push(data)
-			})
-
-			const startDate = moment().subtract(time, unit).format(format)
-
-			setTimeout(() => {
-				handlePeriod()
-			}, 500);
-
-			const handlePeriod = () => {
-
-			const resultData = parsedMovements.filter((movement, i) => {
-				return moment(movement.date, "DD/MM/YYYY").format('YYYY/MM/DD') >= moment(startDate, "DD/MM/YYYY").format('YYYY/MM/DD');
-			});
-
-			const pesosIn = resultData.filter(movement => {
-				return movement.currency === 'pesos' && movement.type === 'recibo'
-			}).reduce((acc, value) => {
-					return acc + value.amount
-			}, 0)
-
-			const pesosOut = resultData.filter(movement => {
-				return movement.currency === 'pesos' && movement.type === 'envio'
-			}).reduce((acc, value) => {
-					return acc + value.amount
-			}, 0)
-
-			const DollarsIn = resultData.filter(movement => {
-				return movement.currency === 'dolares' && movement.type === 'recibo'
-			}).reduce((acc, value) => {
-					return acc + value.amount
-			}, 0)
-
-			const DollarsOut = resultData.filter(movement => {
-				return movement.currency === 'dolares' && movement.type === 'recibo'
-			}).reduce((acc, value) => {
-					return acc + value.amount
-			}, 0)
-
-				setPeriodAmount({
-					dollar: {
-						in: DollarsIn,
-						out: DollarsOut
-					},
-					peso: {
-						in: pesosIn,
-						out: pesosOut
-					}
-				})
-
-				setTimeout(() => {
-					setCharging(false)
-				}, 500);
+		movements && movements.map(movement => {
+			let data = {
+				type: movement.type,
+				amount: parseInt(movement.amount),
+				currency: movement.currency,
+				date: moment(movement.createdAt.slice(0, 10), 'YYYY-MM-DD').format(format)
 			}
+			parsedMovements.push(data)
+		})
 
-	//}
+		
+
+		const startDate = moment().subtract(time, unit).format(format)
+
+		const resultData = parsedMovements.filter(movement => {
+			return moment(movement.date, "DD/MM/YYYY").format('YYYY/MM/DD') >= moment(startDate, "DD/MM/YYYY").format('YYYY/MM/DD');
+		});
+		
+		const pesosIn = resultData.filter(movement => {
+			return movement.currency === 'pesos' && movement.type === 'recibo'
+		}).reduce((acc, value) => {
+				return acc + value.amount
+		}, 0)
+		
+		const pesosOut = resultData.filter(movement => {
+			return movement.currency === 'pesos' && movement.type === 'envio'
+		}).reduce((acc, value) => {
+				return acc + value.amount
+		}, 0)
+		
+		const DollarsIn = resultData.filter(movement => {
+			return movement.currency === 'dolares' && movement.type === 'recibo'
+		}).reduce((acc, value) => {
+				return acc + value.amount
+		}, 0)
+		
+		const DollarsOut = resultData.filter(movement => {
+			return movement.currency === 'dolares' && movement.type === 'envio'
+		}).reduce((acc, value) => {
+				return acc + value.amount
+		}, 0)
+
+		setPeriodAmount({
+			periodAmount,
+			dollar: {
+				in: DollarsIn,
+				out: DollarsOut
+			},
+			peso: {
+				in: pesosIn,
+				out: pesosOut
+			}
+		})
+	}
 
 	const card = ({item, index}) => (
 		<View>
@@ -163,9 +164,9 @@ const MainScreen = ({changeScreen}) => {
 
 	return (
 		<View style={styles.container}>
-			{chargin
+			{!firstName
 				? <View style={{flex: 1, justifyContent: 'center'}}>
-				
+					<ActivityIndicator size="large" color="#5DB12F"/>
 				</View>
 				: <>
 					<View style={styles.balance}>
@@ -242,7 +243,10 @@ const MainScreen = ({changeScreen}) => {
 										<RadioButton
 											value="1d"
 											status={ periodChecked === '1d' ? 'checked' : 'unChecked' }
-											onPress={() => setPeriodChecked('1d')}
+											onPress={() => {
+												setPeriodChecked('1d')
+												handlePeriod()
+											}}
 										/>
 										<Text style={{fontSize: 18, marginLeft: 5}}>
 											Hoy
@@ -252,7 +256,10 @@ const MainScreen = ({changeScreen}) => {
 										<RadioButton
 											value="3d"
 											status={ periodChecked === '3d' ? 'checked' : 'unChecked' }
-											onPress={() => setPeriodChecked('3d')}
+											onPress={() => {
+												setPeriodChecked('3d')
+												handlePeriod()
+											}}
 										/>
 										<Text style={{fontSize: 18, marginLeft: 5}}>
 											Tres días
@@ -262,7 +269,10 @@ const MainScreen = ({changeScreen}) => {
 										<RadioButton
 											value="1w"
 											status={ periodChecked === '1w' ? 'checked' : 'unChecked' }
-											onPress={() => setPeriodChecked('1w')}
+											onPress={() => {
+												setPeriodChecked('1w')
+												handlePeriod()
+											}}
 										/>
 										<Text style={{fontSize: 18, marginLeft: 5}}>
 											Una semana</Text>
@@ -271,7 +281,10 @@ const MainScreen = ({changeScreen}) => {
 										<RadioButton
 											value="2w"
 											status={ periodChecked === '2w' ? 'checked' : 'unChecked' }
-											onPress={() => setPeriodChecked('2w')}
+											onPress={() => {
+												setPeriodChecked('2w')
+												handlePeriod()
+											}}
 										/>
 										<Text style={{fontSize: 18, marginLeft: 5}}>
 											Dos semanas
@@ -281,7 +294,10 @@ const MainScreen = ({changeScreen}) => {
 										<RadioButton
 											value="1M"
 											status={ periodChecked === '1M' ? 'checked' : 'unChecked' }
-											onPress={() => setPeriodChecked('1M')}
+											onPress={() => {
+												setPeriodChecked('1M')
+												handlePeriod()
+											}}
 										/>
 										<Text style={{fontSize: 18, marginLeft: 5}}>
 											Un mes
@@ -291,7 +307,10 @@ const MainScreen = ({changeScreen}) => {
 										<RadioButton
 											value="3M"
 											status={ periodChecked === '3M' ? 'checked' : 'unChecked' }
-											onPress={() => setPeriodChecked('3M')}
+											onPress={() => {
+												setPeriodChecked('3M')
+												handlePeriod()
+											}}
 										/>
 										<Text style={{fontSize: 18, marginLeft: 5}}>
 											Tres meses
@@ -301,7 +320,10 @@ const MainScreen = ({changeScreen}) => {
 										<RadioButton
 											value="6M"
 											status={ periodChecked === '6M' ? 'checked' : 'unChecked' }
-											onPress={() => setPeriodChecked('6M')}
+											onPress={() => {
+												setPeriodChecked('6M')
+												handlePeriod()
+											}}
 										/>
 										<Text style={{fontSize: 18, marginLeft: 5}}>
 											Seis meses
@@ -311,7 +333,10 @@ const MainScreen = ({changeScreen}) => {
 										<RadioButton
 											value="1y"
 											status={ periodChecked === '1y' ? 'checked' : 'unChecked' }
-											onPress={() => setPeriodChecked('1y')}
+											onPress={() => {
+												setPeriodChecked('1y')
+												handlePeriod()
+											}}
 										/>
 										<Text style={{fontSize: 18, marginLeft: 5}}>
 											Un año
