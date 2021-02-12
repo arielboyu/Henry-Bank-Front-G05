@@ -79,7 +79,7 @@ export default function VerifyScrenn({ navigation }) {
       <TextInput
       label="Código de verificación"
       onChangeText={code => handleCodeChange(code)}
-      selectionColor="black"
+      keyboardType="numeric"
       style={{height:48,
         paddingLeft:5,
         width:210,
