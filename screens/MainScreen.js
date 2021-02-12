@@ -67,7 +67,6 @@ const MainScreen = ({changeScreen}) => {
 
 	setTimeout(() => {
 		if (periodAmount.peso.in === "" || periodAmount.peso.in === "") {
-			console.log("Me ejecuto")
 			handlePeriod()
 		} else {
 			setCharging(false)
@@ -401,8 +400,8 @@ const styles = StyleSheet.create({
  		backgroundColor: "#FFFF"
   	},
  	mainCard: {
- 		width: 250,
- 		height: 150,
+ 		width: 320,
+ 		height: 200,
  		padding: 10,
  		borderRadius: 20,
  		marginTop: 10,
@@ -424,7 +423,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		flexDirection: "row",
 		alignItems: "flex-end",
-		justifyContent: "space-between",
+		justifyContent: "space-around",
 		width: "100%",
 		marginTop: 5,
 		marginBottom: 5,
@@ -434,7 +433,7 @@ const styles = StyleSheet.create({
 		marginLeft: 15
   	},
   	scroll: {
-		height: 200,
+		height: 220,
 		width: '100%'
   	},
   	general: {
