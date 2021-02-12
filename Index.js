@@ -31,6 +31,7 @@ LogBox.ignoreAllLogs(true)
 
 
 
+
 const Stack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
 

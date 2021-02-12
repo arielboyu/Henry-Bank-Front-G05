@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { FlatList, ImageBackground, StyleSheet, Text, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux'
-import { Button, RadioButton, Headline, Paragraph, Portal, Dialog, Divider } from 'react-native-paper';
+import { Button, RadioButton, Headline, Paragraph, Portal, Dialog, Divider, ActivityIndicator } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import Transfer from 'react-native-vector-icons/MaterialCommunityIcons';
 import moment from 'moment';
@@ -23,6 +23,7 @@ const MainScreen = ({changeScreen}) => {
 	const [selectedCard, setSelectedCard] = useState('Pesos');
 
 	//Se utiliza en el selector de periodo
+	const [chargin, setCharging] = useState(true);
   	const [periodShows, setPeriodShows] = useState(false);
 	const [periodChecked, setPeriodChecked] = useState("1M");
 	const [periodAmount, setPeriodAmount] = useState({
@@ -43,8 +44,7 @@ const MainScreen = ({changeScreen}) => {
 		dispatch(getUserByID(user.user.id.id));
 		dispatch(getAllAccounts(user.user.id.email));
     	getStoredUser();
-		handlePeriod('1M')
-	}, []); 
+	}, []);
 
    // Trae el usuario guardado en asyncStorage, en forma de objeto.
    	const getStoredUser = async () => {  
@@ -67,64 +67,75 @@ const MainScreen = ({changeScreen}) => {
 
 	const keyExtractor = (item, index) => index.toString();
 
-	const handlePeriod = (period) => {
-		const format = 'DD-MM-YYYY';
-		const time = periodChecked[0] ? periodChecked[0] : period[0]; //Numero
-		const unit = periodChecked[1] ? periodChecked[1] : period[1]; //Periodos de tiempo (dia, mes, semana)
+			const format = 'DD/MM/YYYY';
+			const time = periodChecked[0] || data[0]; //Numero
+			const unit = periodChecked[1] || data[1]; //Periodos de tiempo (dia, mes, semana)
 
-		const parsedMovements = [];
+			const parsedMovements = [];
 
-		movements && movements.map(movement => {
-			let data = {
-				type: movement.type,
-				amount: parseInt(movement.amount),
-				currency: movement.currency,
-				date: moment(movement.createdAt.slice(0, 10), 'YYYY-MM-DD').format(format)
+			movements && movements.map(movement => {
+				let data = {
+					type: movement.type,
+					amount: parseInt(movement.amount),
+					currency: movement.currency,
+					date: moment(movement.createdAt.slice(0, 10), 'YYYY-MM-DD').format(format)
+				}
+				parsedMovements.push(data)
+			})
+
+			const startDate = moment().subtract(time, unit).format(format)
+
+			setTimeout(() => {
+				handlePeriod()
+			}, 500);
+
+			const handlePeriod = () => {
+
+			const resultData = parsedMovements.filter((movement, i) => {
+				return moment(movement.date, "DD/MM/YYYY").format('YYYY/MM/DD') >= moment(startDate, "DD/MM/YYYY").format('YYYY/MM/DD');
+			});
+
+			const pesosIn = resultData.filter(movement => {
+				return movement.currency === 'pesos' && movement.type === 'recibo'
+			}).reduce((acc, value) => {
+					return acc + value.amount
+			}, 0)
+
+			const pesosOut = resultData.filter(movement => {
+				return movement.currency === 'pesos' && movement.type === 'envio'
+			}).reduce((acc, value) => {
+					return acc + value.amount
+			}, 0)
+
+			const DollarsIn = resultData.filter(movement => {
+				return movement.currency === 'dolares' && movement.type === 'recibo'
+			}).reduce((acc, value) => {
+					return acc + value.amount
+			}, 0)
+
+			const DollarsOut = resultData.filter(movement => {
+				return movement.currency === 'dolares' && movement.type === 'recibo'
+			}).reduce((acc, value) => {
+					return acc + value.amount
+			}, 0)
+
+				setPeriodAmount({
+					dollar: {
+						in: DollarsIn,
+						out: DollarsOut
+					},
+					peso: {
+						in: pesosIn,
+						out: pesosOut
+					}
+				})
+
+				setTimeout(() => {
+					setCharging(false)
+				}, 500);
 			}
-			parsedMovements.push(data)
-		})
 
-		const startDate = moment().subtract(time, unit).format(format)
-
-		const resultData = parsedMovements.filter(movement => {
-			return new Date(movement.date) >= new Date(startDate)
-		});
-
-		const pesosIn = resultData.filter(movement => {
-			return movement.currency === 'pesos' && movement.type === 'recibo'
-		}).reduce((acc, value) => {
-				return acc + value.amount
-		}, 0)
-
-		const pesosOut = resultData.filter(movement => {
-			return movement.currency === 'pesos' && movement.type === 'envio'
-		}).reduce((acc, value) => {
-				return acc + value.amount
-		}, 0)
-
-		const DollarsIn = resultData.filter(movement => {
-			return movement.currency === 'dolares' && movement.type === 'recibo'
-		}).reduce((acc, value) => {
-				return acc + value.amount
-		}, 0)
-
-		const DollarsOut = resultData.filter(movement => {
-			return movement.currency === 'dolares' && movement.type === 'recibo'
-		}).reduce((acc, value) => {
-				return acc + value.amount
-		}, 0)
-
-		setPeriodAmount({
-			dollar: {
-				in: DollarsIn,
-				out: DollarsOut
-			},
-			peso: {
-				in: pesosIn,
-				out: pesosOut
-			}
-		})
-	}
+	//}
 
 	const card = ({item, index}) => (
 		<View>
@@ -152,8 +163,11 @@ const MainScreen = ({changeScreen}) => {
 
 	return (
 		<View style={styles.container}>
-			{firstName &&
-				<>
+			{chargin
+				? <View style={{flex: 1, justifyContent: 'center'}}>
+				
+				</View>
+				: <>
 					<View style={styles.balance}>
 						<Header 
 							title={`Hola, ${firstName}...`}
@@ -306,9 +320,8 @@ const MainScreen = ({changeScreen}) => {
 								</Dialog.Content>
 								<Dialog.Actions>
 									<Button onPress={(e) => {
-										handlePeriod()
+										
 										setPeriodShows(false)
-										console.log(e.target)
 									}}>
 										Seleccionar
 									</Button>
@@ -363,8 +376,8 @@ const styles = StyleSheet.create({
  		backgroundColor: "#FFFF"
   	},
  	mainCard: {
- 		width: 310,
- 		height: 190,
+ 		width: 250,
+ 		height: 150,
  		padding: 10,
  		borderRadius: 20,
  		marginTop: 10,
@@ -385,7 +398,7 @@ const styles = StyleSheet.create({
 	generalCont2: {
 		flex: 1,
 		flexDirection: "row",
-		alignItems: "center",
+		alignItems: "flex-end",
 		justifyContent: "space-between",
 		width: "100%",
 		marginTop: 5,
