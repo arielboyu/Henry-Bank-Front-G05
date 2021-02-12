@@ -207,6 +207,7 @@ export default function Login({ navigation }) {
 		 height:48,
 		 paddingLeft:5,
 		 width:210,
+		 backgroundColor:"transparent",
 		 }}
 		 />
 		 {data.check_textInputChange ?
@@ -240,6 +241,8 @@ export default function Login({ navigation }) {
 		 height:48,
 		 paddingLeft:5,
 		 width:210,
+		 backgroundColor:"transparent",
+		 
 		 }}
 		 />
 		 <TouchableOpacity
@@ -326,8 +329,9 @@ logo: {
 },
 	action: {
 			flexDirection:'row',
+		
 			marginTop:20,
-			marginLeft:60,
+			marginLeft:"25%",
 			paddingBottom:5
 	},
 	errorMsg: {

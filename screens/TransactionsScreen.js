@@ -132,7 +132,16 @@ const styles = StyleSheet.create({
     marginBottom: 2,
 		borderRadius: 10,
 		width: "98%",
-    overflow: "hidden"
+    overflow: "hidden",
+    shadowColor: "#000",
+		shadowOffset: {
+						width: 5,
+						height: 6,
+					},
+		shadowOpacity: 0.37,
+		shadowRadius: 7.49,
+
+		elevation: 2,
 	},
   generalCont1: {
  		display: "flex",
@@ -149,7 +158,7 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		padding: 7,
 		borderRightWidth: 1,
-		backgroundColor: '#097934'
+    backgroundColor: '#097934',
 	},
 	section2: {
 		width: '75%',
@@ -157,7 +166,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
 		padding: 5,
-    backgroundColor: '#5DB11F',
+    backgroundColor: 'rgba(93, 177, 31,0.1)',
     marginRight: 5
   },
   section3: {
@@ -169,7 +178,7 @@ const styles = StyleSheet.create({
     width: '40%'
   },
 	blueNumbers: {
-		color: "#192BC2",
+		color: "#097934",
 		fontWeight: "100",
 		fontSize: 20
   },
@@ -179,7 +188,7 @@ const styles = StyleSheet.create({
 		fontSize: 20
   },
   text: {
-		color: "white",
+		color: "black",
 		fontWeight: "400",
 		fontSize: 18
   },

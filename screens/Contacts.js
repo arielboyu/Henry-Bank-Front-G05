@@ -31,8 +31,8 @@ export default function PhoneBook({changeScreen}) {
   //   // acceder a los telefonos de los contactos- contacts.phoneNumbers[0].number
     const arg1 = contactos
     const arg2 = info.contacts
-    console.log("numero de Daley-",arg1[0].mobile)
-    if(info.contacts[0]) console.log("entro aca", arg2[0].phoneNumbers[0].number)
+    console.log("contacto de db-",arg1[0].mobile)
+    if(info.contacts[0]) console.log("contacto del movil-", arg2[0].phoneNumbers[0].number)
     
     
   //   return finalarray;
