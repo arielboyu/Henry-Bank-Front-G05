@@ -10,7 +10,7 @@ const Header = (props) => {
     const user = useSelector(state => state.user);
 
     const { changeScreen, menu, title } = props;
-    
+
     const [visible, setVisible] = useState(false)
 
     useEffect(() => {
@@ -23,7 +23,7 @@ const Header = (props) => {
         <>
             <View style={styles.greeting}>
                 {
-                    menu && <Icon.Button 
+                    menu && <Icon.Button
                         name="bars" 
                         size={25}
                         color="black"
@@ -34,8 +34,8 @@ const Header = (props) => {
                 <Headline>{title}</Headline>
             </View>
             <Portal>
-                <Modal 
-                    visible={visible} 
+                <Modal
+                    visible={visible}
                     onDismiss={() => setVisible(false)}
                     //dismissable={false}
                     contentContainerStyle={styles.content}
@@ -47,9 +47,9 @@ const Header = (props) => {
                             <Title>{`${firstName} ${lastName}`}</Title>
                             <Caption>{`${email}`}</Caption>
                         </View>
-                        
+
                         <View style={[styles.menu]}>
-                            <Menu.Item icon="account" onPress={() => {}} title="Mis datos" style={{width: '100%'}}/>
+                            <Menu.Item icon="account" onPress={() => {changeScreen('misdatos')}} title="Mis datos" style={{width: '100%'}}/>
                             <Menu.Item icon="contacts" onPress={() => {changeScreen('contacts')}} title="Mis contactos" style={{width: '100%'}}/>
                             <Menu.Item icon="cog" onPress={() => {}} title="Configuración" style={{width: '100%'}}/>
                             <Menu.Item icon="help" onPress={() => {}} title="Ayuda" style={{width: '100%'}}/>
