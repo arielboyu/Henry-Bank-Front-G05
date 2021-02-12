@@ -163,6 +163,11 @@ const Index = () => {
                         component={VerifyScrenn}
                         options={{title:'Verificacion'}}
                     />
+                         <Stack.Screen
+                        name="FingerPrint"
+                        component={FingerPrint}
+                        options={{title:'FingerPrint'}}
+                    />
                 </Stack.Navigator>
             </NavigationContainer>
             }
