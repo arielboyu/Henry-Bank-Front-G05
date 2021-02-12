@@ -2,6 +2,7 @@ import axios from 'axios';
 
 import {
   LOGIN,
+  LOGOUT,
   GET_USER_BY_ID,
   CREATE_USER,
   GET_ALL_USERS,
@@ -45,10 +46,9 @@ const logUser = (user) => {
   };
 }
 
-const logoutUser = (user) => {
+const logoutUser = () => {
   return {
-    type: LOGOUT,
-    user
+    type: LOGOUT
   };
 }
 
@@ -141,9 +141,20 @@ export const createAccount = (updateUser) => {
   export const logout = () => {
     return async (dispatch) => {
       try {
-        dispatch(logoutUser(res.data))
+        dispatch(logoutUser())
       } catch (err) {
         console.log(err);
       }
     };
   };
+
+ export const getStorageUser = async () => {
+    try {
+      const jsonData = await AsyncStorage.getItem('USER')
+      console.log("JSON DATA ", jsonData)
+     // return jsonData != null ? JSON.parse(jsonData) : null;
+     
+    } catch(e) {
+      // error reading value
+    }
+  }

@@ -45,7 +45,8 @@ const userReducer = (state = initialState, action) => {
           ...state,
           user: {
             logged: false,
-          }
+          },
+          loggedUser: null
         };
       case GET_USER_BY_ID:
         return {
@@ -56,7 +57,5 @@ const userReducer = (state = initialState, action) => {
     return state;
   };
 };
-
-
 
 export default userReducer;

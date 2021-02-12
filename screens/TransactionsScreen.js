@@ -1,123 +1,112 @@
-import React, { useEffect } from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
-import { Headline } from 'react-native-paper';
+import React, { useEffect, useState } from 'react';
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Portal, Modal, Headline, Divider, Paragraph, Subheading, Title } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { useDispatch, useSelector } from 'react-redux';
 import Header from '../src/components/Header';
-import { getAllAccounts } from '../src/redux/actions/account';
-
-const accounts = {
-  usd  : '6384636',
-  peso : '4520065'
-};
-
-const transactions = [
-  {
-    name: "Mc Donald's",
-    ammount: 400,
-    movement: "payment",
-    icon: "hamburger",
-    account: accounts.peso,
-    date: "25/01/20",
-    hour: "13:34"
-  },
-  {
-    name: "Zara",
-    ammount: 3000,
-    movement: "payment",
-    icon: "shopping-bag",
-    account: accounts.peso,
-    date: "22/01/20",
-    hour: "17:03",
-  },
-  {
-    name: "Transferencia a Carlos",
-    ammount: 86,
-    movement: "payment",
-    icon: "money-bill-wave",
-    account: accounts.usd,
-    date: "22/01/20",
-    hour: "13:28"
-  },
-  {
-    name: "Burger King",
-    ammount: 520,
-    movement: "payment",
-    icon: "hamburger",
-    account: accounts.peso,
-    date: "19/01/20",
-    hour: "19:34"
-  },
-  {
-    name: "Supermercado Estrella",
-    ammount: 3200,
-    movement: "payment",
-    icon: "shopping-cart",
-    account: accounts.peso,
-    date: "17/01/20",
-    hour: "10:51"
-  },
-  {
-    name: "Carga",
-    ammount: 6000,
-    movement: "collection",
-    icon: "donate",
-    account: accounts.peso,
-    date: "15/01/20",
-    hour: "15:28"
-  },
-  {
-    name: "Bar la tentación",
-    ammount: 220,
-    movement: "payment",
-    icon: "cocktail",
-    account: accounts.peso,
-    date: "13/01/20",
-    hour: "00:28"
-  },
-
-];
+import { getAllMovements } from '../src/redux/actions/account';
 
 const TransactionsScreen = () => {
 
   const dispatch = useDispatch()
   const user = useSelector(state => state.user)
+  const account = useSelector(state => state.user.loggedUser.accounts)
+  const movements = useSelector(state => state.user.loggedUser.movements )
 
   useEffect(() => {
-    dispatch(getAllAccounts(user.user.id.id))
+    dispatch(getAllMovements(user.user.id.id))
   }, [])
+
+  const [visible, setVisible] = useState(false)
+  const [selected, setSelected] = useState(1)
 
 	return (
 		<View style={styles.container}>
 			<Header title="Mis transacciones..."/>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        {
-          transactions.map((transaction, i) => (
-            <View style={styles.generalCont1} key={i}>
-              <View style={styles.cardContainer}>
-                <View style={styles.section1}>
-                  <Icon name={transaction.icon} size={30} color="#F7F7F9" />
+      <Portal>
+        <Modal 
+          visible={visible} 
+          onDismiss={() => setVisible(false)} 
+          contentContainerStyle={styles.containerStyle}
+          style={{display: 'flex', alignItems: 'center'}}
+        >
+          <Headline>Detalles de transaccion...</Headline>
+          <Divider/>
+          <View style={styles.row}>
+            <Text style={styles.title}>Origen: </Text>
+            <Text>{movements[selected] && movements[selected].name}</Text>
+          </View>
+          <View style={styles.row}>
+            <Text style={styles.title}>Monto: </Text>
+            <Text>${movements[selected] && movements[selected].amount}</Text>
+          </View>
+          <View style={styles.row}>
+            <Text style={styles.title}>Número de transacción: </Text>
+            <Text>{movements[selected] && movements[selected].id}</Text>
+          </View>
+          <View style={styles.row}>
+            <Text style={styles.title}>Tipo: </Text>
+            <Text>{`${movements[selected] && movements[selected].movementType} en ${movements[selected] && movements[selected].currency}`}</Text>
+          </View>
+          <View style={styles.row}>
+            <Text style={styles.title}>Descripción: </Text>
+            <Text>{movements[selected] && movements[selected].description}</Text>
+          </View>
+        </Modal>
+      </Portal>
+      {movements
+        ? <ScrollView showsVerticalScrollIndicator={false}>
+            {/* Detalles de la transaccion */}
+            {
+              movements.map((transaction, i) => (
+                <View 
+                  style={styles.generalCont1} 
+                  key={i}  
+                >
+                  <TouchableOpacity 
+                    style={styles.cardContainer} 
+                    onPress={() => {
+                      setVisible(true)
+                      setSelected(i)
+                    }}
+                  >
+                    <View style={styles.section1}>
+                      <Icon 
+                        name={
+                          transaction.movementType === "Compra" ? "shopping-cart" :
+                          transaction.movementType === "Transferencia" ? "exchange-alt" :
+                          transaction.movementType === "Pago" ? "dollar-sign" :
+                          transaction.movementType === "Carga" ? "donate" : null
+                        } 
+                        size={30} 
+                        color="#F7F7F9" 
+                      />
+                    </View>
+                    <View style={styles.section2}>
+                      <View style={styles.section3}>
+                        <Text style={styles.text}>
+                          {transaction.name.length > 15 ? transaction.name.slice(0, 13) + "..." : transaction.name}
+                        </Text>
+                        <Text style={styles.information}>
+                          {`${transaction.createdAt.slice(0, 10)} | ${transaction.createdAt.slice(11, 13) - 3}${transaction.createdAt.slice(13, 16)}`}</Text>
+                      </View>
+                      <View style={styles.section4}>
+                        <Text style={
+                          transaction.type === "recibo" 
+                          ? styles.blueNumbers 
+                          : styles.redNumbers}
+                        >
+                          {`${transaction.type === "recibo" ? "+" : "-"}${transaction.currency === "pesos" ? "$" : "US$"} ${transaction.amount}`}
+                        </Text>
+                      </View>
+                    </View>
+                  </TouchableOpacity>
                 </View>
-                <View style={styles.section2}>
-                  <View style={styles.section3}>
-                    <Text style={styles.text}>{transaction.name}</Text>
-                    <Text style={styles.information}>{`${transaction.date} | ${transaction.hour}`}</Text>
-                  </View>
-                  <View style={styles.section4}>
-                    <Text style={
-                      transaction.movement === "collection" 
-                      ? styles.blueNumbers 
-                      : styles.redNumbers}
-                    >
-                      {`${transaction.movement === "collection" ? "+" : "-"}${transaction.account === accounts.peso ? "$" : "US$"} ${transaction.ammount}`}
-                    </Text>
-                  </View>
-                </View>
-              </View>
-            </View>
-          ))
-        }
-      </ScrollView>		
+              ))
+            }
+          </ScrollView>
+        : <Text>Aun no tienes transacciones</Text>
+      }	
 		</View>
 	);
 };
@@ -150,7 +139,7 @@ const styles = StyleSheet.create({
  		flexDirection: "column",
  		justifyContent: "space-around",
  		width: "100%",
- 		marginTop: 10,
+ 		marginTop: 5,
     height: 100,
 	},
 	section1: {
@@ -182,17 +171,17 @@ const styles = StyleSheet.create({
 	blueNumbers: {
 		color: "#192BC2",
 		fontWeight: "100",
-		fontSize: 25
+		fontSize: 20
   },
 	redNumbers: {
 		color: "#FF4242",
 		fontWeight: "100",
-		fontSize: 25
+		fontSize: 20
   },
   text: {
 		color: "white",
-		fontWeight: "300",
-		fontSize: 20
+		fontWeight: "400",
+		fontSize: 18
   },
   information: {
     display: 'flex',
@@ -200,6 +189,25 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: '300',
     marginTop: 20
+  },
+  containerStyle: {
+    backgroundColor: 'white', 
+    padding: 20,
+    width: '85%',
+    height: '50%',
+    borderRadius: 10,
+    display: 'flex',
+    justifyContent: 'flex-start'
+  },
+  row: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+    margin: 10
+  },
+  title: {
+    fontWeight: "600", 
+    color: '#097934'
   }
 });
 
