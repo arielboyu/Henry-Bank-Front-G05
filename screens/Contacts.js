@@ -20,16 +20,21 @@ export default function PhoneBook({changeScreen}) {
        isLoading: true,
        contacts: [],
   })
+  console.log("contactos-", contactos)
   
-  // const comparar = (contactos, contacts) => {
+  
+   const comparar = () => {
   //   // acceder a los telefonos  de la db- contactos[i].mobile
   //   // acceder a los telefonos de los contactos- contacts.phoneNumbers[0].number
+    const arg1 = contactos
+    const arg2 = info.contacts
+    console.log("numero de Daley-",arg1[0].mobile)
+    if(info.contacts[0]) console.log("entro aca", arg2[0].phoneNumbers[0].number)
     
-  //   if ()
-  
     
   //   return finalarray;
-  // }
+ }
+ comparar()
 
   useEffect(() => {
       loadContacts();
