@@ -81,8 +81,13 @@ export default function SendMoney({ changeScreen, navigation }) {
           onValueChange={(val) => handleChange({ value: val, type: 'contactId' })}
         >
           <Picker.Item label="name" value="0" />
+         
           <Picker.Item label={contacts[0].alias} value={contacts[0].contactId} />
           <Picker.Item label={contacts[1].alias} value={contacts[1].contactId} />
+          <Picker.Item label={contacts[2].alias} value={contacts[2].contactId} />
+          <Picker.Item label={contacts[3].alias} value={contacts[3].contactId} />
+          <Picker.Item label={contacts[4].alias} value={contacts[4].contactId} />
+          <Picker.Item label={contacts[5].alias} value={contacts[5].contactId} />
         </Picker>
         {/* <TextInput
 		 placeholder="Nombre o E-mail"
