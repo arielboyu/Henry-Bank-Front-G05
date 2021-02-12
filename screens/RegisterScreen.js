@@ -91,7 +91,7 @@ export default function Register({navigation}) {
   		 style={{marginRight:5,marginTop:5}}
   		 />
   		 <TextInput
-  		 placeholder="Correo Electrónico"
+  		 placeholder="Correo electrónico"
   		 autoCapitalize="none"
   		 onChangeText={(val) => textInputChange(val)}
   		 // onEndEditing={(e)=>handleValidUser(e.nativeEvent.text)}
@@ -124,7 +124,7 @@ export default function Register({navigation}) {
   		 style={{marginRight:5,marginTop:5}}
   		 />
   		 <TextInput
-  		 placeholder="Crear Contraseña"
+  		 placeholder="Crear contraseña"
   		 secureTextEntry={data.secureTextEntry ? true : false}
   		 autoCapitalize="none"
   		 onChangeText={(val) => handlePasswordChange(val)}
@@ -156,11 +156,11 @@ export default function Register({navigation}) {
   		 </View>
   		 { data.isValidPassword ? null :
   		 <Animatable.View animation="fadeInLeft" duration={500}>
-  		 <Text style={styles.errorMsg}>valores alfanumericos 8 caracteres min</Text>
+  		 <Text style={styles.errorMsg}>Valores alfanuméricos 8 caracteres minimo</Text>
   		 </Animatable.View>
   		 }
        <View style={{marginLeft:340,marginTop:-55}} >
-       { !data.isValidPassword ? true :
+       { data.isValidPassword && data.password !== "" &&
          <Animatable.View animation="bounceIn">
          <Feather
          name="check-circle"
