@@ -7,6 +7,7 @@ import Svg from 'react-native-svg';
 import { useSelector } from 'react-redux';
 import { VictoryPie, VictoryAnimation, VictoryLabel, VictoryLegend } from 'victory-native';
 import Header from '../src/components/Header'; // Para ver desde el mobil >> victory-native
+import { getUserByID } from '../src/redux/actions/user';
 
 const WIDTH = 400;
 const HEIGHT = 250;
@@ -22,10 +23,11 @@ const StatisticsScreen = () => {
 	const account = useSelector((state) => state.user.loggedUser.accounts);
 
 /*   const transferencias = movements */
-co
+
 	useEffect(() => {
 		changeData();
-	}, []);
+
+	},[movements]);
 
 	const changeData = () => {
 		const movementBuy = movements
