@@ -6,6 +6,7 @@ import 'react-native-gesture-handler'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import { LogBox } from "react-native"
 
 //Componentes/Screens
 import LoginScreen from './screens/LoginScreen';
@@ -24,6 +25,9 @@ import { cos } from 'react-native-reanimated';
 import CvuScreen from './screens/CvuScreen'
 import CardsScreen from './screens/CardsScreen'
 import FingerPrint from './screens/FingerPrintScreen';
+
+
+LogBox.ignoreAllLogs(true)
 
 
 
