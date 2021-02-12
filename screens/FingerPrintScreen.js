@@ -16,30 +16,39 @@ import { useDispatch } from 'react-redux';
 import { login } from '../src/redux/actions/user';
 
 export default function fingerPrint({ navigation }) {
-
-  const [ state, setState ] = useState({
-		compatible : false,
+  const [loading, setloading] = useState(true)
+  const [state, setState] = useState({
+    compatible: false,
     loggedUser: {}
-	});
+  });
 
   const dispatch = useDispatch();
-  useEffect( () => {
+/*   useEffect(() => {
     let mounted = true;
-   if(mounted) checkDeviceForHardware();
-   // getUser()
-   mounted = false;
-  }, []);
+    checkDeviceForHardware();
+    if (mounted) setloading(false)
+    return mounted = false
+  }, []); */
 
-
+  useEffect(() => {
+    let mounted = true
+    checkDeviceForHardware();
+    if (mounted) {
+      setloading(false)
+    }
+    return function cleanup() {
+      mounted = false
+    }
+  }, [loading])
 
   //Busca el user guardado en AsyncStorage para hacer el login.
   const getUser = async () => {
     try {
       const jsonData = await AsyncStorage.getItem('USER')
       console.log("JSON DATA ", jsonData)
-     setState({compatible: true, loggedUser: JSON.parse(jsonData) })
+      setState({ compatible: true, loggedUser: JSON.parse(jsonData) })
 
-     /*  return jsonData != null ? JSON.parse(jsonData) : null; */
+      /*  return jsonData != null ? JSON.parse(jsonData) : null; */
 
     } catch (e) {
       // error reading value
@@ -51,8 +60,8 @@ export default function fingerPrint({ navigation }) {
   //Checkea si el telefono es compatible 
   const checkDeviceForHardware = async () => {
     let compatible = await LocalAuthentication.hasHardwareAsync();
-     setState({ compatible });
-     getUser();
+    setState({ compatible });
+    getUser();
     if (!compatible) {
       showIncompatibleAlert();
     }
@@ -90,7 +99,7 @@ export default function fingerPrint({ navigation }) {
   };
 
   const showAndroidAlert = () => {
-  /*   Alert.alert('Fingerprint Scan', 'Coloque su huella sobre el sensor.'); */
+    /*   Alert.alert('Fingerprint Scan', 'Coloque su huella sobre el sensor.'); */
     scanBiometrics();
   };
 
@@ -113,10 +122,10 @@ export default function fingerPrint({ navigation }) {
   };
 
   const handleLogin = () => {
-/*     console.log("loggedUSER >>", loggedUser)
-    if (loggedUser.isValidUser && loggedUser.isValidPassword) { */
-      dispatch(login(loggedUser));
-   /*  } */
+    /*     console.log("loggedUSER >>", loggedUser)
+        if (loggedUser.isValidUser && loggedUser.isValidPassword) { */
+    dispatch(login(loggedUser));
+    /*  } */
   };
 
 
