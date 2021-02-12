@@ -16,6 +16,8 @@ export default function SendMoney({ changeScreen, navigation }) {
   const contacts = useSelector(state => state.user.loggedUser.contacts)
   const userId = useSelector(state => state.user.loggedUser.id)
 
+  const [contactState, setContactState] =useState(false);
+
   const [data, setData] = useState({
     form: {
      
@@ -77,10 +79,10 @@ export default function SendMoney({ changeScreen, navigation }) {
             color: 'black',
             width: 200,
           }}
-          selectedValue={contacts}
-          onValueChange={(val) => handleChange({ value: val, type: 'contactId' })}
+          selectedValue={contactState}
+          onValueChange={(val) => (setContactState(val), handleChange({ value: val, type:'contactId' }))}
         >
-          <Picker.Item label="name" value="0" />
+          <Picker.Item label="seleccione contacto.." />
          
           <Picker.Item label={contacts[0].alias} value={contacts[0].contactId} />
           <Picker.Item label={contacts[1].alias} value={contacts[1].contactId} />
