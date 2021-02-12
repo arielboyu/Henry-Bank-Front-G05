@@ -13,6 +13,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 //Mi posición consolidada
 const MainScreen = ({changeScreen}) => {
 	const dispatch = useDispatch();
+  useEffect(() => {
+		dispatch(getUserByID(user.user.id.id));
+		dispatch(getAllAccounts(user.user.id.email));
+    getStoredUser();
+	}, []); 
 
 	//Card seleccionada (pesos o dolares)
 	const [selectedCard, setSelectedCard] = useState('Pesos');

@@ -8,26 +8,35 @@ import * as Animatable from 'react-native-animatable';
 import { createNewUser, getUsers, login } from '../src/redux/actions/user';
 import { Divider, Headline, Paragraph, TextInput, Button } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import DropdownAlert from 'react-native-dropdownalert';
+import * as LocalAuthentication from 'expo-local-authentication'
 
 export default function Login({ navigation }) {
 	const dispatch = useDispatch();
   	useEffect(() => {
 		dispatch(getUsers());
-    getUser()
+    getStoredUser()
+    checkDeviceForHardware();
 	},[]);
 
   let storageUser= "";
    // Trae el usuario guardado en asyncStorage, en forma de objeto.
-   const getUser = async () => {
+   const getStoredUser = async () => {
     try {
       const jsonData = await AsyncStorage.getItem('USER')
       storageUser = jsonData;
-      return jsonData != null ? JSON.parse(jsonData) : null;
+      setState({ compatible: true, loggedUser: JSON.parse(jsonData) })
 
     } catch(e) {
       // error reading value
     }
   }
+
+ 
+  const [state, setState] = useState({
+    compatible: false,
+    loggedUser: {}
+  });
 
 	const [ data, setData ] = useState({
 		email                 : '',
@@ -98,11 +107,88 @@ export default function Login({ navigation }) {
     }
   }
 
+  var loggedUser = state.loggedUser;
+
+  //Checkea si el telefono es compatible 
+  const checkDeviceForHardware = async () => {
+    let compatible = await LocalAuthentication.hasHardwareAsync();
+    setState({ compatible });
+    getStoredUser();
+    if (!compatible) {
+      showIncompatibleAlert();
+    }
+  };
+
+  //Error si no es compatible.
+  const showIncompatibleAlert = () => {
+    dropdown.alertWithType(
+      'error',
+      'Dispositivo no compatible',
+      'Su dispositivo no es compatible con escaneo de huella dactilar.'
+    );
+  };
+
+  //Busca que haya huellas guardadas.
+  const checkForBiometrics = async () => {
+    let biometricRecords = await LocalAuthentication.isEnrolledAsync();
+    if (!biometricRecords) {
+      dropdown.alertWithType(
+        'Atención',
+        'No tiene huellas guardadas',
+        'Asegurese que su dispositivo tenga huellas guardadas'
+      );
+    } else {
+      handleLoginPress();
+    }
+  };
+
+  const handleLoginPress = () => {
+    if (Platform.OS === 'android') {
+      showAndroidAlert();
+    } else {
+      scanBiometrics();
+    }
+  };
+
+  const showAndroidAlert = () => {
+    /*   Alert.alert('Fingerprint Scan', 'Coloque su huella sobre el sensor.'); */
+    scanBiometrics();
+  };
+
+  const scanBiometrics = async () => {
+    let result = await LocalAuthentication.authenticateAsync();
+    if (result.success) {
+      dropdown.alertWithType(
+        'success',
+        'You are you!',
+        'Bio-Authentication succeeded.'
+      );
+      handleLogin2();
+    } else {
+      dropdown.alertWithType(
+        'error',
+        'Uh oh!',
+        'Bio-Authentication failed or canceled.'
+      );
+    }
+  };
+
+  const handleLogin2 = () => {
+    /*     console.log("loggedUSER >>", loggedUser)
+        if (loggedUser.isValidUser && loggedUser.isValidPassword) { */
+    dispatch(login(loggedUser));
+    /*  } */
+  };
+
 
 
 	return (
 		<View style={styles.container}>
 		<View style={styles.logo}>
+    <DropdownAlert
+        ref={ref => (dropdown = ref)}
+        closeInterval={5000}
+      />
 		<ImageBackground style={{ width: 140, height: 140 }}
 		source={require('../assets/LogoVector.png')} />
 		</View>
@@ -196,11 +282,15 @@ export default function Login({ navigation }) {
 		 { storageUser ? true :
 			 <Button
 			 mode="contained"
-			 onPress={()=>{}}
+			 onPress={
+          state.compatible
+            ? checkForBiometrics
+            : showIncompatibleAlert
+        }
 			 style={{
 				 borderRadius:5,
 				 marginTop: 25,
-				 marginLeft:130,
+				 marginLeft:110,
 				 width: 150,
 			 backgroundColor : '#006A34',
 			 }}>
