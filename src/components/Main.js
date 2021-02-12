@@ -5,7 +5,7 @@ import ChargeMoney from '../../screens/ChargeMoneyScreen';
 import ChangeMoney from '../../screens/ChangeMoneyScreen';
 import MainScreen from '../../screens/MainScreen';
 import ContactsScreen from '../../screens/Contacts';
-
+import UserDataScreen from '../../screens/userDataScreen'
 const Main = () => {
     const [screen, setScreen] = useState("main")
 
@@ -37,6 +37,11 @@ const Main = () => {
             }
             {
                 screen === "change" && <ChangeMoney
+                    changeScreen={changeScreen}
+                />
+            }
+            {
+                screen === "misdatos" && <UserDataScreen
                     changeScreen={changeScreen}
                 />
             }
