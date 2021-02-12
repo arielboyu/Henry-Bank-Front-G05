@@ -363,8 +363,8 @@ const styles = StyleSheet.create({
  		backgroundColor: "#FFFF"
   	},
  	mainCard: {
- 		width: 310,
- 		height: 190,
+ 		width: 250,
+ 		height: 150,
  		padding: 10,
  		borderRadius: 20,
  		marginTop: 10,

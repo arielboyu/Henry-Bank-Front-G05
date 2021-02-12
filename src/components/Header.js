@@ -12,7 +12,7 @@ const Header = (props) => {
     const { changeScreen, menu, title } = props;
 
     const [visible, setVisible] = useState(false)
-
+  
     useEffect(() => {
 		dispatch(getUserByID(user.user.id.id));
 	}, [])
@@ -21,6 +21,9 @@ const Header = (props) => {
 
     return(
         <>
+           
+
+
             <View style={styles.greeting}>
                 {
                     menu && <Icon.Button

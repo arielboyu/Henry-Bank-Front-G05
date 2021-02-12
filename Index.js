@@ -27,6 +27,7 @@ import FingerPrint from './screens/FingerPrintScreen';
 
 
 
+
 const Stack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
 
