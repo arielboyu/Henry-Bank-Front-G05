@@ -43,8 +43,8 @@ export default function SendMoney({ changeScreen, navigation }) {
    
   console.log("DATA 2 >>>", data.form)
       return  await axios.post(`http://${IP}:3001/movement/transferencia/${userId}`, data.form )
-      .then(  await axios.put(`http://${IP}:3001/account/${userId}`, data.form ))    
-      .then( changeScreen('main'))
+      .then(  await axios.put(`http://${IP}:3001/account/${userId}`, data.form ).catch((err) => alert(`No posee los fondos suficientes`)))    
+      .then( changeScreen('main'))          
       
            
     };
@@ -81,8 +81,13 @@ export default function SendMoney({ changeScreen, navigation }) {
           onValueChange={(val) => handleChange({ value: val, type: 'contactId' })}
         >
           <Picker.Item label="name" value="0" />
+         
           <Picker.Item label={contacts[0].alias} value={contacts[0].contactId} />
           <Picker.Item label={contacts[1].alias} value={contacts[1].contactId} />
+          <Picker.Item label={contacts[2].alias} value={contacts[2].contactId} />
+          <Picker.Item label={contacts[3].alias} value={contacts[3].contactId} />
+          <Picker.Item label={contacts[4].alias} value={contacts[4].contactId} />
+          <Picker.Item label={contacts[5].alias} value={contacts[5].contactId} />
         </Picker>
         {/* <TextInput
 		 placeholder="Nombre o E-mail"
@@ -112,14 +117,15 @@ export default function SendMoney({ changeScreen, navigation }) {
         marginLeft: 80
       }} >
         <Picker
-          onValueChange={(val) => handleChange({ value: val, type: 'currency' })}
+          onValueChange={(val) => handleChange({ value: val || "pesos", type: 'currency' })}
           style={{
             color: 'black',
             width: 100,
           }}
         >
-          <Picker.Item label="Pesos" value="pesos" />
-          <Picker.Item label="Dolar" value="dolares" />
+          <Picker.Item label="$" value="pesos" />
+          <Picker.Item label="$" value="pesos" />
+          <Picker.Item label="U$D" value="dolares" />
         </Picker>
       </View>
       <View style={styles.monto}>
