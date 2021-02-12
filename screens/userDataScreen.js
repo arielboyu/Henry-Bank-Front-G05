@@ -14,7 +14,7 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
-export default function userDataScreen({navigation}) {
+export default function userDataScreen({changeScreen}) {
 	const dispatch = useDispatch()
 	const user = useSelector(state => state.user)
 	const { firstName, lastName,mobile,email } = user.loggedUser
@@ -48,7 +48,7 @@ export default function userDataScreen({navigation}) {
 		size={25}
 		color="black"
 		backgroundColor="#FFFF"
-		onPress={() => navigation.navigate('Inicio')}
+		onPress={() => changeScreen('main')}
 		/>
 		<Text style={{fontSize:20}} >	<Entypo
 			name="user"
