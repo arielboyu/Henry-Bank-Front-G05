@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 //import PureChart from 'react-native-pure-chart';
 import Svg from 'react-native-svg';
 import { useSelector } from 'react-redux';
-import { VictoryPie, VictoryAnimation, VictoryLabel, VictoryLegend } from 'victory-native';
+import { VictoryPie, VictoryAnimation, VictoryLabel, VictoryLegend } from 'victory';
 import Header from '../src/components/Header'; // Para ver desde el mobil >> victory-native
 
 const WIDTH = 400;
@@ -18,9 +18,11 @@ const HEIGHTRING = 400;
 const StatisticsScreen = () => {
 	const user = useSelector((state) => state.user);
 	const [ data, setData ] = useState([ { x: 1, y: 0 }, { x: 2, y: 0 }, { x: 3, y: 0 }, { x: 4, y: 0 } ]);
-	const movements = user.loggedUser.movements;
-	const account = user.loggedUser.accounts;
+	const movements = useSelector((state) => state.user.loggedUser.movements);
+	const account = useSelector((state) => state.user.loggedUser.accounts);
 
+/*   const transferencias = movements */
+co
 	useEffect(() => {
 		changeData();
 	}, []);
