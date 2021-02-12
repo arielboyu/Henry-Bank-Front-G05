@@ -9,7 +9,7 @@ import { changeMoney, getAllMovements } from '../src/redux/actions/account';
 export default function ChangeMoney ({changeScreen}) {
 
     const [selected, setSelected] = useState(0)
-    const [amount, setAmount] = useState()
+    const [amount, setAmount] = useState("")
     const [visible, setVisible] = useState()
     const [visible1, setVisible1] = useState()
     const [visible2, setVisible2] = useState()
@@ -30,25 +30,21 @@ export default function ChangeMoney ({changeScreen}) {
     }
 
     const onSubmit = () => {
-        if (amount === undefined || '') {
+        if (amount === '') {
             setVisible1(true)
         }
         else if (user.loggedUser.accounts[selected].balance >= amount) {
             setVisible2(true)
         } else {
-            setVisible(true)
+            setVisible2(true)
         }
     }
 
     const change = () => {
         dispatch(changeMoney(data))
-        setAmount('')
+        //setAmount('')
         setVisible2(false)
         setVisible3(true)
-    }
-
-    const handleChange = (e) => {
-        setAmount(e.target.value)
     }
 
 	return (
@@ -122,8 +118,8 @@ export default function ChangeMoney ({changeScreen}) {
                 placeholder={`Ingrese monto en ${selected === 0 ? "Pesos" : "Dolares"}`}
                 keyboardType="numeric" 
                 mode="outlined"
-                value={amount}
-                onChange={handleChange}
+                //value={amount}
+                onChangeText={(text) => {setAmount(text)}}
                 style={{height: 40, width: 222}}
             />
             <ButtonGroup
