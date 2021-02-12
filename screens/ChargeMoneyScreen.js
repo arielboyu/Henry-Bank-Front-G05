@@ -16,16 +16,37 @@ import { useDispatch, useSelector } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import logo from '../assets/logo.png';
-import { getUsers } from '../src/redux/actions/user';
+import { getUserByID, getUsers } from '../src/redux/actions/user';
+import axios from 'axios';
+import IP from '../src/redux/actions/ip';
 
-export default function ChargeMoneyScreen({ changeScreen, navigation, user }) {
-	//const userAccount = useSelector((state) => state.user.user[1].mobile);
+export default function ChargeMoneyScreen({ changeScreen, navigation}) {
+	
 	const userAccount = '88333 44526';
 
 	const dispatch = useDispatch();
+  const user = useSelector(state => state.user)
 	useEffect(() => {
 		dispatch(getUsers());
+    dispatch(getUserByID(user.user.id.id));
 	}, []);
+
+
+
+
+  const chargeMoney = () => {
+    return async () => {
+      try {
+        const res = await axios.post(`http://${IP}:3001/movement/carga/1`);
+        const res1 = await axios.put(`http://${IP}:3001/account/recarga/2`)
+        transfer();
+
+        console.log(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+  };
 
 	const [ visible, setVisible ] = useState(false);
 	const [ visibleButton, setVisibleButton ] = useState(false);
@@ -34,10 +55,12 @@ export default function ChargeMoneyScreen({ changeScreen, navigation, user }) {
 	const [ account, setAccount ] = useState(userAccount);
 
 	const transfer = () => {
+    
 		setVisible(true);
 		setVisibleButton(false);
 		setMovement('Procesando Recarga....');
 		setTimeout(() => {
+      
 			setMovement('Recarga Exitosa');
 			setAnimation(false);
 			setVisibleButton(true);
@@ -46,6 +69,7 @@ export default function ChargeMoneyScreen({ changeScreen, navigation, user }) {
 			setVisible('false');
 		}, 4000) */
 	};
+
 
 	return (
 		<View style={styles.container}>
@@ -101,7 +125,7 @@ export default function ChargeMoneyScreen({ changeScreen, navigation, user }) {
 				</View>
 				<View style={styles.boton}>
 					<View>
-						<Button style={styles.iconButtons} onPress={transfer}>
+						<Button style={styles.iconButtons} onPress={ chargeMoney()}>
 							<Icon name="donate" size={30} color="#fff" />
 						</Button>
 						<Paragraph style={{ fontWeight: '700' }}>Confirmar Recarga</Paragraph>
@@ -126,7 +150,7 @@ export default function ChargeMoneyScreen({ changeScreen, navigation, user }) {
 							{visibleButton ? (
 								<Button
 									mode="contained"
-									onPress={() => changeScreen("main")}
+									onPress={() => changeScreen("main") }
 									style={{
 										backgroundColor : '#006A34',
 										width           : 150

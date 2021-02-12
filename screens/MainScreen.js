@@ -13,6 +13,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 //Mi posición consolidada
 const MainScreen = ({changeScreen}) => {
 	const dispatch = useDispatch();
+  useEffect(() => {
+		dispatch(getUserByID(user.user.id.id));
+		dispatch(getAllAccounts(user.user.id.email));
+    getStoredUser();
+	}, []); 
 
 	//Card seleccionada (pesos o dolares)
 	const [selectedCard, setSelectedCard] = useState('Pesos');
@@ -396,8 +401,8 @@ const styles = StyleSheet.create({
  		backgroundColor: "#FFFF"
   	},
  	mainCard: {
- 		width: 310,
- 		height: 190,
+ 		width: 250,
+ 		height: 150,
  		padding: 10,
  		borderRadius: 20,
  		marginTop: 10,

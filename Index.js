@@ -27,6 +27,7 @@ import FingerPrint from './screens/FingerPrintScreen';
 
 
 
+
 const Stack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
 
@@ -162,6 +163,11 @@ const Index = () => {
                         name="VerifyScrenn"
                         component={VerifyScrenn}
                         options={{title:'Verificacion'}}
+                    />
+                         <Stack.Screen
+                        name="FingerPrint"
+                        component={FingerPrint}
+                        options={{title:'FingerPrint'}}
                     />
                 </Stack.Navigator>
             </NavigationContainer>
