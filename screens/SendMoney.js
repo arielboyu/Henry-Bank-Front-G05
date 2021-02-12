@@ -117,14 +117,15 @@ export default function SendMoney({ changeScreen, navigation }) {
         marginLeft: 80
       }} >
         <Picker
-          onValueChange={(val) => handleChange({ value: val, type: 'currency' })}
+          onValueChange={(val) => handleChange({ value: val || "pesos", type: 'currency' })}
           style={{
             color: 'black',
             width: 100,
           }}
         >
-          <Picker.Item label="Pesos" value="pesos" />
-          <Picker.Item label="Dolar" value="dolares" />
+          <Picker.Item label="$" value="pesos" />
+          <Picker.Item label="$" value="pesos" />
+          <Picker.Item label="U$D" value="dolares" />
         </Picker>
       </View>
       <View style={styles.monto}>
