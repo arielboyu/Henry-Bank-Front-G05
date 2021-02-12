@@ -43,8 +43,8 @@ export default function SendMoney({ changeScreen, navigation }) {
    
   console.log("DATA 2 >>>", data.form)
       return  await axios.post(`http://${IP}:3001/movement/transferencia/${userId}`, data.form )
-      .then(  await axios.put(`http://${IP}:3001/account/${userId}`, data.form ))    
-      .then( changeScreen('main'))
+      .then(  await axios.put(`http://${IP}:3001/account/${userId}`, data.form ).catch((err) => alert(`No posee los fondos suficientes`)))    
+      .then( changeScreen('main'))          
       
            
     };
