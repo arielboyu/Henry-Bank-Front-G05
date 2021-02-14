@@ -195,8 +195,8 @@ export default function Login({ navigation }) {
 		<View style={styles.action}>
 		<FontAwesome
 		 name="user-o"
-		 size={28}
-		 style={{marginRight:5,marginTop:5}}
+		 size={20}
+		 style={{marginRight:5,marginTop:15}}
 		 />
 		 <TextInput
 		 placeholder="Correo Electrónico"
@@ -229,8 +229,8 @@ export default function Login({ navigation }) {
 		 <View style={styles.action}>
 		 <Feather
 		 name="lock"
-		 size={28}
-		 style={{marginRight:5,marginTop:5}}
+		 size={20}
+		 style={{marginRight:5,marginTop:15}}
 		 />
 		 <TextInput
 		 placeholder="Contraseña"
@@ -268,9 +268,7 @@ export default function Login({ navigation }) {
 		 <View
 		 style={{marginTop:60
 		 }}>
-		 <Divider />
-		 <Divider />
-		 <View style={styles.botones}>
+		 <View>
 		 <View style={styles.boton}>
 		 <Button
 		 mode="contained"
@@ -293,7 +291,7 @@ export default function Login({ navigation }) {
 			 style={{
 				 borderRadius:5,
 				 marginTop: 25,
-				 marginLeft:110,
+				 marginLeft:'32%',
 				 width: 150,
 			 backgroundColor : '#006A34',
 			 }}>
@@ -309,12 +307,13 @@ export default function Login({ navigation }) {
 const styles = StyleSheet.create({
 container: {
 	backgroundColor:'#FFF',
-	height:'100%'
+	height:'100%',
+	paddingTop:30
 },
 boton: {
 	alignItems: 'center',
 	marginTop:50,
-	marginLeft:10
+	marginLeft:5
 },
 iconButtons: {
 	marginBottom: 10,
@@ -331,7 +330,7 @@ logo: {
 			flexDirection:'row',
 		
 			marginTop:20,
-			marginLeft:"25%",
+			marginLeft:"20%",
 			paddingBottom:5
 	},
 	errorMsg: {

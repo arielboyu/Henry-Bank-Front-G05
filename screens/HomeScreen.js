@@ -24,7 +24,6 @@ export default function HomeScreen({navigation}) {
     }
   } 
 
-
   return (
     <View style={style.container}>
       <StatusBar backgroundColor='green' barStyle="light-content"/>
@@ -40,7 +39,7 @@ export default function HomeScreen({navigation}) {
 
       <Animatable.View
         style={[style.footer, {
-          backgroundColor: "#ffbf34"
+          backgroundColor: "rgba(255, 191, 52, 0.3)"
       }]}
       animation="fadeInUpBig"
       >
@@ -49,8 +48,10 @@ export default function HomeScreen({navigation}) {
         style={style.title}
       >Bienvenido a...
       </Text>
-      <Text style={style.text}>TreeBank</Text>
-
+      <Text style={style.textcontainer}>
+      <Text style={style.text1}>Tree</Text>
+      <Text style={style.text2}>Bank</Text>
+      </Text>
 
       <View style={style.button} >
         <TouchableOpacity
@@ -58,7 +59,7 @@ export default function HomeScreen({navigation}) {
           // color={'#08d4c4', '#01ab9d'}
           style={style.signIn}
           >
-          <Text style={style.textSign}>Iniciar sesion</Text>
+          <Text style={style.textSign}>Iniciar Sesión</Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => navigation.navigate('RegisterScreen')}
@@ -101,12 +102,28 @@ title: {
     fontSize: 20,
     fontWeight: 'bold'
 },
-text: {
-    color: '#01890B',
+textcontainer:{
+    textAlign: 'center',
+    textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    textShadowOffset: {width: -1, height: 1},
+    textShadowRadius: 10,
+    marginTop:'5%',
+    marginBottom:'5%'
+},
+text1: {
+    color: '#ecaf06',
     marginTop:5,
     fontSize: 60,
     fontWeight: 'bold',
     textAlign: 'center'
+
+},
+text2: {
+  color: '#007a2a',
+  marginTop:5,
+  fontSize: 60,
+  fontWeight: 'bold',
+  textAlign: 'center'
 
 },
 button: {

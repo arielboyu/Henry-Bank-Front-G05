@@ -99,6 +99,7 @@ export default function Register({navigation}) {
   		 height:48,
   		 paddingLeft:5,
   		 width:210,
+		 backgroundColor:"transparent",
   		 }}
   		 />
   		 {data.check_textInputChange ?
@@ -132,6 +133,7 @@ export default function Register({navigation}) {
   		 height:48,
   		 paddingLeft:5,
   		 width:210,
+		 backgroundColor:"transparent",
   		 }}
   		 />
   		 <TouchableOpacity
