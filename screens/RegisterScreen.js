@@ -199,7 +199,8 @@ export default function Register({navigation}) {
   const styles = StyleSheet.create({
   container: {
   	backgroundColor:'#FFF',
-  	height:'100%'
+  	height:'100%',
+	paddingTop: 30
   },
   boton: {
   	alignItems: 'center',
