@@ -40,7 +40,7 @@ export default function CvuScreen({changeScreen}) {
         </View>
         <View style={styles.logo}>
         <ImageBackground
-        style={{width:120,height:120}}
+        style={{width:220,height:220}}
         source={require('../assets/LogoVector.png')}
         >
         </ImageBackground>
@@ -69,7 +69,7 @@ export default function CvuScreen({changeScreen}) {
 										<Text style={{alignItems:'center',
                     width:254,
               			marginTop:6,
-                    height:32,
+                    height:48,
               			marginLeft:10,
                     color:'white',
                     fontSize:20,
@@ -117,7 +117,7 @@ export default function CvuScreen({changeScreen}) {
                     <Text style={{alignItems:'center',
                     width:254,
                     marginTop:6,
-                    height:32,
+                    height:48,
                     marginLeft:10,
                     color:'white',
                     fontSize:20,
@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
   	},
     logo: {
        alignItems:'center',
-       marginTop:-10,
+       marginTop:40,
        marginBottom:10
     },
     heading: {

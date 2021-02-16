@@ -85,35 +85,35 @@ export default function userDataScreen({changeScreen}) {
 			 name="user-o"
 			 size={28}
 			 />
-			 <Text style={{paddingLeft:40,fontSize:20}}>Nombre:{"  "}{`${firstName} ${lastName}`}</Text>
+			 <Text style={{paddingLeft:40,fontSize:20}}>{"  "}{`${firstName} ${lastName}`}</Text>
 			 </View>
 			 <View style={styles.label}>
 			 <FontAwesome
 				name="phone"
 				size={28}
 				/>
-				<Text style={{paddingLeft:40,fontSize:20}}>Télefono:{"  "}{`${mobile}`}</Text>
+				<Text style={{paddingLeft:40,fontSize:20}}>{"  "}{`${mobile}`}</Text>
 				</View>
 				<View style={styles.label} >
 				<Entypo
 				 name="email"
 				 size={28}
 				 />
-				 <Text style={{paddingLeft:40,fontSize:18}}>Correo:{"  "}{`${email}`}</Text>
+				 <Text style={{paddingLeft:40,fontSize:18}}>{"  "}{`${email}`}</Text>
 				 </View>
 				<View style={styles.label} >
 				<FontAwesome
 				 name="id-card"
 				 size={28}
 				 />
-				 <Text style={{paddingLeft:40,fontSize:16}}>CVU:{"  "}{cvu}</Text>
+				 <Text style={{paddingLeft:20,fontSize:18}}>{"  "}{cvu}</Text>
 				 </View>
 				 <View style={styles.label} >
 				 <FontAwesome5
-					name="money-check-alt"
+					name="file-invoice-dollar"
 					size={28}
 					/>
-					<Text style={{paddingLeft:25,fontSize:16}}>CVU-Dolar:{"  "}{cvuUS}</Text>
+					<Text style={{paddingLeft:20,fontSize:18}}>{"  "}{cvuUS}</Text>
 					</View>
 		</View>
 	);
@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
 	},
 	label: {
 		flexDirection : 'row',
-		marginTop:100,
+		marginTop:130,
 		marginBottom:-80,
 		marginLeft:40
 	}
