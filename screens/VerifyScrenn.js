@@ -46,7 +46,7 @@ export default function VerifyScrenn({ navigation }) {
 
     } catch (err) {
 
-    
+
      if (err) alert('Código de verificación incorrecto');
     }
   };
@@ -79,12 +79,13 @@ export default function VerifyScrenn({ navigation }) {
       <TextInput
       label="Código de verificación"
       onChangeText={code => handleCodeChange(code)}
-      keyboardType="numeric"
+      keyboardType="decimal-pad"
       style={{height:48,
         paddingLeft:5,
         width:210,
         position: 'relative',
         left:110,
+        backgroundColor:'transparent',
         top:-80}}
       />
       </View>

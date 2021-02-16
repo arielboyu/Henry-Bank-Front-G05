@@ -21,7 +21,7 @@ export default function CardsScreen({changeScreen}) {
     </View>
     <View style={styles.logo}>
     <ImageBackground
-    style={{width:40,height:40}}
+    style={{width:80,height:80}}
     source={require('../assets/LogoVector.png')}
     >
     </ImageBackground>
@@ -58,7 +58,7 @@ export default function CardsScreen({changeScreen}) {
       <View style={{marginTop:26,
       }}>
       <View>
-      <View style={{marginTop:46,}} >
+      <View style={{marginTop:106,}} >
       <Divider/>
       <Divider/>
       </View>
@@ -100,16 +100,16 @@ const styles = StyleSheet.create({
   	},
 logo: {
    alignItems:'center',
-   marginTop:-10,
+   marginTop:20,
 },
 mainCard: {
 	width: 310,
 	height: 190,
 	padding: 10,
 	borderRadius: 20,
-	marginTop: 20,
+	marginTop: 40,
 	marginBottom: 10,
-	marginLeft: 5
+	marginLeft: 30
 	},
 botonRecargar: {
    alignItems:'center',

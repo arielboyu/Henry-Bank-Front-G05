@@ -153,7 +153,7 @@ export default function dischargeScreen({ navigation, user }) {
 			 style={{width:400,
 			 height: 400,
 			 opacity:0.9,
-			 marginTop:100
+			 marginTop:'40%'
 			 }}
 			 source=
 				{require('../assets/LogoVector.png')}>
@@ -168,7 +168,7 @@ export default function dischargeScreen({ navigation, user }) {
 					/>
 				</TouchableOpacity>
 			</View>
-			<View style={{marginLeft:'4%'}} >
+			<View style={{marginLeft:'1%'}} >
 			<Picker
 				style={{
 					color:'black',
@@ -187,7 +187,7 @@ export default function dischargeScreen({ navigation, user }) {
 						color:'black',
 						marginLeft:'4%',
 						marginTop:'25%',
-						width:60
+						width:60,
 					}}
 					onValueChange={(val) => handleChange({ value: val, type: 'prefix_code' })}>
 					<Picker.Item label="+54" value="+54" />
@@ -301,6 +301,14 @@ export default function dischargeScreen({ navigation, user }) {
 					<Text style={styles.errorMsg}>Recuerda Debes ser mayor a 16 años</Text>
 				</Animatable.View>
 			</View>
+			<View style={styles.logo}>
+				<FontAwesome
+					name="camera"
+					color="black"
+					size={25}
+				/>
+			</View>
+			</ImageBackground>
 			<View style={styles.guardar}>
 				<Button
 					mode="outlined"
@@ -314,14 +322,6 @@ export default function dischargeScreen({ navigation, user }) {
 					GUARDAR
 				</Button>
 			</View>
-			<View style={styles.logo}>
-				<FontAwesome
-					name="camera"
-					color="black"
-					size={25}
-				/>
-			</View>
-			</ImageBackground>
 		</View>
 	);
 }
@@ -336,12 +336,12 @@ const styles = StyleSheet.create({
 		flexDirection : 'row',
 		width         : 120,
 		marginLeft:'35%',
-		marginTop:'-22%'
+		marginTop:'-24%'
 
 	},
 	logo: {
-		marginLeft:'24%',
-		marginTop:'-122%'
+		alignItems:'center',
+		marginTop:'-160%'
 	},
 	image        : {
 		height       : 100,
@@ -363,12 +363,12 @@ const styles = StyleSheet.create({
 	guardar      : {
 		marginLeft        : 10,
 		paddingHorizontal : 120,
-		marginTop:'28%'
+		marginTop:'15%'
 	},
 
 	form         : {
   alignItems:'center',
-	marginTop:'-48%'
+	marginTop:'-46%'
 
 },
 	nro          : {
