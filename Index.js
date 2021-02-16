@@ -41,19 +41,19 @@ const Index = () => {
 
     useEffect(() => {
       getStoredUser()
-    }, []); 
-  
+    }, []);
+
      // Trae el usuario guardado en asyncStorage, en forma de objeto.
-     const getStoredUser = async () => {  
+     const getStoredUser = async () => {
       try {
         const jsonData = await AsyncStorage.getItem('USER')
         console.log("JSON DATA ", jsonData)
         return jsonData != null ? JSON.parse(jsonData) : null;
-       
+
       } catch(e) {
         // error reading value
       }
-    } 
+    }
 
 	return (
         <>
@@ -156,7 +156,7 @@ const Index = () => {
                     <Stack.Screen
                         name="DischargeScreen"
                         component={DischargeScreen}
-                        options={{title:'Alta de Ususario'}}
+                        options={{title:'Cargar Datos'}}
                     />
                     <Stack.Screen
                         name="RegisterScreen"

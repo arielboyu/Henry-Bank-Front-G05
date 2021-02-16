@@ -32,7 +32,7 @@ export default function Login({ navigation }) {
     }
   }
 
- 
+
   const [state, setState] = useState({
     compatible: false,
     loggedUser: {}
@@ -109,7 +109,7 @@ export default function Login({ navigation }) {
 
   var loggedUser = state.loggedUser;
 
-  //Checkea si el telefono es compatible 
+  //Checkea si el telefono es compatible
   const checkDeviceForHardware = async () => {
     let compatible = await LocalAuthentication.hasHardwareAsync();
     setState({ compatible });
@@ -242,7 +242,7 @@ export default function Login({ navigation }) {
 		 paddingLeft:5,
 		 width:210,
 		 backgroundColor:"transparent",
-		 
+
 		 }}
 		 />
 		 <TouchableOpacity
@@ -280,7 +280,7 @@ export default function Login({ navigation }) {
 		 </Button>
 		 </View>
 		 </View>
-		 { storageUser ? true :
+		 { !storageUser ? null :
 			 <Button
 			 mode="contained"
 			 onPress={
@@ -328,7 +328,7 @@ logo: {
 },
 	action: {
 			flexDirection:'row',
-		
+
 			marginTop:20,
 			marginLeft:"20%",
 			paddingBottom:5

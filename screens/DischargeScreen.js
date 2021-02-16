@@ -149,6 +149,14 @@ export default function dischargeScreen({ navigation, user }) {
 
 	return (
 		<View style={styles.container}>
+		<ImageBackground
+			 style={{width:400,
+			 height: 400,
+			 opacity:0.9,
+			 marginTop:100
+			 }}
+			 source=
+				{require('../assets/LogoVector.png')}>
 			<View style={styles.imagenview} />
 			<View style={styles.imageaction}>
 				<TouchableOpacity style={styles.button_image} onPress={openImgPictureAsync}>
@@ -160,23 +168,34 @@ export default function dischargeScreen({ navigation, user }) {
 					/>
 				</TouchableOpacity>
 			</View>
+			<View style={{marginLeft:'4%'}} >
+			<Picker
+				style={{
+					color:'black',
+					width:60
+				}}
+				selectedValue={data.form.typeID}
+				onValueChange={(val) => handleChange({ value: val, type: 'typeID' })}>
+				<Picker.Item label="DNI" value="DNI" />
+				<Picker.Item label="PAS" value="PASAPORTE" />
+			</Picker>
+			</View>
+			<View style={styles.picker_tel}>
+				<Picker
+					selectedValue={data.form.prefix_code}
+					style={{
+						color:'black',
+						marginLeft:'4%',
+						marginTop:'25%',
+						width:60
+					}}
+					onValueChange={(val) => handleChange({ value: val, type: 'prefix_code' })}>
+					<Picker.Item label="+54" value="+54" />
+					<Picker.Item label="+57" value="+57" />
+				</Picker>
+			</View>
 			<View style={styles.form}>
 				<View />
-				<Picker
-					style={{
-						color        : 'black',
-						position     : 'relative',
-						top          : 235,
-						left         : 50,
-						width        : 122,
-						marginTop    : 2,
-						borderRadius : 60
-					}}
-					selectedValue={data.form.typeID}
-					onValueChange={(val) => handleChange({ value: val, type: 'typeID' })}>
-					<Picker.Item label="DNI" value="DNI" />
-					<Picker.Item label="PAS" value="PASAPORTE" />
-				</Picker>
 				<View>
 					<View style={styles.nro}>
 						<TextInput
@@ -185,13 +204,15 @@ export default function dischargeScreen({ navigation, user }) {
 								color       : 'white',
 								paddingLeft : 5,
 								marginTop   : 2,
-								width       : 200
+								width       : 200,
+								backgroundColor:'transparent'
 							}}
-							placeholder="Número Documento"
+							placeholder="Número "
 							placeholderTextColor="black"
 							keyboardType="decimal-pad"
 							onChangeText={(val) => handleChange({ value: val, type: 'document_number' })}
 						/>
+
 					</View>
 				</View>
 				<View style={styles.nombres}>
@@ -200,7 +221,8 @@ export default function dischargeScreen({ navigation, user }) {
 							height      : 45,
 							color       : 'black',
 							paddingLeft : 5,
-							marginTop   : 2
+							marginTop   : 2,
+							backgroundColor:'transparent'
 						}}
 						placeholder="Nombres"
 						placeholderTextColor="black"
@@ -214,36 +236,22 @@ export default function dischargeScreen({ navigation, user }) {
 						placeholderTextColor="black"
 						style={{
 							height      : 45,
-							paddingLeft : 5
+							paddingLeft : 5,
+							backgroundColor:'transparent'
 						}}
 						autoCapitalize="none"
 						onChangeText={(val) => handleChange({ value: val, type: 'last_name' })}
 					/>
 				</View>
 				<View>
-					<View style={styles.picker_tel}>
-						<Picker
-							selectedValue={data.form.prefix_code}
-							style={{
-								color        : 'black',
-								position     : 'relative',
-								top          : 180,
-								left         : 50,
-								width        : 70,
-								borderRadius : 60
-							}}
-							onValueChange={(val) => handleChange({ value: val, type: 'prefix_code' })}>
-							<Picker.Item label="+54" value="+54" />
-							<Picker.Item label="+57" value="+57" />
-						</Picker>
-					</View>
 					<View style={styles.telefono}>
 						<TextInput
-							placeholder="Télefono Celular"
+							placeholder="Télefono"
 							placeholderTextColor="black"
 							style={{
-								height      : 45,
-								paddingLeft : 5
+								height:45,
+								paddingLeft:5,
+								backgroundColor:'transparent',
 							}}
 							keyboardType="decimal-pad"
 							onChangeText={(val) => handleChange({ value: val, type: 'phone_number' })}
@@ -264,13 +272,13 @@ export default function dischargeScreen({ navigation, user }) {
 						/>
 					) : (
 						<TextInput
-							placeholder="Fecha de Nacimiento(YYYY-MM-DD)"
+							placeholder="Fec. Nac.(YYYY-MM-DD)"
 							placeholderTextColor="black"
 							style={{
 								height      : 45,
 								paddingLeft : 5,
 								marginTop   : 2,
-								fontSize    : 11
+								backgroundColor:'transparent'
 							}}
 							autoCapitalize="none"
 							//onSubmitEditing={showDatePicker}
@@ -307,62 +315,13 @@ export default function dischargeScreen({ navigation, user }) {
 				</Button>
 			</View>
 			<View style={styles.logo}>
-				<Image style={styles.imagelogo} source={logo} />
-				<Text />
 				<FontAwesome
 					name="camera"
 					color="black"
 					size={25}
-					style={{
-						position : 'relative',
-						top      : 40,
-						left     : -50
-					}}
 				/>
-				{/* <View
-					style={{
-						position        : 'relative',
-						top             : -50,
-						left            : -140,
-						height          : 1.5,
-						backgroundColor : 'black'
-					}}
-				/> */}
-				{/* <View
-					style={{
-						position        : 'relative',
-						top             : -108,
-						left            : -60,
-						height          : 48,
-						width           : 1.5,
-						backgroundColor : '#006A34'
-					}}>
-					<Text>y</Text>
-				</View> */}
-				<View>
-					<Text
-						style={{
-							width    : "100%",
-							height   : 60,
-							position : 'relative',
-							top      : -110,
-							left     : 5,
-							fontSize : 24
-						}}>
-						Cargar Datos!
-					</Text>
-					{/* <ImageBackground
-						style={{
-							width    : 80,
-							height   : 50,
-							position : 'relative',
-							top      : -216,
-							left     : 180
-						}}
-						source={require('../assets/backgroundCard2.jpeg')}
-					/> */}
-				</View>
 			</View>
+			</ImageBackground>
 		</View>
 	);
 }
@@ -372,40 +331,17 @@ const styles = StyleSheet.create({
 		flex            : 1,
 		backgroundColor : '#FFFF'
 	},
-	text_tree    : {
-		color           : 'black',
-		borderRadius    : 10,
-		marginTop       : -12,
-		fontSize        : 20,
-		paddingBottom   : 2,
-		paddingLeft     : 3,
-		backgroundColor : '#E4DC65',
-		width           : 60,
-		position        : 'relative',
-		left            : -65,
-		top             : -40
-	},
-	logo         : {
-		position : 'relative',
-		top      : -495,
-		left     : 140
-	},
-	imagelogo    : {
-		marginLeft   : 10,
-		marginBottom : 15,
-		height       : 55,
-		width        : 60,
-		borderRadius : 10,
-		position     : 'relative',
-		top          : 3,
-		left         : -140
-	},
+
 	imageaction  : {
 		flexDirection : 'row',
-		position      : 'relative',
-		top           : 100,
-		left          : 145,
-		width         : 120
+		width         : 120,
+		marginLeft:'35%',
+		marginTop:'-22%'
+
+	},
+	logo: {
+		marginLeft:'24%',
+		marginTop:'-122%'
 	},
 	image        : {
 		height       : 100,
@@ -422,61 +358,38 @@ const styles = StyleSheet.create({
 	errorMsg     : {
 		fontSize : 10,
 		color    : 'red',
-		position : 'relative',
-		top      : 140,
-		left     : 120
+		marginTop:'2%'
 	},
 	guardar      : {
-		position          : 'relative',
-		top               : 50,
-		left              : -15,
 		marginLeft        : 10,
-		paddingHorizontal : 120
+		paddingHorizontal : 120,
+		marginTop:'28%'
 	},
-	picker_tel   : {
-		position : 'relative',
-		top      : 4,
-		width    : 70
-	},
+
 	form         : {
-		position : 'relative',
-		top      : -120
-	},
+  alignItems:'center',
+	marginTop:'-48%'
+
+},
 	nro          : {
-		position     : 'relative',
-		top          : 185,
-		left         : 100,
 		borderRadius : 60,
-		width        : 200
+		width        : 200,
 	},
 	nombres      : {
-		position     : 'relative',
-		top          : 185,
-		left         : 100,
 		borderRadius : 60,
 		width        : 200,
 		marginTop    : 5
 	},
 	apellidos    : {
-		position     : 'relative',
-		top          : 185,
-		left         : 100,
 		borderRadius : 60,
 		width        : 200,
 		marginTop    : 5
 	},
 	telefono     : {
-		position     : 'relative',
-		top          : 134,
-		left         : 100,
 		borderRadius : 60,
 		width        : 200,
-		marginTop    : 5
 	},
 	fecha        : {
-		position     : 'relative',
-		top          : 134,
-		left         : 100,
 		borderRadius : 60,
 		width        : 203,
 		height       : 40,
